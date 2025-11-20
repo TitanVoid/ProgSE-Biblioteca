@@ -1,32 +1,47 @@
 \documentclass[12pt, a4paper]{article}
 
-\usepackage[top=1.5cm, bottom=1.5cm, left=1.5cm, right=1.5cm]{geometry}
+% ------------------------------------PACCHETTI UTILIZZATI------------------------------------
+\usepackage[top=2cm, bottom=2cm, left=2cm, right=2cm, headheight=15pt]{geometry}
 \usepackage{graphicx}
 \usepackage{tcolorbox}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\renewcommand{\contentsname}{Indice}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
 \graphicspath{{images/}}
 
 
-\title{Ingegneria del Software\\
+\title{\Huge Ingegneria del Software\\
         \Large Applicazione per la gestione di una biblioteca}
 \author{Luisa Genovese
-        \\Erica Brancaccio
-        \\Paolo Alfé
-        \\Francesco Altieri}
+     \\ Erica Brancaccio
+     \\ Paolo Alfé
+     \\ Francesco Altieri}
 \date{\today}
 
 \begin{document}
+
+    \fancyhf{}
+	\fancyhead[R]{pagina \thepage}
     \maketitle
-    \newpage
-    
-    \tableofcontents 
+    \thispagestyle{empty}
     \newpage
 
-    \section*{Introduction}
-    \addcontentsline{toc}{section}{Introduction}
+    \pagestyle{fancy}
+    \tableofcontents
     \newpage
+
+    \section*{Descrizione introduttiva}
+    \addcontentsline{toc}{section}{Descrizione introduttiva}
     
+    \section*{Mockup}
+	\addcontentsline{toc}{section}{Mockup}
+    \newpage
+
+    \fancyhf{}
+    \fancyhead[R]{page \thepage}
+    \fancyhead[L]{\nouppercase{\leftmark}}
     \section{Ingegneria dei Requisiti - SRS}
     \subsection{Tabella di categorizzazione dei requisiti}
-
 
 \end{document}
