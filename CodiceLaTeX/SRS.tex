@@ -15,8 +15,6 @@
 \usepackage{caption}
 \renewcommand{\contentsname}{Indice}
 \renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
-\graphicspath{{images/}} % COSE DA FARE: Directory "images" per le foto da inserire nel documento!
-
 
 \begin{document}
     \begin{titlepage}
@@ -26,17 +24,17 @@
 		{\Large \textsc{Ingegneria del Software - A.A. 2025/2026}}\\[.4cm]
         {\Large Applicazione per la gestione di una Biblioteca universitaria}\\[4cm]
 		
-		{\huge \textbf{Documento di Specifica dei\\Requisiti - SRS}}\\[12.5cm]
+		{\huge \textbf{Documento di Specifica dei\\Requisiti - SRS}}\\[0.5cm]
 		
 		\large { 
-			\textit{\emph{Gruppo 9:}\\
+			\textit{
             Luisa Genovese\\
             Erica Brancaccio\\
             Paolo Alfé\\
             Francesco Altieri}
 		}
 		
-		\vspace{1.5cm}
+		\vspace{13.5cm}
 		
 		{\large \today}
 		
@@ -293,7 +291,7 @@
                     \item Il campo “Titolo” dovrà essere una stringa, con una lunghezza massima di cento caratteri;
                     \item I campi “Nome” e “Cognome” di ogni autore dovranno essere stringhe di caratteri alfabetici (con una lunghezza massima di venticinque caratteri);
                     \item Il campo “Anno di pubblicazione” dovrà essere un numero a quattro cifre, compreso tra zero e l’anno corrente;
-                    \item Il campo “Codice identificativo univoco” dovrà essere il codice ISBN del libro, e dunque conforme allo standard ISO 2108: 2017;
+                    \item Il campo “Codice identificativo” dovrà essere il codice ISBN del libro, e dunque conforme allo standard ISO 2108: 2017;
                     \item Il campo “Numero di copie disponibili” dovrà essere un numero compreso tra zero e cento (definita come disponibilità massima per un singolo volume). 
                 \end{itemize}
                 
@@ -442,7 +440,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C1 - Visualizza lista libri}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore ha avviato l’applicazione;\\L’amministratore si trova su una schermata diversa da quella di visualizzazione dei libri;\\L'archivio dei libri è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore ha avviato l’applicazione;\\L’amministratore si trova su una schermata diversa da quella di visualizzazione dei libri;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
                 
             \textbf{Postcondizioni:} L’elenco dei libri viene visualizzato in ordine alfabetico, per titolo.\vspace{.2cm}
 
@@ -467,7 +465,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C2 - Visualizza lista utenti}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore ha avviato l’applicazione;\\L’amministratore si trova su una schermata diversa da quella di visualizzazione degli utenti;\\L'archivio degli utenti è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore ha avviato l’applicazione;\\L’amministratore si trova su una schermata diversa da quella di visualizzazione degli utenti;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
                 
             \textbf{Postcondizioni:} L’elenco degli utenti viene visualizzato in ordine alfabetico, per cognome e (a parità di cognome) per nome.\vspace{.2cm}
 
@@ -492,7 +490,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C3 - Visualizza lista prestiti}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore ha avviato l’applicazione;\\L’amministratore si trova su una schermata diversa da quella di visualizzazione dei prestiti;\\L'archivio dei prestiti è stato caricato correttamente dal file all'avvio del sistema. \vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore ha avviato l’applicazione;\\L’amministratore si trova su una schermata diversa da quella di visualizzazione dei prestiti;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema. \vspace{.2cm}
                 
             \textbf{Postcondizioni:} L’elenco dei prestiti viene visualizzato in ordine cronologico, per data prevista di restituzione.\vspace{.2cm}
 
@@ -540,7 +538,7 @@
                 \setlength\itemsep{-0.3em}
                 \item[4a.] L’amministratore preme il pulsante “Annulla”; 
                 \begin{enumerate}
-                    \item[4a.1] L’esecuzione termina.
+                    \item[4a.1] L’esecuzione riprende dal passo 1.
                 \end{enumerate}
                 \item[5a.] Il sistema riscontra degli errori nel formato dei campi inseriti; 
                 \begin{enumerate}
@@ -566,7 +564,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C5 - Modifica libro}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei libri;\\È presente almeno un libro nella lista dei libri;\\L'archivio dei libri è stato caricato correttamente dal file all'avvio del sistema. \vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei libri;\\È presente almeno un libro nella lista dei libri;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema. \vspace{.2cm}
                 
             \textbf{Postcondizioni:} Uno o più campi del libro selezionato vengono modificati con successo.\vspace{.2cm}
 
@@ -589,7 +587,7 @@
                 \setlength\itemsep{-0.3em}
                 \item[5a.] L’amministratore preme il pulsante “Annulla”; 
                 \begin{enumerate}
-                    \item[5a.1] L’esecuzione termina.
+                    \item[5a.1] L’esecuzione riprende dal passo 1.
                 \end{enumerate}
                 \item[6a.] Il sistema riscontra degli errori nel formato dei campi inseriti; 
                 \begin{enumerate}
@@ -609,7 +607,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C6 - Rimuovi libro}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei libri;\\È presente almeno un libro nella lista dei libri;\\L'archivio dei libri è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei libri;\\È presente almeno un libro nella lista dei libri;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
                 
             \textbf{Postcondizioni:} Il libro selezionato viene rimosso con successo dalla lista dei libri.\vspace{.2cm}
 
@@ -629,7 +627,7 @@
             \begin{enumerate}
                 \item[4a.] L'amministratore preme il pulsante "No";\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[4a.1] L'esecuzione termina.
+                    \item[4a.1] L'esecuzione riprende dal passo 1.
                 \end{enumerate}
             \end{enumerate}       
         \end{tcolorbox}
@@ -660,7 +658,7 @@
                 \setlength\itemsep{-0.3em}
                 \item[4a.] L’amministratore preme il pulsante “Annulla”; 
                 \begin{enumerate}
-                    \item[4a.1] L’esecuzione termina.
+                    \item[4a.1] L’esecuzione riprende dal passo 1.
                 \end{enumerate}
                 \item[5a.] Il sistema riscontra degli errori nel formato dei campi inseriti; 
                 \begin{enumerate}
@@ -686,7 +684,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C8 - Modifica utente}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione degli utenti;\\È presente almeno un utente nella lista degli utenti;\\L'archivio degli utenti è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione degli utenti;\\È presente almeno un utente nella lista degli utenti;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
                 
             \textbf{Postcondizioni:} Uno o più campi dell'utente selezionato vengono modificati con successo.\vspace{.2cm}
 
@@ -709,7 +707,7 @@
                 \setlength\itemsep{-0.3em}
                 \item[5a.] L’amministratore preme il pulsante “Annulla”; 
                 \begin{enumerate}
-                    \item[5a.1] L’esecuzione termina.
+                    \item[5a.1] L’esecuzione riprende dal passo 1.
                 \end{enumerate}
                 \item[6a.] Il sistema riscontra degli errori nel formato dei campi inseriti; 
                 \begin{enumerate}
@@ -729,7 +727,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C9 - Rimuovi utente}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione degli utenti;\\È presente almeno un utente nella lista degli utenti;\\L'archivio degli utenti è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione degli utenti;\\È presente almeno un utente nella lista degli utenti;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
                 
             \textbf{Postcondizioni:} L'utente selezionato viene rimosso con successo dalla lista degli utenti.\vspace{.2cm}
 
@@ -749,7 +747,7 @@
             \begin{enumerate}
                 \item[4a.] L'amministratore preme il pulsante "No";\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[4a.1] L'esecuzione termina.
+                    \item[4a.1] L'esecuzione riprende dal passo 1.
                 \end{enumerate}
             \end{enumerate}         
         \end{tcolorbox}
@@ -757,7 +755,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C10 - Ricerca libro}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei libri;\\L'archivio dei libri è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei libri;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
                 
             \textbf{Postcondizioni:} Vengono mostrati soltanto i libri che soddisfano il criterio di ricerca;\\I libri vengono visualizzati in ordine alfabetico, per titolo.\vspace{.2cm}
 
@@ -776,7 +774,7 @@
                 \item[2a.] L’amministratore cancella la sottostringa dalla barra di ricerca; 
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
-                    \item[2a.1] Viene ripristinata la visualizzazione della lista completa dei libri;
+                    \item[2a.1] Viene ripristinata la visualizzazione della lista completa dei libri.
                 \end{enumerate}
                 \item[3a.] Il sistema non trova alcuna corrispondenza per la sottostringa inserita; 
                 \begin{enumerate}
@@ -790,7 +788,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C11 - Ricerca libro con filtro}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei libri;\\L'archivio dei libri è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei libri;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
                 
             \textbf{Postcondizioni:} Vengono mostrati soltanto i libri che soddisfano il criterio o i criteri di ricerca applicati;\\I libri vengono visualizzati in ordine alfabetico, per titolo.\vspace{.2cm}
 
@@ -812,7 +810,7 @@
                 \item[3a.] L’amministratore preme il pulsante “Rimuovi filtri”; 
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
-                    \item[3a.1] Viene ripristinata la visualizzazione della lista completa dei libri;
+                    \item[3a.1] Viene ripristinata la visualizzazione della lista completa dei libri.
                 \end{enumerate}
                 \item[5a.] Il sistema riscontra degli errori nel formato dei campi inseriti;
                 \begin{enumerate}
@@ -838,7 +836,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C12 - Ricerca utente}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione degli utenti;\\L'archivio degli utenti è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione degli utenti;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
                 
             \textbf{Postcondizioni:} Vengono mostrati soltanto gli utenti che soddisfano il criterio di ricerca;\\Gli utenti vengono visualizzati in ordine alfabetico, per cognome e (a parità di cognome) per nome.\vspace{.2cm}
 
@@ -871,7 +869,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C13 - Registra prestito}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei prestiti;\\Gli archivi dei libri, degli utenti e dei prestiti sono stati caricati correttamente dal file all'avvio del sistema;\\L’utente che ha richiesto il prestito è presente all’interno del sistema e non ha più di tre prestiti attivi;\\Il libro da prestare è presente all’interno del sistema ed è disponibile. \vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei prestiti;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema;\\L’utente che ha richiesto il prestito è presente all’interno del sistema e non ha più di tre prestiti attivi;\\Il libro da prestare è presente all’interno del sistema ed è disponibile. \vspace{.2cm}
                 
             \textbf{Postcondizioni:} Il prestito viene aggiunto con successo alla lista dei prestiti;\\Il numero di copie disponibili del libro prestato viene aggiornato dal sistema;\\La lista dei libri presi in prestito dall’utente viene aggiornata dal sistema.\vspace{.2cm}
 
@@ -893,7 +891,7 @@
             \begin{enumerate}
                 \item[4a.] L'amministratore preme il pulsante "Annulla";\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[4a.1] L'esecuzione termina.
+                    \item[4a.1] L'esecuzione riprende dal passo 1.
                 \end{enumerate}
                 \item[5a.] Il sistema riscontra degli errori nel formato dei campi inseriti;\vspace{-0.2cm}
                 \begin{enumerate}
@@ -907,7 +905,7 @@
                 \end{enumerate}
                 \item[5c.] Il sistema si accorge che è stata inserita una data antecedente alla data odierna;\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[5c.1] Viene visualizzato un messaggio di errore e viene evidenziato il 		          campo da modificare;
+                    \item[5c.1] Viene visualizzato un messaggio di errore e viene evidenziato il campo da modificare;
                     \item[5c.2] L'esecuzione riprende dal passo 3.
                 \end{enumerate}
             \end{enumerate}       
@@ -916,7 +914,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C14 - Registra restituzione}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei prestiti;\\È presente almeno un prestito nella lista dei prestiti;\\Gli archivi dei libri, degli utenti e dei prestiti sono stati caricati correttamente dal file all'avvio del sistema.\vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei prestiti;\\È presente almeno un prestito nella lista dei prestiti;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
                 
             \textbf{Postcondizioni:} La restituzione del libro viene registrata con successo;\\Il numero di copie disponibili del libro prestato viene aggiornato dal sistema;\\La lista dei libri presi in prestito dall’utente viene aggiornata dal sistema.\vspace{.2cm}
 
@@ -938,7 +936,7 @@
             \begin{enumerate}
                 \item[4a.] L'amministratore preme il pulsante "No";\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[4a.1] L'esecuzione termina.
+                    \item[4a.1] L'esecuzione riprende dal passo 1.
                 \end{enumerate}
             \end{enumerate}       
         \end{tcolorbox}
@@ -946,7 +944,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C15 - Estendi prestito}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei prestiti;\\È presente almeno un prestito nella lista dei prestiti;\\L'archivio dei prestiti è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei prestiti;\\È presente almeno un prestito nella lista dei prestiti;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
                 
             \textbf{Postcondizioni:} La data prevista di restituzione del prestito selezionato viene aggiornata con successo.\vspace{.2cm}
 
@@ -968,7 +966,7 @@
             \begin{enumerate}
                 \item[5a.] L'amministratore preme il pulsante "Annulla";\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[5a.1] L'esecuzione termina.
+                    \item[5a.1] L'esecuzione riprende dal passo 1.
                 \end{enumerate}
                 \item[6a.] Il sistema riscontra degli errori nel formato del campo inserito;\vspace{-0.2cm}
                 \begin{enumerate}
@@ -982,7 +980,7 @@
                 \end{enumerate}
                 \item[6c.] Il sistema si accorge che è stata inserita una data antecedente alla data odierna oppure alla data prevista di restituzione precedente;\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[6c.1] Viene visualizzato un messaggio di errore e viene evidenziato il 		          campo da modificare;
+                    \item[6c.1] Viene visualizzato un messaggio di errore e viene evidenziato il campo da modificare;
                     \item[6c.2] L'esecuzione riprende dal passo 4.
                 \end{enumerate}
             \end{enumerate}       
