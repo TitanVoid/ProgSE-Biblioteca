@@ -1,0 +1,57 @@
+@startuml
+
+left to right direction
+
+:Amministratore: as a
+
+rectangle Sistema {
+
+usecase "C1 - Visualizza lista libri" as UC1
+usecase "C2 - Visualizza lista utenti" as UC2
+usecase "C3 - Visualizza lista prestiti" as UC3
+usecase "C4 - Inserisci libro" as UC4
+usecase "C5 - Modifica libro" as UC5
+usecase "C6 - Rimuovi libro" as UC6
+usecase "C7 - Inserisci utente" as UC7
+usecase "C8 - Modifica utente" as UC8
+usecase "C9 - Rimuovi utente" as UC9
+usecase "C10 - Ricerca libro" as UC10
+usecase "C11 - Ricerca libro\ncon filtro" as UC11
+usecase "C12 - Ricerca utente" as UC12
+usecase "C13 - Registra prestito" as UC13
+usecase "C14 - Registra restituzione" as UC14
+usecase "C15 - Estendi prestito" as UC15
+
+}
+
+a -- UC4
+a -- UC5
+a -- UC6
+a -- UC10
+a -- UC11
+a -- UC7
+a -- UC8
+a -- UC9
+a -- UC12
+a -- UC13
+a -- UC14
+a -- UC15
+
+UC11 -|> UC10
+
+UC4 ..> UC1 : <<include>>
+UC5 ..> UC1 : <<include>>
+UC6 ..> UC1 : <<include>>
+UC10 ..> UC1 : <<include>>
+UC11 ..> UC1 : <<include>>
+
+UC7 ..> UC2 : <<include>>
+UC8 ..> UC2 : <<include>>
+UC9 ..> UC2 : <<include>>
+UC12 ..> UC2 : <<include>>
+
+UC13 ..> UC3 : <<include>>
+UC14 ..> UC3 : <<include>>
+UC15 ..> UC3 : <<include>>
+
+@enduml
