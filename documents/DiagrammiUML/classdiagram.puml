@@ -1,0 +1,215 @@
+@startuml
+skinparam nodesep 100
+skinparam ranksep 140
+top to bottom direction
+
+
+
+interface GestioneConChiave<K, V> {
++esisteChiave(key: K): boolean
++ottieni(key: K): V
+}
+
+
+class Biblioteca {
+-gestoreLibri: GestoreLibri
+-gestoreUtenti: GestoreUtenti
+-gestorePrestiti: GestorePrestiti
+
++Biblioteca()
+}
+
+
+interface GestioneArchivio<E> {
++aggiungi(elemento: E): void
++modifica(): void 
++rimuovi(elemento: E): void
+}
+
+
+class GestoreUtenti {
+-matricole: Map<Matricola, Utente>
+-utenti: List<Utente>
+
++GestoreUtenti()
++getUtenti(): List<Utente>
++ricerca(input: String): List<Utente> 
+}
+
+
+class GestoreLibri {
+-ISBN: Map<ISBN, Libro>
+-libri: List<Libro>
+
++GestoreLibri()
++getLibri(): List<Libro>
++ricerca(input: String): List<Libro> 
+}
+
+
+class GestorePrestiti {
+-prestiti: List<Prestito>
+
++GestorePrestiti()
++getPrestiti(): List<Prestito>
+}
+
+
+interface GestioneFile {
++salvaCSV(nomeFile: String): void
++leggiCSV(nomeFile: String): void
+}
+
+
+class Utente {
+-matricola: Matricola {readOnly}
+-email: String
+-prestitiAttivi: List<Prestito> [0...3] {readOnly}
+
++Utente(nome: String, cognome: String, matricola: Matricola, email: String)
++setEmail(email: String): void
++getEmail(): String
++getPrestitiAttivi(): List<Prestito>
++aggiungiPrestito(prestito: Prestito): void
++rimuoviPrestito(prestito: Prestito): void
++verificaEmail(email: String): boolean {static} 
++equals(o: Object): boolean
++hashCode(): int
+}
+
+
+class Libro {
+-titolo: String
+-autori: List<Autore> {readOnly}
+-annoPubblicazione: int 
+-id: ISBN {readOnly}
+-copieDisponibili: int 
+
++Libro(titolo: String, annoPubblicazione: int, id: ISBN, copieDisponibili: int)
++setTitolo(titolo: String): void
++getTitolo(): String
++getAutori(): List<Autore>
++aggiungiAutore(autore: Autore): void
++setAnnoPubblicazione(annoPubblicazione: int): void
++getAnnoPubblicazione(): int
++setCopieDisponibili(copieDisponibili: int): void
++getCopieDisponibili(): int
++equals(o: Object): boolean
++hashCode(): int
+}
+
+
+class Prestito {
+-matricola: Matricola {readOnly}
+-id: ISBN {readOnly}
+-dataInizio: LocalDate {readOnly}
+-dataScadenza: LocalDate 
+-dataRestituzione : LocalDate {readOnly}
+
++Prestito(matricola: Matricola, id: ISBN, dataInizio: LocalDate,
+dataScadenza: LocalDate, dataRestituzione LocalDate)
++setDataScadenza(data: LocalDate): void
++getDataScadenza(): LocalDate
++getDataInizio(): LocalDate 
++getDataRestituzione(): LocalDate 
++isAttivo(): boolean
+}
+
+
+abstract class Persona {
+-nome: String
+-cognome: String 
+
++Persona(nome: String, cognome: String)
++setNome(nome: String): void 
++setCognome(cognome: String): void 
++getNome(): String
++getCognome(): String
++verificaNome(): boolean {static}
++verificaCognome(): boolean {static}
+}
+
+
+class Autore {
+
+}
+
+
+class Matricola {
+-matricola: String {readOnly}
+
++Matricola(matricola: String)
++getMatricola(): String
++verificaMatricola(): boolean {static}
+}
+
+
+class ISBN {
+-ISBN: String {readOnly}
+
++ISBN(ISBN: String)
++getISBN(): String
++verificaISBN(): boolean {static}
+}
+
+
+class Maschera {
+-lunghezza: int {readOnly}
+-maschera: String
+
++Maschera(lunghezza: int)
++getMaschera(): String
++setMaschera(maschera: String): void
++getLunghezza(): int
+}
+
+
+interface Filtrabile<E> {
++filtra(tipo: TipoFiltro): List<E>
+}
+
+
+enum TipoFiltro {
+TUTTI
+ATTIVI
+CONCLUSI
+}
+
+
+
+Biblioteca "1" *-- "1" GestoreUtenti
+Biblioteca "1" *-- "1" GestoreLibri
+Biblioteca "1" *-- "1" GestorePrestiti
+
+GestoreUtenti "1" *-- "0...*" Utente
+GestoreLibri "1" *-- "0...*" Libro
+GestorePrestiti "1" *---- "0...*" Prestito
+
+
+Libro "1" *-- "1...*" Autore
+
+Prestito "1...3" -> "1" Utente
+
+Utente --|> Persona
+Autore -down--|> Persona
+
+Libro <-- ISBN
+Prestito <-- ISBN
+
+Utente <-- Matricola
+Prestito <-- Matricola
+
+GestioneConChiave ..|> GestoreUtenti
+GestioneConChiave ..|> GestoreLibri
+
+GestioneFile ..|> GestorePrestiti
+GestioneFile ..|> GestoreUtenti
+GestioneFile ..|> GestoreLibri
+
+GestioneArchivio <|- GestioneFile
+
+Filtrabile .|> GestorePrestiti
+
+Filtrabile -- TipoFiltro
+
+@enduml
