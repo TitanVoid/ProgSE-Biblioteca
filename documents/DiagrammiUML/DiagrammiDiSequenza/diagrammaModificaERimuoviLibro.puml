@@ -1,0 +1,69 @@
+@startuml
+
+actor Amministratore as a
+participant ClasseCheContieneVisualizzazioneLibri as cvl
+participant Libro as l
+participant GestoreLibri as gl
+
+cvl->cvl: inizialize(...)
+a->cvl: Apre schermata libri
+a->cvl: Seleziona un libro
+alt Utente clicca il pulsante "Modifica"
+a->cvl: Clicca il pulsante "Modifica"
+cvl->cvl: funzioneOnActionPulsanteModifica(...)
+activate cvl
+cvl --> "a": Viene mostrata la schermata di modifica libro
+deactivate cvl
+
+loop Utente modifica i campi in modo errato
+a->cvl: Modifica i campi del libro nel TextField
+a->cvl: Preme il pulsante "Conferma"
+
+cvl->cvl: funzioneOnActionDiPulsanteDiConferma(...)
+activate cvl
+cvl->l: verifica(...)
+activate l
+l->l: Verifica campi
+l --> cvl: Verifica non andata a buon fine
+deactivate l
+deactivate cvl
+break
+	l-->cvl: Verifica andata a buon fine
+end
+
+
+end
+
+
+
+cvl->gl: modificaLibro(...)
+
+activate gl
+gl->gl: Viene modificato il libro
+gl --> a: Viene chiusa la schermata di modifica libro
+deactivate gl
+deactivate cvl
+
+else Utente clicca il pulsante "Rimuovi"
+a->cvl: Clicca il pulsante "Rimuovi"
+cvl->cvl: funzioneOnActionPulsanteDiRimozione(...)
+activate cvl
+cvl-->a: Viene mostrata una nuova finestra con un messaggio di avviso
+deactivate cvl
+a->cvl: Conferma l'operazione cliccando il pulsante "Si"
+
+opt Preme il pulsante "No"
+a->cvl: Annulla l'operazione cliccando il pulsante "No"
+cvl-->a: Viene chiusa la schermata di rimozione libro
+end
+
+cvl->gl: eliminaLibro(...)
+activate gl
+gl->gl: Viene eliminato il libro
+gl-->a: Viene chiusa la schermata di rimozione libro
+
+deactivate gl
+
+end
+
+@enduml
