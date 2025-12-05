@@ -28,6 +28,7 @@
 				l->l: Verifica campi
 				l --> cvl: Verifica non andata a buon fine
 			deactivate l
+		cvl-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
 		deactivate cvl
 		'Condizione di uscita dal loop
 		break
