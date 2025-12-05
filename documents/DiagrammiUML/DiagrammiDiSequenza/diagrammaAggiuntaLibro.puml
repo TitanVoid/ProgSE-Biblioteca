@@ -1,65 +1,60 @@
 @startuml
+	actor Amministratore as a
+	participant ClasseCheContieneVisualizzazioneLibri as cvl
+	participant Libro as l
+	participant GestoreLibri as gl
+	participant Biblioteca as b
 
-actor Amministratore as a
-participant ClasseCheContieneVisualizzazioneLibri as cvl
-participant Libro as l
-participant GestoreLibri as gl
+	b->b: caricaArchivio(...)
+	cvl->cvl: inizialize(...)
+	a->cvl: Apre schermata libri
+	a->cvl: Clicca il pulsante "Aggiungi"
 
-cvl->cvl: inizialize(...)
-a->cvl: Apre schermata libri
-a->cvl: Clicca il pulsante "Aggiungi"
+	cvl->cvl: funzioneOnActionDelPulsante(...)
+	activate cvl
+		cvl --> "a": Viene mostrata la schermata di aggiunta libro
+	deactivate cvl
 
-cvl->cvl: funzioneOnActionDelPulsante(...)
-activate cvl
-cvl --> "a": Viene mostrata la schermata di aggiunta libro
-deactivate cvl
+	'Flusso alternativo
+	loop Utente inserisce i campi del libro errati o incompleti
+		a->cvl: Inserisce i campi del libro nel TextField
+		a->cvl: Preme il pulsante "Conferma"
+		cvl->cvl: funzioneOnActionDelPulsanteDiConferma(...)
+		activate cvl
+			cvl-> l: verifica(...)
+			activate l
+				l -> l: Verifica campi
+				l --> cvl: Verifica non andata a buon fine
+				deactivate l
+				cvl-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+			deactivate cvl
+		
+		'Condizione di uscita dal loop
+		break Verifica andata a buon fine
+			l --> cvl: Verifica andata a buon fine
+		end
+	end
 
-loop Utente inserisce i campi del libro errati o incompleti
-a->cvl: Inserisce i campi del libro nel TextField
-a->cvl: Preme il pulsante "Conferma"
+	cvl -> gl: ricercaLibro(...)
+		 
+			gl -> gl: Verifica se il libro è presente già nella lista
+		
 
-opt Utente preme il pulsante "Annulla"
-a->cvl: Preme il pulsante "Annulla"
-cvl->cvl: funzioneOnActionDelPulsanteDiAnnullamento(...)
-cvl-->a: Viene chiusa la schermata di aggiunta libro
-end
-
-cvl->cvl: funzioneOnActionDelPulsanteDiConferma(...)
-activate cvl
-cvl-> l: verifica(...)
-activate l
-l -> l: Verifica campi
-l --> cvl: Verifica non andata a buon fine
-cvl-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
-deactivate cvl
-deactivate l
-break Verifica andata a buon fine
-	l --> cvl: Verifica andata a buon fine
-end
- 
-end
-
-
-
-
-
-cvl -> gl: esiste(...)
-activate cvl
-activate gl
-gl -> gl: Verifica l'esistenza
-gl --> cvl: Il libro non esiste nell'archivio
-deactivate cvl
-deactivate gl
-
-opt Il libro esiste nell'archivio
-gl-->cvl: Il libro esiste nell'archivio
-cvl-->a: Viene mostrato un messaggio di errore
-end
-
-cvl->gl: aggiungiLibro(...)
-activate gl
-gl->gl: Viene aggiunto il libro
-gl --> a: Viene chiusa la schermata di aggiunta libro
-deactivate gl
+	'Non è possibile inserire due libri uguali quindi ne si verifica l'univocità
+	alt Il libro esiste nella lista		
+		gl-->cvl: Il libro esiste nella lista
+		cvl-->a: Viene mostrato un messaggio di errore	
+	else Il libro non esiste nella lista
+		gl --> cvl: Il libro non esiste nella lista
+		activate cvl
+			cvl->gl: aggiungiLibro(...)
+			activate gl
+				gl->gl: Viene aggiunto il libro
+				gl --> cvl: Conferma
+				deactivate gl
+				cvl-->a: Viene chiusa la schermata di aggiunta libro
+		deactivate cvl
+		
+	end
 
 @enduml

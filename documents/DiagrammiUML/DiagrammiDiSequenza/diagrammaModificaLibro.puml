@@ -1,0 +1,46 @@
+@startuml
+
+	actor Amministratore as a
+	participant ClasseCheContieneVisualizzazioneLibri as cvl
+	participant Libro as l
+	participant GestoreLibri as gl
+	participant Biblioteca as b
+
+	b->b: caricaArchivio(...)
+	cvl->cvl: inizialize(...)
+	a->cvl: Apre schermata libri
+	a->cvl: Seleziona un libro
+	
+	a->cvl: Clicca il pulsante "Modifica"
+	cvl->cvl: funzioneOnActionPulsanteModifica(...)
+	activate cvl
+		cvl --> "a": Viene mostrata la schermata di modifica libro
+	deactivate cvl
+
+	'Utente modifica i campi in modo errato
+	loop Utente modifica i campi in modo errato
+		a->cvl: Modifica i campi del libro nel TextField
+		a->cvl: Preme il pulsante "Conferma"
+		cvl->cvl: funzioneOnActionDiPulsanteDiConferma(...)
+		activate cvl
+			cvl->l: verifica(...)
+			activate l
+				l->l: Verifica campi
+				l --> cvl: Verifica non andata a buon fine
+			deactivate l
+		deactivate cvl
+		'Condizione di uscita dal loop
+		break
+			l-->cvl: Verifica andata a buon fine
+		end
+	end
+
+	cvl->gl: modificaLibro(...)
+	activate cvl
+		activate gl
+			gl->gl: Viene modificato il libro
+			gl --> cvl: Conferma
+		deactivate gl
+	cvl --> a: Viene chiusa la schermata di modifica libro
+	deactivate cvl
+@enduml
