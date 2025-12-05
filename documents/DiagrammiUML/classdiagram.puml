@@ -1,6 +1,6 @@
 @startuml
-skinparam nodesep 100
-skinparam ranksep 150
+skinparam nodesep 70
+skinparam ranksep 100
 skinparam linetype ortho
 'skinparam linetype polyline
 top to bottom direction
@@ -9,59 +9,59 @@ top to bottom direction
 
 '------------------------------------------CLASSI/INTERFACCE------------------------------------------
 
-interface GestioneConChiave<K, V> {
++interface Mappabile<K, V> {
 +esisteChiave(chiave: K): boolean
 +ottieni(chiave: K): V
 }
 
 
-class Biblioteca {
--gestoreLibri: GestoreLibri {readOnly}
--gestoreUtenti: GestoreUtenti {readOnly}
--gestorePrestiti: GestorePrestiti {readOnly}
++class Biblioteca {
+-libri: Libri {readOnly}
+-utenti: Utenti {readOnly}
+-prestiti: Prestiti {readOnly}
 
 +Biblioteca()
-+salvaBiblioteca(nomeFile: String): void
-+leggiBiblioteca(nomeFile: String): Biblioteca {static}
++salvaBibliotecaOBJ(nomeFile: String): void
++leggiBibliotecaOBJ(nomeFile: String): Biblioteca {static}
 }
 
 
-interface GestioneArchivio<E> {
-+aggiungi(elemento: E): void
-+modifica(elemento: E): void
-+rimuovi(elemento: E): void
++interface Archiviabile<E> {
++aggiungi(elemento: E): List<E>
++modifica(originale: E, modificato: E): List<E>
++rimuovi(elemento: E): List<E>
 }
 
 
-class GestoreUtenti {
--matricole: Map<Matricola, Utente> {readOnly}
++class Utenti {
+-chiaviMatricole: Map<Matricola, Utente> {readOnly}
 -utenti: List<Utente> {readOnly}
 
-+GestoreUtenti()
++Utenti()
 +getUtenti(): List<Utente>
 +ricerca(input: String): List<Utente> 
 }
 
 
-class GestoreLibri {
--ISBN: Map<ISBN, Libro> {readOnly}
++class Libri {
+-chiaviISBN: Map<ISBN, Libro> {readOnly}
 -libri: List<Libro> {readOnly}
 
-+GestoreLibri()
++Libri()
 +getLibri(): List<Libro>
 +ricerca(input: String): List<Libro> 
 }
 
 
-class GestorePrestiti {
++class Prestiti {
 -prestiti: List<Prestito> {readOnly}
 
-+GestorePrestiti()
++Prestiti()
 +getPrestiti(): List<Prestito>
 }
 
 
-class Utente {
++class Utente {
 -matricola: Matricola {readOnly}
 -email: String
 -prestitiAttivi: List<Prestito> [0...3] {readOnly}
@@ -76,10 +76,11 @@ class Utente {
 +verificaEmail(email: String): boolean {static} 
 +equals(o: Object): boolean
 +hashCode(): int
++compareTo(u: Utente): int
 }
 
 
-class Libro {
++class Libro {
 -titolo: String
 -autori: List<Autore> {readOnly}
 -annoPubblicazione: int 
@@ -91,23 +92,26 @@ class Libro {
 +getTitolo(): String
 +getAutori(): List<Autore>
 +aggiungiAutore(autore: Autore): void
++rimuoviAutore(autore: Autore): void
 +setAnnoPubblicazione(annoPubblicazione: int): void
 +getAnnoPubblicazione(): int
 +setCopieDisponibili(copieDisponibili: int): void
 +getCopieDisponibili(): int
-+verificaLibro(titolo: String, autori: List<Autore>, annoPubblicazione: int,
- id: ISBN, copieDisponibili: int): boolean (static)
++verificaLibro(titolo: String, autori: List<Autore>, annoPubblicazione: int, id: ISBN, copieDisponibili: int): boolean {static}
 +equals(o: Object): boolean
 +hashCode(): int
++compareTo(l: Libro): int
 }
 
 
-class Prestito {
++class Prestito {
 -matricola: Matricola {readOnly}
 -id: ISBN {readOnly}
 -dataInizio: LocalDate {readOnly}
 -dataScadenza: LocalDate 
--dataRestituzione : LocalDate 
+-dataRestituzione : LocalDate
+-codice: int
+-contatore: int {static}
 
 +Prestito(matricola: Matricola, id: ISBN, dataInizio: LocalDate,
 dataScadenza: LocalDate, dataRestituzione LocalDate)
@@ -117,11 +121,13 @@ dataScadenza: LocalDate, dataRestituzione LocalDate)
 +setDataRestituzione(data: LocalDate): void
 +getDataRestituzione(): LocalDate 
 +isAttivo(): boolean
-+verificaPrestito(): boolean {static}
++verificaDataScadenza(dataScadenza: LocalDate): boolean {static}
++equals(o: Object): boolean
++compareTo(p: Prestito): int
 }
 
 
-abstract class Persona {
++abstract class Persona {
 -nome: String
 -cognome: String 
 
@@ -130,35 +136,35 @@ abstract class Persona {
 +setCognome(cognome: String): void 
 +getNome(): String
 +getCognome(): String
-+verificaNome(): boolean {static}
-+verificaCognome(): boolean {static}
++verificaNome(nome: String): boolean {static}
++verificaCognome(cognome: String): boolean {static}
 }
 
 
-class Autore {
-
++class Autore {
++Autore(nome: String, cognome: String)
 }
 
 
-class Matricola {
++class Matricola {
 -matricola: String {readOnly}
 
 +Matricola(matricola: String)
 +getMatricola(): String
-+verificaMatricola(): boolean {static}
++verificaMatricola(matricola: String): boolean {static}
 }
 
 
-class ISBN {
++class ISBN {
 -ISBN: String {readOnly}
 
 +ISBN(ISBN: String)
 +getISBN(): String
-+verificaISBN(): boolean {static}
++verificaISBN(ISBN: String): boolean {static}
 }
 
 
-class Maschera {
++class Maschera {
 -lunghezza: int {readOnly}
 -maschera: String
 
@@ -169,12 +175,12 @@ class Maschera {
 }
 
 
-interface Filtrabile<E> {
++interface Filtrabile<E> {
 +filtra(tipo: TipoFiltro): List<E>
 }
 
 
-enum TipoFiltro {
++enum Filtro {
 TUTTI
 ATTIVI
 CONCLUSI
@@ -185,16 +191,16 @@ CONCLUSI
 
 '------------------------------------------LAYOUT------------------------------------------
 
-Biblioteca -[hidden]-> GestioneArchivio
-Biblioteca -[hidden]-> GestioneConChiave
+Biblioteca -[hidden]-> Archiviabile
+Biblioteca -[hidden]-> Mappabile
 
-GestioneArchivio -[hidden]> GestioneConChiave
+Archiviabile -[hidden]> Mappabile
 
-GestioneConChiave -[hidden]-> GestoreLibri
-GestioneConChiave -[hidden]-> GestoreUtenti
+Mappabile -[hidden]-> Libri
+Mappabile -[hidden]-> Utenti
 
-GestorePrestiti -[hidden]> GestoreUtenti
-GestoreUtenti -[hidden]> GestoreLibri
+Prestiti -[hidden]> Utenti
+Utenti -[hidden]> Libri
 
 Utente -[hidden]> Libro
 
@@ -208,17 +214,17 @@ Biblioteca --[hidden]> Maschera
 
 '------------------------------------------RELAZIONI------------------------------------------
 
-Biblioteca "1" *--- "1" GestoreUtenti
-Biblioteca "1" *-- "1" GestoreLibri
-Biblioteca "1" *-- "1" GestorePrestiti
+Biblioteca "1" *--- "1" Utenti
+Biblioteca "1" *-- "1" Libri
+Biblioteca "1" *-- "1" Prestiti
 
-GestoreUtenti "1" *-- "0...*" Utente
-GestoreLibri "1" *-- "0...*" Libro
-GestorePrestiti "1" *-- "0...*" Prestito
+Utenti "1" *-- "0...*" Utente
+Libri "1" *-- "0...*" Libro
+Prestiti "1" *-- "0...*" Prestito
 
 Libro "1" *-- "1...*" Autore
 
-Prestito "1...3" -> "1" Utente
+Prestito "0...3" -> "1" Utente
 
 Utente -|> Persona
 Autore -down-|> Persona
@@ -229,15 +235,15 @@ Prestito <-down- ISBN
 Utente <-- Matricola
 Prestito <-- Matricola
 
-GestioneConChiave <|.down. GestoreUtenti
-GestioneConChiave <|.down. GestoreLibri
+Mappabile <|.down. Utenti
+Mappabile <|.down. Libri
 
-GestioneArchivio <|... GestorePrestiti
-GestioneArchivio <|... GestoreUtenti
-GestioneArchivio <|... GestoreLibri
+Archiviabile <|... Prestiti
+Archiviabile <|... Utenti
+Archiviabile <|... Libri
 
-GestorePrestiti .up.|> Filtrabile 
+Prestiti .up.|> Filtrabile 
 
-Filtrabile -[hidden]-> TipoFiltro
+Filtrabile -[hidden]-> Filtro
 
 @enduml
