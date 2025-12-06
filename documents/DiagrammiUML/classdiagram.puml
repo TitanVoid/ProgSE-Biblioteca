@@ -15,7 +15,7 @@ top to bottom direction
 }
 
 
-+class Biblioteca {
++class Biblioteca implements Serializable {
 -libri: Libri {readOnly}
 -utenti: Utenti {readOnly}
 -prestiti: Prestiti {readOnly}
@@ -27,9 +27,9 @@ top to bottom direction
 
 
 +interface Archiviabile<E> {
-+aggiungi(elemento: E): List<E>
-+modifica(originale: E, modificato: E): List<E>
-+rimuovi(elemento: E): List<E>
++aggiungi(elemento: E): void
++modifica(originale: E, modificato: E): void
++rimuovi(elemento: E): void
 }
 
 
@@ -39,7 +39,7 @@ top to bottom direction
 
 +Utenti()
 +getUtenti(): List<Utente>
-+ricerca(input: String): List<Utente> 
++ricercaUtenti(input: String): List<Utente> 
 }
 
 
@@ -49,7 +49,7 @@ top to bottom direction
 
 +Libri()
 +getLibri(): List<Libro>
-+ricerca(input: String): List<Libro> 
++ricercaLibri(input: String): List<Libro> 
 }
 
 
@@ -58,33 +58,35 @@ top to bottom direction
 
 +Prestiti()
 +getPrestiti(): List<Prestito>
++filtra(filtro: Filtro): List<Prestito>
 }
 
 
-+class Utente {
++class Utente implements Comparable {
 -matricola: Matricola {readOnly}
 -email: String
 -prestitiAttivi: List<Prestito> [0...3] {readOnly}
 
 +Utente(nome: String, cognome: String, matricola: Matricola, email: String)
++getMatricola(): Matricola
 +setEmail(email: String): void
 +getEmail(): String
 +getPrestitiAttivi(): List<Prestito>
 +aggiungiPrestito(prestito: Prestito): void
 +rimuoviPrestito(prestito: Prestito): void
-+verificaUtente(nome: String, cognome: String, matricola: Matricola, email: String): boolean {static}
++verificaUtente(nome: String, cognome: String, matricola: Matricola, {static} 
+email: String): boolean {static}
 +verificaEmail(email: String): boolean {static} 
 +equals(o: Object): boolean
 +hashCode(): int
-+compareTo(u: Utente): int
 }
 
 
-+class Libro {
++class Libro implements Comparable {
 -titolo: String
 -autori: List<Autore> {readOnly}
 -annoPubblicazione: int 
--id: ISBN {readOnly}
+-isbn: ISBN {readOnly}
 -copieDisponibili: int 
 
 +Libro(titolo: String, annoPubblicazione: int, id: ISBN, copieDisponibili: int)
@@ -95,26 +97,27 @@ top to bottom direction
 +rimuoviAutore(autore: Autore): void
 +setAnnoPubblicazione(annoPubblicazione: int): void
 +getAnnoPubblicazione(): int
++getISBN(): ISBN
 +setCopieDisponibili(copieDisponibili: int): void
 +getCopieDisponibili(): int
-+verificaLibro(titolo: String, autori: List<Autore>, annoPubblicazione: int, id: ISBN, copieDisponibili: int): boolean {static}
++verificaLibro(titolo: String, autori: List<Autore>, annoPubblicazione: int, id: ISBN, {static}
+copieDisponibili: int): boolean {static}
 +equals(o: Object): boolean
 +hashCode(): int
-+compareTo(l: Libro): int
 }
 
 
-+class Prestito {
++class Prestito implements Comparable {
 -matricola: Matricola {readOnly}
--id: ISBN {readOnly}
+-isbn: ISBN {readOnly}
 -dataInizio: LocalDate {readOnly}
 -dataScadenza: LocalDate 
 -dataRestituzione : LocalDate
--codice: int
--contatore: int {static}
 
-+Prestito(matricola: Matricola, id: ISBN, dataInizio: LocalDate,
-dataScadenza: LocalDate, dataRestituzione LocalDate)
++Prestito(matricola: Matricola, isbn: ISBN, dataInizio: LocalDate, dataScadenza: LocalDate,
+dataRestituzione LocalDate)
++getMatricola(): Matricola
++getISBN(): ISBN
 +setDataScadenza(data: LocalDate): void
 +getDataScadenza(): LocalDate
 +getDataInizio(): LocalDate 
@@ -122,8 +125,6 @@ dataScadenza: LocalDate, dataRestituzione LocalDate)
 +getDataRestituzione(): LocalDate 
 +isAttivo(): boolean
 +verificaDataScadenza(dataScadenza: LocalDate): boolean {static}
-+equals(o: Object): boolean
-+compareTo(p: Prestito): int
 }
 
 
@@ -156,11 +157,11 @@ dataScadenza: LocalDate, dataRestituzione LocalDate)
 
 
 +class ISBN {
--ISBN: String {readOnly}
+-isbn: String {readOnly}
 
-+ISBN(ISBN: String)
++ISBN(isbn: String)
 +getISBN(): String
-+verificaISBN(ISBN: String): boolean {static}
++verificaISBN(isbn: String): boolean {static}
 }
 
 
@@ -172,11 +173,6 @@ dataScadenza: LocalDate, dataRestituzione LocalDate)
 +getMaschera(): String
 +setMaschera(maschera: String): void
 +getLunghezza(): int
-}
-
-
-+interface Filtrabile<E> {
-+filtra(tipo: TipoFiltro): List<E>
 }
 
 
@@ -192,9 +188,11 @@ CONCLUSI
 '------------------------------------------LAYOUT------------------------------------------
 
 Biblioteca -[hidden]-> Archiviabile
-Biblioteca -[hidden]-> Mappabile
+Biblioteca -[hidden]> Serializable
+
 
 Archiviabile -[hidden]> Mappabile
+
 
 Mappabile -[hidden]-> Libri
 Mappabile -[hidden]-> Utenti
@@ -213,6 +211,7 @@ Biblioteca --[hidden]> Maschera
 
 
 '------------------------------------------RELAZIONI------------------------------------------
+
 
 Biblioteca "1" *--- "1" Utenti
 Biblioteca "1" *-- "1" Libri
@@ -242,8 +241,6 @@ Archiviabile <|... Prestiti
 Archiviabile <|... Utenti
 Archiviabile <|... Libri
 
-Prestiti .up.|> Filtrabile 
-
-Filtrabile -[hidden]-> Filtro
+Filtro -[hidden]> Prestiti
 
 @enduml
