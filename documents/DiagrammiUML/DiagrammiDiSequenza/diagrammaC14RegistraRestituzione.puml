@@ -1,0 +1,37 @@
+@startuml
+
+	actor Amministratore as a
+	participant ClasseCheContieneVisualizzazionePrestiti as cvp
+	participant Prestito as p
+	participant GestorePrestiti as gp
+	participant Biblioteca as b
+
+	b->b: caricaArchivio(...)
+	cvp->cvp: inizialize(...)
+	a->cvp: Apre schermata prestiti
+	a->cvp: Seleziona un prestito
+
+	
+	a->cvp: Clicca il pulsante "Registra"
+	cvp->cvp: funzioneOnActionPulsanteDiRegistra(...)
+	activate cvp
+		cvp-->a: Viene mostrata una nuova finestra con un messaggio di avviso
+	deactivate cvp
+	alt Annulla l'operazione cliccando "No"
+		a->cvp: Annulla l'operazione cliccando il pulsante "No"
+		cvp-->a: Viene chiusa la schermata di rimozione libro
+		
+	else Conferma l'operazione cliccando "Si"
+		a->cvp: Conferma l'operazione cliccando il pulsante "Si"
+		cvp->gp: registraPrestito(...)
+		activate cvp
+			activate gp
+				gp->gp: Viene registrata la restituzione
+				gp-->cvp: Conferma
+			deactivate gp
+		cvp-->a: Viene chiusa la schermata di registrazione prestito
+		deactivate cvp
+	end	
+
+
+@enduml

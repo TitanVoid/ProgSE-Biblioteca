@@ -1,0 +1,48 @@
+@startuml
+
+	actor Amministratore as a
+	participant ClasseCheContieneVisualizzazionePrestiti as cvp
+	participant Prestito as p
+	participant GestorePrestito as gp
+	participant Biblioteca as b
+
+	b->b: caricaArchivio(...)
+	cvp->cvp: inizialize(...)
+	a->cvp: Apre schermata prestiti
+	a->cvp: Seleziona un prestito
+	
+	a->cvp: Clicca il pulsante "Estendi"
+	cvp->cvp: funzioneOnActionPulsanteEstendi(...)
+	activate cvp
+		cvp --> "a": Viene mostrata la schermata di estendi prestito
+	deactivate cvp
+
+	'Amministratore modifica i campi in modo errato
+	loop Amministratore modifica i campi in modo errato
+		a->cvp: Modifica i campi del prestito nel TextField
+		a->cvp: Preme il pulsante "Conferma"
+		cvp->cvp: funzioneOnActionDiPulsanteDiConferma(...)
+		activate cvp
+			cvp->p: verifica(...)
+			activate p
+				p->p: Verifica campi
+				p --> cvp: Verifica non andata a buon fine
+			deactivate p
+		cvp-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+		deactivate cvp
+		'Condizione di uscita dal loop
+		break
+			p-->cvp: Verifica andata a buon fine
+		end
+	end
+
+	cvp->gp: estendiPrestito(...)
+	activate cvp
+		activate gp
+			gp->gp: Viene esteso il prestito
+			gp --> cvp: Conferma
+		deactivate gp
+	cvp --> a: Viene chiusa la schermata di estensione libro
+	deactivate cvp
+
+@enduml

@@ -1,0 +1,48 @@
+@startuml
+
+	actor Amministratore as a
+	participant ClasseCheContieneVisualizzazioneUtenti as cvu
+	participant Utenti as u
+	participant GestoreUtenti as gu
+	participant Biblioteca as b
+
+	b->b: caricaArchivio(...)
+	cvu->cvu: inizialize(...)
+	a->cvu: Apre schermata utenti
+	a->cvu: Seleziona un utente
+	
+	a->cvu: Clicca il pulsante "Modifica"
+	cvu->cvu: funzioneOnActionPulsanteModifica(...)
+	activate cvu
+		cvu --> "a": Viene mostrata la schermata di modifica utente
+	deactivate cvu
+
+	'Amministratore modifica i campi in modo errato
+	loop Amministratore modifica i campi in modo errato
+		a->cvu: Modifica i campi dell'utente nel TextField
+		a->cvu: Preme il pulsante "Conferma"
+		cvu->cvu: funzioneOnActionDiPulsanteDiConferma(...)
+		activate cvu
+			cvu->u: verifica(...)
+			activate u
+				u->u: Verifica campi
+				u --> cvu: Verifica non andata a buon fine
+			deactivate u
+		cvu-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+		deactivate cvu
+		'Condizione di uscita dal loop
+		break
+			u-->cvu: Verifica andata a buon fine
+		end
+	end
+
+	cvu->gu: modificaUtente(...)
+	activate cvu
+		activate gu
+			gu->gu: Viene modificato l'utente
+			gu --> cvu: Conferma
+		deactivate gu
+	cvu --> a: Viene chiusa la schermata di modifica utente
+	deactivate cvu
+	
+@enduml

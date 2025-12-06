@@ -1,0 +1,68 @@
+@startuml
+	actor Amministratore as a
+	participant ClasseCheContieneVisualizzazionePrestiti as cvp
+	participant Prestiti as p
+	participant GestoreUtenti as gu
+	participant GestoreLibri as gl
+	participant GestorePrestiti as gp
+	participant Biblioteca as b
+
+	b->b: caricaArchivio(...)
+	cvp->cvp: inizialize(...)
+	a->cvp: Apre schermata prestiti
+	a->cvp: Clicca il pulsante "Aggiungi"
+
+	cvp->cvp: funzioneOnActionDelPulsante(...)
+	activate cvp
+		cvp --> "a": Viene mostrata la schermata di aggiunta prestito
+	deactivate cvp
+
+	'Flusso alternativo
+	loop Amministratore inserisce i campi del prestito errati o incompleti
+		a->cvp: Inserisce i campi del prestito nel TextField
+		a->cvp: Preme il pulsante "Conferma"
+		cvp->cvp: funzioneOnActionDelPulsanteDiConferma(...)
+		activate cvp
+			cvp-> p: verifica(...)
+			activate p
+				p -> p: Verifica campi
+				p --> cvp: Verifica non andata a buon fine
+				deactivate p
+				cvp-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+			deactivate cvp
+		
+		'Condizione di uscita dal loop
+		break Verifica andata a buon fine
+			p --> cvp: Verifica andata a buon fine
+		end
+	end
+
+	cvp->gu: ricercaUtente(...)
+	gu->gu: Ricerca dell'utente
+	alt Utente non presente nella lista
+		gu-->cvp: L'utente non esiste nella lista degli utenti
+		cvp-->a: Viene mostrato un messaggio di errore
+	else Utente presente nella lista
+		gu-->cvp: L'utente è presente nella lista
+	end
+	
+	cvp->gl: ricercaLibri(...)
+	gl->gl: Ricerca del libro
+	alt Libro non presente nella lista
+		gl-->cvp: Il libro non esiste nella lista
+		cvp-->a: Viene mostrato un messaggio di errore
+	else Libro presente nella lista
+		gl-->cvp: Il libro esiste nella lista
+	end
+
+	cvp->gp: registraPrestito(...)
+	activate cvp
+		activate gp
+			gp->gp: Viene aggiunto il prestito
+			gp--> cvp: Conferma
+		deactivate gp
+		cvp->a: VIene chiusa la schermata di aggiunta prestito
+	deactivate cvp	
+
+
+@enduml

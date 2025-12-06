@@ -17,8 +17,8 @@
 		cvl --> "a": Viene mostrata la schermata di modifica libro
 	deactivate cvl
 
-	'Utente modifica i campi in modo errato
-	loop Utente modifica i campi in modo errato
+	'Amministratore modifica i campi in modo errato
+	loop Amministratore modifica i campi in modo errato
 		a->cvl: Modifica i campi del libro nel TextField
 		a->cvl: Preme il pulsante "Conferma"
 		cvl->cvl: funzioneOnActionDiPulsanteDiConferma(...)
@@ -44,4 +44,5 @@
 		deactivate gl
 	cvl --> a: Viene chiusa la schermata di modifica libro
 	deactivate cvl
+	
 @enduml

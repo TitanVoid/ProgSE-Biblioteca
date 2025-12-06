@@ -1,4 +1,5 @@
 @startuml
+
 	actor Amministratore as a
 	participant ClasseCheContieneVisualizzazioneLibri as cvl
 	participant Libro as l
@@ -16,7 +17,7 @@
 	deactivate cvl
 
 	'Flusso alternativo
-	loop Utente inserisce i campi del libro errati o incompleti
+	loop Amministratore inserisce i campi del libro errati o incompleti
 		a->cvl: Inserisce i campi del libro nel TextField
 		a->cvl: Preme il pulsante "Conferma"
 		cvl->cvl: funzioneOnActionDelPulsanteDiConferma(...)

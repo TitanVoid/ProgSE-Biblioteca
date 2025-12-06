@@ -1,0 +1,61 @@
+@startuml
+
+	actor Amministratore as a
+	participant ClasseCheContieneVisualizzazioneUtenti as cvu
+	participant Utenti as u
+	participant GestoreUtenti as gu
+	participant Biblioteca as b
+
+	b->b: caricaArchivio(...)
+	cvu->cvu: inizialize(...)
+	a->cvu: Apre schermata utenti
+	a->cvu: Clicca il pulsante "Aggiungi"
+
+	cvu->cvu: funzioneOnActionDelPulsante(...)
+	activate cvu
+		cvu --> "a": Viene mostrata la schermata di aggiunta utente
+	deactivate cvu
+
+	'Flusso alternativo
+	loop Utente inserisce i campi dell'utente errati o incompleti
+		a->cvu: Inserisce i campi del libro nel TextField
+		a->cvu: Preme il pulsante "Conferma"
+		cvu-->cvu: funzioneOnActionDelPulsanteDiConferma(...)
+		activate cvu
+			cvu-> u: verifica(...)
+			activate u
+				u -> u: Verifica campi
+				u --> cvu: Verifica non andata a buon fine
+				deactivate u
+				cvu-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+			deactivate cvu
+		
+		'Condizione di uscita dal loop
+		break Verifica andata a buon fine
+			u --> cvu: Verifica andata a buon fine
+		end
+	end
+
+	cvu -> gu: ricercaUtente(...)
+		 
+			gu -> gu: Verifica se l'utente è presente già nella lista
+		
+
+	'Non è possibile inserire due utenti uguali quindi ne si verifica l'univocità
+	alt L'utente esiste nella lista		
+		gu-->cvu: L'utente esiste nella lista
+		cvu-->a: Viene mostrato un messaggio di errore	
+	else L'utente non esiste nella lista
+		gu --> cvu: L'utente non esiste nella lista
+		activate cvu
+			cvu->gu: aggiungiUtente(...)
+			activate gu
+				gu->gu: Viene aggiunto l'utente
+				gu --> cvu: Conferma
+				deactivate gu
+				cvu-->a: Viene chiusa la schermata di aggiunta utente
+		deactivate cvu
+		
+	end
+
+@enduml
