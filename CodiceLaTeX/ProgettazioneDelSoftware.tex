@@ -1,0 +1,88 @@
+\documentclass[12pt, a4paper]{article}
+
+\usepackage[top=2.3cm, bottom=2cm, left=2cm, right=2cm, headheight=15pt]{geometry}
+\usepackage{graphicx}
+\usepackage{svg}
+\usepackage[italian]{babel}
+\usepackage{lastpage}
+\usepackage{adjustbox}
+\usepackage{enumitem}
+\usepackage[most]{tcolorbox}
+%\usepackage{xcolor}
+\usepackage[colorlinks=true]{hyperref}
+\usepackage{fancyhdr}
+\pagestyle{fancy}
+\usepackage{caption}
+\renewcommand{\contentsname}{Indice}
+\renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
+
+
+\begin{document}
+    \begin{titlepage}
+        \fancyhf{}
+		\centering
+		
+		{\Large \textsc{Ingegneria del Software - A.A. 2025/2026}}\\[.4cm]
+        {\Large Applicazione per la gestione di una Biblioteca universitaria}\\[4cm]
+		
+		{\huge \textbf{Progettazione del Software}}\\[0.5cm]
+		
+		\large { 
+			\textit{
+            Luisa Genovese\\
+            Erica Brancaccio\\
+            Paolo Alfé\\
+            Francesco Altieri}
+		}
+		
+		\vspace{13.5cm}
+		
+		{\large \today}
+		
+		
+	\end{titlepage}
+
+    \fancyhf{}
+    \fancyhead[R]{pagina \thepage\ di \pageref*{LastPage}}
+    \pagestyle{fancy}
+    \hypersetup{linkcolor=black}
+    \tableofcontents
+    \newpage
+
+    \fancyhead[L]{\nouppercase{\leftmark}}
+    \section{Progettazione del Software}
+    \subsection{Decomposizione in moduli}
+        \subsubsection{Presentazione delle classi individuate}
+        \newpage
+
+        \subsubsection{Diagramma delle classi}
+        \begin{figure}[h!]
+            \begin{adjustbox}{width=.97\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+                \includesvg{classdiagram.svg}    
+            \end{adjustbox}
+            \captionof{figure}{Diagramma delle Classi} 
+        \end{figure}
+    \newpage
+
+    \subsection{Diagrammi di sequenza}
+        ...
+    \newpage
+    
+    \subsection{Principi di buona progettazione}
+        \subsubsection{Livelli di Coesione}
+            \begin{adjustbox}{width=.8\paperwidth, height=.76\paperheight, center, margin= 0cm .2cm 0cm .3cm}
+                \includegraphics{coesione.png}    
+            \end{adjustbox}
+            \captionof{figure}{Tabella dei livelli di coesione dei moduli} 
+        \newpage
+
+        \subsubsection{Livelli di Accoppiamento}
+            \begin{adjustbox}{width=.8\paperwidth, height=.79\paperheight, center, margin= 0cm .2cm 0cm .2cm}
+                \includegraphics{accoppiamento.png}    
+            \end{adjustbox}
+            \captionof{figure}{Tabella dei livelli di accoppiamento tra i moduli} 
+        \newpage
+
+        \subsubsection{Strategie per la riduzione dell'Accoppiamento}
+            ...
+\end{document}
