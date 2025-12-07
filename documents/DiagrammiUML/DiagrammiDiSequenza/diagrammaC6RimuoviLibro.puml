@@ -1,37 +1,40 @@
 @startuml
 
 	actor Amministratore as a
-	participant ClasseCheContieneVisualizzazioneLibri as cvl
+	participant LibriController as cvl
+	participant RimozioneLibroController as rcl
 	participant Libro as l
-	participant GestoreLibri as gl
-	participant Biblioteca as b
+	participant Libri as gl
 
-	b->b: caricaArchivio(...)
-	cvl->cvl: inizialize(...)
+	cvl->cvl: initialize(...)
 	a->cvl: Apre schermata libri
 	a->cvl: Seleziona un libro
-
-	
 	a->cvl: Clicca il pulsante "Rimuovi"
-	cvl->cvl: funzioneOnActionPulsanteDiRimozione(...)
+	cvl->cvl: onDeleteBook(...)
 	activate cvl
 		cvl-->a: Viene mostrata una nuova finestra con un messaggio di avviso
 	deactivate cvl
+	
 	alt Annulla l'operazione cliccando "No"
-		a->cvl: Annulla l'operazione cliccando il pulsante "No"
-		cvl-->a: Viene chiusa la schermata di rimozione libro
+		a->rcl: Annulla l'operazione cliccando il pulsante "No"
+		rcl -> rcl: onCancel(...)
+			activate rcl
+			rcl-->a: Viene chiusa la schermata di rimozione libro
+		deactivate rcl
+		
 		
 	else Conferma l'operazione cliccando "Si"
-		a->cvl: Conferma l'operazione cliccando il pulsante "Si"
-		cvl->gl: eliminaLibro(...)
-		activate cvl
+		a->rcl: Conferma l'operazione cliccando il pulsante "Si"
+		rcl->rcl: onConfirm(...)
+		activate rcl
+			rcl->gl: rimuovi(...)
 			activate gl
-				gl->gl: Viene eliminato il libro
-				gl-->cvl: Conferma
+				gl->gl: Viene rimosso il libro
+				gl-->rcl: Conferma
 				destroy l
 			deactivate gl
-		cvl-->a: Viene chiusa la schermata di rimozione libro
-		deactivate cvl
+		rcl-->a: Viene chiusa la schermata di rimozione libro
+		deactivate rcl
 	end	
 
 @enduml

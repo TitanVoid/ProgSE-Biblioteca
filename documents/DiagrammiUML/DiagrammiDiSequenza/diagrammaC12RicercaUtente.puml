@@ -1,20 +1,18 @@
 @startuml
 
 	actor Amministratore as a
-	participant ClasseCheContieneLaVisualizzazioneUtenti as cvu
-	participant GestioneUtenti as gu
-	participant Biblioteca as b
+	participant UtentiController as cvu
+	participant Utenti as gu
 
-	b->b: caricaArchivio(...)
 	
-	cvu->cvu: inizialize(...)
+	cvu->cvu: initialize(...)
 	a->cvu: Apre schermata utenti
 	a->cvu: Seleziona la barra di ricerca
 	
 	'Ogni volta che viene inserito un carattere viene aggiornata la ricerca
 	loop Inserimento sottostringa 
 		a->cvu: Digita una sottostringa nella barra di ricerca
-		cvu->gu: ricercaMedianteSottostringa(...)
+		cvu->gu: ricerca(...)
 		activate gu
 			gu->gu: Ricerca utenti
 			gu-->a:Restituisce utenti che rispettano i criteri di ricerca

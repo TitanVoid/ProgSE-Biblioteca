@@ -1,48 +1,47 @@
 @startuml
 
 	actor Amministratore as a
-	participant ClasseCheContieneVisualizzazioneUtenti as cvu
-	participant Utenti as u
-	participant GestoreUtenti as gu
-	participant Biblioteca as b
+	participant UtentiController as cvu
+	participant ModificaUtenteController as muc
+	participant Utente as u
+	participant Utenti as gu
 
-	b->b: caricaArchivio(...)
-	cvu->cvu: inizialize(...)
+	cvu->cvu: initialize(...)
 	a->cvu: Apre schermata utenti
 	a->cvu: Seleziona un utente
 	
 	a->cvu: Clicca il pulsante "Modifica"
-	cvu->cvu: funzioneOnActionPulsanteModifica(...)
+	cvu->cvu: onModifyUser(...)
 	activate cvu
 		cvu --> "a": Viene mostrata la schermata di modifica utente
 	deactivate cvu
 
 	'Amministratore modifica i campi in modo errato
 	loop Amministratore modifica i campi in modo errato
-		a->cvu: Modifica i campi dell'utente nel TextField
-		a->cvu: Preme il pulsante "Conferma"
-		cvu->cvu: funzioneOnActionDiPulsanteDiConferma(...)
-		activate cvu
-			cvu->u: verifica(...)
+		a->muc: Modifica i campi dell'utente nel TextField
+		a->muc: Preme il pulsante "Conferma"
+		muc->muc: onConfirm(...)
+		activate muc
+			muc->u: verificaUtente(...)
 			activate u
 				u->u: Verifica campi
-				u --> cvu: Verifica non andata a buon fine
+				u --> muc: Verifica non andata a buon fine
 			deactivate u
-		cvu-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
-		deactivate cvu
+		muc-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+		deactivate muc
 		'Condizione di uscita dal loop
 		break
-			u-->cvu: Verifica andata a buon fine
+			u-->muc: Verifica andata a buon fine
 		end
 	end
 
-	cvu->gu: modificaUtente(...)
-	activate cvu
+	muc->gu: modifica(...)
+	activate muc
 		activate gu
 			gu->gu: Viene modificato l'utente
-			gu --> cvu: Conferma
+			gu --> muc: Conferma
 		deactivate gu
-	cvu --> a: Viene chiusa la schermata di modifica utente
-	deactivate cvu
+	muc --> a: Viene chiusa la schermata di modifica utente
+	deactivate muc
 	
 @enduml

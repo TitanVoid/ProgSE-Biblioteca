@@ -1,37 +1,39 @@
 @startuml
 
 	actor Amministratore as a
-	participant ClasseCheContieneVisualizzazioneUtenti as cvu
-	participant Utenti as u
-	participant GestoreUtenti as gu
-	participant Biblioteca as b
+	participant UtentiController as cvu
+	participant RimozioneUtenteController as ruc
+	participant Utente as u
+	participant Utenti as gu
 
-	b->b: caricaArchivio(...)
-	cvu->cvu: inizialize(...)
+	cvu->cvu: initialize(...)
 	a->cvu: Apre schermata utenti
 	a->cvu: Seleziona un utente
-
-	
 	a->cvu: Clicca il pulsante "Rimuovi"
-	cvu->cvu: funzioneOnActionPulsanteDiRimozione(...)
+	cvu->cvu: onDeleteUser(...)
 	activate cvu
 		cvu-->a: Viene mostrata una nuova finestra con un messaggio di avviso
 	deactivate cvu
+	
 	alt Annulla l'operazione cliccando "No"
-		a->cvu: Annulla l'operazione cliccando il pulsante "No"
-		cvu-->a: Viene chiusa la schermata di rimozione utente
+		a->ruc: Annulla l'operazione cliccando il pulsante "No"
+		ruc -> ruc: onCancel(...)
+		activate ruc
+			ruc-->a: Viene chiusa la schermata di rimozione utente
+		deactivate ruc
 		
 	else Conferma l'operazione cliccando "Si"
-		a->cvu: Conferma l'operazione cliccando il pulsante "Si"
-		cvu->gu: eliminaUtente(...)
-		activate cvu
+		a->ruc: Conferma l'operazione cliccando il pulsante "Si"
+		ruc->ruc: onConfirm(...)
+			activate ruc
+			ruc->gu: rimuovi(...)
 			activate gu
-				gu->gu: Viene eliminato l'utente
-				gu-->cvu: Conferma
+				gu->gu: Viene rimosso l'utente
+				gu-->ruc: Conferma
 				destroy u
 			deactivate gu
-		cvu-->a: Viene chiusa la schermata di rimozione utente
-		deactivate cvu
+		ruc-->a: Viene chiusa la schermata di rimozione utente
+		deactivate ruc
 	end	
 
 @enduml

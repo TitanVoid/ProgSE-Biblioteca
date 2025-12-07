@@ -1,60 +1,59 @@
 @startuml
 
 	actor Amministratore as a
-	participant ClasseCheContieneVisualizzazioneUtenti as cvu
-	participant Utenti as u
-	participant GestoreUtenti as gu
-	participant Biblioteca as b
+	participant UtentiController as cvu
+	participant AggiuntaUtenteController as auc
+	participant Utente as u
+	participant Utenti as gu
 
-	b->b: caricaArchivio(...)
-	cvu->cvu: inizialize(...)
+	cvu->cvu: initialize(...)
 	a->cvu: Apre schermata utenti
 	a->cvu: Clicca il pulsante "Aggiungi"
 
-	cvu->cvu: funzioneOnActionDelPulsante(...)
+	cvu->cvu: onAddUser(...)
 	activate cvu
 		cvu --> "a": Viene mostrata la schermata di aggiunta utente
 	deactivate cvu
 
 	'Flusso alternativo
 	loop Utente inserisce i campi dell'utente errati o incompleti
-		a->cvu: Inserisce i campi del libro nel TextField
-		a->cvu: Preme il pulsante "Conferma"
-		cvu-->cvu: funzioneOnActionDelPulsanteDiConferma(...)
-		activate cvu
-			cvu-> u: verifica(...)
+		a->auc: Inserisce i campi del libro nel TextField
+		a->auc: Preme il pulsante "Conferma"
+		auc->auc: onConfirm(...)
+		activate auc
+			auc-> u: verificaUtente(...)
 			activate u
 				u -> u: Verifica campi
-				u --> cvu: Verifica non andata a buon fine
+				u --> auc: Verifica non andata a buon fine
 				deactivate u
-				cvu-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
-			deactivate cvu
+				auc-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+			deactivate auc
 		
 		'Condizione di uscita dal loop
 		break Verifica andata a buon fine
-			u --> cvu: Verifica andata a buon fine
+			u --> auc: Verifica andata a buon fine
 		end
 	end
 
-	cvu -> gu: ricercaUtente(...)
+	auc -> gu: esisteChiave(...)
 		 
 			gu -> gu: Verifica se l'utente è presente già nella lista
 		
 
 	'Non è possibile inserire due utenti uguali quindi ne si verifica l'univocità
 	alt L'utente esiste nella lista		
-		gu-->cvu: L'utente esiste nella lista
-		cvu-->a: Viene mostrato un messaggio di errore	
+		gu-->auc: L'utente esiste nella lista
+		auc-->a: Viene mostrato un messaggio di errore	
 	else L'utente non esiste nella lista
-		gu --> cvu: L'utente non esiste nella lista
-		activate cvu
-			cvu->gu: aggiungiUtente(...)
+		gu --> auc: L'utente non esiste nella lista
+		activate auc
+			auc->gu: aggiungi(...)
 			activate gu
 				gu->gu: Viene aggiunto l'utente
-				gu --> cvu: Conferma
+				gu --> auc: Conferma
 				deactivate gu
-				cvu-->a: Viene chiusa la schermata di aggiunta utente
-		deactivate cvu
+				auc-->a: Viene chiusa la schermata di aggiunta utente
+		deactivate auc
 		
 	end
 

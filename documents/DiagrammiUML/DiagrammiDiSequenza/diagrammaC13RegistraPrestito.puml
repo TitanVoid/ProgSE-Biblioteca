@@ -1,68 +1,68 @@
 @startuml
+
 	actor Amministratore as a
-	participant ClasseCheContieneVisualizzazionePrestiti as cvp
-	participant Prestiti as p
-	participant GestoreUtenti as gu
-	participant GestoreLibri as gl
-	participant GestorePrestiti as gp
-	participant Biblioteca as b
+	participant PrestitiController as cvp
+	participant RegistrazionePrestitoController as rpc
+	participant Prestito as p
+	participant Utenti as gu
+	participant Libri as gl
+	participant Prestiti as gp
 
-	b->b: caricaArchivio(...)
-	cvp->cvp: inizialize(...)
+	cvp->cvp: initialize(...)
 	a->cvp: Apre schermata prestiti
-	a->cvp: Clicca il pulsante "Aggiungi"
+	a->cvp: Clicca il pulsante "Inserisci"
 
-	cvp->cvp: funzioneOnActionDelPulsante(...)
+	cvp->cvp: onRegisterLoan(...)
 	activate cvp
-		cvp --> "a": Viene mostrata la schermata di aggiunta prestito
+		cvp --> "a": Viene mostrata la schermata di registrazione prestito
 	deactivate cvp
 
 	'Flusso alternativo
 	loop Amministratore inserisce i campi del prestito errati o incompleti
-		a->cvp: Inserisce i campi del prestito nel TextField
-		a->cvp: Preme il pulsante "Conferma"
-		cvp->cvp: funzioneOnActionDelPulsanteDiConferma(...)
-		activate cvp
-			cvp-> p: verifica(...)
+		a->rpc: Inserisce i campi del prestito nel TextField
+		a->rpc: Preme il pulsante "Conferma"
+		rpc->rpc: onConfirm(...)
+		activate rpc
+			rpc-> p: verificadataScadenza(...)
 			activate p
 				p -> p: Verifica campi
-				p --> cvp: Verifica non andata a buon fine
+				p --> rpc: Verifica non andata a buon fine
 				deactivate p
-				cvp-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
-			deactivate cvp
+				rpc-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+			deactivate rpc
 		
 		'Condizione di uscita dal loop
 		break Verifica andata a buon fine
-			p --> cvp: Verifica andata a buon fine
+			p --> rpc: Verifica andata a buon fine
 		end
 	end
 
-	cvp->gu: ricercaUtente(...)
+	rpc->gu: esisteChiave(...)
 	gu->gu: Ricerca dell'utente
 	alt Utente non presente nella lista
-		gu-->cvp: L'utente non esiste nella lista degli utenti
-		cvp-->a: Viene mostrato un messaggio di errore
+		gu-->rpc: L'utente non esiste nella lista degli utenti
+		rpc-->a: Viene mostrato un messaggio di errore
 	else Utente presente nella lista
-		gu-->cvp: L'utente è presente nella lista
+		gu-->rpc: L'utente è presente nella lista
 	end
 	
-	cvp->gl: ricercaLibri(...)
+	rpc->gl: esisteChiave(...)
 	gl->gl: Ricerca del libro
 	alt Libro non presente nella lista
-		gl-->cvp: Il libro non esiste nella lista
-		cvp-->a: Viene mostrato un messaggio di errore
+		gl-->rpc: Il libro non esiste nella lista
+		rpc-->a: Viene mostrato un messaggio di errore
 	else Libro presente nella lista
-		gl-->cvp: Il libro esiste nella lista
+		gl-->rpc: Il libro esiste nella lista
 	end
 
-	cvp->gp: registraPrestito(...)
-	activate cvp
+	rpc->gp: aggiungi(...)
+	activate rpc
 		activate gp
 			gp->gp: Viene aggiunto il prestito
-			gp--> cvp: Conferma
+			gp--> rpc: Conferma
 		deactivate gp
-		cvp->a: VIene chiusa la schermata di aggiunta prestito
-	deactivate cvp	
+		rpc->a: VIene chiusa la schermata di aggiunta prestito
+	deactivate rpc	
 
 
 @enduml

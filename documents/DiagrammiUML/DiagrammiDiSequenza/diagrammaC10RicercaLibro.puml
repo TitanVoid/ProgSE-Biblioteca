@@ -1,20 +1,17 @@
 @startuml
 
 	actor Amministratore as a
-	participant ClasseCheContieneLaVisualizzazioneLibri as cvl
-	participant GestioneLibro as gl
-	participant Biblioteca as b
-
-	b->b: caricaArchivio(...)
+	participant LibriController as cvl
+	participant Libri as gl
 	
-	cvl->cvl: inizialize(...)
+	cvl->cvl: initialize(...)
 	a->cvl: Apre schermata libri
 	a->cvl: Seleziona la barra di ricerca
 	
 	'Ogni volta che viene inserito un carattere viene aggiornata la ricerca
 	loop Inserimento sottostringa 
 		a->cvl: Digita una sottostringa nella barra di ricerca
-		cvl->gl: ricercaMedianteSottostringa(...)
+		cvl->gl: ricerca(...)
 		activate gl
 			gl->gl: Ricerca libri
 			gl-->a:Restituisce libri che rispettano i criteri di ricerca

@@ -1,36 +1,37 @@
 @startuml
 
 	actor Amministratore as a
-	participant ClasseCheContieneVisualizzazionePrestiti as cvp
-	participant Prestito as p
-	participant GestorePrestiti as gp
-	participant Biblioteca as b
+	participant PrestitiController as cvp
+	participant RestituzionePrestitoController as rrc
+	participant Prestiti as gp
 
-	b->b: caricaArchivio(...)
-	cvp->cvp: inizialize(...)
+	cvp->cvp: initialize(...)
 	a->cvp: Apre schermata prestiti
 	a->cvp: Seleziona un prestito
-
-	
-	a->cvp: Clicca il pulsante "Registra"
-	cvp->cvp: funzioneOnActionPulsanteDiRegistra(...)
+	a->cvp: Clicca il pulsante "Restituzione"
+	cvp->cvp: onReturnLoan(...)
 	activate cvp
 		cvp-->a: Viene mostrata una nuova finestra con un messaggio di avviso
 	deactivate cvp
+	
 	alt Annulla l'operazione cliccando "No"
-		a->cvp: Annulla l'operazione cliccando il pulsante "No"
-		cvp-->a: Viene chiusa la schermata di rimozione libro
+		a->rrc: Annulla l'operazione cliccando il pulsante "No"
+		rrc->rrc: onCancel(...)
+		activate rrc
+			rrc-->a: Viene chiusa la schermata di rimozione libro
+		deactivate rrc
 		
 	else Conferma l'operazione cliccando "Si"
-		a->cvp: Conferma l'operazione cliccando il pulsante "Si"
-		cvp->gp: registraPrestito(...)
-		activate cvp
+		a->rrc: Conferma l'operazione cliccando il pulsante "Si"
+		rrc->rrc: onConfirm(...)
+		activate rrc
+			rrc->gp: registraPrestito(...)
 			activate gp
 				gp->gp: Viene registrata la restituzione
-				gp-->cvp: Conferma
+				gp-->rrc: Conferma
 			deactivate gp
-		cvp-->a: Viene chiusa la schermata di registrazione prestito
-		deactivate cvp
+		rrc-->a: Viene chiusa la schermata di registrazione prestito
+		deactivate rrc
 	end	
 
 
