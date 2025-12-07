@@ -1,8 +1,8 @@
-public class AggiuntaUtenteController implements Initializable {
+public class RegistrazionePrestitoController implements Initializable {
     
-    private AggiuntaUtenteView view;
+    private RegistrazionePrestitoView view;
 
-    public AggiuntaUtenteController(AggiuntaUtenteView view) {
+    public RegistrazionePrestitoController(RegistrazionePrestitoView view) {
         // Constructor implementation
     }
 
