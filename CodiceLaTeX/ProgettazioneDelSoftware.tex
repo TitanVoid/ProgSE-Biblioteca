@@ -86,7 +86,25 @@
             \end{adjustbox}
             \captionof{figure}{Diagramma delle Classi} 
         \end{figure}
-    \newpage
+        \newpage
+
+         \subsubsection{Diagramma dei package (essenziale)}
+        \begin{figure}[h!]
+            \begin{adjustbox}{width=.4\paperwidth, height=.5\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+                \includesvg{diagrammaDeiPackageNonDettagliato.svg}    
+            \end{adjustbox}
+            \captionof{figure}{Diagramma dei Package relativo ai modelli} 
+        \end{figure}
+        \newpage
+        
+        \subsubsection{Diagramma dei package (completo)}
+        \begin{figure}[h!]
+            \begin{adjustbox}{width=.74\paperwidth, height=.75\paperheight, center, margin= 0cm .3cm 0cm .1cm}
+                \includesvg{diagrammaDeiPackage.svg}    
+            \end{adjustbox}
+            \captionof{figure}{Diagramma dei Package completo (incluse le classi Controller e View)} 
+        \end{figure}
+    \newpage   
 
     \subsection{Diagrammi di sequenza}
         Di seguito vengono presentati dei diagrammi di sequenza che descrivono i flussi esecutivi dei casi d’uso più rilevanti, utili per la comprensione delle funzionalità principali del sistema.
@@ -226,8 +244,10 @@
     \newpage
     
     \subsection{Principi di buona progettazione}
+        La progettazione di dettaglio dell'applicazione è stata portata a termine tenendo a mente i principi di buona progettazione, garantendo un'alta ortogonalità, manutenibilità, modularità e chiarezza.\vspace{.2cm}
+        \\Di seguito riportiamo le tabelle con i livelli di coesione e di accoppiamento individuati tra i moduli del nostro sistema: 
         \subsubsection{Livelli di Coesione}
-            \begin{adjustbox}{width=.8\paperwidth, height=.75\paperheight, center, margin= 0cm 0cm 0cm .1cm}
+            \begin{adjustbox}{width=.7\paperwidth, height=.66\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includegraphics{coesione.png}    
             \end{adjustbox}
             \captionof{figure}{Tabella dei livelli di coesione dei moduli} 
@@ -240,7 +260,24 @@
             \captionof{figure}{Tabella dei livelli di accoppiamento tra i moduli} 
         \newpage
 
+        Tutte le classi sono state progettate in accordo con il principio di \emph{Separazione delle preoccupazioni}: ogni modulo contiene solo ed esclusivamente attributi e metodi che hanno a che fare con la propria funzionalità.
+        \\Ciò garantisce di ottenere, nella maggior parte dei casi, il più alto livello di coesione possibile (\emph{coesione funzionale}).\vspace{.2cm}
+        \\Fin dalle prime fasi della progettazione, vista la natura stessa dell'applicazione è emerso un insieme di funzionalità comuni alle principali collezioni di dati (Prestiti, Libri ed Utenti).
+        \\Per evitare ridondanze, e rispettare quanto affermato dal principio di progettazione \emph{DRY} (\emph{Don't Repeat Yourself}), tali funzionalità sono state astratte ed inserite nelle interfacce \emph{Archiviabile} e \emph{Mappabile}.
+        \\Le classi che implementano tali interfacce si preoccuperanno di ridefinire il comportamento specifico dei metodi ereditati da esse, mentre la loro funzionalità di base resterà sempre la stessa.
+        \\In questo modo è possibile ottenere un codice chiaro (secondo quanto affermato dal principio \emph{KISS} - \emph{Keep It Simple, Stupid!}) e facilmente manutenibile.\vspace{.2cm}
+
+        \subsubsection{Analisi della scalabilità}
+            Per aumentare la scalabilità del sistema, sarebbe stato possibile rendere la classe \emph{Utente} astratta, e successivamente specializzarla nelle diverse tipologie di utenti contemplati dall'applicazione.
+            \\È stato scelto di non adottare questa strategia per due motivi:
+            \begin{enumerate}
+                \item Un'ulteriore relazione di specializzazione avrebbe comportato un alto livello di accoppiamento;
+                \item Attualmente, il nostro sistema è in grado di gestire un'unica tipologia di utenti, ovvero gli studenti, quindi sarebbe stata un'aggiunta pressoché inutile (è stato seguito il principio \emph{YAGNI} - \emph{You Aren't Going to Need It}).
+            \end{enumerate}
+        
         \subsubsection{Strategie per la riduzione dell'Accoppiamento}
-            Per ridurre l’accoppiamento la classe Utente non è stata implementata astratta; infatti, se avessimo voluto un codice più manutenibile avremmo dovuto rendere Utente astratta e creare una classe Studente che estendeva Utente. In questo modo in futuro sarebbe stato possibile avere altre tipologie di utenti (come Professore) all’interno della biblioteca ma avremmo avuto un accoppiamento molto più alto dovuto all’estensione di Utente.\vspace{.2cm}
-            \\Per ridurre l’accoppiamento la classe Utente non è stata implementata astratta; infatti, se avessimo voluto un codice più manutenibile avremmo dovuto rendere Utente astratta e creare una classe Studente che estendeva Utente. In questo modo in futuro sarebbe stato possibile avere altre tipologie di utenti (come Professore) all’interno della biblioteca ma avremmo avuto un accoppiamento molto più alto dovuto all’estensione di Utente. 
+            Utilizzando ampliamente meccanismi come l'\emph{incapsulamento} e l'\emph{astrazione} mediante l'introduzione di interfacce, è stato possibile ridurre al minimo possibile l'accoppiamento tra i moduli, nonché aumentare la robustezza generale del sistema.\vspace{.2cm}
+            \\Uno degli aspetti su cui sarebbe possibile effettuare delle ottimizzazioni è l'uso dell'\emph{ereditarietà}: per questioni semantiche (e dettate dalla natura del linguaggio di programmazione utilizzato, ovvero \emph{Java}), la struttura del nostro sistema prevede due relazioni di specializzazione (\emph{Utente} $\rightarrow$ \emph{Persona} e \emph{Autore} $\rightarrow$ \emph{Persona}), che portano con sé un livello di accoppiamento estremamente elevato (\emph{accoppiamento per contenuti}).\vspace{.2cm}
+            \\Una possibile soluzione sarebbe quella di predilire l'\emph{associazione} all'\emph{ereditarietà}: anziché far dipendere l'implementazione di \emph{Utente} interamente da quella di \emph{Persona}, si potrebbe pensare di far mantenere a \emph{Utente} un riferimento ad una classe avente come attributi \emph{nome} e \emph{cognome}, riducendo di molto l'accoppiamento.
+        
 \end{document}
