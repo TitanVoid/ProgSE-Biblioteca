@@ -76,7 +76,7 @@
                 \item \textbf{Persona:} classe astratta che funge da superclasse per Utente e Autore. Definisce gli attributi fondamentali di una persona, ovvero “nome” e “cognome”. Fornisce metodi per la loro gestione (getter e setter) e per la verifica della correttezza del loro formato.
             \end{itemize} 
             All'interno del diagramma viene omessa l’implementazione dell’interfaccia Serializable al fine di aumentare la propria leggibilità. Suddetta interfaccia dovrà essere implementata dalle classi Biblioteca, Prestiti, Libri, Utenti, Prestito, Libro, Utente, Autore, Matricola e ISBN.\vspace{0.2cm}
-            \\Per lo stesso motivo, all'interno del diagramma vengono omesse le classi Controller e le proprie relazioni con i modelli. 
+            \\Per lo stesso motivo, all'interno del diagramma vengono omesse le classi Controller e le relazioni tra queste ultime ed i modelli. 
         \newpage
 
         \subsubsection{Diagramma delle classi}
@@ -89,9 +89,13 @@
     \newpage
 
     \subsection{Diagrammi di sequenza}
+        Di seguito vengono presentati dei diagrammi di sequenza che descrivono i flussi esecutivi dei casi d’uso più rilevanti, utili per la comprensione delle funzionalità principali del sistema.
+        \\Questi diagrammi descrivono l’interazione tra l’attore \emph{Amministratore} e gli oggetti del sistema coinvolti, ai fini di soddisfare i requisiti specificati. 
         \subsubsection{\textbf{C4: Inserimento di un libro}}
+        Il seguente diagramma descrive l'esecuzione del caso d'uso C4.\vspace{.2cm}
+        \\Per migliorare la leggibilità del diagramma, abbiamo omesso il flusso alternativo di annullamento dell’operazione tramite il pulsante “Annulla”. Per il flusso alternativo di inserimento errato o incompleto abbiamo usato la sintassi del loop-break. Per quanto riguarda la sintassi per la descrizione del flusso alternativo dell’univocità del libro, abbiamo usato un alt.
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.9\paperwidth, height=.66\paperheight, center, margin= 0cm 0cm 0cm 0cm}
+            \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includesvg{diagrammaC4InserimentoLibro.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C4} 
@@ -99,8 +103,9 @@
         \newpage
 
         \subsubsection{\textbf{C5: Modifica di un libro}}
+        In questo diagramma, per migliorarne la leggibilità, abbiamo omesso il flusso alternativo di annullamento dell’operazione tramite il pulsante “Annulla”. Qui per il flusso alternativo di modifica errata o incompleta abbiamo usato la sintassi del loop-break.
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.8\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+            \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includesvg{diagrammaC5ModificaLibro.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C5} 
@@ -108,8 +113,9 @@
         \newpage
 
         \subsubsection{\textbf{C6: Rimozione di un libro}}
+        In questo diagramma, per il flusso alternativo di annullamento dell’operazione tramite il pulsante “No” abbiamo usato la sintassi dell’alt.
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.8\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+            \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includesvg{diagrammaC6RimuoviLibro.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C6} 
@@ -117,8 +123,9 @@
         \newpage
 
         \subsubsection{\textbf{C7: Inserimento di un utente}}
+        In questo diagramma, per migliorarne la leggibilità, abbiamo omesso il flusso alternativo di annullamento dell’operazione tramite il pulsante “Annulla”. Per il flusso alternativo di inserimento errato o incompleto abbiamo usato la sintassi del loop-break. Per quanto riguarda la sintassi per la descrizione del flusso alternativo dell’univocità dell’utente, abbiamo usato un alt.
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.8\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+            \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includesvg{diagrammaC7InserisciUtente.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C7} 
@@ -126,8 +133,9 @@
         \newpage
 
         \subsubsection{\textbf{C8: Modifica di un utente}}
+        In questo diagramma, per migliorarne la leggibilità, abbiamo omesso il flusso alternativo di annullamento dell’operazione tramite il pulsante “Annulla”. Qui per il flusso alternativo di modifica errata o incompleta abbiamo usato la sintassi del loop-break.
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.8\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+            \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includesvg{diagrammaC8ModificaUtente.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C8} 
@@ -135,8 +143,9 @@
         \newpage
 
         \subsubsection{\textbf{C9: Rimozione di un utente}}
+        In questo diagramma, per il flusso alternativo di annullamento dell’operazione tramite il pulsante “No” abbiamo usato la sintassi dell’alt.
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.8\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+            \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includesvg{diagrammaC9RimuoviUtente.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C9} 
@@ -144,8 +153,9 @@
         \newpage
 
         \subsubsection{\textbf{C10: Ricerca di un libro}}
+        In questo diagramma abbiamo usato la sintassi del loop-break per simulare la ricerca mediante sottostringa. Infatti, ogni volta che viene aggiunto un carattere, la ricerca si aggiorna per dare tutte le corrispondenze possibili con quella sottostringa, l’operazione si fermerà quando l’amministratore cliccherà su un libro.
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.8\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+            \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includesvg{diagrammaC10RicercaLibro.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C10} 
@@ -153,8 +163,9 @@
         \newpage
 
         \subsubsection{\textbf{C12: Ricerca di un utente}}
+        In questo diagramma abbiamo usato la sintassi del loop-break per simulare la ricerca mediante sottostringa. Infatti, ogni volta che viene aggiunto un carattere, la ricerca si aggiorna per dare tutte le corrispondenze possibili con quella sottostringa, l’operazione si fermerà quando l’amministratore cliccherà su un utente.
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.8\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+            \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includesvg{diagrammaC12RicercaUtente.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C12} 
@@ -162,8 +173,9 @@
         \newpage
 
         \subsubsection{\textbf{C13: Registrazione di un prestito}}
+        In questo diagramma, per migliorarne la leggibilità, abbiamo omesso il flusso alternativo di annullamento dell’operazione tramite il pulsante “Annulla”. Per il flusso alternativo di inserimento errato o incompleto abbiamo usato la sintassi del loop-break. Per quanto riguarda la sintassi per la descrizione del flusso alternativo dell’esistenza dell’utente e dell’esistenza del libro, abbiamo usato un alt.
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.8\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+            \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includesvg{diagrammaC13RegistraPrestito.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C13} 
@@ -171,8 +183,9 @@
         \newpage
 
         \subsubsection{\textbf{C14: Registrazione di una restituzione}}
+        In questo diagramma, per il flusso alternativo di annullamento dell’operazione tramite il pulsante “No” abbiamo usato la sintassi dell’alt.
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.8\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+            \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includesvg{diagrammaC14RegistraRestituzione.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C14} 
@@ -180,8 +193,9 @@
         \newpage
 
         \subsubsection{\textbf{C15: Estensione di un prestito}}
+        In questo diagramma, per migliorarne la leggibilità, abbiamo omesso il flusso alternativo di annullamento dell’operazione tramite il pulsante “Annulla”. Qui per il flusso alternativo di modifica errata o incompleta abbiamo usato la sintassi del loop-break. 
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.8\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+            \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includesvg{diagrammaC15EstendiPrestito.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C15} 
@@ -190,19 +204,20 @@
     
     \subsection{Principi di buona progettazione}
         \subsubsection{Livelli di Coesione}
-            \begin{adjustbox}{width=.8\paperwidth, height=.76\paperheight, center, margin= 0cm .2cm 0cm .3cm}
+            \begin{adjustbox}{width=.8\paperwidth, height=.75\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includegraphics{coesione.png}    
             \end{adjustbox}
             \captionof{figure}{Tabella dei livelli di coesione dei moduli} 
         \newpage
 
         \subsubsection{Livelli di Accoppiamento}
-            \begin{adjustbox}{width=.8\paperwidth, height=.79\paperheight, center, margin= 0cm .2cm 0cm .2cm}
+            \begin{adjustbox}{width=.8\paperwidth, height=.8\paperheight, center, margin= 0cm 0cm 0cm .1cm}
                 \includegraphics{accoppiamento.png}    
             \end{adjustbox}
             \captionof{figure}{Tabella dei livelli di accoppiamento tra i moduli} 
         \newpage
 
         \subsubsection{Strategie per la riduzione dell'Accoppiamento}
-            ...
+            Per ridurre l’accoppiamento la classe Utente non è stata implementata astratta; infatti, se avessimo voluto un codice più manutenibile avremmo dovuto rendere Utente astratta e creare una classe Studente che estendeva Utente. In questo modo in futuro sarebbe stato possibile avere altre tipologie di utenti (come Professore) all’interno della biblioteca ma avremmo avuto un accoppiamento molto più alto dovuto all’estensione di Utente.\vspace{.2cm}
+            \\Per ridurre l’accoppiamento la classe Utente non è stata implementata astratta; infatti, se avessimo voluto un codice più manutenibile avremmo dovuto rendere Utente astratta e creare una classe Studente che estendeva Utente. In questo modo in futuro sarebbe stato possibile avere altre tipologie di utenti (come Professore) all’interno della biblioteca ma avremmo avuto un accoppiamento molto più alto dovuto all’estensione di Utente. 
 \end{document}
