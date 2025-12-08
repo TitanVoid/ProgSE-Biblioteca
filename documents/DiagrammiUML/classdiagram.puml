@@ -15,7 +15,7 @@ top to bottom direction
 }
 
 
-+class Biblioteca implements Serializable {
++class Biblioteca {
 -libri: Libri {readOnly}
 -utenti: Utenti {readOnly}
 -prestiti: Prestiti {readOnly}
@@ -62,19 +62,19 @@ top to bottom direction
 }
 
 
-+class Utente implements Comparable {
--matricola: Matricola {readOnly}
++class Utente implements Comparable<T> {
+-matricolaUtente: Matricola {readOnly}
 -email: String
 -prestitiAttivi: List<Prestito> [0...3] {readOnly}
 
-+Utente(nome: String, cognome: String, matricola: Matricola, email: String)
-+getMatricola(): Matricola
++Utente(nome: String, cognome: String, matricolaUtente: Matricola, email: String)
++getMatricolaUtente(): Matricola
 +setEmail(email: String): void
 +getEmail(): String
 +getPrestitiAttivi(): List<Prestito>
 +aggiungiPrestito(prestito: Prestito): void
 +rimuoviPrestito(prestito: Prestito): void
-+verificaUtente(nome: String, cognome: String, matricola: Matricola, {static} 
++verificaUtente(nome: String, cognome: String, matricolaUtente: Matricola, {static} 
 email: String): boolean {static}
 +verificaEmail(email: String): boolean {static} 
 +equals(o: Object): boolean
@@ -82,14 +82,14 @@ email: String): boolean {static}
 }
 
 
-+class Libro implements Comparable {
++class Libro implements Comparable<T> {
 -titolo: String
 -autori: List<Autore> {readOnly}
 -annoPubblicazione: int 
--isbn: ISBN {readOnly}
+-codiceISBNLibro: ISBN {readOnly}
 -copieDisponibili: int 
 
-+Libro(titolo: String, annoPubblicazione: int, id: ISBN, copieDisponibili: int)
++Libro(titolo: String, annoPubblicazione: int, codiceISBNLibro: ISBN, copieDisponibili: int)
 +setTitolo(titolo: String): void
 +getTitolo(): String
 +getAutori(): List<Autore>
@@ -97,27 +97,27 @@ email: String): boolean {static}
 +rimuoviAutore(autore: Autore): void
 +setAnnoPubblicazione(annoPubblicazione: int): void
 +getAnnoPubblicazione(): int
-+getISBN(): ISBN
++getCodiceISBNLibro(): ISBN
 +setCopieDisponibili(copieDisponibili: int): void
 +getCopieDisponibili(): int
-+verificaLibro(titolo: String, autori: List<Autore>, annoPubblicazione: int, id: ISBN, {static}
++verificaLibro(titolo: String, autori: List<Autore>, annoPubblicazione: int, codiceISBNLibro: ISBN, {static}
 copieDisponibili: int): boolean {static}
 +equals(o: Object): boolean
 +hashCode(): int
 }
 
 
-+class Prestito implements Comparable {
--matricola: Matricola {readOnly}
--isbn: ISBN {readOnly}
++class Prestito implements Comparable<T> {
+-matricolaUtente: Matricola {readOnly}
+-codiceISBNLibro: ISBN {readOnly}
 -dataInizio: LocalDate {readOnly}
 -dataScadenza: LocalDate 
 -dataRestituzione : LocalDate
 
-+Prestito(matricola: Matricola, isbn: ISBN, dataInizio: LocalDate, dataScadenza: LocalDate,
-dataRestituzione LocalDate)
-+getMatricola(): Matricola
-+getISBN(): ISBN
++Prestito(matricolaUtente: Matricola, codiceISBNLibro: ISBN, dataInizio: LocalDate,
+dataScadenza: LocalDate, dataRestituzione LocalDate)
++getMatricolaUtente(): Matricola
++getCodiceISBNLibro(): ISBN
 +setDataScadenza(data: LocalDate): void
 +getDataScadenza(): LocalDate
 +getDataInizio(): LocalDate 
@@ -157,10 +157,10 @@ dataRestituzione LocalDate)
 
 
 +class ISBN {
--isbn: String {readOnly}
+-codiceISBN: String {readOnly}
 
 +ISBN(isbn: String)
-+getISBN(): String
++getCodiceISBN(): String
 +verificaISBN(isbn: String): boolean {static}
 }
 
@@ -183,13 +183,15 @@ CONCLUSI
 }
 
 
++interface Comparable<T> {
+}
+
+
 
 
 '------------------------------------------LAYOUT------------------------------------------
 
 Biblioteca -[hidden]-> Archiviabile
-Biblioteca -[hidden]> Serializable
-
 
 Archiviabile -[hidden]> Mappabile
 
@@ -215,7 +217,7 @@ Biblioteca --[hidden]> Maschera
 
 Biblioteca "1" *--- "1" Utenti
 Biblioteca "1" *-- "1" Libri
-Biblioteca "1" *-- "1" Prestiti
+Biblioteca "1" *-- "1" Prestiti 
 
 Utenti "1" *-- "0...*" Utente
 Libri "1" *-- "0...*" Libro
@@ -228,11 +230,11 @@ Prestito "0...3" -> "1" Utente
 Utente -|> Persona
 Autore -down-|> Persona
 
-Libro <-down- ISBN
-Prestito <-down- ISBN
+Libro "1" <-down- "1" ISBN
+Prestito "1" <-down- "1" ISBN
 
-Utente <-- Matricola
-Prestito <-- Matricola
+Utente "1" <-- "1" Matricola
+Prestito "1" <-- "1" Matricola
 
 Mappabile <|.down. Utenti
 Mappabile <|.down. Libri
