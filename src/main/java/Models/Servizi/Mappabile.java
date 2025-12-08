@@ -2,7 +2,7 @@ package Models.Servizi;
 
 /**
  * @interface Mappabile
- * @brief Interfaccia per ///// .
+ * @brief Interfaccia per la gestione di una collezione di elementi mappabili.
  *
  * @tparam K Tipo della chiave.
  * @tparam V Tipo del valore.
