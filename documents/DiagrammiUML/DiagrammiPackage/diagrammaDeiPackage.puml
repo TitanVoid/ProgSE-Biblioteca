@@ -1,0 +1,92 @@
+@startuml
+left to right direction
+
+package Java{
+	class Main{}
+	
+	package Controllers{
+		
+		class MainController
+		
+		package Libri{
+			class AggiuntaLibroController
+			class LibriController
+			class ModificaLibroController
+			class RimozioneLibroController
+		}
+		
+		package Prestiti{
+			class EstensionePrestitoController
+			class PrestitiController
+			class RegistazionePrestitoController
+			class RestituzionePrestitoController
+		}
+		
+		package Utenti{
+			class AggiuntaUtenteController
+			class UtentiController
+			class ModificaUtenteController
+			class RimozioneUtenteController
+		}
+	
+	}
+	
+	package Models{
+		
+		class Biblioteca
+		class Matricola
+		class ISBN
+		abstract Persona
+		
+		package Libri{
+			class Autore
+			class Libri
+			class Libro
+		}
+		
+		package Prestiti{
+			class Prestiti
+			class Prestito
+		}
+		
+		package Utenti{
+			class Utente
+			class Utenti
+		}
+		
+		package Servizi{
+			interface Archiviabile
+			enum Filtro
+			interface Mappabile
+			class Maschera
+		}
+	}
+	
+	
+	package Views{
+	
+		class AvvisoConfermaRimozioneView
+		
+		package Libri{
+			class LibriView
+			class AggiuntaLibroView
+			class ModificaLibroView
+		}
+		
+		package Prestiti{
+			class EstensionePrestitoView
+			class PrestitiView
+			class RegistrazionePrestitoView
+		}
+		
+		package Utenti{
+			class AggiuntaUtenteView
+			class ModificaUtenteView
+			class UtentiView
+		}
+	}
+}
+Models -[hidden]> Controllers
+
+
+@enduml

@@ -1,0 +1,68 @@
+@startuml
+
+	actor Amministratore as a
+	participant PrestitiController as cvp
+	participant RegistrazionePrestitoController as rpc
+	participant Prestito as p
+	participant Utenti as gu
+	participant Libri as gl
+	participant Prestiti as gp
+
+	cvp->cvp: initialize(...)
+	a->cvp: Apre schermata prestiti
+	a->cvp: Clicca il pulsante "Inserisci"
+
+	cvp->cvp: onRegisterLoan(...)
+	activate cvp
+		cvp --> "a": Viene mostrata la schermata di registrazione prestito
+	deactivate cvp
+
+	'Flusso alternativo
+	loop Amministratore inserisce i campi del prestito errati o incompleti
+		a->rpc: Inserisce i campi del prestito nel TextField
+		a->rpc: Preme il pulsante "Conferma"
+		rpc->rpc: onConfirm(...)
+		activate rpc
+			rpc-> p: verificadataScadenza(...)
+			activate p
+				p -> p: Verifica campi
+				p --> rpc: Verifica non andata a buon fine
+				deactivate p
+				rpc-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+			deactivate rpc
+		
+		'Condizione di uscita dal loop
+		break Verifica andata a buon fine
+			p --> rpc: Verifica andata a buon fine
+		end
+	end
+
+	rpc->gu: esisteChiave(...)
+	gu->gu: Ricerca dell'utente
+	alt Utente non presente nella lista
+		gu-->rpc: L'utente non esiste nella lista degli utenti
+		rpc-->a: Viene mostrato un messaggio di errore
+	else Utente presente nella lista
+		gu-->rpc: L'utente è presente nella lista
+	end
+	
+	rpc->gl: esisteChiave(...)
+	gl->gl: Ricerca del libro
+	alt Libro non presente nella lista
+		gl-->rpc: Il libro non esiste nella lista
+		rpc-->a: Viene mostrato un messaggio di errore
+	else Libro presente nella lista
+		gl-->rpc: Il libro esiste nella lista
+	end
+
+	rpc->gp: aggiungi(...)
+	activate rpc
+		activate gp
+			gp->gp: Viene aggiunto il prestito
+			gp--> rpc: Conferma
+		deactivate gp
+		rpc->a: VIene chiusa la schermata di aggiunta prestito
+	deactivate rpc	
+
+
+@enduml

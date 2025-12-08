@@ -1,0 +1,47 @@
+@startuml
+
+	actor Amministratore as a
+	participant LibriController as cvl
+	participant ModificaLibroController as mlc
+	participant Libro as l
+	participant Libri as gl
+
+	cvl->cvl: initialize(...)
+	a->cvl: Apre schermata libri
+	a->cvl: Seleziona un libro
+	
+	a->cvl: Clicca il pulsante "Modifica"
+	cvl->cvl: onModifyBook(...)
+	activate cvl
+		cvl --> "a": Viene mostrata la schermata di modifica libro
+	deactivate cvl
+
+	'Amministratore modifica i campi in modo errato
+	loop Amministratore modifica i campi in modo errato
+		a->mlc: Modifica i campi del libro nel TextField
+		a->mlc: Preme il pulsante "Conferma"
+		mlc->mlc: onConfirm(...)
+		activate mlc
+			mlc->l: verificaLibro(...)
+			activate l
+				l->l: Verifica campi
+				l --> mlc: Verifica non andata a buon fine
+			deactivate l
+		mlc-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+		deactivate mlc
+		'Condizione di uscita dal loop
+		break
+			l-->mlc: Verifica andata a buon fine
+		end
+	end
+
+	mlc->gl: modifica(...)
+	activate mlc
+		activate gl
+			gl->gl: Viene modificato il libro
+			gl --> mlc: Conferma
+		deactivate gl
+	mlc --> a: Viene chiusa la schermata di modifica libro
+	deactivate mlc
+	
+@enduml

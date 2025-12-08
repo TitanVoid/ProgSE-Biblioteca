@@ -1,0 +1,60 @@
+@startuml
+
+	actor Amministratore as a
+	participant UtentiController as cvu
+	participant AggiuntaUtenteController as auc
+	participant Utente as u
+	participant Utenti as gu
+
+	cvu->cvu: initialize(...)
+	a->cvu: Apre schermata utenti
+	a->cvu: Clicca il pulsante "Aggiungi"
+
+	cvu->cvu: onAddUser(...)
+	activate cvu
+		cvu --> "a": Viene mostrata la schermata di aggiunta utente
+	deactivate cvu
+
+	'Flusso alternativo
+	loop Utente inserisce i campi dell'utente errati o incompleti
+		a->auc: Inserisce i campi del libro nel TextField
+		a->auc: Preme il pulsante "Conferma"
+		auc->auc: onConfirm(...)
+		activate auc
+			auc-> u: verificaUtente(...)
+			activate u
+				u -> u: Verifica campi
+				u --> auc: Verifica non andata a buon fine
+				deactivate u
+				auc-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+			deactivate auc
+		
+		'Condizione di uscita dal loop
+		break Verifica andata a buon fine
+			u --> auc: Verifica andata a buon fine
+		end
+	end
+
+	auc -> gu: esisteChiave(...)
+		 
+			gu -> gu: Verifica se l'utente è presente già nella lista
+		
+
+	'Non è possibile inserire due utenti uguali quindi ne si verifica l'univocità
+	alt L'utente esiste nella lista		
+		gu-->auc: L'utente esiste nella lista
+		auc-->a: Viene mostrato un messaggio di errore	
+	else L'utente non esiste nella lista
+		gu --> auc: L'utente non esiste nella lista
+		activate auc
+			auc->gu: aggiungi(...)
+			activate gu
+				gu->gu: Viene aggiunto l'utente
+				gu --> auc: Conferma
+				deactivate gu
+				auc-->a: Viene chiusa la schermata di aggiunta utente
+		deactivate auc
+		
+	end
+
+@enduml

@@ -1,0 +1,47 @@
+@startuml
+
+	actor Amministratore as a
+	participant UtentiController as cvu
+	participant ModificaUtenteController as muc
+	participant Utente as u
+	participant Utenti as gu
+
+	cvu->cvu: initialize(...)
+	a->cvu: Apre schermata utenti
+	a->cvu: Seleziona un utente
+	
+	a->cvu: Clicca il pulsante "Modifica"
+	cvu->cvu: onModifyUser(...)
+	activate cvu
+		cvu --> "a": Viene mostrata la schermata di modifica utente
+	deactivate cvu
+
+	'Amministratore modifica i campi in modo errato
+	loop Amministratore modifica i campi in modo errato
+		a->muc: Modifica i campi dell'utente nel TextField
+		a->muc: Preme il pulsante "Conferma"
+		muc->muc: onConfirm(...)
+		activate muc
+			muc->u: verificaUtente(...)
+			activate u
+				u->u: Verifica campi
+				u --> muc: Verifica non andata a buon fine
+			deactivate u
+		muc-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+		deactivate muc
+		'Condizione di uscita dal loop
+		break
+			u-->muc: Verifica andata a buon fine
+		end
+	end
+
+	muc->gu: modifica(...)
+	activate muc
+		activate gu
+			gu->gu: Viene modificato l'utente
+			gu --> muc: Conferma
+		deactivate gu
+	muc --> a: Viene chiusa la schermata di modifica utente
+	deactivate muc
+	
+@enduml
