@@ -70,7 +70,7 @@
                 \item \textbf{Prestito}: classe che modella un prestito. I suoi attributi sono: \texttt{matricolaUtente}, \texttt{codiceISBNLibro}, \texttt{dataInizio}, \texttt{dataScadenza} e \texttt{dataRestituzione}. Fornisce vari metodi per la modifica e visualizzazione di questi ultimi (getter e setter) e per la verifica della correttezza del formato dei dati; 
                 \item \textbf{Utente}: classe che specializza Persona. Modella un utente del sistema. I suoi attributi sono: \texttt{matricolaUtente}, \texttt{email} e \texttt{prestitiAttivi} (una collezione di oggetti di tipo Prestito). Fornisce vari metodi per la modifica e visualizzazione di questi ultimi (getter e setter), per la gestione della collezione di prestiti e per la verifica della correttezza del formato dei dati; 
                 \item \textbf{Libro}: classe che modella un libro. I suoi attributi sono: \texttt{titolo}, \texttt{autori} (una collezione di oggetti di tipo Autore), \texttt{annoPubblicazione}, \texttt{codiceISBNLibro} e \texttt{copieDisponibili}. Fornisce vari metodi per la modifica e visualizzazione di questi ultimi (getter e setter), per la gestione della collezione di autori e per la verifica della correttezza del formato dei dati;
-                \item \textbf{Matricola}: classe che modella una matricola (ovvero il codice identificativo univoco) associata ad un utente. possiede l'attributo \texttt{matricola}, il metodo per la sua visualizzazione (getter) e un metodo per verificare la correttezza del proprio formato; 
+                \item \textbf{Matricola}: classe che modella una matricola (ovvero il codice identificativo univoco) associata ad un utente. Possiede l'attributo \texttt{matricola}, il metodo per la sua visualizzazione (getter) e un metodo per verificare la correttezza del proprio formato; 
                 \item \textbf{ISBN}: classe che modella un codice ISBN (ovvero il codice identificativo univoco) associato ad un libro. Possiede l'attributo \texttt{codiceISBN}, il metodo per la sua visualizzazione (getter) e un metodo per verificare la correttezza del proprio formato; 
                 \item \textbf{Autore}: classe che specializza Persona. Modella l'entità autore associata ad un libro.
                 \item \textbf{Persona}: classe astratta che funge da superclasse per Utente e Autore. Definisce gli attributi fondamentali di una persona, ovvero \texttt{nome} e \texttt{cognome}. Fornisce metodi per la loro gestione (getter e setter) e per la verifica della correttezza del loro formato.
@@ -82,7 +82,7 @@
         \subsubsection{Diagramma delle classi}
         \begin{figure}[h!]
             \begin{adjustbox}{width=.92\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
-                \includesvg{classdiagram.svg}    
+                \includesvg[inkscapelatex=false]{classdiagram.svg}    
             \end{adjustbox}
             \captionof{figure}{Diagramma delle Classi} 
         \end{figure}
@@ -90,8 +90,8 @@
 
          \subsubsection{Diagramma dei package (essenziale)}
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.4\paperwidth, height=.5\paperheight, center, margin= 0cm .6cm 0cm .1cm}
-                \includesvg{diagrammaDeiPackageNonDettagliato.svg}    
+            \begin{adjustbox}{width=.33\paperwidth, height=.5\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+                \includesvg[inkscapelatex=false]{diagrammaDeiPackageNonDettagliato.svg}    
             \end{adjustbox}
             \captionof{figure}{Diagramma dei Package relativo ai modelli} 
         \end{figure}
@@ -99,8 +99,8 @@
         
         \subsubsection{Diagramma dei package (completo)}
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.74\paperwidth, height=.75\paperheight, center, margin= 0cm .3cm 0cm .1cm}
-                \includesvg{diagrammaDeiPackage.svg}    
+            \begin{adjustbox}{width=.7\paperwidth, height=.75\paperheight, center, margin= 0cm .3cm 0cm .1cm}
+                \includesvg[inkscapelatex=false]{diagrammaDeiPackage.svg}    
             \end{adjustbox}
             \captionof{figure}{Diagramma dei Package completo (incluse le classi Controller e View)} 
         \end{figure}
@@ -116,7 +116,7 @@
         \\Invece, per la descrizione del flusso alternativo relativo all'esistenza pregressa del libro all'interno dell'archivio, è stata utilizzata la sintassi \texttt{alt}.
         \begin{figure}[h!]
             \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
-                \includesvg{diagrammaC4InserimentoLibro.svg} 
+                \includesvg[inkscapelatex=false]{diagrammaC4InserimentoLibro.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C4} 
         \end{figure}
@@ -128,7 +128,7 @@
         \\Per il flusso alternativo relativo ad una modifica errata o incompleta è stata utilizzata la sintassi \texttt{loop-break}.
         \begin{figure}[h!]
             \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
-                \includesvg{diagrammaC5ModificaLibro.svg} 
+                \includesvg[inkscapelatex=false]{diagrammaC5ModificaLibro.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C5} 
         \end{figure}
@@ -139,7 +139,7 @@
         \\Per il flusso alternativo di annullamento dell’operazione tramite la pressione del pulsante “No” è stata utilizzata la sintassi \texttt{alt}.
         \begin{figure}[h!]
             \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
-                \includesvg{diagrammaC6RimuoviLibro.svg} 
+                \includesvg[inkscapelatex=false]{diagrammaC6RimuoviLibro.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C6} 
         \end{figure}
@@ -152,7 +152,7 @@
         \\Invece, per la descrizione del flusso alternativo relativo all'esistenza pregressa dell'utente all'interno dell'archivio, è stata utilizzata la sintassi \texttt{alt}.
         \begin{figure}[h!]
             \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
-                \includesvg{diagrammaC7InserisciUtente.svg} 
+                \includesvg[inkscapelatex=false]{diagrammaC7InserisciUtente.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C7} 
         \end{figure}
@@ -164,7 +164,7 @@
         \\Per il flusso alternativo relativo ad una modifica errata o incompleta è stata utilizzata la sintassi \texttt{loop-break}.
         \begin{figure}[h!]
             \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
-                \includesvg{diagrammaC8ModificaUtente.svg} 
+                \includesvg[inkscapelatex=false]{diagrammaC8ModificaUtente.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C8} 
         \end{figure}
@@ -175,7 +175,7 @@
         \\Per il flusso alternativo di annullamento dell’operazione tramite la pressione del pulsante “No” è stata utilizzata la sintassi \texttt{alt}.
         \begin{figure}[h!]
             \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
-                \includesvg{diagrammaC9RimuoviUtente.svg} 
+                \includesvg[inkscapelatex=false]{diagrammaC9RimuoviUtente.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C9} 
         \end{figure}
@@ -188,7 +188,7 @@
         \\L'operazione terminerà quando l’amministratore selezionerà un libro.
         \begin{figure}[h!]
             \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
-                \includesvg{diagrammaC10RicercaLibro.svg} 
+                \includesvg[inkscapelatex=false]{diagrammaC10RicercaLibro.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C10} 
         \end{figure}
@@ -201,7 +201,7 @@
         \\L'operazione terminerà quando l’amministratore selezionerà un utente.
         \begin{figure}[h!]
             \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
-                \includesvg{diagrammaC12RicercaUtente.svg} 
+                \includesvg[inkscapelatex=false]{diagrammaC12RicercaUtente.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C12} 
         \end{figure}
@@ -214,7 +214,7 @@
         \\Invece, per la descrizione del flusso alternativo relativo all'inesistenza dell'utente e del libro all'interno dell'archivio, è stata utilizzata la sintassi \texttt{alt}.
         \begin{figure}[h!]
             \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
-                \includesvg{diagrammaC13RegistraPrestito.svg} 
+                \includesvg[inkscapelatex=false]{diagrammaC13RegistraPrestito.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C13} 
         \end{figure}
@@ -225,7 +225,7 @@
         \\Per il flusso alternativo di annullamento dell’operazione tramite la pressione del pulsante “No” è stata utilizzata la sintassi \texttt{alt}.
         \begin{figure}[h!]
             \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
-                \includesvg{diagrammaC14RegistraRestituzione.svg} 
+                \includesvg[inkscapelatex=false]{diagrammaC14RegistraRestituzione.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C14} 
         \end{figure}
@@ -237,7 +237,7 @@
         \\Per il flusso alternativo relativo ad una modifica errata o incompleta è stata utilizzata la sintassi \texttt{loop-break}. 
         \begin{figure}[h!]
             \begin{adjustbox}{width=.84\paperwidth, height=.5\paperheight, center, margin= 0cm 0cm 0cm .1cm}
-                \includesvg{diagrammaC15EstendiPrestito.svg} 
+                \includesvg[inkscapelatex=false]{diagrammaC15EstendiPrestito.svg} 
             \end{adjustbox}
             \captionof{figure}{Diagramma di sequenza C15} 
         \end{figure}
@@ -265,7 +265,7 @@
         \\Fin dalle prime fasi della progettazione, vista la natura stessa dell'applicazione è emerso un insieme di funzionalità comuni alle principali collezioni di dati (Prestiti, Libri ed Utenti).
         \\Per evitare ridondanze, e rispettare quanto affermato dal principio di progettazione \emph{DRY} (\emph{Don't Repeat Yourself}), tali funzionalità sono state astratte ed inserite nelle interfacce \emph{Archiviabile} e \emph{Mappabile}.
         \\Le classi che implementano tali interfacce si preoccuperanno di ridefinire il comportamento specifico dei metodi ereditati da esse, mentre la loro funzionalità di base resterà sempre la stessa.
-        \\In questo modo è possibile ottenere un codice chiaro (secondo quanto affermato dal principio \emph{KISS} - \emph{Keep It Simple, Stupid!}) e facilmente manutenibile.\vspace{.2cm}
+        \\In questo modo è possibile ottenere un codice chiaro (secondo quanto affermato dal principio \emph{KISS} - \emph{Keep It Simple}) e facilmente manutenibile.\vspace{.2cm}
 
         \subsubsection{Analisi della scalabilità}
             Per aumentare la scalabilità del sistema, sarebbe stato possibile rendere la classe \emph{Utente} astratta, e successivamente specializzarla nelle diverse tipologie di utenti contemplati dall'applicazione.
