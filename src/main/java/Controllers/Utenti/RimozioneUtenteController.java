@@ -1,21 +1,23 @@
-public class RimozioneUtenteController implements Initializable {
-    
-    private AvvisoConfermaRimozioneView view;
+package Controllers.Utenti;
+import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
+import java.net.URL;
+import java.util.ResourceBundle;
 
-    public RimozioneUtenteController(AvvisoConfermaRimozioneView view) {
-        // Constructor implementation
-    }
+public class RimozioneUtenteController implements Initializable {
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialization code
     }
 
+    @FXML
     private void onConfirm(){
         // Deletion logic
         
     }
 
+    @FXML
     private void onCancel(){
         // Cancellation logic
     }

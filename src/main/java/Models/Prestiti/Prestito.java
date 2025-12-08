@@ -1,3 +1,10 @@
+package Models.Prestiti;
+
+import Models.ISBN;
+import Models.Matricola;
+
+import java.time.LocalDate;
+
 /**
  * @class Prestito
  * @brief Classe che rappresenta un prestito di un libro da parte di un utente.
@@ -69,7 +76,7 @@ public class Prestito implements Comparable<Prestito> {
      * @return true se il prestito è attivo, false altrimenti.
      */
     public boolean isAttivo(){
-
+        return false;
     }
 
     /**
@@ -89,7 +96,7 @@ public class Prestito implements Comparable<Prestito> {
      */
     @Override
     public boolean equals(Object o){
-
+        return false;
     }
 
     /**
@@ -100,6 +107,6 @@ public class Prestito implements Comparable<Prestito> {
      */
     @Override
     public int compareTo(Prestito p){
-
+        return 0;
     }
 }
