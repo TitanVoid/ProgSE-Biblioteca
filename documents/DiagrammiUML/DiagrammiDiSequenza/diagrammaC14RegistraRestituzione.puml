@@ -1,0 +1,38 @@
+@startuml
+
+	actor Amministratore as a
+	participant PrestitiController as cvp
+	participant RestituzionePrestitoController as rrc
+	participant Prestiti as gp
+
+	cvp->cvp: initialize(...)
+	a->cvp: Apre schermata prestiti
+	a->cvp: Seleziona un prestito
+	a->cvp: Clicca il pulsante "Restituzione"
+	cvp->cvp: onReturnLoan(...)
+	activate cvp
+		cvp-->a: Viene mostrata una nuova finestra con un messaggio di avviso
+	deactivate cvp
+	
+	alt Annulla l'operazione cliccando "No"
+		a->rrc: Annulla l'operazione cliccando il pulsante "No"
+		rrc->rrc: onCancel(...)
+		activate rrc
+			rrc-->a: Viene chiusa la schermata di rimozione libro
+		deactivate rrc
+		
+	else Conferma l'operazione cliccando "Si"
+		a->rrc: Conferma l'operazione cliccando il pulsante "Si"
+		rrc->rrc: onConfirm(...)
+		activate rrc
+			rrc->gp: registraPrestito(...)
+			activate gp
+				gp->gp: Viene registrata la restituzione
+				gp-->rrc: Conferma
+			deactivate gp
+		rrc-->a: Viene chiusa la schermata di registrazione prestito
+		deactivate rrc
+	end	
+
+
+@enduml

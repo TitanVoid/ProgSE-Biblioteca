@@ -1,0 +1,40 @@
+@startuml
+
+	actor Amministratore as a
+	participant LibriController as cvl
+	participant RimozioneLibroController as rcl
+	participant Libro as l
+	participant Libri as gl
+
+	cvl->cvl: initialize(...)
+	a->cvl: Apre schermata libri
+	a->cvl: Seleziona un libro
+	a->cvl: Clicca il pulsante "Rimuovi"
+	cvl->cvl: onDeleteBook(...)
+	activate cvl
+		cvl-->a: Viene mostrata una nuova finestra con un messaggio di avviso
+	deactivate cvl
+	
+	alt Annulla l'operazione cliccando "No"
+		a->rcl: Annulla l'operazione cliccando il pulsante "No"
+		rcl -> rcl: onCancel(...)
+			activate rcl
+			rcl-->a: Viene chiusa la schermata di rimozione libro
+		deactivate rcl
+		
+		
+	else Conferma l'operazione cliccando "Si"
+		a->rcl: Conferma l'operazione cliccando il pulsante "Si"
+		rcl->rcl: onConfirm(...)
+		activate rcl
+			rcl->gl: rimuovi(...)
+			activate gl
+				gl->gl: Viene rimosso il libro
+				gl-->rcl: Conferma
+				destroy l
+			deactivate gl
+		rcl-->a: Viene chiusa la schermata di rimozione libro
+		deactivate rcl
+	end	
+
+@enduml

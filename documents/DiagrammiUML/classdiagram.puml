@@ -1,0 +1,248 @@
+@startuml
+skinparam nodesep 70
+skinparam ranksep 100
+skinparam linetype ortho
+'skinparam linetype polyline
+top to bottom direction
+
+
+
+'------------------------------------------CLASSI/INTERFACCE------------------------------------------
+
++interface Mappabile<K, V> {
++esisteChiave(chiave: K): boolean
++ottieni(chiave: K): V
+}
+
+
++class Biblioteca {
+-libri: Libri {readOnly}
+-utenti: Utenti {readOnly}
+-prestiti: Prestiti {readOnly}
+
++Biblioteca()
++salvaBibliotecaOBJ(nomeFile: String): void
++leggiBibliotecaOBJ(nomeFile: String): Biblioteca {static}
+}
+
+
++interface Archiviabile<E> {
++aggiungi(elemento: E): void
++modifica(originale: E, modificato: E): void
++rimuovi(elemento: E): void
+}
+
+
++class Utenti {
+-chiaviMatricole: Map<Matricola, Utente> {readOnly}
+-utenti: List<Utente> {readOnly}
+
++Utenti()
++getUtenti(): List<Utente>
++ricercaUtenti(input: String): List<Utente> 
+}
+
+
++class Libri {
+-chiaviISBN: Map<ISBN, Libro> {readOnly}
+-libri: List<Libro> {readOnly}
+
++Libri()
++getLibri(): List<Libro>
++ricercaLibri(input: String): List<Libro> 
+}
+
+
++class Prestiti {
+-prestiti: List<Prestito> {readOnly}
+
++Prestiti()
++getPrestiti(): List<Prestito>
++filtra(filtro: Filtro): List<Prestito>
+}
+
+
++class Utente implements Comparable<T> {
+-matricolaUtente: Matricola {readOnly}
+-email: String
+-prestitiAttivi: List<Prestito> [0...3] {readOnly}
+
++Utente(nome: String, cognome: String, matricolaUtente: Matricola, email: String)
++getMatricolaUtente(): Matricola
++setEmail(email: String): void
++getEmail(): String
++getPrestitiAttivi(): List<Prestito>
++aggiungiPrestito(prestito: Prestito): void
++rimuoviPrestito(prestito: Prestito): void
++verificaUtente(nome: String, cognome: String, matricolaUtente: Matricola, {static} 
+email: String): boolean {static}
++verificaEmail(email: String): boolean {static} 
++equals(o: Object): boolean
++hashCode(): int
+}
+
+
++class Libro implements Comparable<T> {
+-titolo: String
+-autori: List<Autore> {readOnly}
+-annoPubblicazione: int 
+-codiceISBNLibro: ISBN {readOnly}
+-copieDisponibili: int 
+
++Libro(titolo: String, annoPubblicazione: int, codiceISBNLibro: ISBN, copieDisponibili: int)
++setTitolo(titolo: String): void
++getTitolo(): String
++getAutori(): List<Autore>
++aggiungiAutore(autore: Autore): void
++rimuoviAutore(autore: Autore): void
++setAnnoPubblicazione(annoPubblicazione: int): void
++getAnnoPubblicazione(): int
++getCodiceISBNLibro(): ISBN
++setCopieDisponibili(copieDisponibili: int): void
++getCopieDisponibili(): int
++verificaLibro(titolo: String, autori: List<Autore>, annoPubblicazione: int, codiceISBNLibro: ISBN, {static}
+copieDisponibili: int): boolean {static}
++equals(o: Object): boolean
++hashCode(): int
+}
+
+
++class Prestito implements Comparable<T> {
+-matricolaUtente: Matricola {readOnly}
+-codiceISBNLibro: ISBN {readOnly}
+-dataInizio: LocalDate {readOnly}
+-dataScadenza: LocalDate 
+-dataRestituzione : LocalDate
+
++Prestito(matricolaUtente: Matricola, codiceISBNLibro: ISBN, dataInizio: LocalDate,
+dataScadenza: LocalDate, dataRestituzione LocalDate)
++getMatricolaUtente(): Matricola
++getCodiceISBNLibro(): ISBN
++setDataScadenza(data: LocalDate): void
++getDataScadenza(): LocalDate
++getDataInizio(): LocalDate 
++setDataRestituzione(data: LocalDate): void
++getDataRestituzione(): LocalDate 
++isAttivo(): boolean
++verificaDataScadenza(dataScadenza: LocalDate): boolean {static}
+}
+
+
++abstract class Persona {
+-nome: String
+-cognome: String 
+
++Persona(nome: String, cognome: String)
++setNome(nome: String): void 
++setCognome(cognome: String): void 
++getNome(): String
++getCognome(): String
++verificaNome(nome: String): boolean {static}
++verificaCognome(cognome: String): boolean {static}
+}
+
+
++class Autore {
++Autore(nome: String, cognome: String)
+}
+
+
++class Matricola {
+-matricola: String {readOnly}
+
++Matricola(matricola: String)
++getMatricola(): String
++verificaMatricola(matricola: String): boolean {static}
+}
+
+
++class ISBN {
+-codiceISBN: String {readOnly}
+
++ISBN(isbn: String)
++getCodiceISBN(): String
++verificaISBN(isbn: String): boolean {static}
+}
+
+
++class Maschera {
+-lunghezza: int {readOnly}
+-maschera: String
+
++Maschera(lunghezza: int)
++getMaschera(): String
++setMaschera(maschera: String): void
++getLunghezza(): int
+}
+
+
++enum Filtro {
+TUTTI
+ATTIVI
+CONCLUSI
+}
+
+
++interface Comparable<T> {
+}
+
+
+
+
+'------------------------------------------LAYOUT------------------------------------------
+
+Biblioteca -[hidden]-> Archiviabile
+
+Archiviabile -[hidden]> Mappabile
+
+
+Mappabile -[hidden]-> Libri
+Mappabile -[hidden]-> Utenti
+
+Prestiti -[hidden]> Utenti
+Utenti -[hidden]> Libri
+
+Utente -[hidden]> Libro
+
+Prestito -[hidden]-> Matricola
+Matricola -[hidden]-> ISBN
+
+Biblioteca --[hidden]> Maschera
+
+
+
+
+'------------------------------------------RELAZIONI------------------------------------------
+
+
+Biblioteca "1" *--- "1" Utenti
+Biblioteca "1" *-- "1" Libri
+Biblioteca "1" *-- "1" Prestiti 
+
+Utenti "1" *-- "0...*" Utente
+Libri "1" *-- "0...*" Libro
+Prestiti "1" *-- "0...*" Prestito
+
+Libro "1" *-- "1...*" Autore
+
+Prestito "0...3" -> "1" Utente
+
+Utente -|> Persona
+Autore -down-|> Persona
+
+Libro "1" <-down- "1" ISBN
+Prestito "1" <-down- "1" ISBN
+
+Utente "1" <-- "1" Matricola
+Prestito "1" <-- "1" Matricola
+
+Mappabile <|.down. Utenti
+Mappabile <|.down. Libri
+
+Archiviabile <|... Prestiti
+Archiviabile <|... Utenti
+Archiviabile <|... Libri
+
+Filtro -[hidden]> Prestiti
+
+@enduml

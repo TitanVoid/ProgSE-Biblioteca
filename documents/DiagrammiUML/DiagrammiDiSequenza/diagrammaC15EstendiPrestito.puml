@@ -1,0 +1,46 @@
+@startuml
+
+	actor Amministratore as a
+	participant PrestitiController as cvp
+	participant EstensionePrestitoController as epc
+	participant Prestito as p
+	participant Prestiti as gp
+
+	cvp->cvp: initialize(...)
+	a->cvp: Apre schermata prestiti
+	a->cvp: Seleziona un prestito
+	a->cvp: Clicca il pulsante "Estendi"
+	cvp->cvp: onExtendLoan(...)
+	activate cvp
+		cvp --> "a": Viene mostrata la schermata di estendi prestito
+	deactivate cvp
+
+	'Amministratore modifica i campi in modo errato
+	loop Amministratore modifica i campi in modo errato
+		a->epc: Modifica i campi del prestito nel TextField
+		a->epc: Preme il pulsante "Conferma"
+		epc->epc: onConfirm(...)
+		activate epc
+			epc->p: verificaDataScadenza(...)
+			activate p
+				p->p: Verifica campi
+				p --> epc: Verifica non andata a buon fine
+			deactivate p
+		epc-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+		deactivate epc
+		'Condizione di uscita dal loop
+		break
+			p-->epc: Verifica andata a buon fine
+		end
+	end
+
+	epc->gp: modifica(...)
+	activate epc
+		activate gp
+			gp->gp: Viene esteso il prestito
+			gp --> epc: Conferma
+		deactivate gp
+	epc --> a: Viene chiusa la schermata di estensione libro
+	deactivate epc
+
+@enduml

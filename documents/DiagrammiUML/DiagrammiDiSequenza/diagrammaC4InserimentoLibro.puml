@@ -1,0 +1,60 @@
+@startuml
+
+	actor Amministratore as a
+	participant LibriController as cvl
+	participant AggiuntaLibroController as alc
+	participant Libro as l
+	participant Libri as gl
+
+	cvl->cvl: initialize(...)
+	a->cvl: Apre schermata libri
+	a->cvl: Clicca il pulsante "Aggiungi"
+
+	cvl->cvl: onAddBook(...)
+	activate cvl
+		cvl --> "a": Viene mostrata la schermata di aggiunta libro
+	deactivate cvl
+
+	'Flusso alternativo
+	loop Amministratore inserisce i campi del libro errati o incompleti
+		a->alc: Inserisce i campi del libro nel TextField
+		a->alc: Preme il pulsante "Conferma"
+		alc->alc: onConfirm(...)
+		activate alc
+			alc-> l: verificaLibro(...)
+			activate l
+				l -> l: Verifica i campi del libro
+				l --> alc: Verifica non andata a buon fine
+				deactivate l
+				alc-->a: Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere
+			deactivate alc
+		
+		'Condizione di uscita dal loop
+		break Verifica andata a buon fine
+			l --> alc: Verifica andata a buon fine
+		end
+	end
+
+	alc -> gl: esisteChiave(...)
+		 
+			gl -> gl: Verifica se il libro è presente già nella lista
+		
+
+	'Non è possibile inserire due libri uguali quindi ne si verifica l'univocità
+	alt Il libro esiste nella lista		
+		gl-->alc: Il libro esiste nella lista
+		alc-->a: Viene mostrato un messaggio di errore	
+	else Il libro non esiste nella lista
+		gl --> alc: Il libro non esiste nella lista
+		activate alc
+			alc->gl: aggiungi(...)
+			activate gl
+				gl->gl: Viene aggiunto il libro
+				gl --> alc: Conferma
+				deactivate gl
+				alc-->a: Viene chiusa la schermata di aggiunta libro
+		deactivate alc
+		
+	end
+
+@enduml
