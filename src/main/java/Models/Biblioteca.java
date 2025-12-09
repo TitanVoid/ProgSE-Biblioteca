@@ -35,6 +35,18 @@ public class Biblioteca implements Serializable {
         }
     }
 
+    public Prestiti getPrestiti() {
+        return prestiti;
+    }
+
+    public Libri getLibri() {
+        return libri;
+    }
+
+    public Utenti getUtenti() {
+        return utenti;
+    }
+
     /**
      * @brief Salva lo stato della biblioteca su file.
      * @param[in] fileName Nome del file su cui salvare lo stato.
