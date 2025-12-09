@@ -6,6 +6,7 @@ import Models.Servizi.Mappabile;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ import java.util.Map;
  */
 public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Serializable {
 
-    private final Map<ISBN, Libro> ISBN;
+    private final Map<ISBN, Libro> chiaviISBN;
     private final List<Libro> libri;
 
     /**
@@ -29,7 +30,7 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      */
     public Libri() {
         this.libri = new ArrayList<>();
-        this.ISBN = new HashMap<>();
+        this.chiaviISBN = new HashMap<>();
     }
 
     /**
@@ -46,7 +47,13 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      * @return Lista di libri che corrispondono al criterio di ricerca.
      */
     public List<Libro> ricerca(String input) {
-        return null;
+        List<Libro> lis = new ArrayList<>();
+        for(Libro l : libri){
+            if(l.getTitolo().matches(input)){
+                lis.add(l);
+            }
+        }
+        return lis;
     }
 
     /**
@@ -54,14 +61,26 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      * @param[in] libro Libro da aggiungere.
      */
     @Override
-    public void aggiungi(Libro libro) {}
+    public void aggiungi(Libro libro) {
+        if(!this.esisteChiave(libro.getCodiceISBNLibro())){
+            int i = Collections.binarySearch(libri, libro);
+            if(i < 0){
+                i = - i - 1;
+                libri.add(i, libro);
+            } 
+        }
+    }
 
     /**
      * @brief Rimuove un libro dalla collezione.
      * @param[in] libro Libro da rimuovere.
      */
     @Override
-    public void rimuovi(Libro libro) {}
+    public void rimuovi(Libro libro) {
+        ISBN i = libro.getCodiceISBNLibro();
+        libri.remove(libro);
+        chiaviISBN.remove(i);
+    }
 
     /**
      * @brief Modifica un libro esistente.
@@ -69,7 +88,10 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      * @param[in] modificato Nuovo libro modificato.
      */
     @Override
-    public void modifica(Libro originale, Libro modificato) {}
+    public void modifica(Libro originale, Libro modificato){
+        libri.remove(originale);
+        this.aggiungi(modificato);
+    }
 
     /**
      * @brief Ottiene un libro tramite ISBN.
@@ -78,6 +100,7 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      */
     @Override
     public Libro ottieni(ISBN chiave) {
+        if(esisteChiave(chiave)) return chiaviISBN.get(chiave);
         return null;
     }
 
@@ -88,7 +111,7 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      */
     @Override
     public boolean esisteChiave(ISBN chiave){
-        return false;
+        return chiaviISBN.containsKey(chiave);
     }
 
 }

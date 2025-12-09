@@ -37,6 +37,11 @@ public class ISBN implements Serializable, Comparable<ISBN> {
     }
 
     @Override
+    public boolean equals(Object o){
+        return false;
+    }
+    
+    @Override
     public int compareTo(ISBN o) {
         return 0;
     }
