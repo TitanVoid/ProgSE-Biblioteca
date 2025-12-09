@@ -1,0 +1,44 @@
+@startuml
+left to right direction
+
+package "Java"{
+	class Main{}
+		
+	package "Models"{
+		
+		class Biblioteca
+		class Matricola
+		class ISBN
+		abstract Persona
+		
+		
+		package "Prestiti"{
+			class Prestiti
+			class Prestito
+		}
+			
+		package "Libri"{
+			class Autore
+			class Libri
+			class Libro
+		}
+			
+		package "Utenti"{
+			class Utente
+			class Utenti
+		}
+
+		package "Servizi"{
+			interface Archiviabile
+			enum Filtro
+			interface Mappabile
+			class Maschera
+		}
+		
+		
+	}
+	
+}
+
+
+@enduml

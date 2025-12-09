@@ -3,6 +3,8 @@ package Models.Servizi;
 /**
  * @interface Archiviabile
  * @brief Interfaccia per la gestione di una collezione di elementi.
+ *
+ * @tparam E Tipo degli elementi della collezione.
  */
 public interface Archiviabile<E>{
 
