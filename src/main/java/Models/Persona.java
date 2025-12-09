@@ -68,6 +68,7 @@ public abstract class Persona implements Serializable {
      * @brief Verifica la correttezza del formato del nome.
 
      * @param[in] nome Nome da verificare.
+     * 
      * @return true se il formato del nome è valido, false altrimenti.
      *
      */

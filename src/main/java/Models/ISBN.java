@@ -11,7 +11,7 @@ public class ISBN implements Serializable, Comparable<ISBN> {
 
     /**
      * @brief Costruttore.
-     * @param[in] isbn l'ISBN.
+     * @param[in] codiceISBN l'ISBN.
      */
     public ISBN(String codiceISBN){
 
@@ -20,7 +20,7 @@ public class ISBN implements Serializable, Comparable<ISBN> {
 
     /**
      * @brief Restituisce l'ISBN.
-     * @return isbn.
+     * @return codiceISBN.
      */
     public String getCodiceISBN(){
         return codiceISBN;
@@ -28,7 +28,7 @@ public class ISBN implements Serializable, Comparable<ISBN> {
 
     /**
      * @brief Verifica la correttezza del formato dell'ISBN.
-     *
+     * @param[in] codiceISBN l'ISBN.
      * @return true se il formato dell'ISBN è valido, false altrimenti.
      */
     public static boolean verificaISBN(String codiceISBN){
@@ -53,7 +53,12 @@ public class ISBN implements Serializable, Comparable<ISBN> {
         // Confronta la cifra calcolata con l'ultima cifra dell'ISBN fornito.
         return cifraControlloAttesa == cifraControlloEffettiva;
     }
-
+    
+    /**
+     * @brief Verifica l'uguaglianza tra questo ISBN e un altro oggetto in base all'ISBN.
+     * @param o Oggetto da confrontare.
+     * @return true se sono uguali, false altrimenti.
+     */
     @Override
     public boolean equals(Object o){
         if(o == null) return false;
@@ -64,8 +69,13 @@ public class ISBN implements Serializable, Comparable<ISBN> {
         return this.codiceISBN.equals(i.codiceISBN);
     }
     
+    /**
+     * @brief Confronta questo ISBN con un altro ISBN in base al all'ISBN.
+     * @param i ISBN da confrontare.
+     * @return 0 se sono uguali, valore negativo se questo libro precede l, positivo altrimenti.
+     */
     @Override
-    public int compareTo(ISBN o) {
-        return this.codiceISBN.compareTo(o.codiceISBN);
+    public int compareTo(ISBN i) {
+        return this.codiceISBN.compareTo(i.codiceISBN);
     }
 }

@@ -52,7 +52,6 @@ public class Libro implements Comparable<Libro>, Serializable {
         return annoPubblicazione;
     }
 
-
     /**
      * @brief Restituisce il codice ISBN del libro.
      * @return Codice ISBN del libro.
@@ -102,7 +101,6 @@ public class Libro implements Comparable<Libro>, Serializable {
     }
 
 
-
     /**
      * @brief Aggiunge un autore alla lista degli autori.
      * @param[in] autore Autore da aggiungere.
@@ -129,7 +127,7 @@ public class Libro implements Comparable<Libro>, Serializable {
      * @param[in] copieDisponibili Numero di copie disponibili.
      * @return true se il formato dei dati sono corretti, false altrimenti.
      */
-    public static boolean verificaLibro(List<Autore> autori, String titolo, int annoPubblicazione, ISBN codiceISBNLibro, int copieDisponibili) {
+    public static boolean verificaLibro(List<Autore> autori, String titolo, int annoPubblicazione, ISBN codiceISBNLibro, int copieDisponibili){
         Libro l = new Libro(titolo, annoPubblicazione, codiceISBNLibro, copieDisponibili, autori);
         
         if(l.getTitolo() == null || l.getTitolo().length() > 100){
@@ -157,7 +155,7 @@ public class Libro implements Comparable<Libro>, Serializable {
     }
 
     /**
-     * @brief Calcola l'hash code del libro.
+     * @brief Calcola l'hash code del libro in base all'ISBN.
      * @return Valore hashcode.
      */
     @Override
@@ -166,7 +164,7 @@ public class Libro implements Comparable<Libro>, Serializable {
     }
 
     /**
-     * @brief Verifica l'uguaglianza tra questo libro e un altro oggetto.
+     * @brief Verifica l'uguaglianza tra questo libro e un altro oggetto in base all'ISBN.
      * @param o Oggetto da confrontare.
      * @return true se sono uguali, false altrimenti.
      */
@@ -181,7 +179,7 @@ public class Libro implements Comparable<Libro>, Serializable {
     }
 
     /**
-     * @brief Confronta questo libro con un altro libro.
+     * @brief Confronta questo libro con un altro libro in base al titolo del libro, a parità di titolo si confronta l'ISBN.
      * @param l Libro da confrontare.
      * @return 0 se sono uguali, valore negativo se questo libro precede l, positivo altrimenti.
      */
