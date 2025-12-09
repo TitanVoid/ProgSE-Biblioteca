@@ -6,14 +6,16 @@ import Models.Servizi.Filtro;
 import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Collections;
 
 /**
  * @class Prestiti
- * @brief Gestisce una lista di prestiti.
+ * @brief Classe che rappresenta un insieme di prestiti.
  * @see Prestito
  * @implements Archiviabile<Prestito>
  * @see Archiviabile
-
+ * 
+ * 
  */
 public class Prestiti implements Archiviabile<Prestito>, Serializable {
 
@@ -22,46 +24,74 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
     /**
      * @brief Costruttore.
      */
-    public Prestiti(){
-        this.prestiti = new ArrayList<>();
+    public Prestiti() {
+        prestiti = new ArrayList<>();
     }
 
     /**
      * @brief Restituisce la lista dei prestiti.
      * @return Lista dei prestiti.
      */
-    public List<Prestito> getPrestiti(){
+    public List<Prestito> getPrestiti() {
         return prestiti;
     }
+
     /**
-     * @brief Aggiunge un prestito alla collezione.
+     * @brief Aggiunge un prestito alla lista.
      * @param[in] prestito Prestito da aggiungere.
      */
     @Override
-    public void aggiungi(Prestito prestito){}
+    public void aggiungi(Prestito prestito) {
+
+    }
 
     /**
-     * @brief Rimuove un prestito dalla collezione.
+     * @brief Rimuove un prestito dalla lista dei prestiti.
      * @param[in] prestito Prestito da rimuovere.
      */
     @Override
-    public void rimuovi(Prestito prestito){}
+    public void rimuovi(Prestito prestito) {
+    }
 
     /**
      * @brief Modifica un prestito esistente.
-     * @param[in] originale Prestito da modificare.
      * @param[in] modificato Nuovo prestito modificato.
      */
     @Override
-    public void modifica(Prestito originale, Prestito modificato){}
+    public void modifica(Prestito originale, Prestito modificato) {
+        rimuovi(originale);
+        aggiungi(modificato);
+    }
 
     /**
-     * @brief Filtra i prestiti secondo un determinato filtro.
+     * @brief Filtra i prestiti secondo un determinato criterio di filtraggio.
      * @param[in] filtro Filtro da applicare.
-     * @return Lista dei prestiti che soddisfano il filtro.
+     * @return Lista dei prestiti che soddisfano il criterio di filtraggio
+     *         specificato.
      */
-    public List<Prestito> filtra(Filtro filtro){
-        return null;
+    public List<Prestito> filtra(Filtro filtro) {
+        List<Prestito> l = new ArrayList<>();
+
+        switch (filtro) {
+            case TUTTI:
+                l = prestiti;
+            case ATTIVI:
+                for (Prestito p : prestiti) {
+                    if (p.getDataRestituzione() == null) {
+                        l.add(p);
+                    }
+                }
+            case CONCLUSI:
+                for (Prestito p : prestiti) {
+                    if (p.getDataRestituzione() != null) {
+                        l.add(p);
+                    }
+                }
+            default:
+                System.out.println("Filtro sconosciuto.");
+        }
+
+        return l;
     }
 
 }

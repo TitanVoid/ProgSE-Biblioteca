@@ -75,18 +75,18 @@ public class Prestito implements Comparable<Prestito> {
 
     /**
      * @brief Imposta la data di scadenza del prestito.
-     * @param[in] data Data di scadenza da impostare.
+     * @param[in] dataScadenza Data di scadenza da impostare.
      */
-    public void setDataScadenza(LocalDate data) {
-        dataScadenza = data;
+    public void setDataScadenza(LocalDate dataScadenza) {
+        this.dataScadenza = dataScadenza;
     }
 
     /**
      * @brief Imposta la data di restituzione del prestito.
-     * @param[in] data Data di restituzione da impostare.
+     * @param[in] dataRestituzione Data di restituzione da impostare.
      */
-    public void setDataRestituzione(LocalDate data) {
-        dataRestituzione = data;
+    public void setDataRestituzione(LocalDate dataRestituzione) {
+        this.dataRestituzione = dataRestituzione;
     }
 
     /**
