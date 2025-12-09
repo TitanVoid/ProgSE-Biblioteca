@@ -42,7 +42,11 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
      */
     @Override
     public void aggiungi(Prestito prestito) {
-
+        int index = Collections.binarySearch(prestiti, prestito);
+        if (index < 0) {
+            index = -index - 1;
+        }
+        prestiti.add(index, prestito);
     }
 
     /**
@@ -51,6 +55,12 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
      */
     @Override
     public void rimuovi(Prestito prestito) {
+        int index = Collections.binarySearch(prestiti, prestito);
+        if (index < 0) {
+            System.out.println("Prestito non presente nella lista.");
+        } else {
+            prestiti.remove(index);
+        }
     }
 
     /**
