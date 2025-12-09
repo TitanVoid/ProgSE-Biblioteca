@@ -41,7 +41,7 @@ public class LibriController extends BaseController implements Initializable{
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialization code
-        colTitolo.setCellValueFactory(new PropertyValueFactory<>("titolo"));
+        /*colTitolo.setCellValueFactory(new PropertyValueFactory<>("titolo"));
         colAutori.setCellValueFactory(new PropertyValueFactory<>("autori"));
         colAnno.setCellValueFactory(new PropertyValueFactory<>("anno"));
         colCodice.setCellValueFactory(new PropertyValueFactory<>("codice"));
@@ -50,7 +50,7 @@ public class LibriController extends BaseController implements Initializable{
         tableLibri.setItems(libri);
         libri.clear();
         List<Libro> listLibri = biblioteca.getLibri().getLibri();
-        libri.addAll(listLibri);
+        libri.addAll(listLibri);*/
     }
 
     private void showNewWindow(String viewName, String title) throws IOException {
