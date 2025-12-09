@@ -94,15 +94,14 @@ public class Prestito implements Comparable<Prestito> {
      * @return true se il prestito è attivo, false altrimenti.
      */
     public boolean isAttivo() {
-        return (dataRestituzione != null);
+        return dataRestituzione != null;
     }
 
     /**
      * @brief Verifica se la data di scadenza inserita è valida.
      * @param[in] dataScadenza Data di scadenza da verificare.
      * @return true se la data di scadenza inserita è logicamente valida (ovvero
-     *         successiva alla data corrente), false
-     *         altrimenti.
+     *         successiva alla data corrente), false altrimenti.
      */
     public static boolean verificaDataScadenza(LocalDate dataScadenza) {
         LocalDate today = LocalDate.now();
@@ -113,12 +112,11 @@ public class Prestito implements Comparable<Prestito> {
      * @brief Confronta due prestiti in base alla loro data di scadenza.
      * @param[in] p Prestito da confrontare col prestito corrente.
      * @return Valore minore di zero, pari a zero oppure maggiore di zero se la data
-     *         di scadenza del prestito corrente
-     *         è rispettivamente precedente, uguale o successiva alla data di
-     *         scadenza del prestito p.
+     *         di scadenza del prestito corrente è rispettivamente precedente,
+     *         uguale o successiva alla data di scadenza del prestito p.
      */
     @Override
     public int compareTo(Prestito p) {
-        return 0;
+        return this.dataScadenza.compareTo(p.dataScadenza);
     }
 }
