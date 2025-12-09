@@ -16,16 +16,16 @@
     <children>
         <HBox prefHeight="84.0" prefWidth="600.0">
             <children>
-                <MenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Libri">
+                <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Libri" textAlignment="CENTER">
                     <items>
-                        <MenuItem fx:id="utenti" mnemonicParsing="false" onAction="#onChangeViewMode" text="Utenti" userData="UTENTI"/>
-                        <MenuItem fx:id="prestiti" mnemonicParsing="false" onAction="#onChangeViewMode" text="Prestiti" userData="PRESTITI"/>
+                        <MenuItem fx:id="utenti" mnemonicParsing="false" onAction="#onChangeViewMode" text="Prestiti" userData="UTENTI" />
+                        <MenuItem fx:id="prestiti" mnemonicParsing="false" onAction="#onChangeViewMode" text="Utenti" userData="PRESTITI" />
                     </items>
                     <HBox.margin>
                         <Insets left="40.0" top="30.0" />
                     </HBox.margin>
                 </MenuButton>
-                <TextField alignment="CENTER" onKeyTyped="#onSearchBook" prefHeight="26.0" prefWidth="340.0">
+                <TextField onKeyTyped="#onSearchBook" prefHeight="26.0" prefWidth="340.0">
                     <HBox.margin>
                         <Insets left="20.0" top="30.0" />
                     </HBox.margin>
@@ -43,10 +43,10 @@
                                         <TableView prefHeight="322.0" prefWidth="458.0">
                                             <columns>
                                                 <TableColumn prefWidth="91.2" text="Titolo" />
-                                                <TableColumn prefWidth="91.2" text="Autore/i" />
-                                                <TableColumn prefWidth="91.2" text="Anno publicazione" />
-                                                <TableColumn prefWidth="91.2" text="Codice identificativo" />
-                                                <TableColumn maxWidth="1.7976931348623157E308" prefWidth="91.2" text="Numero copie" />
+                                                <TableColumn prefWidth="91.2" text="Autori" />
+                                                <TableColumn prefWidth="91.2" text="Anno Pubblicazione" />
+                                                <TableColumn prefWidth="91.2" text="Codice ISBN" />
+                                                <TableColumn maxWidth="1.7976931348623157E308" prefWidth="91.2" text="Copie Disponibili" />
                                             </columns>
                                         </TableView>
                                     </children>
@@ -55,17 +55,17 @@
                                     <children>
                                         <VBox alignment="TOP_CENTER" prefHeight="322.0" prefWidth="138.0" AnchorPane.topAnchor="0.0">
                                             <children>
-                                                <Button mnemonicParsing="false" onAction="#onAddBook" text="Aggiungi">
+                                                <Button mnemonicParsing="false" onAction="#onAddBook" prefHeight="26.0" prefWidth="92.0" text="Aggiungi">
                                                     <VBox.margin>
                                                         <Insets top="30.0" />
                                                     </VBox.margin>
                                                 </Button>
-                                                <Button mnemonicParsing="false" onAction="#onModifyBook" prefHeight="26.0" prefWidth="66.0" text="Modifica">
+                                                <Button mnemonicParsing="false" onAction="#onModifyBook" prefHeight="26.0" prefWidth="92.0" text="Modifica">
                                                     <VBox.margin>
                                                         <Insets top="30.0" />
                                                     </VBox.margin>
                                                 </Button>
-                                                <Button mnemonicParsing="false" onAction="#onDeleteBook" prefHeight="26.0" prefWidth="66.0" text="Elimina">
+                                                <Button mnemonicParsing="false" onAction="#onDeleteBook" prefHeight="26.0" prefWidth="92.0" text="Rimuovi">
                                                     <VBox.margin>
                                                         <Insets top="30.0" />
                                                     </VBox.margin>
