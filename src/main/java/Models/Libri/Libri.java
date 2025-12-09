@@ -10,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 /**
- * @class GestoreLibri
+ * @class Libri
  * @brief Gestisce una lista e una mappa di libri.
  * @see Libro
  * @implements Mappabile<ISBN, Libro>
