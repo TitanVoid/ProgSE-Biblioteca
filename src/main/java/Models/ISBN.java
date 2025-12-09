@@ -8,23 +8,23 @@ import java.io.Serializable;
 public class ISBN implements Serializable {
 
 
-    private final String isbn;
+    private final String codiceISBN;
 
     /**
      * @brief Costruttore.
      * @param[in] isbn l'ISBN.
      */
-    public ISBN(String isbn) {
+    public ISBN(String codiceISBN) {
 
-        this.isbn = isbn;
+        this.codiceISBN = codiceISBN;
     }
 
     /**
      * @brief Restituisce l'ISBN.
      * @return isbn.
      */
-    public String getIsbn() {
-        return isbn;
+    public String getCodiceISBN() {
+        return codiceISBN;
     }
 
     /**
@@ -32,7 +32,7 @@ public class ISBN implements Serializable {
      *
      * @return true se il formato dell'ISBN è valido, false altrimenti.
      */
-    public static boolean verificaIsbn(){
+    public static boolean verificaISBN(String isbn){
         return false;
     }
 }
