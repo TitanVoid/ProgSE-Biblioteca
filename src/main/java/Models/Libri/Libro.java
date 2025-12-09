@@ -162,7 +162,7 @@ public class Libro implements Comparable<Libro>, Serializable {
      */
     @Override
     public int hashCode() {
-        return 0;
+        return this.codiceISBNLibro == null ? 0 : codiceISBNLibro.hashCode() * 31;
     }
 
     /**
@@ -172,7 +172,12 @@ public class Libro implements Comparable<Libro>, Serializable {
      */
     @Override
     public boolean equals(Object o) {
-        return false;
+        if(o == null) return false;
+        if(o == this) return true;
+        if(o.getClass() != this.getClass()) return false;
+        
+        Libro l = (Libro) o;
+        return this.codiceISBNLibro.equals(l.getCodiceISBNLibro());
     }
 
     /**
@@ -182,7 +187,8 @@ public class Libro implements Comparable<Libro>, Serializable {
      */
     @Override
     public int compareTo(Libro l) {
-        return 0;
+        if(this.titolo.equals(l.getTitolo())) return this.codiceISBNLibro.compareTo(l.getCodiceISBNLibro());
+        return this.codiceISBNLibro.compareTo(l.getCodiceISBNLibro());
     }
 
 }

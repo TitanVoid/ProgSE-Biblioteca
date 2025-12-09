@@ -5,7 +5,7 @@ import java.io.Serializable;
  * @class ISBN
  * @brief Classe che definisce il codice ISBN e la sua verifica.
  */
-public class ISBN implements Serializable {
+public class ISBN implements Serializable, Comparable<ISBN> {
 
 
     private final String codiceISBN;
@@ -34,5 +34,10 @@ public class ISBN implements Serializable {
      */
     public static boolean verificaISBN(String isbn){
         return false;
+    }
+
+    @Override
+    public int compareTo(ISBN o) {
+        return 0;
     }
 }
