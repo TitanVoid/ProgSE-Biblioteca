@@ -25,6 +25,24 @@ public abstract class Persona implements Serializable {
         this.nome = nome;
         this.cognome = cognome;
     }
+    
+    /**
+     * @brief Restituisce il nome.
+     *
+     * @return nome.
+     */
+    public String getNome() {
+        return nome;
+    }
+
+    /**
+     * @brief Restituisce il cognome della persona.
+     *
+     * @return cognome.
+     */
+    public String getCognome() {
+        return cognome;
+    }
 
     /**
      * @brief Imposta il nome.
@@ -47,24 +65,6 @@ public abstract class Persona implements Serializable {
     }
 
     /**
-     * @brief Restituisce il nome.
-     *
-     * @return nome.
-     */
-    public String getNome() {
-        return nome;
-    }
-
-    /**
-     * @brief Restituisce il cognome della persona.
-     *
-     * @return cognome.
-     */
-    public String getCognome() {
-        return cognome;
-    }
-
-    /**
      * @brief Verifica la correttezza del formato del nome.
 
      * @param[in] nome Nome da verificare.
@@ -72,7 +72,8 @@ public abstract class Persona implements Serializable {
      *
      */
     public static boolean verificaNome(String nome){
-        return false;
+        if(nome == null || nome.length() > 25) return false;
+        return true;
     }
 
     /**
@@ -84,6 +85,7 @@ public abstract class Persona implements Serializable {
      *
      */
     public static boolean verificaCognome(String cognome){
-        return false;
+        if(cognome == null || cognome.length() > 25) return false;
+        return true;
     }
 }

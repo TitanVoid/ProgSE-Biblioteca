@@ -132,7 +132,7 @@ public class Libro implements Comparable<Libro>, Serializable {
     public static boolean verificaLibro(List<Autore> autori, String titolo, int annoPubblicazione, ISBN codiceISBNLibro, int copieDisponibili) {
         Libro l = new Libro(titolo, annoPubblicazione, codiceISBNLibro, copieDisponibili, autori);
         
-        if(l.getTitolo().length() > 100){
+        if(l.getTitolo() == null || l.getTitolo().length() > 100){
             return false;
         }
         

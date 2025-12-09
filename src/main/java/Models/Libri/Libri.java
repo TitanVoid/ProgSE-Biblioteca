@@ -28,7 +28,7 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      * @brief Costruttore.
      * Inizializza la lista dei libri e la mappa degli ISBN.
      */
-    public Libri() {
+    public Libri(){
         this.libri = new ArrayList<>();
         this.chiaviISBN = new HashMap<>();
     }
@@ -37,7 +37,7 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      * @brief Restituisce la lista dei libri.
      * @return Lista dei libri.
      */
-    public List<Libro> getLibri() {
+    public List<Libro> getLibri(){
         return libri;
     }
 
@@ -46,7 +46,7 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      * @param[in] input Criterio di ricerca.
      * @return Lista di libri che corrispondono al criterio di ricerca.
      */
-    public List<Libro> ricerca(String input) {
+    public List<Libro> ricercaLibri(String input){
         List<Libro> lis = new ArrayList<>();
         for(Libro l : libri){
             if(l.getTitolo().matches(input)){
@@ -61,7 +61,7 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      * @param[in] libro Libro da aggiungere.
      */
     @Override
-    public void aggiungi(Libro libro) {
+    public void aggiungi(Libro libro){
         if(!this.esisteChiave(libro.getCodiceISBNLibro())){
             int i = Collections.binarySearch(libri, libro);
             if(i < 0){
@@ -76,7 +76,7 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      * @param[in] libro Libro da rimuovere.
      */
     @Override
-    public void rimuovi(Libro libro) {
+    public void rimuovi(Libro libro){
         ISBN i = libro.getCodiceISBNLibro();
         libri.remove(libro);
         chiaviISBN.remove(i);
