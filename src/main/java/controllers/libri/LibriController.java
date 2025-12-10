@@ -3,6 +3,7 @@ import controllers.BaseController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
+import models.libri.Autore;
 import models.libri.Libro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -49,7 +50,11 @@ public class LibriController extends BaseController implements Initializable{
         // Initialization code
         titleClm.setCellValueFactory(new PropertyValueFactory<>("titolo"));
         authorsClm.setCellValueFactory(cell -> {
-            return new SimpleStringProperty(cell.getValue().getAutori().toString());
+            StringBuilder authors = new StringBuilder();
+            for (Autore a : cell.getValue().getAutori()){
+                authors.append(a.toString()).append(", ");
+            }
+            return new SimpleStringProperty(authors.toString());
         });
         publishYearClm.setCellValueFactory(new PropertyValueFactory<>("annoPubblicazione"));
         idClm.setCellValueFactory(cell -> {
