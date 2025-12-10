@@ -9,6 +9,7 @@ import models.ISBN;
 import models.libri.Autore;
 import models.libri.Libri;
 import models.libri.Libro;
+import models.libri.LibroGiaPresenteException;
 
 
 import java.net.URL;
@@ -41,44 +42,39 @@ public class AggiuntaLibroController extends BaseController implements Initializ
 
     @FXML
     private void onConfirm() {
-        // Confirmation logic
-        String t = titolo.getText();
-        String a = autori.getText();
-        String isbn = ISBN.getText();
-        List<Autore> al = new ArrayList<Autore>();
-        String[] x = a.split(",");
-
-        for (int i = 0; i < x.length; i++) {
-            String[] y = x[i].split(" ");
-            String nome = y[0];
-            String cognome = y[1];
-            al.add(new Autore(nome, cognome));
-        }
         try {
+            // Confirmation logic
+            String t = titolo.getText();
+            String a = autori.getText();
+            String isbn = ISBN.getText();
+            List<Autore> al = new ArrayList<Autore>();
+            String[] x = a.split(",");
 
+            for (int i = 0; i < x.length; i++) {
+                String[] y = x[i].split(" ");
+                String nome = y[0];
+                String cognome = y[1];
+                al.add(new Autore(nome, cognome));
+            }
             int c = Integer.parseInt(copieDisponibili.getText());
             int anno = Integer.parseInt(annoPubblicazione.getText());
 
             Libro.verificaLibro(al, t, anno, isbn, c);
 
-        }catch(NumberFormatException e) {
-            Logger.getLogger(AggiuntaLibroController.class.getName()).log(Level.SEVERE, null, e);
-        }catch(RuntimeException e) {
-            Logger.getLogger(AggiuntaLibroController.class.getName()).log(Level.SEVERE, null, e);
+            Libro l= new Libro(t,Integer.parseInt(annoPubblicazione.getText()),new ISBN(isbn),Integer.parseInt(copieDisponibili.getText()),al);
+            biblioteca.getLibri().aggiungi(l);
+
+            LibriController libriController = (LibriController) parentController;
+            libriController.addBooks();
+            Stage stage = (Stage) titolo.getScene().getWindow();
+            stage.close();
+        } catch(NumberFormatException e) {
+            showWarningAlert("Invalid Format", "Assicurare che i campi ISBN e copieDisponibili siano NUMERI.");
+        } catch (LibroGiaPresenteException ex){
+            showWarningAlert("Libro Gia Presente", "Un Libro con questo ISBN esiste già nell'archivio!");
+        } catch(RuntimeException e) {
+            showErrorAlert("Error", e.toString());
         }
-        Libro l= new Libro(t,Integer.parseInt(annoPubblicazione.getText()),new ISBN(isbn),Integer.parseInt(copieDisponibili.getText()),al);
-
-        try {
-           biblioteca.getLibri().aggiungi(l);
-        }catch(Exception e) {
-            Logger.getLogger(AggiuntaLibroController.class.getName()).log(Level.SEVERE, null, e);
-        }
-
-        LibriController libriController = (LibriController) parentController;
-        libriController.addBooks();
-        Stage stage = (Stage) titolo.getScene().getWindow();
-        stage.close();
-
     }
 
     @FXML
