@@ -2,13 +2,16 @@ package controllers.prestiti;
 import controllers.BaseController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
 import javafx.stage.Stage;
 import models.prestiti.Prestito;
+import models.servizi.Filtro;
 
 import java.io.IOException;
 import java.net.URL;
@@ -51,20 +54,45 @@ public class PrestitiController extends BaseController implements Initializable 
 
     @FXML
     private void onExtendLoan(){
-
+        showNewWindow("/views/prestiti/EstensionePrestitoView.fxml", "Estensione Prestito");
     }
 
     @FXML
     private void onReturnLoan(){
-
+        showNewWindow("/views/AvvisoConfermaRimozioneView.fxml", "Restituzione Prestito");
     }
 
     @FXML
     private void onFilterLoans(){
+        /// ////////////////
+        /// // Ricordare qua/////
+        /// ////////////////////
+        List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.ATTIVI); //Capire come selezionare i filtri
+        prestiti.setAll(listPrestiti);
     }
 
     @FXML
-    private void onChangeViewMode(){
+    private void onChangeViewMode(ActionEvent event) {
+        MenuItem item = (MenuItem) event.getSource();
+        String mode = (String) item.getUserData();
 
+        FXMLLoader loader = null;
+        if (mode.equals("UTENTI")) {
+            loader = new FXMLLoader(getClass().getResource("/views/utenti/UtentiView.fxml"));
+        } else if (mode.equals("LIBRI")) {
+            loader = new FXMLLoader(getClass().getResource("/views/libri/LibriView.fxml"));
+        }
+
+        try{
+            Parent root = loader.load();
+            BaseController controller = loader.getController();
+            controller.setBiblioteca(this.biblioteca);  // Pass the same instance
+
+            Stage stage = (Stage) item.getParentPopup().getOwnerWindow();
+            Scene scene = stage.getScene();
+            scene.setRoot(root);
+        } catch (NullPointerException | IOException ex) {
+            showErrorAlert("Error", "Could Not Find " + mode + " FXML");
+        }
     }
 }

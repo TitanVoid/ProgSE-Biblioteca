@@ -103,18 +103,18 @@ public class LibriController extends BaseController implements Initializable{
     }
 
     @FXML
-    private void onChangeViewMode(ActionEvent event) throws IOException {
+    private void onChangeViewMode(ActionEvent event) {
         MenuItem item = (MenuItem) event.getSource();
         String mode = (String) item.getUserData();
 
         FXMLLoader loader = null;
         if (mode.equals("UTENTI")) {
             loader = new FXMLLoader(getClass().getResource("/views/utenti/UtentiView.fxml"));
-        } else if (mode. equals("PRESTITI")) {
+        } else if (mode.equals("PRESTITI")) {
             loader = new FXMLLoader(getClass().getResource("/views/prestiti/PrestitiView.fxml"));
         }
 
-        if (loader != null) {
+        try{
             Parent root = loader.load();
             BaseController controller = loader.getController();
             controller.setBiblioteca(this.biblioteca);  // Pass the same instance
@@ -122,6 +122,8 @@ public class LibriController extends BaseController implements Initializable{
             Stage stage = (Stage) item.getParentPopup().getOwnerWindow();
             Scene scene = stage.getScene();
             scene.setRoot(root);
+        } catch (NullPointerException | IOException ex) {
+            showErrorAlert("Error", "Could Not Find " + mode + " FXML");
         }
     }
 }
