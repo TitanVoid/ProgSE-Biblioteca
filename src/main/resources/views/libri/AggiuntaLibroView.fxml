@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
+
+<VBox alignment="CENTER" spacing="12" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="24" left="28" right="28" top="24" />
+    </padding>
+
+    <children>
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Inserisci dati libro" />
+
+        <GridPane hgap="10" vgap="12">
+            <children>
+                <Label text="Titolo:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="nomeField" promptText="Titolo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="Autore/i:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="cognomeField" promptText="Autore/i" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="ISBN:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="matricolaField" promptText="ISBN" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Copie Disponibili:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="emailField" promptText="Copie Disponibili" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+            </children>
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+            </rowConstraints>
+        </GridPane>
+
+        <HBox alignment="CENTER" spacing="18" style="-fx-padding: 14 0 0 0;">
+            <children>
+                <Button fx:id="confermaBtn" text="Conferma" />
+                <Button fx:id="annullaBtn" text="Annulla" />
+            </children>
+        </HBox>
+    </children>
+</VBox>
