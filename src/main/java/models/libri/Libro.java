@@ -2,8 +2,10 @@ package models.libri;
 
 import models.ISBN;
 import models.Persona;
+
 import java.io.Serializable;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -127,32 +129,65 @@ public class Libro implements Comparable<Libro>, Serializable {
      * @param[in] annoPubblicazione Anno di pubblicazione.
      * @param[in] isbn Codice ISBN.
      * @param[in] copieDisponibili Numero di copie disponibili.
-     * @return true se il formato dei dati sono corretti, false altrimenti.
+     * @return true se il formato dei dati è corretto, altrimenti lancia un'eccezione.
      */
-    public static boolean verificaLibro(List<Autore> autori, String titolo, int annoPubblicazione, String codiceISBNLibro, int copieDisponibili) throws RuntimeException {
-        //////// Dobbiamo Implementare Maschera throwing runtime exception//////
+    public static boolean verificaLibro(String autori, String titolo, String annoPubblicazione, String codiceISBNLibro, String copieDisponibili) throws RuntimeException {
+        String msg = "";
         if(titolo == null || titolo.length() > 100){
-            return false;
+            msg = msg + '0';
+        }else{
+            msg = msg + '1';
         }
-        
-        if(annoPubblicazione < 0 || annoPubblicazione > LocalDate.now().getYear()){
-            return false;
+
+        if(annoPubblicazione.matches("\\d{1,4}")) {
+            int anno = Integer.parseInt(annoPubblicazione);
+            if (anno < 0 || anno > LocalDate.now().getYear()) {
+                msg = msg + '0';
+            } else {
+                msg = msg + '1';
+            }
         }
         
         if(!ISBN.verificaISBN(codiceISBNLibro)){
-            return false;
+            msg = msg + '0';
+        }else{
+            msg = msg + '1';
         }
-        
-        if(copieDisponibili < 0 || copieDisponibili > 100){
-            return false;
-        }
-        
-        for(Autore a : autori){
-            if(!Persona.verificaNome(a.getNome()) || !Persona.verificaCognome(a.getCognome())){
-                return false;
+
+        if(copieDisponibili.matches("\\d{1,3}")) {
+            int copie = Integer.parseInt(copieDisponibili);
+            if (copie < 0 || copie > 100) {
+                msg = msg + '0';
+            } else {
+                msg = msg + '1';
             }
         }
-        return true;
+
+        List<Autore> al = new ArrayList<Autore>();
+        //spazio fra due o più autori
+        String[] x = autori.split(", ");
+        for (int i = 0; i < x.length; i++) {
+            //spazio fra nome autore e cognome autore
+            String[] y = x[i].split(" ");
+            String nome = y[0];
+            String cognome = y[1];
+            al.add(new Autore(nome, cognome));
+        }
+
+        String correct = "1";
+        for(Autore a : al){
+            if(!Persona.verificaNome(a.getNome()) || !Persona.verificaCognome(a.getCognome())){
+                correct = "0";
+            }
+        }
+        msg = msg + correct;
+
+        String check = "11111";
+        if(!msg.equals(check)){
+            throw new RuntimeException(msg);
+        }else {
+            return true;
+        }
     }
 
     /**
