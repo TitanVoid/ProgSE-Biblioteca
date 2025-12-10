@@ -48,7 +48,7 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
      * @param[in] input Criterio di ricerca.
      * @return Lista di utenti che soddisfano il criterio di ricerca.
      */
-    public List<Utente> ricerca(String input) {
+    public List<Utente> ricercaUtenti(String input) {
         List<Utente> l = new ArrayList<>();
         String inputLowerCase = input.toLowerCase();
         for (Utente u : utenti) {
@@ -66,9 +66,9 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
      * @param[in] utente Utente da aggiungere.
      */
     @Override
-    public void aggiungi(Utente utente) {
+    public void aggiungi(Utente utente) throws UtenteGiaPresenteException {
         if (esisteChiave(utente.getMatricolaUtente())) {
-            System.out.println("Utente già esistente.");
+            throw new UtenteGiaPresenteException("L'utente è già presente nell'archivio.");
         } else {
             chiaviMatricole.put(utente.getMatricolaUtente(), utente);
             int index = Collections.binarySearch(utenti, utente);
@@ -99,7 +99,11 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
     @Override
     public void modifica(Utente originale, Utente modificato) {
         rimuovi(originale);
-        aggiungi(modificato);
+        try {
+            aggiungi(modificato);
+        } catch (UtenteGiaPresenteException e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
