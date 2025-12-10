@@ -59,32 +59,35 @@ public class LibriController extends BaseController implements Initializable{
     }
 
     public void addBooks(){
-        libri.clear();
         List<Libro> listLibri = biblioteca.getLibri().getLibri();
-        libri.addAll(listLibri);
+        libri.setAll(listLibri);
     }
 
-    private void showNewWindow(String viewName, String title) throws IOException {
-        Stage stage = new Stage();
-        Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(viewName)));
-        Scene scene = new Scene(root);
-        stage.setScene(scene);
-        stage.setTitle(title);
-        stage.show();
+    private void showNewWindow(String viewName, String title) {
+        try{
+            Stage stage = new Stage();
+            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(viewName)));
+            Scene scene = new Scene(root);
+            stage.setScene(scene);
+            stage.setTitle(title);
+            stage.show();
+        } catch (IOException | NullPointerException ex) {
+            showErrorAlert("Error", "Could Not Find FXML at " + viewName);
+        }
     }
 
     @FXML
-    private void onAddBook() throws IOException {
+    private void onAddBook() {
         showNewWindow("/views/libri/AggiuntaLibroView.fxml", "Aggiunta Libro");
     }
 
     @FXML
-    private void onModifyBook() throws IOException {
+    private void onModifyBook() {
         showNewWindow("/views/libri/ModificaLibroView.fxml", "Modifica Libro");
     }
 
     @FXML
-    private void onDeleteBook() throws IOException {
+    private void onDeleteBook() {
         showNewWindow("/views/AvvisoConfermaRimozioneView.fxml", "Rimozione Libro");
     }
 
