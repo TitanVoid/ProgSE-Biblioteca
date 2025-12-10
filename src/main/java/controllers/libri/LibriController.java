@@ -1,5 +1,7 @@
 package controllers.libri;
 import controllers.BaseController;
+import controllers.prestiti.PrestitiController;
+import controllers.utenti.UtentiController;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.scene.control.TextField;
 import javafx.scene.control.cell.PropertyValueFactory;
@@ -129,7 +131,13 @@ public class LibriController extends BaseController implements Initializable{
             Parent root = loader.load();
             BaseController controller = loader.getController();
             controller.setBiblioteca(this.biblioteca);  // Pass the same instance
-
+            if (controller instanceof UtentiController){
+                UtentiController utentiController = (UtentiController) controller;
+                //utentiController.addUsers()
+            } else if (controller instanceof PrestitiController) {
+                PrestitiController prestitiController = (PrestitiController) controller;
+                prestitiController.addLoans();
+            }
             Stage stage = (Stage) item.getParentPopup().getOwnerWindow();
             Scene scene = stage.getScene();
             scene.setRoot(root);
