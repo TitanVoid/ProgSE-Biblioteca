@@ -19,7 +19,7 @@ import java.util.ResourceBundle;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-public class AggiuntaLibroController extends BaseController implements Initializable {
+public class AggiuntaLibroController extends BaseController {
 
     @FXML
     private TextField titolo;
@@ -33,12 +33,6 @@ public class AggiuntaLibroController extends BaseController implements Initializ
     private TextField annoPubblicazione;
 
 
-
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // Initialization code
-    }
 
     @FXML
     private void onConfirm() {
@@ -59,7 +53,7 @@ public class AggiuntaLibroController extends BaseController implements Initializ
             int c = Integer.parseInt(copieDisponibili.getText());
             int anno = Integer.parseInt(annoPubblicazione.getText());
 
-            Libro.verificaLibro(al, t, anno, isbn, c);
+            Libro.verificaLibro(al, t, anno, isbn, c); /// da implementare in caso di return false 
 
             Libro l= new Libro(t,Integer.parseInt(annoPubblicazione.getText()),new ISBN(isbn),Integer.parseInt(copieDisponibili.getText()),al);
             biblioteca.getLibri().aggiungi(l);
@@ -80,5 +74,7 @@ public class AggiuntaLibroController extends BaseController implements Initializ
     @FXML
     private void onCancel(){
         // Cancellation logic
+        Stage stage = (Stage) titolo.getScene().getWindow();
+        stage.close();
     }
 }
