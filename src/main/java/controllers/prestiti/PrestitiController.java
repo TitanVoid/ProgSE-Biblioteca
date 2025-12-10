@@ -1,5 +1,8 @@
 package controllers.prestiti;
 import controllers.BaseController;
+import controllers.libri.LibriController;
+import controllers.utenti.UtentiController;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -9,6 +12,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.stage.Stage;
 import models.prestiti.Prestito;
 import models.servizi.Filtro;
@@ -24,9 +29,37 @@ public class PrestitiController extends BaseController implements Initializable 
 
     private final ObservableList<Prestito> prestiti = FXCollections.observableArrayList();
 
+    @FXML
+    private TableView<Prestito> prestitiTable;
+    @FXML
+    private TableColumn<Prestito, String> matricolaClm;
+    @FXML
+    private TableColumn<Prestito, String> isbnClm;
+    @FXML
+    private TableColumn<Prestito, String> dataInizioClm;
+    @FXML
+    private TableColumn<Prestito, String> dataScadenzaClm;
+    @FXML
+    private TableColumn<Prestito, String> dataRestituzioneClm;
+
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialization code
+        matricolaClm.setCellValueFactory(cell -> {
+            return new SimpleStringProperty(cell.getValue().getMatricolaUtente().getMatricola());
+        });
+        isbnClm.setCellValueFactory(cell -> {
+            return new SimpleStringProperty(cell.getValue().getCodiceISBNLibro().getCodiceISBN());
+        });
+        dataInizioClm.setCellValueFactory(cell -> {
+            return new SimpleStringProperty(cell.getValue().getDataInizio().toString());
+        });
+        dataScadenzaClm.setCellValueFactory(cell -> {
+            return new SimpleStringProperty(cell.getValue().getDataScadenza().toString());
+        });
+        dataRestituzioneClm.setCellValueFactory(cell -> {
+            return new SimpleStringProperty(cell.getValue().getDataRestituzione().toString());
+        });
     }
 
     public void addLoans(){
@@ -37,7 +70,11 @@ public class PrestitiController extends BaseController implements Initializable 
     private void showNewWindow(String viewName, String title) {
         try{
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(viewName)));
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(viewName)));
+            Parent root = loader.load();
+            BaseController controller = loader.getController();
+            controller.setParentController(this);
+            controller.setBiblioteca(biblioteca);
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle(title);
@@ -87,7 +124,13 @@ public class PrestitiController extends BaseController implements Initializable 
             Parent root = loader.load();
             BaseController controller = loader.getController();
             controller.setBiblioteca(this.biblioteca);  // Pass the same instance
-
+            if (controller instanceof UtentiController){
+                UtentiController utentiController = (UtentiController) controller;
+                //utentiController.addUsers()
+            } else if (controller instanceof LibriController){
+                LibriController libriController = (LibriController) controller;
+                libriController.addBooks();
+            }
             Stage stage = (Stage) item.getParentPopup().getOwnerWindow();
             Scene scene = stage.getScene();
             scene.setRoot(root);
