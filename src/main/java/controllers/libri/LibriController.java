@@ -66,8 +66,8 @@ public class LibriController extends BaseController implements Initializable{
     private void showNewWindow(String viewName, String title) {
         try{
             Stage stage = new Stage();
-            FXMLLoader loader = null;
-            Parent root = loader.load(Objects.requireNonNull(getClass().getResource(viewName)));
+            FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(viewName)));
+            Parent root = loader.load();
             BaseController controller = loader.getController();
             controller.setParentController(this);
             Scene scene = new Scene(root);
