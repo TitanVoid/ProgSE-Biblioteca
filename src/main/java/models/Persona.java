@@ -88,4 +88,9 @@ public abstract class Persona implements Serializable {
         if(cognome == null || cognome.length() > 25) return false;
         return true;
     }
+
+    @Override
+    public String toString(){
+        return this.nome + " " + this.cognome;
+    }
 }
