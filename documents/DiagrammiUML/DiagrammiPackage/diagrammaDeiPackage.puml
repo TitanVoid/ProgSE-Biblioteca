@@ -4,7 +4,7 @@ left to right direction
 package Java{
 	class Main{}
 	
-	package Controllers{
+	package controllers{
 		
 		class MainController
 		
@@ -31,7 +31,7 @@ package Java{
 	
 	}
 	
-	package Models{
+	package models{
 		
 		class Biblioteca
 		class Matricola
@@ -86,7 +86,7 @@ package Java{
 		}
 	}
 }
-Models -[hidden]> Controllers
+models -[hidden]> controllers
 
 
 @enduml

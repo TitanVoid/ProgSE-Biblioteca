@@ -1,12 +1,10 @@
-import Controllers.Libri.LibriController;
-import Models.Biblioteca;
+import controllers.libri.LibriController;
+import models.Biblioteca;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
-
-import java.util.Objects;
 
 public class Main extends Application {
 
@@ -17,7 +15,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception {
         Biblioteca biblioteca = new Biblioteca();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Views/Libri/LibriView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/libri/LibriView.fxml"));
         Parent root = loader.load();
         // Pass instance of biblioteca to controllers
         LibriController controller = loader.getController();
