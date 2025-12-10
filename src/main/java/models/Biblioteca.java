@@ -1,11 +1,20 @@
 package models;
 
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
 import models.libri.Libri;
 import models.prestiti.Prestiti;
 import models.utenti.Utenti;
 
 import java.io.Serializable;
 import java.io.IOException;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * @class Biblioteca
@@ -25,13 +34,8 @@ public class Biblioteca implements Serializable {
 
     public Biblioteca() {
         this.libri = new Libri();
-        this.prestiti = null;
-        this.utenti = null;
-        try {
-            leggiBibliotecaObj ("biblioteca.obj");
-        } catch (IOException e) {
-            throw new RuntimeException(e);
-        }
+        this.prestiti = new Prestiti();
+        this.utenti = new Utenti();
     }
 
     public Prestiti getPrestiti() {
@@ -48,22 +52,37 @@ public class Biblioteca implements Serializable {
 
     /**
      * @brief Salva lo stato della biblioteca su file.
-     * @param[in] fileName Nome del file su cui salvare lo stato.
+     * @param[in] nomeFile Nome del file su cui salvare lo stato.
      */
 
     public void salvaBibliotecaObj(String nomeFile) throws IOException {
         // Implementazione del salvataggio dello stato della biblioteca su file
+        try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(nomeFile)))){
+            oos.writeObject(this);
+        } catch (FileNotFoundException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
 
     }
 
     /**
      * @brief Carica lo stato della biblioteca da file.
-     * @param[in] fileName Nome del file da cui caricare lo stato.
+     * @param[in] nomeFile Nome del file da cui caricare lo stato.
      * @return Istanza di Biblioteca caricata dal file.
      */
     public static Biblioteca leggiBibliotecaObj(String nomeFile) throws IOException{
         // Implementazione del caricamento dello stato della biblioteca dal file
-        return null;
+        Biblioteca x = null;
+        try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomeFile)))){
+            x = (Biblioteca) ois.readObject();
+        } catch (IOException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return x;
     }
 
 }

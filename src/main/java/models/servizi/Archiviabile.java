@@ -13,7 +13,7 @@ public interface Archiviabile<E>{
      * @param[in] elemento L'elemento da aggiungere.
      * @return La lista aggiornata degli elementi.
      */
-    public void aggiungi(E elemento);
+    public void aggiungi(E elemento) throws OggettoGiaPresenteException;
 
     /**
      * @brief Rimuove un elemento dall'archivio.

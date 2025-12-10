@@ -10,6 +10,7 @@ import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * @class Libri
  * @brief Gestisce una lista e una mappa di libri.
@@ -48,38 +49,40 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      */
     public List<Libro> ricercaLibri(String input){
         List<Libro> lis = new ArrayList<>();
+        String inputLowerCase = input.toLowerCase();
         for(Libro l : libri){
-            if(l.getTitolo().matches(input)){
+            String titoloLowerCase = l.getTitolo().toLowerCase();
+            String codiceISBNLibroLowerCase = l.getCodiceISBN().toLowerCase();
+            if(titoloLowerCase.contains(input) || codiceISBNLibroLowerCase().matches(input)){
                 lis.add(l);
+            }else{
+                String nomeLowerCase = a.getNome().toLowerCase();
+                String cognomeLowerCase =  a.getCognome().toLowerCase();
+                for(Autore a : l.getAutori()){
+                    if(nomeLowerCase.matches(input) || cognomeLowerCase.matches(input)){
+                        lis.add(l);
+                    }
+                }
             }
         }
         return lis;
     }
-
+    
     /**
      * @brief Aggiunge un libro alla collezione.
      * @param[in] libro Libro da aggiungere.
      */
     @Override
-    public void aggiungi(Libro libro){
-        if(!this.esisteChiave(libro.getCodiceISBNLibro())){
+    public void aggiungi(Libro libro) throws LibroGiaPresenteException{
+        if(this.esisteChiave(libro.getCodiceISBNLibro())){
+            throw new LibroGiaPresenteException("Il libro è già presente nella lista");
+        }else{
             int i = Collections.binarySearch(libri, libro);
             if(i < 0){
                 i = - i - 1;
                 libri.add(i, libro);
             } 
         }
-    }
-
-    /**
-     * @brief Rimuove un libro dalla collezione.
-     * @param[in] libro Libro da rimuovere.
-     */
-    @Override
-    public void rimuovi(Libro libro){
-        ISBN i = libro.getCodiceISBNLibro();
-        libri.remove(libro);
-        chiaviISBN.remove(i);
     }
 
     /**
@@ -93,15 +96,16 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
         this.aggiungi(modificato);
     }
 
+
     /**
-     * @brief Ottiene un libro tramite ISBN.
-     * @param[in] chiave ISBN del libro.
-     * @return Libro associato all'ISBN, null altrimenti.
+     * @brief Rimuove un libro dalla collezione.
+     * @param[in] libro Libro da rimuovere.
      */
     @Override
-    public Libro ottieni(ISBN chiave) {
-        if(esisteChiave(chiave)) return chiaviISBN.get(chiave);
-        return null;
+    public void rimuovi(Libro libro){
+        ISBN i = libro.getCodiceISBNLibro();
+        libri.remove(libro);
+        chiaviISBN.remove(i);
     }
 
     /**
@@ -114,4 +118,19 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
         return chiaviISBN.containsKey(chiave);
     }
 
+    /**
+     * @brief Ottiene un libro tramite ISBN.
+     * @param[in] chiave ISBN del libro.
+     * @return Libro associato all'ISBN, null altrimenti.
+     */
+    @Override
+    public Libro ottieni(ISBN chiave) {
+        if(esisteChiave(chiave)) return chiaviISBN.get(chiave);
+        return null;
+    }
+    
+    
+        
+            
+        
 }
