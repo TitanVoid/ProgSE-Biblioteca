@@ -201,7 +201,7 @@ public class Libro implements Comparable<Libro>, Serializable {
 
     /**
      * @brief Verifica l'uguaglianza tra questo libro e un altro oggetto.
-     * @param o Oggetto da confrontare.
+     * @param[in] o Oggetto da confrontare.
      * @return true se sono uguali, false altrimenti.
      */
     @Override
@@ -216,7 +216,7 @@ public class Libro implements Comparable<Libro>, Serializable {
 
     /**
      * @brief Confronta questo libro con un altro libro.
-     * @param l Libro da confrontare.
+     * @param[in] l Libro da confrontare.
      * @return 0 se sono uguali, valore negativo se questo libro precede l, positivo altrimenti.
      */
     @Override
