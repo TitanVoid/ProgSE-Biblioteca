@@ -63,14 +63,13 @@ public class LibriController extends BaseController implements Initializable{
         libri.setAll(listLibri);
     }
 
-    public ObservableList<Libro> getLibri() {
-        return libri;
-    }
-
     private void showNewWindow(String viewName, String title) {
         try{
             Stage stage = new Stage();
-            Parent root = FXMLLoader.load(Objects.requireNonNull(getClass().getResource(viewName)));
+            FXMLLoader loader = null;
+            Parent root = loader.load(Objects.requireNonNull(getClass().getResource(viewName)));
+            BaseController controller = loader.getController();
+            controller.setParentController(this);
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle(title);

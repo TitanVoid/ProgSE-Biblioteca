@@ -6,12 +6,11 @@ import models.Biblioteca;
 
 public abstract class BaseController {
     protected Biblioteca biblioteca;
-    private BaseController parentController;
+    protected BaseController parentController;
 
-    private void setParentController(BaseController parentController) {
+    public void setParentController(BaseController parentController) {
         this.parentController = parentController;
     };
-
 
     public void setBiblioteca(Biblioteca biblioteca) {
         this.biblioteca = biblioteca;
