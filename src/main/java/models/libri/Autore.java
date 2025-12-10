@@ -1,13 +1,13 @@
 package models.libri;
+
 import models.Persona;
-import java.io.Serializable;
 
 /**
  * @class Autore
  * @brief Classe che rappresenta un autore.
  * @see Persona
  */
-public class Autore extends Persona implements Serializable {
+public class Autore extends Persona {
 
     /**
      * @brief Costruttore.
