@@ -61,7 +61,7 @@ public class LibriController extends BaseController implements Initializable{
     }
 
     public void addBooks(){
-        List<Libro> listLibri = biblioteca.getLibri().getLibri();
+        List<Libro> listLibri = biblioteca.getLibri().getListaLibri();
         libri.setAll(listLibri);
     }
 
