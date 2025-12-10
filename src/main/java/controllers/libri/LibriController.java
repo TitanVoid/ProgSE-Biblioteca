@@ -63,6 +63,10 @@ public class LibriController extends BaseController implements Initializable{
         libri.setAll(listLibri);
     }
 
+    public ObservableList<Libro> getLibri() {
+        return libri;
+    }
+
     private void showNewWindow(String viewName, String title) {
         try{
             Stage stage = new Stage();
