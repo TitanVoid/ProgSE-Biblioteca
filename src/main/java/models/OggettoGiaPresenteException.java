@@ -3,19 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package models.libri;
+package models;
 
 /**
  *
  * @author erica
  */
-public class OggettoGiaPresenteException extends Exception{
+public class OggettoGiaPresenteException extends Exception {
 
     /**
      * Creates a new instance of <code>LibroGiaPresenteException</code> without
      * detail message.
      */
-    public LibroGiaPresenteException() {
+    public OggettoGiaPresenteException() {
     }
 
     /**
@@ -24,7 +24,7 @@ public class OggettoGiaPresenteException extends Exception{
      *
      * @param msg the detail message.
      */
-    public LibroGiaPresenteException(String msg) {
+    public OggettoGiaPresenteException(String msg) {
         super(msg);
     }
 }
