@@ -67,6 +67,7 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
             if(i < 0){
                 i = - i - 1;
                 libri.add(i, libro);
+                chiaviISBN.put(libro.getCodiceISBNLibro(), libro);
             } 
         }
     }
@@ -89,7 +90,7 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      */
     @Override
     public void modifica(Libro originale, Libro modificato){
-        libri.remove(originale);
+        this.rimuovi(originale);
         this.aggiungi(modificato);
     }
 

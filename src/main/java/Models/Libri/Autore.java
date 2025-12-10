@@ -7,7 +7,7 @@ import java.io.Serializable;
  * @brief Classe che rappresenta un autore.
  * @see Persona
  */
-public class Autore extends Persona implements Serializable {
+public class Autore extends Persona{
 
     /**
      * @brief Costruttore.
