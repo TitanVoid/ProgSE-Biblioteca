@@ -1,5 +1,7 @@
 package models.servizi;
 
+import models.OggettoGiaPresenteException;
+
 /**
  * @interface Archiviabile
  * @brief Interfaccia per la gestione di una collezione di elementi.

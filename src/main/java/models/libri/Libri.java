@@ -52,13 +52,13 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
         String inputLowerCase = input.toLowerCase();
         for(Libro l : libri){
             String titoloLowerCase = l.getTitolo().toLowerCase();
-            String codiceISBNLibroLowerCase = l.getCodiceISBN().toLowerCase();
-            if(titoloLowerCase.contains(input) || codiceISBNLibroLowerCase().matches(input)){
+            String codiceISBNLibroLowerCase = l.getCodiceISBNLibro().getCodiceISBN().toLowerCase();
+            if(titoloLowerCase.contains(input) || codiceISBNLibroLowerCase.matches(input)){
                 lis.add(l);
             }else{
-                String nomeLowerCase = a.getNome().toLowerCase();
-                String cognomeLowerCase =  a.getCognome().toLowerCase();
                 for(Autore a : l.getAutori()){
+                    String nomeLowerCase = a.getNome().toLowerCase();
+                    String cognomeLowerCase =  a.getCognome().toLowerCase();
                     if(nomeLowerCase.matches(input) || cognomeLowerCase.matches(input)){
                         lis.add(l);
                     }
@@ -93,7 +93,11 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
     @Override
     public void modifica(Libro originale, Libro modificato){
         libri.remove(originale);
-        this.aggiungi(modificato);
+        try {
+            this.aggiungi(modificato);
+        } catch (LibroGiaPresenteException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 
