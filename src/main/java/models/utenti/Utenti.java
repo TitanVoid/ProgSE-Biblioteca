@@ -6,9 +6,11 @@ import models.servizi.Mappabile;
 
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+
 /**
  * @class Utenti
  * @brief Gestisce una lista e una mappa di utenti.
@@ -20,7 +22,7 @@ import java.util.Map;
  */
 public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente>, Serializable {
 
-    private final Map<Matricola, Utente> matricole;
+    private final Map<Matricola, Utente> chiaviMatricole;
     private final List<Utente> utenti;
 
     /**
@@ -28,7 +30,7 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
      */
     public Utenti() {
         this.utenti = new ArrayList<>();
-        this.matricole = new HashMap<>();
+        this.chiaviMatricole = new HashMap<>();
     }
 
     /**
@@ -40,12 +42,23 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
     }
 
     /**
-     * @brief Ricerca utenti in base a un input.
+     * @brief Ricerca uno o più utenti in base al loro cognome e alla loro
+     *        matricola, verificando se almeno uno di questi due campi contenga una
+     *        determinata stringa.
      * @param[in] input Criterio di ricerca.
-     * @return Lista di utenti che corrispondono al criterio di ricerca.
+     * @return Lista di utenti che soddisfano il criterio di ricerca.
      */
     public List<Utente> ricerca(String input) {
-        return null;
+        List<Utente> l = new ArrayList<>();
+        String inputLowerCase = input.toLowerCase();
+        for (Utente u : utenti) {
+            String cognomeLowerCase = u.getCognome().toLowerCase();
+            String matricolaLowerCase = u.getMatricolaUtente().getMatricola().toLowerCase();
+            if (cognomeLowerCase.contains(inputLowerCase) || matricolaLowerCase.contains(inputLowerCase)) {
+                l.add(u);
+            }
+        }
+        return l;
     }
 
     /**
@@ -53,40 +66,49 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
      * @param[in] utente Utente da aggiungere.
      */
     @Override
-    public void aggiungi(Utente utente) {}
+    public void aggiungi(Utente utente) {
+    }
 
     /**
      * @brief Rimuove un utente dalla collezione.
      * @param[in] utente Utente da rimuovere.
      */
     @Override
-    public void rimuovi(Utente utente) {}
+    public void rimuovi(Utente utente) {
+        chiaviMatricole.remove(utente.getMatricolaUtente(), utente);
+        int index = Collections.binarySearch(utenti, utente);
+        utenti.remove(index);
+    }
 
     /**
      * @brief Modifica un utente esistente.
      * @param[in] originale Utente da modificare.
-     * @param[in] modificato Nuovo utente modificato.
+     * @param[in] modificato Utente modificato.
      */
     @Override
-    public void modifica(Utente originale, Utente modificato) {}
+    public void modifica(Utente originale, Utente modificato) {
+        rimuovi(originale);
+        aggiungi(modificato);
+    }
 
     /**
-     * @briefVerifica se esiste un uetnte con un determinata matricola.
+     * @brief Verifica se esiste l'utente che corrisponde ad una determinata
+     *        matricola.
      * @param[in] chiave Matricola del utente.
      * @return true se esiste, false altrimenti.
      */
     @Override
-    public boolean esisteChiave(Matricola chiave){
-        return false;
+    public boolean esisteChiave(Matricola chiave) {
+        return chiaviMatricole.containsKey(chiave);
     }
 
     /**
-     * @brief Ottiene un utente tramite matricola.
-     * @param chiave Matricola dell'utente.
+     * @brief Ottiene un utente tramite la sua matricola.
+     * @param chiave Matricola dell'utente che si vuole ottenere.
      * @return Utente associato alla matricola, null altrimenti.
      */
     @Override
     public Utente ottieni(Matricola chiave) {
-        return null;
+        return chiaviMatricole.get(chiave);
     }
 }
