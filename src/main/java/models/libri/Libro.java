@@ -129,27 +129,26 @@ public class Libro implements Comparable<Libro>, Serializable {
      * @param[in] copieDisponibili Numero di copie disponibili.
      * @return true se il formato dei dati sono corretti, false altrimenti.
      */
-    public static boolean verificaLibro(List<Autore> autori, String titolo, int annoPubblicazione, ISBN codiceISBNLibro, int copieDisponibili) {
-        Libro l = new Libro(titolo, annoPubblicazione, codiceISBNLibro, copieDisponibili, autori);
-        
-        if(l.getTitolo() == null || l.getTitolo().length() > 100){
+    public static boolean verificaLibro(List<Autore> autori, String titolo, int annoPubblicazione, String codiceISBNLibro, int copieDisponibili) throws RuntimeException {
+        //////// Dobbiamo Implementare Maschera throwing runtime exception//////
+        if(titolo == null || titolo.length() > 100){
             return false;
         }
         
-        if(l.getAnnoPubblicazione() < 0 && l.getAnnoPubblicazione() > LocalDate.now().getYear()){
+        if(annoPubblicazione < 0 || annoPubblicazione > LocalDate.now().getYear()){
             return false;
         }
         
-        if(!ISBN.verificaISBN(l.getCodiceISBNLibro().getCodiceISBN())){
+        if(!ISBN.verificaISBN(codiceISBNLibro)){
             return false;
         }
         
-        if(l.getCopieDisponibili() < 0 || l.getCopieDisponibili() > 100){
+        if(copieDisponibili < 0 || copieDisponibili > 100){
             return false;
         }
         
-        for(Autore a : l.getAutori()){
-            if(!Persona.verificaNome(a.getNome()) && !Persona.verificaCognome(a.getCognome())){
+        for(Autore a : autori){
+            if(!Persona.verificaNome(a.getNome()) || !Persona.verificaCognome(a.getCognome())){
                 return false;
             }
         }
