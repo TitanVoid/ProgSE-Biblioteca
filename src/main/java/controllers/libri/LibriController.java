@@ -22,6 +22,8 @@ import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class LibriController extends BaseController implements Initializable{
 
@@ -70,6 +72,7 @@ public class LibriController extends BaseController implements Initializable{
             Parent root = loader.load();
             BaseController controller = loader.getController();
             controller.setParentController(this);
+            controller.setBiblioteca(biblioteca);
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle(title);
