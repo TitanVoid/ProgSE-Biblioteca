@@ -21,16 +21,16 @@
         <GridPane hgap="10" vgap="12">
             <children>
                 <Label text="Titolo:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <TextField fx:id="nomeField" promptText="Titolo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <TextField fx:id="titolo" promptText="Titolo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
                 <Label text="Autore/i:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <TextField fx:id="cognomeField" promptText="Autore/i" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <TextField fx:id="autori" promptText="Autore/i" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                 <Label text="ISBN:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="matricolaField" promptText="ISBN" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <TextField fx:id="ISBN" promptText="ISBN" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
                 <Label text="Copie Disponibili:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <TextField fx:id="emailField" promptText="Copie Disponibili" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <TextField fx:id="copieDisponibili" promptText="Copie Disponibili" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
             <columnConstraints>
                 <ColumnConstraints />
