@@ -62,15 +62,26 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
     }
 
     /**
-     * @brief Aggiunge un utente alla collezione.
+     * @brief Aggiunge un utente alla lista.
      * @param[in] utente Utente da aggiungere.
      */
     @Override
     public void aggiungi(Utente utente) {
+        if (esisteChiave(utente.getMatricolaUtente())) {
+            System.out.println("Utente già esistente.");
+        } else {
+            chiaviMatricole.put(utente.getMatricolaUtente(), utente);
+            int index = Collections.binarySearch(utenti, utente);
+
+            if (index < 0) {
+                index = -index - 1;
+            }
+            utenti.add(index, utente);
+        }
     }
 
     /**
-     * @brief Rimuove un utente dalla collezione.
+     * @brief Rimuove un utente dalla lista.
      * @param[in] utente Utente da rimuovere.
      */
     @Override
