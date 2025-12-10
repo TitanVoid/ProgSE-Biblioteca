@@ -4,7 +4,6 @@ import models.Matricola;
 import models.Persona;
 import models.prestiti.Prestito;
 
-import java.io.Serializable;
 import java.util.List;
 import java.util.ArrayList;
 
@@ -15,9 +14,9 @@ import java.util.ArrayList;
  * @see Prestito
  */
 
-public class Utente extends Persona implements Comparable<Utente> , Serializable {
+public class Utente extends Persona implements Comparable<Utente> {
 
-    private final Matricola matricola;
+    private final Matricola matricolaUtente;
     private String email;
     private final List<Prestito> prestitiAttivi;
 
@@ -25,125 +24,139 @@ public class Utente extends Persona implements Comparable<Utente> , Serializable
      * @brief Costruttore.
      * @param[in] nome Nome dell'utente.
      * @param[in] cognome Cognome dell'utente.
-     * @param[in] matricola Matricola identificativa.
+     * @param[in] matricolaUtente Matricola identificativa dell'utente.
      * @param[in] email Email dell'utente.
-     * @param[in] persona Persona associata all'utente.
      */
-
-    public Utente(String nome, String cognome, Matricola matricola, String email) {
+    public Utente(String nome, String cognome, Matricola matricolaUtente, String email) {
         super(nome, cognome);
-        this.matricola = matricola;
+        this.matricolaUtente = matricolaUtente;
         this.email = email;
         this.prestitiAttivi = new ArrayList<>();
     }
 
     /**
-     * @brief Restituisce l'email dell'utente.
-     * @return Email.
+     * @brief Restituisce la matricola dell'utente.
+     * @return Matricola dell'utente.
      */
+    public Matricola getMatricolaUtente() {
+        return matricolaUtente;
+    }
 
+    /**
+     * @brief Restituisce l'email dell'utente.
+     * @return Email dell'utente.
+     */
     public String getEmail() {
         return email;
     }
 
     /**
-     * @brief Imposta l'email dell'utente.
-     * @param[in] email Nuova email da impostare.
+     * @brief Restituisce la lista dei prestiti attivi associati ad un utente.
+     * @return Lista dei prestiti attivi associati all'utente.
      */
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-
-    /**
-     * @brief Restituisce la matricola dell'utente.
-     * @return persona.
-     */
-
-    public Matricola getMatricola() {
-        return matricola;
-    }
-
-    /**
-     * @brief Restituisce la lista dei prestiti attivi.
-     * @return Lista dei prestiti attivi dell'utente.
-     */
-
     public List<Prestito> getPrestitiAttivi() {
         return prestitiAttivi;
     }
 
     /**
-     * @brief Aggiunge un prestito alla lista dei prestiti attivi.
+     * @brief Imposta l'email dell'utente.
+     * @param[in] email Email da impostare.
+     */
+    public void setEmail(String email) {
+        this.email = email;
+    }
+
+    /**
+     * @brief Aggiunge un prestito alla lista dei prestiti attivi associati ad un
+     *        utente.
      * @param[in] prestito Prestito da aggiungere.
      */
-
     public void aggiungiPrestito(Prestito prestito) {
         prestitiAttivi.add(prestito);
     }
 
     /**
-     * @brief Rimuove un prestito dalla lista dei prestiti attivi.
+     * @brief Rimuove un prestito dalla lista dei prestiti attivi associati ad un
+     *        utente.
      * @param[in] prestito Prestito da rimuovere.
      */
-
     public void rimuoviPrestito(Prestito prestito) {
-
+        prestitiAttivi.remove(prestito);
     }
 
     /**
-     * @brief Verifica il formato di una email.
+     * @brief Verifica il formato di un'email.
      * @param[in] email Email da verificare.
      * @return true se il formato dell'email è corretto, false altrimenti.
      */
-
     public static boolean verificaEmail(String email) {
-        return false;
+        return email.matches("^\\w+@studenti\\.unisa\\.it$");
     }
 
     /**
-     * @brief Verifica il formato di un utente.
+     * @brief Verifica il formato dei campi di un utente.
      * @param[in] utente Utente da verificare.
      * @param[in] nome Nome dell'utente.
      * @param[in] cognome Cognome dell'utente.
-     * @param[in] matricola Matricola dell'utente.
+     * @param[in] matricolaUtente Matricola dell'utente.
      * @param[in] email Email dell'utente.
-     * @return true se il formato dell'utente è corretto, false altrimenti.
+     * @return true se il formato dei campi dell'utente è corretto, false
+     *         altrimenti.
      */
-
-    public static boolean verificaUtente(String nome, String cognome, Matricola matricola, String email) {
-        return false;
+    public static boolean verificaUtente(String nome, String cognome, Matricola matricolaUtente, String email) {
+        if (!Persona.verificaNome(nome) || !Persona.verificaCognome(cognome) || !Matricola.verificaMatricola(email)
+                || !Utente.verificaEmail(email)) {
+            return false;
+        }
+        return true;
     }
 
     /**
-     * @brief Calcola l'hash code dell'utente.
+     * @brief Calcola l'hashcode di un utente.
      * @return Valore hashcode.
      */
-
     @Override
-    public int hashCode(){
-        return 0;
+    public int hashCode() {
+        return matricolaUtente == null ? 0 : matricolaUtente.hashCode() * 31;
     }
 
     /**
-     * @brief Verifica l'uguaglianza tra questo utente e un altro oggetto.
+     * @brief Verifica l'uguaglianza tra l'oggetto corrente ed un altro oggetto.
      * @param[in] o Oggetto da confrontare.
-     * @return true se sono uguali, false altrimenti.
+     * @return true se i due oggetti sono uguali, false altrimenti.
      */
-
     @Override
     public boolean equals(Object o) {
-        return false;
+        if (o == null)
+            return false;
+        if (this == o)
+            return true;
+        if (o.getClass() != this.getClass())
+            return false;
+
+        Utente u = (Utente) o;
+        return this.matricolaUtente.equals(u.matricolaUtente);
     }
 
     /**
-     * @brief Confronta questo utente con un altro utente.
-     * @param[in] u Utente da confrontare.
-     * @return 0 se sono uguali, valore negativo se questo utente precede u, positivo altrimenti.
+     * @brief Confronta due utenti.
+     *        Il confronto è effettuato in base ai seguenti campi:
+     *        - In primo luogo, in base al loro cognome;
+     *        - A parità di cognome, in base al loro nome;
+     *        - A parità dei campi precedenti, in base alla loro matricola.
+     * @param[in] u Utente da confrontare con l'utente corrente.
+     * @return Valore minore di zero, pari a zero oppure maggiore di zero se
+     *         l'utente corrente precede, è uguale o segue l'utente u nell'ordine
+     *         lessicografico.
      */
     @Override
     public int compareTo(Utente u) {
-        return 0;
+        if (this.getCognome().equals(u.getCognome())) {
+            if (this.getNome().equals(u.getNome())) {
+                return this.matricolaUtente.compareTo(u.matricolaUtente);
+            }
+            return this.getNome().compareTo(u.getNome());
+        }
+        return this.getCognome().compareTo(u.getCognome());
     }
-
 }
