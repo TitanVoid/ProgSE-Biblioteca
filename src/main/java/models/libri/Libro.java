@@ -1,6 +1,7 @@
 package models.libri;
 
 import models.ISBN;
+import models.Persona;
 import java.io.Serializable;
 import java.time.LocalDate;
 import java.util.List;
@@ -139,7 +140,7 @@ public class Libro implements Comparable<Libro>, Serializable {
             return false;
         }
         
-        if(!l.getCodiceISBNLibro().verificaISBN(l.getCodiceISBNLibro().getCodiceISBN())){
+        if(!ISBN.verificaISBN(l.getCodiceISBNLibro().getCodiceISBN())){
             return false;
         }
         
@@ -148,7 +149,7 @@ public class Libro implements Comparable<Libro>, Serializable {
         }
         
         for(Autore a : l.getAutori()){
-            if(!a.verificaNome(a.getNome()) && !a.verificaCognome(a.getCognome())){
+            if(!Persona.verificaNome(a.getNome()) && !Persona.verificaCognome(a.getCognome())){
                 return false;
             }
         }
@@ -189,5 +190,4 @@ public class Libro implements Comparable<Libro>, Serializable {
         if(this.titolo.equals(l.getTitolo())) return this.codiceISBNLibro.compareTo(l.getCodiceISBNLibro());
         return this.codiceISBNLibro.compareTo(l.getCodiceISBNLibro());
     }
-
 }
