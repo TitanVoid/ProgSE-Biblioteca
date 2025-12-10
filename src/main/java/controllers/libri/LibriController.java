@@ -81,7 +81,7 @@ public class LibriController extends BaseController implements Initializable{
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle(title);
-            stage.show();
+            stage.showAndWait();
         } catch (IOException | NullPointerException ex) {
             showErrorAlert("Error", "Could Not Find FXML at " + viewName);
         }
