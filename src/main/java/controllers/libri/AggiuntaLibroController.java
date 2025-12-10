@@ -46,7 +46,7 @@ public class AggiuntaLibroController extends BaseController {
 
             Libro.verificaLibro(a, t, anno, isbn, c);
 
-            Libro l = new Libro(t,Integer.parseInt(annoPubblicazione.getText()),new ISBN(isbn),Integer.parseInt(copieDisponibili.getText()),al);
+            Libro l = new Libro(t,Integer.parseInt(annoPubblicazione.getText()),new ISBN(isbn),Integer.parseInt(copieDisponibili.getText()),a);
             biblioteca.getLibri().aggiungi(l);
 
             LibriController libriController = (LibriController) parentController;

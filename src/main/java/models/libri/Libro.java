@@ -30,12 +30,12 @@ public class Libro implements Comparable<Libro>, Serializable {
      * @param[in] copieDisponibili Numero di copie disponibili.
      * @param[in] autori Lista degli autori.
      */
-    public Libro(String titolo, int annoPubblicazione, ISBN codiceISBNLibro, int copieDisponibili, List<Autore> autori) {
+    public Libro(String titolo, int annoPubblicazione, ISBN codiceISBNLibro, int copieDisponibili, String autori) {
         this.titolo = titolo;
         this.annoPubblicazione = annoPubblicazione;
         this.codiceISBNLibro = codiceISBNLibro;
         this.copieDisponibili = copieDisponibili;
-        this.autori = autori;
+        this.autori = StringAutoriToList(autori);
     }
 
     /**
@@ -121,6 +121,25 @@ public class Libro implements Comparable<Libro>, Serializable {
         autori.remove(autore);
     }
 
+    /**
+     * @brief Converte una Stringa autori in una lista di oggetti Autore.
+     * @param[in] autori Stringa autori
+     * @return List<Autore>
+     */
+
+    private static List<Autore> StringAutoriToList(String autori){
+        List<Autore> al = new ArrayList<Autore>();
+        //spazio fra due o più autori
+        String[] x = autori.split(", ");
+        for (int i = 0; i < x.length; i++) {
+            //spazio fra nome autore e cognome autore
+            String[] y = x[i].split(" ");
+            String nome = y[0];
+            String cognome = y[1];
+            al.add(new Autore(nome, cognome));
+        }
+        return al;
+    }
 
     /**
      * @brief Verifica il formato dei dati di un libro.
@@ -163,16 +182,7 @@ public class Libro implements Comparable<Libro>, Serializable {
             }
         }
 
-        List<Autore> al = new ArrayList<Autore>();
-        //spazio fra due o più autori
-        String[] x = autori.split(", ");
-        for (int i = 0; i < x.length; i++) {
-            //spazio fra nome autore e cognome autore
-            String[] y = x[i].split(" ");
-            String nome = y[0];
-            String cognome = y[1];
-            al.add(new Autore(nome, cognome));
-        }
+        List<Autore> al = StringAutoriToList(autori);
 
         String correct = "1";
         for(Autore a : al){
