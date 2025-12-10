@@ -41,29 +41,18 @@ public class AggiuntaLibroController extends BaseController {
             String t = titolo.getText();
             String a = autori.getText();
             String isbn = ISBN.getText();
-            List<Autore> al = new ArrayList<Autore>();
-            String[] x = a.split(",");
+            String c = copieDisponibili.getText();
+            String anno = annoPubblicazione.getText();
 
-            for (int i = 0; i < x.length; i++) {
-                String[] y = x[i].split(" ");
-                String nome = y[0];
-                String cognome = y[1];
-                al.add(new Autore(nome, cognome));
-            }
-            int c = Integer.parseInt(copieDisponibili.getText());
-            int anno = Integer.parseInt(annoPubblicazione.getText());
+            Libro.verificaLibro(a, t, anno, isbn, c);
 
-            Libro.verificaLibro(al, t, anno, isbn, c); /// da implementare in caso di return false 
-
-            Libro l= new Libro(t,Integer.parseInt(annoPubblicazione.getText()),new ISBN(isbn),Integer.parseInt(copieDisponibili.getText()),al);
+            Libro l = new Libro(t,Integer.parseInt(annoPubblicazione.getText()),new ISBN(isbn),Integer.parseInt(copieDisponibili.getText()),al);
             biblioteca.getLibri().aggiungi(l);
 
             LibriController libriController = (LibriController) parentController;
             libriController.addBooks();
             Stage stage = (Stage) titolo.getScene().getWindow();
             stage.close();
-        } catch(NumberFormatException e) {
-            showWarningAlert("Invalid Format", "Assicurare che i campi ISBN e copieDisponibili siano NUMERI.");
         } catch (LibroGiaPresenteException ex){
             showWarningAlert("Libro Gia Presente", "Un Libro con questo ISBN esiste già nell'archivio!");
         } catch(RuntimeException e) {
