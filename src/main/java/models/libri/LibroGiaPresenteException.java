@@ -5,11 +5,13 @@
  */
 package models.libri;
 
+import models.OggettoGiaPresenteException;
+
 /**
  *
  * @author erica
  */
-public class LibroGiaPresenteException extends OggettoGiaPresenteException{
+public class LibroGiaPresenteException extends OggettoGiaPresenteException {
 
     /**
      * Creates a new instance of <code>LibroGiaPresenteException</code> without
