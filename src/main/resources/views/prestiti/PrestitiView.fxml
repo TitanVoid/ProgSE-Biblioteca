@@ -11,9 +11,12 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" xmlns="http://javafx.com/javafx/8.0.441" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.prestiti.PrestitiController">
+<VBox xmlns="http://javafx.com/javafx/8.0.441"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.prestiti.PrestitiController">
     <children>
-        <HBox prefHeight="84.0" prefWidth="600.0">
+        <!-- Header section - fixed height -->
+        <HBox prefHeight="84.0">
             <children>
                 <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Prestiti" textAlignment="CENTER">
                     <items>
@@ -26,50 +29,50 @@
                 </MenuButton>
             </children>
         </HBox>
-        <AnchorPane prefHeight="316.0" prefWidth="600.0">
+
+        <!-- Content section - grows to fill available space -->
+        <AnchorPane VBox.vgrow="ALWAYS">
             <children>
-                <SplitPane prefHeight="324.0" prefWidth="600.0">
+                <SplitPane dividerPositions="0.8"
+                           AnchorPane.topAnchor="0.0"
+                           AnchorPane.bottomAnchor="0.0"
+                           AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0">
                     <items>
-                        <HBox prefHeight="100.0" prefWidth="200.0">
+                        <!-- Table area -->
+                        <AnchorPane minWidth="0.0">
                             <children>
-                                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="277.0" prefWidth="458.0">
-                                    <children>
-                                        <TableView prefHeight="322.0" prefWidth="458.0">
-                                            <columns>
-                                                <TableColumn prefWidth="91.2" text="Matricola" />
-                                                <TableColumn prefWidth="91.2" text="ISBN" />
-                                                <TableColumn prefWidth="91.2" text="Data Inizio" />
-                                                <TableColumn prefWidth="91.2" text="Data Scadenza" />
-                                                <TableColumn maxWidth="1.7976931348623157E308" prefWidth="91.2" text="Data Restituzionr" />
-                                            </columns>
-                                        </TableView>
-                                    </children>
-                                </AnchorPane>
-                                <AnchorPane prefHeight="316.0" prefWidth="111.0">
-                                    <children>
-                                        <VBox alignment="TOP_CENTER" prefHeight="322.0" prefWidth="138.0" AnchorPane.topAnchor="0.0">
-                                            <children>
-                                                <Button mnemonicParsing="false" onAction="#onAddBook" prefHeight="26.0" prefWidth="92.0" text="Inserisci">
-                                                    <VBox.margin>
-                                                        <Insets top="30.0" />
-                                                    </VBox.margin>
-                                                </Button>
-                                                <Button mnemonicParsing="false" onAction="#onModifyBook" prefHeight="26.0" prefWidth="92.0" text="Estendi">
-                                                    <VBox.margin>
-                                                        <Insets top="30.0" />
-                                                    </VBox.margin>
-                                                </Button>
-                                                <Button mnemonicParsing="false" onAction="#onDeleteBook" prefHeight="26.0" prefWidth="92.0" text="Restituzione">
-                                                    <VBox.margin>
-                                                        <Insets top="30.0" />
-                                                    </VBox.margin>
-                                                </Button>
-                                            </children>
-                                        </VBox>
-                                    </children>
-                                </AnchorPane>
+                                <TableView fx:id="tablePrestiti"
+                                           AnchorPane.topAnchor="0.0"
+                                           AnchorPane.bottomAnchor="0.0"
+                                           AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0">
+                                    <columns>
+                                        <TableColumn fx:id="matricolaClm" prefWidth="120.0" text="Matricola" />
+                                        <TableColumn fx:id="isbnClm" prefWidth="150.0" text="ISBN" />
+                                        <TableColumn fx:id="dataInizioClm" prefWidth="120.0" text="Data Inizio" />
+                                        <TableColumn fx:id="dataScadenzaClm" prefWidth="120.0" text="Data Scadenza" />
+                                        <TableColumn fx:id="dataRestituzioneClm" prefWidth="140.0" text="Data Restituzione" />
+                                    </columns>
+                                </TableView>
                             </children>
-                        </HBox>
+                        </AnchorPane>
+
+                        <!-- Button sidebar -->
+                        <AnchorPane minWidth="138.0" prefWidth="138.0" maxWidth="138.0">
+                            <children>
+                                <VBox alignment="TOP_CENTER" spacing="30.0"
+                                      AnchorPane.topAnchor="30.0"
+                                      AnchorPane.leftAnchor="10.0"
+                                      AnchorPane.rightAnchor="10.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#onRegisterLoan" text="Inserisci" maxWidth="Infinity" />
+                                        <Button mnemonicParsing="false" onAction="#onExtendLoan" text="Estendi" maxWidth="Infinity" />
+                                        <Button mnemonicParsing="false" onAction="#onReturnLoan" text="Restituzione" maxWidth="Infinity" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
                     </items>
                 </SplitPane>
             </children>

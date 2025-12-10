@@ -117,11 +117,11 @@ public class LibriController extends BaseController implements Initializable{
         if (loader != null) {
             Parent root = loader.load();
             BaseController controller = loader.getController();
-            controller.setBiblioteca(this.biblioteca);  // Pass the same instance!
+            controller.setBiblioteca(this.biblioteca);  // Pass the same instance
 
-            Scene scene = new Scene(root);
             Stage stage = (Stage) item.getParentPopup().getOwnerWindow();
-            stage.setScene(scene);
+            Scene scene = stage.getScene();
+            scene.setRoot(root);
         }
     }
 }
