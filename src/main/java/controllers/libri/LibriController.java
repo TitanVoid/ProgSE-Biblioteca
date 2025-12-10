@@ -1,5 +1,8 @@
 package controllers.libri;
 import controllers.BaseController;
+import javafx.beans.property.SimpleStringProperty;
+import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import models.libri.Libro;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -16,6 +19,7 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
+import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
 
@@ -35,24 +39,29 @@ public class LibriController extends BaseController implements Initializable{
     private TableColumn<Libro, String> idClm;
     @FXML
     private TableColumn<Libro, Integer> copiesClm;
+    @FXML
+    private TextField searchBar;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialization code
-        /*titleClm.setCellValueFactory(new PropertyValueFactory<>("Titolo"));
+        titleClm.setCellValueFactory(new PropertyValueFactory<>("titolo"));
         authorsClm.setCellValueFactory(cell -> {
             return new SimpleStringProperty(cell.getValue().getAutori().toString());
         });
-        publishYearClm.setCellValueFactory(new PropertyValueFactory<>("anno"));
+        publishYearClm.setCellValueFactory(new PropertyValueFactory<>("annoPubblicazione"));
         idClm.setCellValueFactory(cell -> {
-            return new SimpleStringProperty(cell.getValue().getCodiceISBNLibro();
+            return new SimpleStringProperty(cell.getValue().getCodiceISBNLibro().getCodiceISBN());
         });
-        copiesClm.setCellValueFactory(new PropertyValueFactory<>("copie"));
+        copiesClm.setCellValueFactory(new PropertyValueFactory<>("copieDisponibili"));
 
         tableLibri.setItems(libri);
+    }
+
+    public void addBooks(){
         libri.clear();
         List<Libro> listLibri = biblioteca.getLibri().getLibri();
-        libri.addAll(listLibri);*/
+        libri.addAll(listLibri);
     }
 
     private void showNewWindow(String viewName, String title) throws IOException {
@@ -81,7 +90,13 @@ public class LibriController extends BaseController implements Initializable{
 
     @FXML
     private void onSearchBook(){
-        System.out.println("Test");
+        String input = searchBar.getText();
+        if (input.isEmpty()) {
+            addBooks();
+            return;
+        }
+        List<Libro> listLibri = biblioteca.getLibri().ricercaLibri(input);
+        libri.setAll(listLibri);
     }
 
     @FXML
@@ -98,7 +113,6 @@ public class LibriController extends BaseController implements Initializable{
 
         if (loader != null) {
             Parent root = loader.load();
-            // Get the new controller and pass the Biblioteca instance
             BaseController controller = loader.getController();
             controller.setBiblioteca(this.biblioteca);  // Pass the same instance!
 
