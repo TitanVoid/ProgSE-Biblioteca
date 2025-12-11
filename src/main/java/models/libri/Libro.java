@@ -1,5 +1,6 @@
 package models.libri;
 
+import models.FormatoCampiErrato;
 import models.ISBN;
 import models.Persona;
 
@@ -194,7 +195,7 @@ public class Libro implements Comparable<Libro>, Serializable {
 
         String check = "11111";
         if(!msg.equals(check)){
-            throw new RuntimeException(msg);
+            throw new FormatoCampiErrato(msg);
         }else {
             return true;
         }

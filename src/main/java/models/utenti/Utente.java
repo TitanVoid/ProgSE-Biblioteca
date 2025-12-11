@@ -1,5 +1,6 @@
 package models.utenti;
 
+import models.FormatoCampiErrato;
 import models.Matricola;
 import models.Persona;
 import models.prestiti.Prestito;
@@ -132,7 +133,7 @@ public class Utente extends Persona implements Comparable<Utente> {
 
         String check= "1111";
         if(!msg.equals(check)){
-            throw new RuntimeException(msg);
+            throw new FormatoCampiErrato(msg);
         }
         return true;
 
