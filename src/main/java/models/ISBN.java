@@ -32,7 +32,7 @@ public class ISBN implements Serializable, Comparable<ISBN> {
      * @return true se il formato dell'ISBN è valido, false altrimenti.
      */
     public static boolean verificaISBN(String codiceISBN){
-        if (codiceISBN == null || codiceISBN.length() != 13 || !codiceISBN.matches("\\d{13}")) return false;
+        if (codiceISBN == null || !codiceISBN.matches("\\d{13}") || codiceISBN.length() != 13) return false;
         
         int sommaPonderata = 0;
         for (int i = 0; i < 12; i++){

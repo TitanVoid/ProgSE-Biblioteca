@@ -104,8 +104,6 @@ public class Utente extends Persona implements Comparable<Utente> {
      * @return true se il formato dei campi dell'utente è corretto, lancia eccezione altrimenti.
      */
     public static boolean verificaUtente(String nome, String cognome, String matricolaUtente, String email) {
-
-
         String msg= "";
         if(!Persona.verificaNome(nome)){
             msg = msg+ "0";
