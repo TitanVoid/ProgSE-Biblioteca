@@ -37,7 +37,7 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
      * @brief Restituisce la lista degli utenti.
      * @return Lista degli utenti.
      */
-    public List<Utente> getUtenti() {
+    public List<Utente> getListaUtenti() {
         return utenti;
     }
 

@@ -149,7 +149,7 @@ public class Libro implements Comparable<Libro>, Serializable{
      * @param[in] annoPubblicazione Anno di pubblicazione.
      * @param[in] isbn Codice ISBN.
      * @param[in] copieDisponibili Numero di copie disponibili.
-     * @return true se il formato dei dati è corretto, altrimenti lancia un'eccezione.
+     * @return true se il formato dei dati è corretto, lancia eccezione altrimenti.
      */
     public static boolean verificaLibro(String autori, String titolo, String annoPubblicazione, String codiceISBNLibro, String copieDisponibili) throws RuntimeException {
         String msg = "";

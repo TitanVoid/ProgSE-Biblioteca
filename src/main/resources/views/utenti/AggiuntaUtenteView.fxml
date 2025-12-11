@@ -10,27 +10,28 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="12" xmlns="http://javafx.com/javafx/25" xmlns:fx="http://javafx.com/fxml/1">
+
+<VBox alignment="CENTER" spacing="12" xmlns="http://javafx.com/javafx/8.0.441" fx:controller="controllers.utenti.AggiuntaUtenteController" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets bottom="24" left="28" right="28" top="24" />
     </padding>
 
     <children>
-        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Inserisci dati libro" />
+        <Label alignment="CENTER" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Inserisci i dati dell' Utente" textAlignment="CENTER" />
 
         <GridPane hgap="10" vgap="12">
             <children>
-                <Label text="Titolo:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <TextField fx:id="nomeField" promptText="Titolo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Nome:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="nome" promptText="Nome" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                <Label text="Autore/i:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <TextField fx:id="cognomeField" promptText="Autore/i" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="Cognome:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="cognome" promptText="Cognome" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                <Label text="ISBN:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="matricolaField" promptText="ISBN" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Matricola:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="matricola" promptText="Matricola" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                <Label text="Copie Disponibili:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
-                <TextField fx:id="emailField" promptText="Copie Disponibili" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Email:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="email" promptText="Email" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
             <columnConstraints>
                 <ColumnConstraints />

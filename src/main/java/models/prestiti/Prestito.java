@@ -122,8 +122,7 @@ public class Prestito implements Comparable<Prestito> {
     /**
      * @brief Verifica se la data di scadenza inserita è valida.
      * @param[in] dataScadenza Data di scadenza da verificare.
-     * @return true se la data di scadenza inserita è logicamente valida (ovvero
-     *         successiva alla data corrente), false altrimenti.
+     * @return true se la data di scadenza inserita è logicamente valida, lancia eccezione altrimenti.
      */
     public static boolean verificaDataScadenza(String dataScadenza) {
         LocalDate data = null;
