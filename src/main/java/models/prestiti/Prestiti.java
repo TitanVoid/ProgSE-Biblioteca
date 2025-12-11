@@ -32,7 +32,7 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
      * @brief Restituisce la lista dei prestiti.
      * @return Lista dei prestiti.
      */
-    public List<Prestito> getPrestiti() {
+    public List<Prestito> getListaPrestiti() {
         return prestiti;
     }
 

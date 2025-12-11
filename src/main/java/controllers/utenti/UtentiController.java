@@ -114,7 +114,7 @@ public class UtentiController extends BaseController implements Initializable {
             controller.setBiblioteca(this.biblioteca);  // Pass the same instance
             if (controller instanceof LibriController){
                 LibriController libriController = (LibriController) controller;
-                //libriController.addBooks();  /////<-------- Modificato
+                libriController.addBooks();
             } else if (controller instanceof PrestitiController) {
                 PrestitiController prestitiController = (PrestitiController) controller;
                 prestitiController.addLoans();
