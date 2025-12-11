@@ -2,6 +2,7 @@ package controllers.utenti;
 import controllers.BaseController;
 import controllers.libri.LibriController;
 import controllers.prestiti.PrestitiController;
+import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -14,7 +15,9 @@ import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
+import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
+import models.prestiti.Prestito;
 import models.utenti.Utente;
 
 import java.io.IOException;
@@ -36,6 +39,8 @@ public class UtentiController extends BaseController implements Initializable {
     @FXML
     private TableColumn<Utente, Integer> matricolaClm;
     @FXML
+    private TableColumn<Utente, String> emailClm;
+    @FXML
     private TableColumn<Utente, String> prestitiAttiviClm;
     @FXML
     private TextField searchBar;
@@ -46,6 +51,20 @@ public class UtentiController extends BaseController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialization code
+        nomeClm.setCellValueFactory(new PropertyValueFactory<>("nome"));
+        cognomeClm.setCellValueFactory(new PropertyValueFactory<>("cognome"));
+        matricolaClm.setCellValueFactory(new PropertyValueFactory<>("matricola"));
+        emailClm.setCellValueFactory(new PropertyValueFactory<>("email"));
+        prestitiAttiviClm.setCellValueFactory(cell -> {
+            StringBuilder prAt = new StringBuilder();
+            for (Prestito a : cell.getValue().getPrestitiAttivi()){
+                prAt.append(a.toString()).append(", ");
+            }
+            return new SimpleStringProperty(prAt.toString());
+        });
+
+
+        tableUtenti.setItems(utenti);
     }
 
     public void addUtente(){

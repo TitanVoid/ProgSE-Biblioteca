@@ -39,7 +39,7 @@ public class Matricola implements Serializable, Comparable<Matricola> {
      * @return true se il formato della matricola è valido, false altrimenti.
      */
     public static boolean verificaMatricola(String matricola){
-        if(matricola == null || !matricola.matches("\\d{10}") || matricola.length() != 10) return false;
+        if(matricola == null || !matricola.matches("\\d{10}") || matricola.length() != 10) return false; // ridondante il check lunghezza lo fa gia regex
         return true;
     }
 

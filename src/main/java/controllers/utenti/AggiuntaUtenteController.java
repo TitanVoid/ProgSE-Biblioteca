@@ -38,7 +38,7 @@ public class AggiuntaUtenteController extends BaseController implements Initiali
             String m = matricola.getText();
             String e = email.getText();
 
-            Utente.verificaUtente(n, c, e, m);
+            Utente.verificaUtente(n, c,m,e );
 
 
             Utente u = new Utente(n, c, new Matricola(m), e);
