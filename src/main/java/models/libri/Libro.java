@@ -1,6 +1,6 @@
 package models.libri;
 
-import models.FormatoCampiErrato;
+import models.FormatoCampiErratoException;
 import models.ISBN;
 import models.Persona;
 
@@ -15,7 +15,7 @@ import java.util.List;
  *@see Autore
  *@see ISBN
  */
-public class Libro implements Comparable<Libro>, Serializable {
+public class Libro implements Comparable<Libro>, Serializable{
 
     private String titolo;
     private final List<Autore> autori;
@@ -122,12 +122,12 @@ public class Libro implements Comparable<Libro>, Serializable {
         autori.remove(autore);
     }
 
+
     /**
      * @brief Converte una Stringa autori in una lista di oggetti Autore.
      * @param[in] autori Stringa autori
      * @return List<Autore>
      */
-
     private static List<Autore> StringAutoriToList(String autori){
         List<Autore> al = new ArrayList<Autore>();
         //spazio fra due o più autori
@@ -204,7 +204,7 @@ public class Libro implements Comparable<Libro>, Serializable {
 
         String check = "11111";
         if(!msg.equals(check)){
-            throw new FormatoCampiErrato(msg);
+            throw new FormatoCampiErratoException(msg);
         }else {
             return true;
         }
@@ -235,7 +235,7 @@ public class Libro implements Comparable<Libro>, Serializable {
     }
 
     /**
-     * @brief Confronta questo libro con un altro libro.
+     * @brief Confronta questo libro con un altro libro in base al titolo, a parità di titolo si confronta l'ISBN.
      * @param[in] l Libro da confrontare.
      * @return 0 se sono uguali, valore negativo se questo libro precede l, positivo altrimenti.
      */

@@ -1,24 +1,12 @@
 package controllers.libri;
 import controllers.BaseController;
 import javafx.fxml.FXML;
-import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import models.Biblioteca;
-import models.FormatoCampiErrato;
+import models.FormatoCampiErratoException;
 import models.ISBN;
-import models.libri.Autore;
-import models.libri.Libri;
 import models.libri.Libro;
 import models.libri.LibroGiaPresenteException;
-
-
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class AggiuntaLibroController extends BaseController {
 
@@ -54,7 +42,7 @@ public class AggiuntaLibroController extends BaseController {
             libriController.addBooks();
             Stage stage = (Stage) titolo.getScene().getWindow();
             stage.close();
-        } catch (FormatoCampiErrato ex){
+        } catch (FormatoCampiErratoException ex){
             String maschera = ex.getMessage();
             System.out.println(maschera);
             String[] campi = {"Titolo", "Autore/i", "ISBN", "Copie Disponibili", "Anno Pubblicazione"};
