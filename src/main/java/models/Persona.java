@@ -72,7 +72,7 @@ public abstract class Persona implements Serializable {
      *
      */
     public static boolean verificaNome(String nome){
-        if(nome == null || nome.matches("\\D{3,25}") || nome.length() > 25) return false;
+        if(nome == null || !nome.matches("\\D{3,25}") || nome.length() > 25) return false;
         return true;
     }
 
@@ -85,7 +85,7 @@ public abstract class Persona implements Serializable {
      *
      */
     public static boolean verificaCognome(String cognome){
-        if(cognome == null || cognome.matches("\\D{3,25}") || cognome.length() > 25) return false;
+        if(cognome == null || !cognome.matches("\\D{3,25}") || cognome.length() > 25) return false;
         return true;
     }
 
