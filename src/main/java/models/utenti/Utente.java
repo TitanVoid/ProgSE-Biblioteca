@@ -100,15 +100,42 @@ public class Utente extends Persona implements Comparable<Utente> {
      * @param[in] cognome Cognome dell'utente.
      * @param[in] matricolaUtente Matricola dell'utente.
      * @param[in] email Email dell'utente.
-     * @return true se il formato dei campi dell'utente è corretto, false
-     *         altrimenti.
+     * @return true se il formato dei campi dell'utente è corretto, lancia eccezione altrimenti.
      */
-    public static boolean verificaUtente(String nome, String cognome, Matricola matricolaUtente, String email) {
-        if (!Persona.verificaNome(nome) || !Persona.verificaCognome(cognome) || !Matricola.verificaMatricola(email)
-                || !Utente.verificaEmail(email)) {
-            return false;
+    public static boolean verificaUtente(String nome, String cognome, String matricolaUtente, String email) {
+
+
+        String msg= "";
+        if(!Persona.verificaNome(nome)){
+            msg = msg+ "0";
+        }else {
+            msg = msg+ "1";
+        }
+
+        if(!Persona.verificaCognome(cognome)){
+            msg = msg+ "0";
+        }else  {
+            msg = msg+ "1";
+        }
+
+        if(!Matricola.verificaMatricola(matricolaUtente)){
+            msg = msg+ "0";
+        }else{
+            msg = msg+ "1";
+        }
+
+        if(!Utente.verificaEmail(email)){
+            msg = msg+ "0";
+        }else  {
+            msg = msg+ "1";
+        }
+
+        String check= "1111";
+        if(!msg.equals(check)){
+            throw new RuntimeException(msg);
         }
         return true;
+
     }
 
     /**
