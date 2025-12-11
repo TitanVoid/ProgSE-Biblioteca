@@ -153,7 +153,7 @@ public class Libro implements Comparable<Libro>, Serializable {
      */
     public static boolean verificaLibro(String autori, String titolo, String annoPubblicazione, String codiceISBNLibro, String copieDisponibili) throws RuntimeException {
         String msg = "";
-        
+
         //controllo titolo
         if(titolo == null || titolo.length() > 100){
             msg = msg + '0';
@@ -186,6 +186,8 @@ public class Libro implements Comparable<Libro>, Serializable {
             } else {
                 msg = msg + '1';
             }
+        }else{
+            msg = msg + '0';
         }
 
         //controllo anno di pubblicazione
@@ -196,6 +198,8 @@ public class Libro implements Comparable<Libro>, Serializable {
             } else {
                 msg = msg + '1';
             }
+        }else{
+            msg = msg + '0';
         }
 
         String check = "11111";
