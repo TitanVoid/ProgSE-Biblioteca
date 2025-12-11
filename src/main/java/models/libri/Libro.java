@@ -153,27 +153,32 @@ public class Libro implements Comparable<Libro>, Serializable {
      */
     public static boolean verificaLibro(String autori, String titolo, String annoPubblicazione, String codiceISBNLibro, String copieDisponibili) throws RuntimeException {
         String msg = "";
+        
+        //controllo titolo
         if(titolo == null || titolo.length() > 100){
             msg = msg + '0';
         }else{
             msg = msg + '1';
         }
 
-        if(annoPubblicazione.matches("\\d{1,4}")) {
-            int anno = Integer.parseInt(annoPubblicazione);
-            if (anno < 0 || anno > LocalDate.now().getYear()) {
-                msg = msg + '0';
-            } else {
-                msg = msg + '1';
+        //controllo autori
+        List<Autore> al = StringAutoriToList(autori);
+        String correct = "1";
+        for(Autore a : al){
+            if(!Persona.verificaNome(a.getNome()) || !Persona.verificaCognome(a.getCognome())){
+                correct = "0";
             }
         }
-        
+        msg = msg + correct;
+
+        //controllo ISBN
         if(!ISBN.verificaISBN(codiceISBNLibro)){
             msg = msg + '0';
         }else{
             msg = msg + '1';
         }
 
+        //controllo copie disponibili
         if(copieDisponibili.matches("\\d{1,3}")) {
             int copie = Integer.parseInt(copieDisponibili);
             if (copie < 0 || copie > 100) {
@@ -183,15 +188,15 @@ public class Libro implements Comparable<Libro>, Serializable {
             }
         }
 
-        List<Autore> al = StringAutoriToList(autori);
-
-        String correct = "1";
-        for(Autore a : al){
-            if(!Persona.verificaNome(a.getNome()) || !Persona.verificaCognome(a.getCognome())){
-                correct = "0";
+        //controllo anno di pubblicazione
+        if(annoPubblicazione.matches("\\d{1,4}")) {
+            int anno = Integer.parseInt(annoPubblicazione);
+            if (anno < 0 || anno > LocalDate.now().getYear()) {
+                msg = msg + '0';
+            } else {
+                msg = msg + '1';
             }
         }
-        msg = msg + correct;
 
         String check = "11111";
         if(!msg.equals(check)){
