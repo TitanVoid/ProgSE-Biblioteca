@@ -104,7 +104,7 @@ public class Prestito implements Comparable<Prestito> {
     /**
      * @brief Converte una Stringa dataScadenza in un LocalDate.
      * @param[in] dataScadenza Stringa data di scadenza.
-     * @return data convertita
+     * @return data convertita.
      */
     private static LocalDate StringDataScadenzaToLocalDate(String dataScadenza){
         LocalDate data = null;
