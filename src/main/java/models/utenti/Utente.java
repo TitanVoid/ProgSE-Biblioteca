@@ -91,7 +91,7 @@ public class Utente extends Persona implements Comparable<Utente> {
      * @return true se il formato dell'email è corretto, false altrimenti.
      */
     public static boolean verificaEmail(String email) {
-        return email.matches("^\\w+@studenti\\.unisa\\.it$");
+        return email.matches("^[a-zA-Z]{1,}\\.[a-zA-Z0-9]{1,}@studenti\\.unisa\\.it$");
     }
 
     /**

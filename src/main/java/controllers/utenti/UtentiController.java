@@ -37,7 +37,7 @@ public class UtentiController extends BaseController implements Initializable {
     @FXML
     private TableColumn<Utente, String> cognomeClm;
     @FXML
-    private TableColumn<Utente, Integer> matricolaClm;
+    private TableColumn<Utente, String> matricolaClm;
     @FXML
     private TableColumn<Utente, String> emailClm;
     @FXML
@@ -53,7 +53,10 @@ public class UtentiController extends BaseController implements Initializable {
         // Initialization code
         nomeClm.setCellValueFactory(new PropertyValueFactory<>("nome"));
         cognomeClm.setCellValueFactory(new PropertyValueFactory<>("cognome"));
-        matricolaClm.setCellValueFactory(new PropertyValueFactory<>("matricola"));
+        matricolaClm.setCellValueFactory(cell -> {
+            String matricolaFinale = cell.getValue().getMatricolaUtente().getMatricola();
+            return new SimpleStringProperty(matricolaFinale);
+        });
         emailClm.setCellValueFactory(new PropertyValueFactory<>("email"));
         prestitiAttiviClm.setCellValueFactory(cell -> {
             StringBuilder prAt = new StringBuilder();
