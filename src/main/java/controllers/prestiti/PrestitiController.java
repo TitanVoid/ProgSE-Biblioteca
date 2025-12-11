@@ -63,7 +63,7 @@ public class PrestitiController extends BaseController implements Initializable 
     }
 
     public void addLoans(){
-        List<Prestito> listPrestiti = biblioteca.getPrestiti().getPrestiti();
+        List<Prestito> listPrestiti = biblioteca.getPrestiti().getListaPrestiti();
         prestiti.setAll(listPrestiti);
     }
 
