@@ -68,7 +68,7 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
     @Override
     public void aggiungi(Utente utente) throws UtenteGiaPresenteException {
         if (esisteChiave(utente.getMatricolaUtente())) {
-            throw new UtenteGiaPresenteException("L'utente è già presente nell'archivio.");
+            throw new UtenteGiaPresenteException("L'utente è già presente nella lista.");
         } else {
             chiaviMatricole.put(utente.getMatricolaUtente(), utente);
             int index = Collections.binarySearch(utenti, utente);

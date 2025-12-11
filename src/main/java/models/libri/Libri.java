@@ -53,13 +53,13 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
         for(Libro l : libri){
             String titoloLowerCase = l.getTitolo().toLowerCase();
             String codiceISBNLibroLowerCase = l.getCodiceISBNLibro().getCodiceISBN().toLowerCase();
-            if(titoloLowerCase.contains(input) || codiceISBNLibroLowerCase.matches(input)){
+            if(titoloLowerCase.contains(inputLowerCase) || codiceISBNLibroLowerCase.matches(inputLowerCase)){
                 lis.add(l);
             }else{
                 for(Autore a : l.getAutori()){
                     String nomeLowerCase = a.getNome().toLowerCase();
                     String cognomeLowerCase =  a.getCognome().toLowerCase();
-                    if(nomeLowerCase.matches(input) || cognomeLowerCase.matches(input)){
+                    if(nomeLowerCase.matches(inputLowerCase) || cognomeLowerCase.matches(inputLowerCase)){
                         lis.add(l);
                     }
                 }
@@ -96,11 +96,10 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
         libri.remove(originale);
         try {
             this.aggiungi(modificato);
-        } catch (LibroGiaPresenteException e) {
+        } catch (LibroGiaPresenteException e){
             throw new RuntimeException(e);
         }
     }
-
 
     /**
      * @brief Rimuove un libro dalla collezione.
@@ -108,9 +107,8 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      */
     @Override
     public void rimuovi(Libro libro){
-        ISBN i = libro.getCodiceISBNLibro();
         libri.remove(libro);
-        chiaviISBN.remove(i);
+        chiaviISBN.remove(libro.getCodiceISBNLibro());
     }
 
     /**
@@ -130,8 +128,7 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      */
     @Override
     public Libro ottieni(ISBN chiave) {
-        if(esisteChiave(chiave)) return chiaviISBN.get(chiave);
-        return null;
+        return chiaviISBN.get(chiave);
     }
     
     

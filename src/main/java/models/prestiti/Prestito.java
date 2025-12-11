@@ -1,9 +1,13 @@
 package models.prestiti;
 
+import models.FormatoCampiErratoException;
 import models.ISBN;
 import models.Matricola;
+import models.libri.Autore;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * @class Prestito
@@ -98,15 +102,49 @@ public class Prestito implements Comparable<Prestito> {
     }
 
     /**
+     * @brief Converte una Stringa dataScadenza in un LocalDate.
+     * @param[in] dataScadenza Stringa data di scadenza.
+     * @return data convertita
+     */
+    private static LocalDate StringDataScadenzaToLocalDate(String dataScadenza){
+        LocalDate data = null;
+        //spazio fra nome autore e cognome autore
+        String[] y = dataScadenza.split("-");
+        int anno = Integer.parseInt(y[0]);
+        int mese = Integer.parseInt(y[1]);
+        int giorno = Integer.parseInt(y[2]);
+        //DOVREBBE LANCIARE UNA DATETIMEEXCEPTION SE MESE GIORNO E ANNO SONO FUORI DAL RANGE CONSENTITO
+        data = LocalDate.of(anno, mese, giorno);
+        return data;
+    }
+
+
+    /**
      * @brief Verifica se la data di scadenza inserita è valida.
      * @param[in] dataScadenza Data di scadenza da verificare.
      * @return true se la data di scadenza inserita è logicamente valida (ovvero
      *         successiva alla data corrente), false altrimenti.
      */
-    public static boolean verificaDataScadenza(LocalDate dataScadenza) {
-        LocalDate today = LocalDate.now();
-        return dataScadenza.isAfter(today);
+    public static boolean verificaDataScadenza(String dataScadenza) {
+        LocalDate data = null;
+        String msg = "";
+        if(!dataScadenza.matches("^\\d{4}-\\d{2}-\\d{2}$")){
+            msg = msg + '0';
+        }else{
+            data = StringDataScadenzaToLocalDate(dataScadenza);
+            LocalDate today = LocalDate.now();
+            if(data.isAfter(today)){
+                msg = msg + '1';
+            }
+        }
+        if(!msg.equals('1')){
+            throw new FormatoCampiErratoException(msg);
+        }else{
+            return true;
+        }
+
     }
+
 
     /**
      * @brief Confronta due prestiti in base alla loro data di scadenza.

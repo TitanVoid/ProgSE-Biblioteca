@@ -134,7 +134,6 @@ public class Utente extends Persona implements Comparable<Utente> {
             throw new FormatoCampiErratoException(msg);
         }
         return true;
-
     }
 
     /**
