@@ -1,15 +1,20 @@
 package controllers.utenti;
 import controllers.BaseController;
+import controllers.libri.LibriController;
+import controllers.prestiti.PrestitiController;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.TableColumn;
+import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import models.libri.Libro;
 import models.utenti.Utente;
 
 import java.io.IOException;
@@ -23,13 +28,15 @@ public class UtentiController extends BaseController implements Initializable {
     private final ObservableList<Utente> utenti = FXCollections.observableArrayList();
 
     @FXML
-
+    private TableView<Utente> tableUtenti;
     @FXML
-
+    private TableColumn<Utente, String> nomeClm;
     @FXML
-
+    private TableColumn<Utente, String> cognomeClm;
     @FXML
-
+    private TableColumn<Utente, Integer> matricolaClm;
+    @FXML
+    private TableColumn<Utente, String> prestitiAttiviClm;
     @FXML
     private TextField searchBar;
 
@@ -85,12 +92,38 @@ public class UtentiController extends BaseController implements Initializable {
             addUtente();
             return;
         }
-        List<Utente> listUtenti = biblioteca.getUtenti().getListaUtenti(input);
+        List<Utente> listUtenti = biblioteca.getUtenti().ricercaUtenti(input);
         utenti.setAll(listUtenti);
     }
 
     @FXML
-    private void onChangeViewMode(){
-        
+    private void onChangeViewMode(ActionEvent event){
+        MenuItem item = (MenuItem) event.getSource();
+        String mode = (String) item.getUserData();
+
+        FXMLLoader loader = null;
+        if (mode.equals("LIBRI")) {
+            loader = new FXMLLoader(getClass().getResource("/views/libri/LibriView.fxml"));
+        } else if (mode.equals("PRESTITI")) {
+            loader = new FXMLLoader(getClass().getResource("/views/prestiti/PrestitiView.fxml"));
+        }
+
+        try{
+            Parent root = loader.load();
+            BaseController controller = loader.getController();
+            controller.setBiblioteca(this.biblioteca);  // Pass the same instance
+            if (controller instanceof LibriController){
+                LibriController libriController = (LibriController) controller;
+                //libriController.addBooks();  /////<-------- Modificato
+            } else if (controller instanceof PrestitiController) {
+                PrestitiController prestitiController = (PrestitiController) controller;
+                prestitiController.addLoans();
+            }
+            Stage stage = (Stage) item.getParentPopup().getOwnerWindow();
+            Scene scene = stage.getScene();
+            scene.setRoot(root);
+        } catch (NullPointerException | IOException ex) {
+            showErrorAlert("Error", "Could Not Find " + mode + " FXML");
+        }
     }
 }
