@@ -93,7 +93,7 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      */
     @Override
     public void modifica(Libro originale, Libro modificato){
-        libri.remove(originale);
+        rimuovi(originale);
         try {
             this.aggiungi(modificato);
         } catch (LibroGiaPresenteException e){
@@ -107,8 +107,9 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
      */
     @Override
     public void rimuovi(Libro libro){
-        libri.remove(libro);
         chiaviISBN.remove(libro.getCodiceISBNLibro());
+        int index = Collections.binarySearch(libri, libro);
+        libri.remove(index);
     }
 
     /**
