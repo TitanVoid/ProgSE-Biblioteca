@@ -42,7 +42,7 @@ public class ModificaUtenteController extends BaseController {
             String matricolaText = matricola.getText();
             String emailUtente = email.getText();
 
-            Utente.verificaUtente(nomeUtente, cognomeUtente, utentiController.getSelectedUser().getMatricolaUtente().getMatricola() , emailUtente);
+            Utente.verificaUtente(nomeUtente, cognomeUtente, utenteDaModificare.getMatricolaUtente().getMatricola() , emailUtente);
             Utente utenteModificato = new Utente(nomeUtente, cognomeUtente, new Matricola(matricolaText), emailUtente);
 
             biblioteca.getUtenti().modifica(utenteDaModificare, utenteModificato);
