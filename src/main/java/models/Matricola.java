@@ -58,6 +58,11 @@ public class Matricola implements Serializable, Comparable<Matricola> {
         return this.matricola.equals(m.getMatricola());
     }
 
+    @Override
+    public int hashCode(){
+        return matricola != null ? matricola.hashCode() : 0;
+    }
+
     /**
      * @brief Confronta questa matricola con un altra matricola in base alla matricola.
      * @param matricola matricola da confrontare.
