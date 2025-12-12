@@ -22,13 +22,12 @@ import javafx.stage.Stage;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class LibriController extends BaseController implements Initializable{
 
     private final ObservableList<Libro> libri = FXCollections.observableArrayList();
+    private final Map<String, Stage> windows = new HashMap<>();
 
     @FXML
     private TableView<Libro> tableLibri;
@@ -57,9 +56,7 @@ public class LibriController extends BaseController implements Initializable{
             return new SimpleStringProperty(authors.toString());
         });
         publishYearClm.setCellValueFactory(new PropertyValueFactory<>("annoPubblicazione"));
-        idClm.setCellValueFactory(cell -> {
-            return new SimpleStringProperty(cell.getValue().getCodiceISBNLibro().getCodiceISBN());
-        });
+        idClm.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCodiceISBNLibro().getCodiceISBN()));
         copiesClm.setCellValueFactory(new PropertyValueFactory<>("copieDisponibili"));
 
         tableLibri.setItems(libri);
@@ -71,6 +68,11 @@ public class LibriController extends BaseController implements Initializable{
     }
 
     private void showNewWindow(String viewName, String title) {
+        if (windows.containsKey(viewName)) {
+            Stage stage = windows.get(viewName);
+            stage.toFront();
+            return;
+        }
         try{
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(viewName)));
@@ -81,6 +83,7 @@ public class LibriController extends BaseController implements Initializable{
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle(title);
+            windows.put(viewName, stage);
             stage.showAndWait();
         } catch (IOException | NullPointerException ex) {
             showErrorAlert("Error", "Could Not Find FXML at " + viewName);

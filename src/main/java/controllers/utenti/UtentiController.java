@@ -21,13 +21,12 @@ import javafx.beans.binding.Bindings;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
-import java.util.Objects;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class UtentiController extends BaseController implements Initializable {
 
     private final ObservableList<Utente> utenti = FXCollections.observableArrayList();
+    private final Map<String, Stage> windows = new HashMap<>();
 
     @FXML
     private TableView<Utente> tableUtenti;
@@ -76,6 +75,11 @@ public class UtentiController extends BaseController implements Initializable {
     }
 
     private void showNewWindow(String viewName, String title) {
+        if (windows.containsKey(viewName)) {
+            Stage stage = windows.get(viewName);
+            stage.toFront();
+            return;
+        }
         try{
             Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(viewName)));
@@ -86,6 +90,7 @@ public class UtentiController extends BaseController implements Initializable {
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle(title);
+            windows.put(viewName, stage);
             stage.showAndWait();
         } catch (IOException | NullPointerException ex) {
             showErrorAlert("Error", "Could Not Find FXML at " + viewName);
