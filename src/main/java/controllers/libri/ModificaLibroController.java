@@ -27,7 +27,7 @@ public class ModificaLibroController extends BaseController {
     public void loadBook(Libro libro) {
 
         titolo.setText(libro.getTitolo());
-        autori.setText(libro.getAutori().toString());
+        autori.setText(String.valueOf(libro.getAutori()));
         codiceISBN.setText(libro.getCodiceISBNLibro().getCodiceISBN());
         annoPubblicazione.setText(String.valueOf(libro.getAnnoPubblicazione()));
         copieDisponibili.setText(String.valueOf(libro.getCopieDisponibili()));

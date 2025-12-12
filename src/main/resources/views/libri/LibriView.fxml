@@ -74,7 +74,7 @@
                                     <children>
                                         <Button mnemonicParsing="false" onAction="#onAddBook" text="Aggiungi" maxWidth="Infinity" />
                                         <Button mnemonicParsing="false" fx:id="modificaButton" onAction="#onModifyBook" text="Modifica" maxWidth="Infinity" />
-                                        <Button mnemonicParsing="false" fx:id="rimuoviButton" onAction="#onDeleteBook" text="Elimina" maxWidth="Infinity" />
+                                        <Button mnemonicParsing="false" fx:id="eliminaButton" onAction="#onDeleteBook" text="Elimina" maxWidth="Infinity" />
                                     </children>
                                 </VBox>
                             </children>
