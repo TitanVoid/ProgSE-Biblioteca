@@ -44,12 +44,15 @@ public class UtentiController extends BaseController implements Initializable {
     private TextField searchBar;
     @FXML
     private Button modificaButton;
+    @FXML
+    private Button eliminaButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialization code
         SelectionModel<Utente> selectionModel= tableUtenti.getSelectionModel();
         modificaButton.disableProperty().bind(Bindings.isNull(selectionModel.selectedItemProperty()));
+        eliminaButton.disableProperty().bind(Bindings.isNull(selectionModel.selectedItemProperty()));
 
         nomeClm.setCellValueFactory(new PropertyValueFactory<>("nome"));
         cognomeClm.setCellValueFactory(new PropertyValueFactory<>("cognome"));

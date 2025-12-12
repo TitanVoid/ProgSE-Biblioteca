@@ -44,12 +44,15 @@ public class LibriController extends BaseController implements Initializable{
     private TextField searchBar;
     @FXML
     private Button modificaButton;
+    @FXML
+    private Button eliminaButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialization code
         SelectionModel<Libro> selectionModel= tableLibri.getSelectionModel();
         modificaButton.disableProperty().bind(Bindings.isNull(selectionModel.selectedItemProperty()));
+        eliminaButton.disableProperty().bind(Bindings.isNull(selectionModel.selectedItemProperty()));
 
         titleClm.setCellValueFactory(new PropertyValueFactory<>("titolo"));
         authorsClm.setCellValueFactory(cell -> {
