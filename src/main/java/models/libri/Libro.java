@@ -110,7 +110,7 @@ public class Libro implements Comparable<Libro>, Serializable{
      * @brief Aggiunge un autore alla lista degli autori.
      * @param[in] autore Autore da aggiungere.
      */
-    public void aggiungAutore(Autore autore) {
+    public void aggiungiAutore(Autore autore) {
         autori.add(autore);
     }
 

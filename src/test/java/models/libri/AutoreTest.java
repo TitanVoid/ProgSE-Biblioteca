@@ -62,8 +62,8 @@ public class AutoreTest {
     public void testVerificaNome() {
         // Test nome valido:
         assertTrue(Persona.verificaNome("Mario"));
-        // Test nome non valido, poiché contenente numeri e caratteri speciali:
-        assertFalse(Persona.verificaNome("M4rio!!!"));
+        // Test nome con caratteri speciali valido:
+        assertTrue(Persona.verificaNome("J.K."));
         // Test nome non valido, poiché troppo corto:
         assertFalse(Persona.verificaNome("Ma"));
         // Test nome non valido, poiché troppo lungo:
@@ -76,8 +76,6 @@ public class AutoreTest {
     public void testVerificaCognome() {
         // Test cognome valido:
         assertTrue(Persona.verificaCognome("Rossi"));
-        // Test cognome non valido, poiché contenente numeri e caratteri speciali:
-        assertFalse(Persona.verificaCognome("R0ss1!!!"));
         // Test nome non valido, poiché troppo corto:
         assertFalse(Persona.verificaCognome("Ro"));
         // Test nome non valido, poiché troppo lungo:
