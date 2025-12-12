@@ -107,7 +107,7 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
     }
 
     /**
-     * @brief Verifica se esiste l'utente che corrisponde ad una determinata
+     * @brief Verifica se esiste l'utente che corrisponde a una determinata
      *        matricola.
      * @param[in] chiave Matricola del utente.
      * @return true se esiste, false altrimenti.

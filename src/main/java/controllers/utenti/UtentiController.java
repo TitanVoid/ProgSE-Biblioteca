@@ -3,6 +3,7 @@ import controllers.BaseController;
 import controllers.libri.LibriController;
 import controllers.prestiti.PrestitiController;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -11,15 +12,16 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.stage.Stage;
 import models.prestiti.Prestito;
 import models.utenti.Utente;
+import javafx.beans.binding.Bindings;
+import models.utenti.Utenti;
 
+
+import javax.xml.ws.Binding;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -44,6 +46,8 @@ public class UtentiController extends BaseController implements Initializable {
     private TableColumn<Utente, String> prestitiAttiviClm;
     @FXML
     private TextField searchBar;
+    @FXML
+    private Button modificaButton;
 
 
 
@@ -51,6 +55,11 @@ public class UtentiController extends BaseController implements Initializable {
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialization code
+        SelectionModel<Utente> selectionModel= tableUtenti.getSelectionModel();
+        modificaButton.disableProperty().bind(Bindings.isNull(selectionModel.selectedItemProperty()));
+
+
+
         nomeClm.setCellValueFactory(new PropertyValueFactory<>("nome"));
         cognomeClm.setCellValueFactory(new PropertyValueFactory<>("cognome"));
         matricolaClm.setCellValueFactory(cell -> {
@@ -92,6 +101,10 @@ public class UtentiController extends BaseController implements Initializable {
         }
     }
 
+    public Utente getSelectedUtente(){
+        return tableUtenti.getSelectionModel().getSelectedItem();
+    }
+
     @FXML
     private void onAddUser(){
         showNewWindow("/views/utenti/AggiuntaUtenteView.fxml", "Aggiunta Utente");
@@ -99,7 +112,7 @@ public class UtentiController extends BaseController implements Initializable {
 
     @FXML
     private void onModifyUser(){
-        showNewWindow("/views/utenti/ModificaUtentiView.fxml", "Modifica Utente");
+        showNewWindow("/views/utenti/ModificaUtenteView.fxml", "Modifica Utente");
     }
 
     @FXML
