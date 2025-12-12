@@ -1,5 +1,4 @@
 package controllers.utenti;
-import controllers.libri.LibriController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
@@ -45,7 +44,7 @@ public class AggiuntaUtenteController extends BaseController implements Initiali
             biblioteca.getUtenti().aggiungi(u);
 
             UtentiController utentiController = (UtentiController) parentController;
-            utentiController.addUtente();
+            utentiController.refreshUsers();
 
             Stage stage = (Stage) nome.getScene().getWindow(); //???
             stage.close();

@@ -3,7 +3,6 @@ import controllers.BaseController;
 import controllers.libri.LibriController;
 import controllers.prestiti.PrestitiController;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,10 +17,8 @@ import javafx.stage.Stage;
 import models.prestiti.Prestito;
 import models.utenti.Utente;
 import javafx.beans.binding.Bindings;
-import models.utenti.Utenti;
 
 
-import javax.xml.ws.Binding;
 import java.io.IOException;
 import java.net.URL;
 import java.util.List;
@@ -79,7 +76,7 @@ public class UtentiController extends BaseController implements Initializable {
         tableUtenti.setItems(utenti);
     }
 
-    public void addUtente(){
+    public void refreshUsers(){
         List<Utente> listUtenti = biblioteca.getUtenti().getListaUtenti();
         utenti.setAll(listUtenti);
     }
@@ -124,7 +121,7 @@ public class UtentiController extends BaseController implements Initializable {
     private void onSearchUser(){
         String input = searchBar.getText();
         if (input.isEmpty()) {
-            addUtente();
+            refreshUsers();
             return;
         }
         List<Utente> listUtenti = biblioteca.getUtenti().ricercaUtenti(input);
@@ -149,10 +146,10 @@ public class UtentiController extends BaseController implements Initializable {
             controller.setBiblioteca(this.biblioteca);  // Pass the same instance
             if (controller instanceof LibriController){
                 LibriController libriController = (LibriController) controller;
-                libriController.addBooks();
+                libriController.refreshBooks();
             } else if (controller instanceof PrestitiController) {
                 PrestitiController prestitiController = (PrestitiController) controller;
-                prestitiController.addLoans();
+                prestitiController.refreshLoans();
             }
             Stage stage = (Stage) item.getParentPopup().getOwnerWindow();
             Scene scene = stage.getScene();

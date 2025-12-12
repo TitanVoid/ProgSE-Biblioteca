@@ -2,12 +2,10 @@ package controllers.utenti;
 import controllers.BaseController;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.FormatoCampiErratoException;
 import models.utenti.Utente;
-import models.utenti.UtenteGiaPresenteException;
 
 import java.net.URL;
 import java.util.ResourceBundle;
@@ -53,7 +51,7 @@ public class ModificaUtenteController extends BaseController implements Initiali
 
 
             biblioteca.getUtenti().modifica(utentiController.getSelectedUtente(), utenteModificato);
-            utentiController.addUtente();
+            utentiController.refreshUsers();
 
             Stage stage = (Stage) nome.getScene().getWindow();
             stage.close();

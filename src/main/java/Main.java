@@ -20,7 +20,7 @@ public class Main extends Application {
         // Pass instance of biblioteca to controllers
         LibriController controller = loader.getController();
         controller.setBiblioteca(biblioteca);
-        controller.addBooks();
+        controller.refreshBooks();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);

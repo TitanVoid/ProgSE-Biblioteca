@@ -22,7 +22,6 @@ import java.io.IOException;
 import java.net.URL;
 import java.util.List;
 import java.util.Objects;
-import java.util.Observable;
 import java.util.ResourceBundle;
 
 public class PrestitiController extends BaseController implements Initializable {
@@ -62,7 +61,7 @@ public class PrestitiController extends BaseController implements Initializable 
         });
     }
 
-    public void addLoans(){
+    public void refreshLoans(){
         List<Prestito> listPrestiti = biblioteca.getPrestiti().getListaPrestiti();
         prestiti.setAll(listPrestiti);
     }
@@ -126,10 +125,10 @@ public class PrestitiController extends BaseController implements Initializable 
             controller.setBiblioteca(this.biblioteca);  // Pass the same instance
             if (controller instanceof UtentiController){
                 UtentiController utentiController = (UtentiController) controller;
-                //utentiController.addUsers()
+                utentiController.refreshUsers();
             } else if (controller instanceof LibriController){
                 LibriController libriController = (LibriController) controller;
-                libriController.addBooks();
+                libriController.refreshBooks();
             }
             Stage stage = (Stage) item.getParentPopup().getOwnerWindow();
             Scene scene = stage.getScene();

@@ -39,7 +39,7 @@ public class AggiuntaLibroController extends BaseController {
             biblioteca.getLibri().aggiungi(l);
 
             LibriController libriController = (LibriController) parentController;
-            libriController.addBooks();
+            libriController.refreshBooks();
             Stage stage = (Stage) titolo.getScene().getWindow();
             stage.close();
         } catch (FormatoCampiErratoException ex){

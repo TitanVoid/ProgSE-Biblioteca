@@ -25,8 +25,6 @@ import java.net.URL;
 import java.util.List;
 import java.util.Objects;
 import java.util.ResourceBundle;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 public class LibriController extends BaseController implements Initializable{
 
@@ -67,7 +65,7 @@ public class LibriController extends BaseController implements Initializable{
         tableLibri.setItems(libri);
     }
 
-    public void addBooks(){
+    public void refreshBooks(){
         List<Libro> listLibri = biblioteca.getLibri().getListaLibri();
         libri.setAll(listLibri);
     }
@@ -108,7 +106,7 @@ public class LibriController extends BaseController implements Initializable{
     private void onSearchBook(){
         String input = searchBar.getText();
         if (input.isEmpty()) {
-            addBooks();
+            refreshBooks();
             return;
         }
         List<Libro> listLibri = biblioteca.getLibri().ricercaLibri(input);
@@ -133,10 +131,10 @@ public class LibriController extends BaseController implements Initializable{
             controller.setBiblioteca(this.biblioteca);  // Pass the same instance
             if(controller instanceof UtentiController){
                 UtentiController utentiController = (UtentiController) controller;
-                utentiController.addUtente();
+                utentiController.refreshUsers();
             } else if (controller instanceof PrestitiController) {
                 PrestitiController prestitiController = (PrestitiController) controller;
-                prestitiController.addLoans();
+                prestitiController.refreshLoans();
             }
             Stage stage = (Stage) item.getParentPopup().getOwnerWindow();
             Scene scene = stage.getScene();
