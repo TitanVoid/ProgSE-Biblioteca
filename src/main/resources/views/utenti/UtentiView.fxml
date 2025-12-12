@@ -28,7 +28,7 @@
                         <Insets left="40.0" top="30.0" />
                     </HBox.margin>
                 </MenuButton>
-                <TextField fx:id="searchBar" alignment="CENTER" onKeyTyped="#onSearchUser" prefHeight="26.0" prefWidth="340.0">
+                <TextField fx:id="searchBar" onKeyReleased="#onSearchUser" prefHeight="26.0" prefWidth="340.0">
                     <HBox.margin>
                         <Insets left="20.0" top="30.0" />
                     </HBox.margin>
