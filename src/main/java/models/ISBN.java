@@ -134,6 +134,16 @@ public class ISBN implements Serializable, Comparable<ISBN> {
         return sommaPonderata % 11 == 0;
     }
 
+    /**
+     * @brief Verifica dell'uguaglianza tra un oggetto e l'istanza corrente.
+     *        Aderisce al contratto del metodo equals() di Object.
+     * 
+     *        Due ISBN si dicono uguali se le stringhe ad essi associate sono
+     *        uguali.
+     * 
+     * @param[in] o Oggetto da confrontare con l'istanza corrente.
+     * @return true se i due ISBN sono uguali, false altrimenti.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null)
@@ -147,11 +157,29 @@ public class ISBN implements Serializable, Comparable<ISBN> {
         return this.codiceISBN.equals(i.codiceISBN);
     }
 
+    /**
+     * @brief Hashcode per l'oggetto ISBN.
+     *        Aderisce al contratto del metodo hashCode() di Object.
+     * 
+     * @return L'hashcode associato all'oggetto ISBN.
+     */
     @Override
     public int hashCode() {
-        return codiceISBN != null ? codiceISBN.hashCode() : 0;
+        return codiceISBN == null ? 0 : codiceISBN.hashCode() * 31;
     }
 
+    /**
+     * @brief Confronto dell'ISBN corrente con un altro ISBN. Aderisce al contratto
+     *        del metodo compareTo() di Comparable<T>.
+     * 
+     *        Gli ISBN vengono confrontati in base all'ordine
+     *        lessicografico della stringa di caratteri ad essi associata.
+     * 
+     * @param[in] i ISBN da confrontare con l'istanza corrente.
+     * @return Valore negativo, zero o positivo se l'ISBN corrente è
+     *         rispettivamente minore, uguale o maggiore dell'ISBN passato come
+     *         parametro.
+     */
     @Override
     public int compareTo(ISBN i) {
         return this.codiceISBN.compareTo(i.codiceISBN);
