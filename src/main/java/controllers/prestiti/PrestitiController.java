@@ -11,6 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -39,9 +40,17 @@ public class PrestitiController extends BaseController implements Initializable 
     private TableColumn<Prestito, String> dataScadenzaClm;
     @FXML
     private TableColumn<Prestito, String> dataRestituzioneClm;
+    @FXML
+    private Button estendiButton;
+    @FXML
+    private Button restituzioneButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
+
+        estendiButton.disableProperty().bind(tablePrestiti.getSelectionModel().selectedItemProperty().isNull());
+        restituzioneButton.disableProperty().bind(tablePrestiti.getSelectionModel().selectedItemProperty().isNull());
+
         // Initialization code
         matricolaClm.setCellValueFactory(cell -> {
             return new SimpleStringProperty(cell.getValue().getMatricolaUtente().getMatricola());

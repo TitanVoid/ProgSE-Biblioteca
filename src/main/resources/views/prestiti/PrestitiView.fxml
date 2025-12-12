@@ -30,7 +30,6 @@
             </children>
         </HBox>
 
-        <!-- Content section - grows to fill available space -->
         <AnchorPane VBox.vgrow="ALWAYS">
             <children>
                 <SplitPane dividerPositions="0.8"
@@ -39,7 +38,6 @@
                            AnchorPane.leftAnchor="0.0"
                            AnchorPane.rightAnchor="0.0">
                     <items>
-                        <!-- Table area -->
                         <AnchorPane minWidth="0.0">
                             <children>
                                 <TableView fx:id="tablePrestiti"
@@ -58,7 +56,6 @@
                             </children>
                         </AnchorPane>
 
-                        <!-- Button sidebar -->
                         <AnchorPane minWidth="138.0" prefWidth="138.0" maxWidth="138.0">
                             <children>
                                 <VBox alignment="TOP_CENTER" spacing="30.0"
@@ -66,9 +63,9 @@
                                       AnchorPane.leftAnchor="10.0"
                                       AnchorPane.rightAnchor="10.0">
                                     <children>
-                                        <Button mnemonicParsing="false" onAction="#onRegisterLoan" text="Inserisci" maxWidth="Infinity" />
-                                        <Button mnemonicParsing="false" onAction="#onExtendLoan" text="Estendi" maxWidth="Infinity" />
-                                        <Button mnemonicParsing="false" onAction="#onReturnLoan" text="Restituzione" maxWidth="Infinity" />
+                                        <Button fx:id="inserisciButton" mnemonicParsing="false" onAction="#onRegisterLoan" text="Inserisci" maxWidth="Infinity" />
+                                        <Button fx:id="estendiButton" mnemonicParsing="false" onAction="#onExtendLoan" text="Estendi" maxWidth="Infinity" />
+                                        <Button fx:id="restituzioneButton" mnemonicParsing="false" onAction="#onReturnLoan" text="Restituzione" maxWidth="Infinity" />
                                     </children>
                                 </VBox>
                             </children>
