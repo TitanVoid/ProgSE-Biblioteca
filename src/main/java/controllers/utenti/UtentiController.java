@@ -123,7 +123,7 @@ public class UtentiController extends BaseController implements Initializable {
 
     @FXML
     private void onSearchUser(){
-        String input = searchBar.getText();
+        String input = searchBar.getText().trim();
         if (input.isEmpty()) {
             refreshUsers();
             return;

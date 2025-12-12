@@ -5,6 +5,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import models.FormatoCampiErratoException;
+import models.Matricola;
 import models.utenti.Utente;
 
 import java.net.URL;
@@ -34,21 +35,17 @@ public class ModificaUtenteController extends BaseController {
 
         try {
             UtentiController utentiController = (UtentiController) parentController;
-            Utente utenteModificato = utentiController.getSelectedUser();
+            Utente utenteDaModificare = utentiController.getSelectedUser();
 
             String nomeUtente = nome.getText();
             String cognomeUtente = cognome.getText();
-            //String matricolaText = matricola.getText();
+            String matricolaText = matricola.getText();
             String emailUtente = email.getText();
 
             Utente.verificaUtente(nomeUtente, cognomeUtente, utentiController.getSelectedUser().getMatricolaUtente().getMatricola() , emailUtente);
+            Utente utenteModificato = new Utente(nomeUtente, cognomeUtente, new Matricola(matricolaText), emailUtente);
 
-            utenteModificato.setNome(nomeUtente);
-            utenteModificato.setCognome(cognomeUtente);
-            utenteModificato.setEmail(emailUtente);
-
-
-            biblioteca.getUtenti().modifica(utentiController.getSelectedUser(), utenteModificato);
+            biblioteca.getUtenti().modifica(utenteDaModificare, utenteModificato);
             utentiController.refreshUsers();
 
             Stage stage = (Stage) nome.getScene().getWindow();

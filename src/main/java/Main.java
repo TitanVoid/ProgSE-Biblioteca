@@ -43,6 +43,7 @@ public class Main extends Application {
     public void stop() throws Exception {
         try {
             biblioteca.salvaBibliotecaObj("biblioteca.obj");
+            System.out.println("Biblioteca salvata");
         } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage());
             alert.showAndWait();
