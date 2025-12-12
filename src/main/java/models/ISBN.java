@@ -45,27 +45,21 @@ public class ISBN implements Serializable, Comparable<ISBN> {
      *         ISBN valido, false altrimenti.
      */
     public static boolean verificaISBN(String codiceISBN) {
-        if (codiceISBN == null || !codiceISBN.matches("\\d{13}") || codiceISBN.length() != 13)
+        if (codiceISBN.length() == 13)
+            return verificaISBN13(codiceISBN);
+        else if (codiceISBN.length() == 10)
+            return verificaISBN10(codiceISBN);
+        else
             return false;
 
-        int sommaPonderata = 0;
-        for (int i = 0; i < 12; i++) {
-            // - '0' lo converte nel valore numerico (es. '7' - '0' = 7).
-            int cifra = codiceISBN.charAt(i) - '0';
-            // Posizioni dispari (1, 3, 5, ...) -> Moltiplica per 1
-            if ((i + 1) % 2 != 0) {
-                sommaPonderata += cifra * 1;
-                // Posizioni pari (2, 4, 6, ...) -> Moltiplica per 3
-            } else {
-                sommaPonderata += cifra * 3;
-            }
-        }
+    }
 
-        int resto = sommaPonderata % 10;
-        int cifraControlloAttesa = (10 - resto) % 10;
-        int cifraControlloEffettiva = codiceISBN.charAt(12) - '0';
-        // Confronta la cifra calcolata con l'ultima cifra dell'ISBN fornito.
-        return cifraControlloAttesa == cifraControlloEffettiva;
+    private static boolean verificaISBN13(String codiceISBN) {
+        return false;
+    }
+
+    private static boolean verificaISBN10(String codiceISBN) {
+        return false;
     }
 
     @Override
