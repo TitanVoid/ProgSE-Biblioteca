@@ -37,7 +37,7 @@ public class ISBN implements Serializable, Comparable<ISBN> {
 
     /**
      * @brief Verifica del formato dell'ISBN.
-     *        Verifica se la stringa passata come parametro corrisponda o meno ad un
+     *        Verifica se la stringa passata come parametro corrisponde o meno ad un
      *        codice ISBN valido, sulla base degli standard internazionali definiti
      *        all'interno del documento ISO 2108.
      * @param[in] codiceISBN Stringa di caratteri da verificare.
@@ -54,6 +54,20 @@ public class ISBN implements Serializable, Comparable<ISBN> {
 
     }
 
+    /**
+     * @brief Verifica la validità di un codice ISBN-13.
+     *        Verifica se la stringa passata come parametro corrisponde o meno ad un
+     *        codice ISBN-13 valido.
+     *        Affinché lo sia, la stringa deve:
+     *        - essere lunga esattamente 13 caratteri;
+     *        - essere composta soltanto da caratteri numerici.
+     *        Inoltre, la somma delle sue cifre moltiplicate per un determinato peso
+     *        (le cifre di posizione pari hanno peso pari a 3, quelle di posizione
+     *        dispari pari ad 1) deve essere divisibile per 10.
+     * @param[in] codiceISBN Stringa di caratteri da verificare.
+     * @return true se la stringa corrisponde ad un codice
+     *         ISBN-13 valido, false altrimenti.
+     */
     private static boolean verificaISBN13(String codiceISBN) {
         // Controlliamo che la stringa sia non nulla e composta esattamente da 13 cifre
         // numeriche.
@@ -76,6 +90,21 @@ public class ISBN implements Serializable, Comparable<ISBN> {
         return sommaPonderata % 10 == 0;
     }
 
+    /**
+     * @brief Verifica la validità di un codice ISBN-10.
+     *        Verifica se la stringa passata come parametro corrisponde o meno ad un
+     *        codice ISBN-10 valido.
+     *        Affinché lo sia, la stringa deve:
+     *        - essere lunga 10 caratteri;
+     *        - essere composta soltanto da caratteri numerici oppure avere 'X' come
+     *        ultimo carattere.
+     *        Inoltre, la somma delle sue cifre moltiplicate per un determinato peso
+     *        (la prima cifra ha peso pari a 10, la seconda pari a 9, e così via...)
+     *        deve essere divisibile per 11.
+     * @param[in] codiceISBN Stringa di caratteri da verificare.
+     * @return true se la stringa corrisponde ad un codice
+     *         ISBN-10 valido, false altrimenti.
+     */
     private static boolean verificaISBN10(String codiceISBN) {
         // Controlliamo che la stringa sia non nulla e composta esattamente da 10 cifre
         // numeriche OPPURE da 9 cifre numeriche e il carattere 'X'.
