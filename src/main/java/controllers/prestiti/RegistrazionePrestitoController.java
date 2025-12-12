@@ -6,9 +6,14 @@ import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DatePicker;
+import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import models.FormatoCampiErratoException;
+import models.ISBN;
+import models.Matricola;
 import models.libri.Libro;
+import models.prestiti.Prestito;
 import models.utenti.Utente;
 
 import java.net.URL;
@@ -18,107 +23,70 @@ import java.util.ResourceBundle;
 public class RegistrazionePrestitoController extends BaseController implements Initializable {
 
     @FXML
-    private ComboBox<Utente> utenteCombo;
+    private TextField matricola;
     @FXML
-    private ComboBox<Libro> libroCombo;
+    private TextField isbn;
     @FXML
-    private DatePicker dataScadenza;
-
-    private ObservableList<Utente> utenti;
-    private ObservableList<Libro> libri;
+    private TextField dataInizio;
+    @FXML
+    private TextField dataScadenza;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Prevent user from typing non-dates
-        dataScadenza.setEditable(false);
-        dataScadenza.setValue(LocalDate.now().plusWeeks(2));
-
-        utenti = FXCollections.observableArrayList();
-        libri = FXCollections.observableArrayList();
-
-        utenteCombo.setConverter(new StringConverter<Utente>() {
-            @Override
-            public String toString(Utente utente) {
-                if (utente == null) return "";
-                return utente.getMatricolaUtente().getMatricola() + " - " + utente.getNome() + " " + utente.getCognome();
-            }
-
-            @Override
-            public Utente fromString(String string) {
-                return null;
-            }
-        });
-
-        libroCombo.setConverter(new StringConverter<Libro>() {
-            @Override
-            public String toString(Libro libro) {
-                if (libro == null) return "";
-                return libro.getCodiceISBNLibro().getCodiceISBN() + " - " + libro.getTitolo();
-            }
-
-            @Override
-            public Libro fromString(String string) {
-                return null;
-            }
-        });
-
-        utenteCombo.setItems(utenti);
-        libroCombo.setItems(libri);
-    }
-
-    @FXML
-    private void onUserType(){
-        // User has selected
-        if (utenteCombo.getValue() != null) return;
-        utenteCombo.hide();
-        if (utenteCombo.getEditor().getText().isEmpty()) {
-            utenti.setAll(biblioteca.getUtenti().getListaUtenti());
-        } else{
-            utenti.setAll(biblioteca.getUtenti().ricercaUtenti(utenteCombo.getEditor().getText()));
-        }
-        int size = utenti.size();
-        if (size > 5) size = 5;
-        utenteCombo.setVisibleRowCount(size);
-        if (!utenti.isEmpty()) utenteCombo.show();
-    }
-
-    @FXML
-    private void onUserSelect(){
-        System.out.println("Utente selezionato: " + utenteCombo.getSelectionModel().getSelectedItem());
-        utenteCombo.getEditor().setEditable(false);
-    }
-
-    @FXML
-    private void onBookSelect(){
-
-    }
-
-    @FXML
-    private void onBookType(){
-        // User has selected
-        if (libroCombo.getValue() != null) return;
-        libroCombo.hide();
-        if (libroCombo.getEditor().getText().isEmpty()) {
-            libri.setAll(biblioteca.getLibri().getListaLibri());
-        } else {
-            libri.setAll(biblioteca.getLibri().ricercaLibri(libroCombo.getEditor().getText()));
-        }
-        int size = libri.size();
-        if (size > 5) size = 5;
-        libroCombo.setVisibleRowCount(size);
-        if (!libri.isEmpty()) libroCombo.show();
+        dataInizio.setDisable(true);
+        dataInizio.setText(LocalDate.now().toString());
+        dataScadenza.setText(LocalDate.now().plusWeeks(2).toString());
     }
 
     @FXML
     private void onConfirm(){
         // Confirmation logic
+        String matricolaUtente = matricola.getText();
+        String isbnLibro = isbn.getText();
+        String dataScadenzaPrestito = dataScadenza.getText();
 
+        String mask = "";
+        if (!biblioteca.getUtenti().esisteChiave(new Matricola(matricolaUtente))){
+            mask += "0";
+        } else {
+            mask += "1";
+        }
+
+        if (!biblioteca.getLibri().esisteChiave(new ISBN(isbnLibro))){
+            mask += "0";
+        } else {
+            mask += "1";
+        }
+
+        try {
+            Prestito.verificaDataScadenza(dataScadenzaPrestito);
+            mask += "1";
+        } catch (FormatoCampiErratoException ex){
+            mask += "0";
+        }
+
+        if (!mask.equals("111")){
+            String[] campi = {"Matricola - Non esiste un utente registrato con questa matricola", "ISBN - Non esiste un libro registrato con questo ISBN", "Data di Scadenza - Deve aderire al formato AAAA-MM-GG"};
+            StringBuilder sb = new StringBuilder("Attenzione, i seguenti campi sono errati:\n");
+            for (int i = 0; i < mask.length(); i++) {
+                if (mask.charAt(i) == '0') sb.append("\n").append(campi[i]);
+            }
+            showWarningAlert("Campi Errati", sb.toString());
+            return;
+        }
+
+        biblioteca.getPrestiti().aggiungi(new Prestito(new Matricola(matricolaUtente), new ISBN(isbnLibro), LocalDate.now(), LocalDate.parse(dataScadenzaPrestito)));
+        PrestitiController prestitiController = (PrestitiController) parentController;
+        prestitiController.refreshLoans();
+        Stage stage = (Stage) matricola.getScene().getWindow();
+        stage.close();
     }
 
     @FXML
     private void onCancel(){
         // Cancellation logic
-        Stage stage = (Stage) utenteCombo.getScene().getWindow();
+        Stage stage = (Stage) matricola.getScene().getWindow();
         stage.close();
     }
 }

@@ -4,6 +4,7 @@ import models.FormatoCampiErratoException;
 import models.ISBN;
 import models.Matricola;
 
+import java.io.Serializable;
 import java.time.LocalDate;
 
 /**
@@ -11,7 +12,7 @@ import java.time.LocalDate;
  * @brief Classe che rappresenta un prestito di un libro effettuato ad un
  *        utente.
  */
-public class Prestito implements Comparable<Prestito> {
+public class Prestito implements Comparable<Prestito>, Serializable {
     private final Matricola matricolaUtente;
     private final ISBN codiceISBNLibro;
     private final LocalDate dataInizio;
@@ -126,15 +127,15 @@ public class Prestito implements Comparable<Prestito> {
         LocalDate data = null;
         String msg = "";
         if (!dataScadenza.matches("^\\d{4}-\\d{2}-\\d{2}$")) {
-            msg = msg + '0';
+            msg = msg + "0";
         } else {
             data = StringDataScadenzaToLocalDate(dataScadenza);
             LocalDate today = LocalDate.now();
             if (data.isAfter(today)) {
-                msg = msg + '1';
+                msg = msg + "1";
             }
         }
-        if (!msg.equals('1')) {
+        if (!msg.equals("1")) {
             throw new FormatoCampiErratoException(msg);
         } else {
             return true;

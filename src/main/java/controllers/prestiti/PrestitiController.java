@@ -28,7 +28,7 @@ public class PrestitiController extends BaseController implements Initializable 
     private final Map<String, Stage> windows = new HashMap<>();
 
     @FXML
-    private TableView<Prestito> prestitiTable;
+    private TableView<Prestito> tablePrestiti;
     @FXML
     private TableColumn<Prestito, String> matricolaClm;
     @FXML
@@ -56,8 +56,11 @@ public class PrestitiController extends BaseController implements Initializable 
             return new SimpleStringProperty(cell.getValue().getDataScadenza().toString());
         });
         dataRestituzioneClm.setCellValueFactory(cell -> {
+            if (cell.getValue().getDataRestituzione() == null) return new SimpleStringProperty("Attivo");
             return new SimpleStringProperty(cell.getValue().getDataRestituzione().toString());
         });
+
+        tablePrestiti.setItems(prestiti);
     }
 
     public void refreshLoans(){
@@ -140,7 +143,7 @@ public class PrestitiController extends BaseController implements Initializable 
             Scene scene = stage.getScene();
             scene.setRoot(root);
         } catch (NullPointerException | IOException ex) {
-            showErrorAlert("Error", "Could Not Find " + mode + " FXML");
+            showErrorAlert("Error", "Error Loading " + mode + " FXML");
         }
     }
 }

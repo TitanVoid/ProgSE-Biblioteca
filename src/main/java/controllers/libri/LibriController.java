@@ -160,7 +160,7 @@ public class LibriController extends BaseController implements Initializable{
             Scene scene = stage.getScene();
             scene.setRoot(root);
         } catch (NullPointerException | IOException ex) {
-            showErrorAlert("Error", "Could Not Find " + mode + " FXML");
+            showErrorAlert("Error", "Error Loading " + mode + " FXML");
         }
     }
 }

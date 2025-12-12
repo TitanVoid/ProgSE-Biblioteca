@@ -2,47 +2,43 @@
 
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.control.Button?>
-<?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
 <?import javafx.scene.layout.ColumnConstraints?>
 <?import javafx.scene.layout.GridPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<?import javafx.scene.control.Label?>
-<?import javafx.scene.layout.GridPane?>
-<?import javafx.scene.layout.RowConstraints?>
-<VBox alignment="CENTER" spacing="12" xmlns="http://javafx.com/javafx/8.0.441"
-      fx:controller="controllers.prestiti.RegistrazionePrestitoController"
-      xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" spacing="12" xmlns="http://javafx.com/javafx/8.0.441" fx:controller="controllers.prestiti.RegistrazionePrestitoController" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets bottom="24" left="28" right="28" top="24" />
     </padding>
 
     <children>
-        <Label style="-fx-font-size: 18px; -fx-font-weight:  bold;" text="Inserisci dati prestito" />
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Registrazione Prestito" />
 
-        <GridPane hgap="10" prefWidth="350.0" vgap="12">
+        <GridPane hgap="10" prefWidth="281.0" vgap="12">
             <children>
-                <Label text="Utente:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
-                <ComboBox fx:id="utenteCombo" editable="true" onKeyReleased="#onUserType" onAction="#onUserSelect" promptText="Cerca utente per matricola o cognome"
-                          prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                <Label text="Matricola Utente:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="matricola" promptText="Matricola" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                <Label text="Libro:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <ComboBox fx:id="libroCombo" editable="true" onKeyReleased="#onBookType" onAction="#onBookSelect" promptText="Cerca libro per ISBN o titolo"
-                          prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="ISBN Libro:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="isbn" promptText="ISBN" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                <Label text="Data Scadenza:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <DatePicker fx:id="dataScadenza" promptText="Seleziona data"
-                            prefWidth="250.0" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Data Inizio:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="dataInizio" promptText="Data Inizio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Data Scadenza:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="dataScadenza" promptText="Data Scadenza" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
             <columnConstraints>
                 <ColumnConstraints />
                 <ColumnConstraints />
             </columnConstraints>
             <rowConstraints>
+                <RowConstraints />
                 <RowConstraints />
                 <RowConstraints />
                 <RowConstraints />

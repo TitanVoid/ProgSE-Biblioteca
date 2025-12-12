@@ -1,6 +1,8 @@
 package models;
 
 import java.io.*;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 import models.libri.Libri;
 import models.prestiti.Prestiti;
@@ -52,6 +54,7 @@ public class Biblioteca implements Serializable {
                 new BufferedOutputStream(new FileOutputStream(nomeFile)))) {
             oos.writeObject(this);
         } catch (IOException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException("Errore di scrittura su file: " + nomeFile, ex);
         }
     }
@@ -72,8 +75,10 @@ public class Biblioteca implements Serializable {
         try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomeFile)))) {
             return (Biblioteca) ois.readObject();
         } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException("Formato file incompatibile:  " + nomeFile, ex);
         } catch (IOException ex) {
+            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
             throw new IOException("File corrotto o illeggibile: " + nomeFile, ex);
         }
     }
