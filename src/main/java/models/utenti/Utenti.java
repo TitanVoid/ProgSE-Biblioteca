@@ -70,13 +70,12 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
         if (esisteChiave(utente.getMatricolaUtente())) {
             throw new UtenteGiaPresenteException("L'utente è già presente nella lista.");
         } else {
-            chiaviMatricole.put(utente.getMatricolaUtente(), utente);
             int index = Collections.binarySearch(utenti, utente);
-
             if (index < 0) {
                 index = -index - 1;
+                utenti.add(index, utente);
+                chiaviMatricole.put(utente.getMatricolaUtente(), utente);
             }
-            utenti.add(index, utente);
         }
     }
 

@@ -246,6 +246,6 @@ public class Libro implements Comparable<Libro>, Serializable{
     @Override
     public int compareTo(Libro l) {
         if(this.titolo.equals(l.getTitolo())) return this.codiceISBNLibro.compareTo(l.getCodiceISBNLibro());
-        return this.codiceISBNLibro.compareTo(l.getCodiceISBNLibro());
+        return this.titolo.compareTo(l.getTitolo());
     }
 }
