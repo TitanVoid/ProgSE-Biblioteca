@@ -5,6 +5,7 @@
  */
 package models.libri;
 
+import models.Persona;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.BeforeEach;
@@ -38,4 +39,45 @@ public class AutoreTest {
     public void testGetCognome() {
         assertEquals(a.getCognome(), "Pirandello");
     }
+    
+    @Test
+    public void testSetNome() {
+        a.setNome("Eugenio");
+        assertEquals(a.getNome(), "Eugenio");
+    }
+    
+    @Test
+    public void testSetCognome() {
+        a.setCognome("Montale");
+        assertEquals(a.getCognome(), "Montale");
+    }
+    
+    @Test
+    public void testVerificaNome() {
+        // Test nome valido:
+        assertTrue(Persona.verificaNome("Mario"));
+        // Test nome non valido, poiché contenente numeri e caratteri speciali:
+        assertFalse(Persona.verificaNome("M4rio!!!"));
+        // Test nome non valido, poiché troppo corto:
+        assertFalse(Persona.verificaNome("Ma"));
+        // Test nome non valido, poiché troppo lungo:
+        assertFalse(Persona.verificaNome("Mariomariomariomariomariomario"));
+        // Test nome non valido, poiché nullo:
+        assertFalse(Persona.verificaNome(null));
+    }
+    
+    @Test
+    public void testVerificaCognome() {
+        // Test cognome valido:
+        assertTrue(Persona.verificaCognome("Rossi"));
+        // Test cognome non valido, poiché contenente numeri e caratteri speciali:
+        assertFalse(Persona.verificaCognome("R0ss1!!!"));
+        // Test nome non valido, poiché troppo corto:
+        assertFalse(Persona.verificaCognome("Ro"));
+        // Test nome non valido, poiché troppo lungo:
+        assertFalse(Persona.verificaCognome("Rossirossirossirossirossirossi"));
+        // Test cognome non valido, poiché nullo:
+        assertFalse(Persona.verificaCognome(null));
+    }
+    
 }
