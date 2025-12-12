@@ -25,27 +25,16 @@ public class MatricolaTest {
     }
     
     @Test
-    public void testMatricola() {
-        // TODO: aggiungere eccezioni in src
-        // assertThrows(MatricolaErrataException.class, () -> {new Matricola("0612708796");});
-    }
-    
-    @Test
     public void testGetMatricola() {
         assertEquals(matricola.getMatricola(), "0612708796");
     }
 
     @Test
     public void testVerificaMatricola() {
-        Matricola m1 = new Matricola("0612708796");
-        Matricola m2 = new Matricola(null);
-        Matricola m3 = new Matricola("061270879");
-        Matricola m4 = new Matricola("061L708796");
-        
-        assertTrue(Matricola.verificaMatricola(m1.getMatricola()));
-        assertFalse(Matricola.verificaMatricola(m2.getMatricola()));
-        assertFalse(Matricola.verificaMatricola(m3.getMatricola()));
-        assertFalse(Matricola.verificaMatricola(m4.getMatricola()));
+        assertTrue(Matricola.verificaMatricola("0612708796"));
+        assertFalse(Matricola.verificaMatricola(null));
+        assertFalse(Matricola.verificaMatricola("061270879"));
+        assertFalse(Matricola.verificaMatricola("061L708796"));
     }
 
     @Test
