@@ -66,6 +66,11 @@ public class LibriController extends BaseController implements Initializable{
         tableLibri.setItems(libri);
     }
 
+    public Libro getSelectedBook(){
+        return tableLibri.getSelectionModel().getSelectedItem();
+    }
+
+
     public void refreshBooks(){
         List<Libro> listLibri = biblioteca.getLibri().getListaLibri();
         libri.setAll(listLibri);
@@ -84,6 +89,10 @@ public class LibriController extends BaseController implements Initializable{
             BaseController controller = loader.getController();
             controller.setParentController(this);
             controller.setBiblioteca(biblioteca);
+            if(controller instanceof ModificaLibroController){
+                ModificaLibroController cont = (ModificaLibroController) controller;
+                cont.loadBook(getSelectedBook());
+            }
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle(title);

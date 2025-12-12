@@ -1,14 +1,57 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
-<?import javafx.scene.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.layout.*?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.ColumnConstraints?>
+<?import javafx.scene.layout.GridPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.RowConstraints?>
+<?import javafx.scene.layout.VBox?>
 
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="CONTROLLER_NAME"
-            prefHeight="400.0" prefWidth="600.0">
+<VBox alignment="CENTER" spacing="12" xmlns="http://javafx.com/javafx/8.0.441" fx:controller="controllers.libri.ModificaLibroController" xmlns:fx="http://javafx.com/fxml/1">
+    <padding>
+        <Insets bottom="24" left="28" right="28" top="24" />
+    </padding>
 
-</AnchorPane>
+    <children>
+        <Label alignment="CENTER" style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Modifica Dati Libro" textAlignment="CENTER" />
+
+        <GridPane hgap="10" vgap="12">
+            <children>
+                <Label text="Titolo:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="titolo" promptText="Titolo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+
+                <Label text="Autore/i:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="autori" promptText="Autore/i" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+
+                <Label text="ISBN:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="codiceISBN" disable="true" promptText="Non modificabile" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+
+                <Label text="Anno Pubblicazione:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="annoPubblicazione" promptText="Anno Pubblicazione" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label prefHeight="27.0" prefWidth="113.0" text="Copie Disponibili:" GridPane.rowIndex="4" />
+                <TextField fx:id="copieDisponibili" prefHeight="31.0" prefWidth="160.0" promptText="Copie Disponibili" GridPane.columnIndex="1" GridPane.rowIndex="4" />
+            </children>
+            <columnConstraints>
+                <ColumnConstraints />
+                <ColumnConstraints />
+            </columnConstraints>
+            <rowConstraints>
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints />
+                <RowConstraints minHeight="10.0" prefHeight="30.0" />
+            </rowConstraints>
+        </GridPane>
+
+        <HBox alignment="CENTER" spacing="18" style="-fx-padding: 14 0 0 0;">
+            <children>
+                <Button fx:id="confermaBtn" onAction="#onConfirm" text="Conferma" />
+                <Button fx:id="annullaBtn" onAction="#onCancel" text="Annulla" />
+            </children>
+        </HBox>
+    </children>
+</VBox>
