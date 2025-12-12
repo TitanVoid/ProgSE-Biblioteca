@@ -1,18 +1,11 @@
 package models;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.io.FileOutputStream;
+import java.io.*;
+
 import models.libri.Libri;
 import models.prestiti.Prestiti;
 import models.utenti.Utenti;
 
-import java.io.Serializable;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -59,12 +52,9 @@ public class Biblioteca implements Serializable {
         // Implementazione del salvataggio dello stato della biblioteca su file
         try(ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(nomeFile)))){
             oos.writeObject(this);
-        } catch (FileNotFoundException ex) {
-            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
         } catch (IOException ex) {
-            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
+            throw new IOException("Errore di scrittura su file: " + nomeFile, ex);
         }
-
     }
 
     /**
@@ -74,15 +64,17 @@ public class Biblioteca implements Serializable {
      */
     public static Biblioteca leggiBibliotecaObj(String nomeFile) throws IOException{
         // Implementazione del caricamento dello stato della biblioteca dal file
-        Biblioteca x = null;
-        try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomeFile)))){
-            x = (Biblioteca) ois.readObject();
-        } catch (IOException ex) {
-            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Biblioteca.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return x;
-    }
 
+        File file = new File(nomeFile);
+        // Il file non esiste -> biblioteca vuota
+        if (!file.exists()) return new Biblioteca();
+
+        try(ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(nomeFile)))){
+            return (Biblioteca) ois.readObject();
+        } catch (ClassNotFoundException ex) {
+            throw new IOException("Formato file incompatibile:  " + nomeFile, ex);
+        } catch (IOException ex) {
+            throw new IOException("File corrotto o illeggibile: " + nomeFile, ex);
+        }
+    }
 }
