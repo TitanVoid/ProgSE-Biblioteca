@@ -36,21 +36,21 @@ public class ModificaUtenteController extends BaseController implements Initiali
 
         try {
             UtentiController utentiController = (UtentiController) parentController;
-            utenteModificato=utentiController.getSelectedUtente();
+            utenteModificato=utentiController.getSelectedUser();
 
             String nomeUtente = nome.getText();
             String cognomeUtente = cognome.getText();
             //String matricolaText = matricola.getText();
             String emailUtente = email.getText();
 
-            Utente.verificaUtente(nomeUtente, cognomeUtente, utentiController.getSelectedUtente().getMatricolaUtente().getMatricola() , emailUtente);
+            Utente.verificaUtente(nomeUtente, cognomeUtente, utentiController.getSelectedUser().getMatricolaUtente().getMatricola() , emailUtente);
 
             utenteModificato.setNome(nomeUtente);
             utenteModificato.setCognome(cognomeUtente);
             utenteModificato.setEmail(emailUtente);
 
 
-            biblioteca.getUtenti().modifica(utentiController.getSelectedUtente(), utenteModificato);
+            biblioteca.getUtenti().modifica(utentiController.getSelectedUser(), utenteModificato);
             utentiController.refreshUsers();
 
             Stage stage = (Stage) nome.getScene().getWindow();
@@ -59,10 +59,10 @@ public class ModificaUtenteController extends BaseController implements Initiali
         }catch (FormatoCampiErratoException ex){
             String maschera = ex.getMessage();
             System.out.println(maschera);
-            String[] campi = {"Nome", "Cognome", "Matricola", "Email"};
-            StringBuilder sb = new StringBuilder("Attenzione, i seguenti campi sono errati: ");
+            String[] campi = {"Nome - Da 3-25 caratteri alfabetici", "Cognome - Da 3-25 caratteri alfabetici", "Matricola - Numero a 10 cifre", "Email - <*>.<*>@studenti.unisa.it"};
+            StringBuilder sb = new StringBuilder("Attenzione, i seguenti campi devono avere il formato corretto:\n");
             for (int i = 0; i < maschera.length(); i++) {
-                if (maschera.charAt(i) == '0') sb.append(campi[i]).append(" ");
+                if (maschera.charAt(i) == '0') sb.append("\n").append(campi[i]).append(" ");
             }
             showWarningAlert("Campi Errati", sb.toString());
         }catch(RuntimeException ex){

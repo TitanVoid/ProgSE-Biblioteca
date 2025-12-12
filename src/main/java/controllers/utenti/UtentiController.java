@@ -46,16 +46,11 @@ public class UtentiController extends BaseController implements Initializable {
     @FXML
     private Button modificaButton;
 
-
-
-
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialization code
         SelectionModel<Utente> selectionModel= tableUtenti.getSelectionModel();
         modificaButton.disableProperty().bind(Bindings.isNull(selectionModel.selectedItemProperty()));
-
-
 
         nomeClm.setCellValueFactory(new PropertyValueFactory<>("nome"));
         cognomeClm.setCellValueFactory(new PropertyValueFactory<>("cognome"));
@@ -71,7 +66,6 @@ public class UtentiController extends BaseController implements Initializable {
             }
             return new SimpleStringProperty(prAt.toString());
         });
-
 
         tableUtenti.setItems(utenti);
     }
@@ -98,7 +92,7 @@ public class UtentiController extends BaseController implements Initializable {
         }
     }
 
-    public Utente getSelectedUtente(){
+    public Utente getSelectedUser(){
         return tableUtenti.getSelectionModel().getSelectedItem();
     }
 

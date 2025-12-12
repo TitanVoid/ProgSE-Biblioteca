@@ -39,23 +39,22 @@ public class AggiuntaUtenteController extends BaseController implements Initiali
 
             Utente.verificaUtente(n, c,m,e );
 
-
             Utente u = new Utente(n, c, new Matricola(m), e);
             biblioteca.getUtenti().aggiungi(u);
 
             UtentiController utentiController = (UtentiController) parentController;
             utentiController.refreshUsers();
 
-            Stage stage = (Stage) nome.getScene().getWindow(); //???
+            Stage stage = (Stage) nome.getScene().getWindow();
             stage.close();
 
         }catch(FormatoCampiErratoException ex){
             String maschera = ex.getMessage();
             System.out.println(maschera);
-            String[] campi = {"Nome", "Cognome", "Matricola", "Email"};
-            StringBuilder sb = new StringBuilder("Attenzione, i seguenti campi sono errati: ");
+            String[] campi = {"Nome - Da 3-25 caratteri alfabetici", "Cognome - Da 3-25 caratteri alfabetici", "Matricola - Numero a 10 cifre", "Email - <*>.<*>@studenti.unisa.it"};
+            StringBuilder sb = new StringBuilder("Attenzione, i seguenti campi devono avere il formato corretto:\n");
             for (int i = 0; i < maschera.length(); i++) {
-                if (maschera.charAt(i) == '0') sb.append(campi[i]).append(" ");
+                if (maschera.charAt(i) == '0') sb.append("\n").append(campi[i]).append(" ");
             }
             showWarningAlert("Campi Errati", sb.toString());
         }catch(UtenteGiaPresenteException ex){
