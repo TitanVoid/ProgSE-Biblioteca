@@ -2,8 +2,9 @@ package controllers.libri;
 import controllers.BaseController;
 import controllers.prestiti.PrestitiController;
 import controllers.utenti.UtentiController;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import models.libri.Autore;
 import models.libri.Libro;
@@ -15,10 +16,8 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
 import javafx.stage.Stage;
+import models.utenti.Utente;
 
 import java.io.IOException;
 import java.net.URL;
@@ -43,10 +42,15 @@ public class LibriController extends BaseController implements Initializable{
     private TableColumn<Libro, Integer> copiesClm;
     @FXML
     private TextField searchBar;
+    @FXML
+    private Button modificaButton;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
         // Initialization code
+        SelectionModel<Libro> selectionModel= tableLibri.getSelectionModel();
+        modificaButton.disableProperty().bind(Bindings.isNull(selectionModel.selectedItemProperty()));
+
         titleClm.setCellValueFactory(new PropertyValueFactory<>("titolo"));
         authorsClm.setCellValueFactory(cell -> {
             StringBuilder authors = new StringBuilder();
@@ -84,6 +88,7 @@ public class LibriController extends BaseController implements Initializable{
             stage.setScene(scene);
             stage.setTitle(title);
             windows.put(viewName, stage);
+            stage.setOnHidden(e -> windows.remove(viewName));
             stage.showAndWait();
         } catch (IOException | NullPointerException ex) {
             showErrorAlert("Error", "Could Not Find FXML at " + viewName);

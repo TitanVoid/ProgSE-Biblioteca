@@ -10,10 +10,7 @@ import models.utenti.Utente;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class ModificaUtenteController extends BaseController implements Initializable {
-
-
-    private Utente utenteModificato;
+public class ModificaUtenteController extends BaseController {
 
     @FXML
     private TextField nome;
@@ -24,10 +21,11 @@ public class ModificaUtenteController extends BaseController implements Initiali
     @FXML
     private TextField email;
 
-
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // Initialization code
+    public void loadUser(Utente utente){
+        nome.setText(utente.getNome());
+        cognome.setText(utente.getCognome());
+        matricola.setText(utente.getMatricolaUtente().getMatricola());
+        email.setText(utente.getEmail());
     }
 
     @FXML
@@ -36,7 +34,7 @@ public class ModificaUtenteController extends BaseController implements Initiali
 
         try {
             UtentiController utentiController = (UtentiController) parentController;
-            utenteModificato=utentiController.getSelectedUser();
+            Utente utenteModificato = utentiController.getSelectedUser();
 
             String nomeUtente = nome.getText();
             String cognomeUtente = cognome.getText();

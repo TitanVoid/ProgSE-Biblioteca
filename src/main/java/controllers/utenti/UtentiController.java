@@ -87,10 +87,15 @@ public class UtentiController extends BaseController implements Initializable {
             BaseController controller = loader.getController();
             controller.setParentController(this);
             controller.setBiblioteca(biblioteca);
+            if (controller instanceof ModificaUtenteController){
+                ModificaUtenteController cont = (ModificaUtenteController) controller;
+                cont.loadUser(getSelectedUser());
+            }
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle(title);
             windows.put(viewName, stage);
+            stage.setOnHidden(e -> windows.remove(viewName));
             stage.showAndWait();
         } catch (IOException | NullPointerException ex) {
             showErrorAlert("Error", "Could Not Find FXML at " + viewName);
