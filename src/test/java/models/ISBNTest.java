@@ -25,6 +25,11 @@ public class ISBNTest {
     }
     
     @Test
+    public void testCostruttoreISBN() {
+        assertNotNull(i);
+    }
+    
+    @Test
     public void testGetCodiceISBN() {
         assertEquals(i.getCodiceISBN(), "038500438X");
     }

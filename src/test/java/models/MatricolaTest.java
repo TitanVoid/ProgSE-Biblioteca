@@ -25,6 +25,11 @@ public class MatricolaTest {
     }
     
     @Test
+    public void testCostruttoreMatricola() {
+        assertNotNull(matricola);
+    }
+    
+    @Test
     public void testGetMatricola() {
         assertEquals(matricola.getMatricola(), "0612708796");
     }
