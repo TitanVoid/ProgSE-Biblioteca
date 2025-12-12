@@ -162,14 +162,18 @@ public class Libro implements Comparable<Libro>, Serializable{
         }
 
         //controllo autori
-        List<Autore> al = StringAutoriToList(autori);
-        String correct = "1";
-        for(Autore a : al){
-            if(!Persona.verificaNome(a.getNome()) || !Persona.verificaCognome(a.getCognome())){
-                correct = "0";
+        try {
+            List<Autore> al = StringAutoriToList(autori);
+            String correct = "1";
+            for (Autore a : al) {
+                if (!Persona.verificaNome(a.getNome()) || !Persona.verificaCognome(a.getCognome())) {
+                    correct = "0";
+                }
             }
+            msg = msg + correct;
+        } catch (Exception e) {
+            msg = msg + '0';
         }
-        msg = msg + correct;
 
         //controllo ISBN
         if(!ISBN.verificaISBN(codiceISBNLibro)){

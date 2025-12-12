@@ -51,10 +51,10 @@ public class AggiuntaUtenteController extends BaseController implements Initiali
         }catch(FormatoCampiErratoException ex){
             String maschera = ex.getMessage();
             System.out.println(maschera);
-            String[] campi = {"Nome - Da 3-25 caratteri alfabetici", "Cognome - Da 3-25 caratteri alfabetici", "Matricola - Numero a 10 cifre", "Email - <*>.<*>@studenti.unisa.it"};
+            String[] campi = {"Nome - Da 3-25 caratteri alfabetici", "Cognome - Da 3-25 caratteri alfabetici", "Matricola - 10 cifre numeriche", "Email - <*>.<*>@studenti.unisa.it"};
             StringBuilder sb = new StringBuilder("Attenzione, i seguenti campi devono avere il formato corretto:\n");
             for (int i = 0; i < maschera.length(); i++) {
-                if (maschera.charAt(i) == '0') sb.append("\n").append(campi[i]).append(" ");
+                if (maschera.charAt(i) == '0') sb.append("\n").append(campi[i]);
             }
             showWarningAlert("Campi Errati", sb.toString());
         }catch(UtenteGiaPresenteException ex){

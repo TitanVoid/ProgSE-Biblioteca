@@ -45,10 +45,10 @@ public class AggiuntaLibroController extends BaseController {
         } catch (FormatoCampiErratoException ex){
             String maschera = ex.getMessage();
             System.out.println(maschera);
-            String[] campi = {"Titolo", "Autore/i", "ISBN", "Copie Disponibili", "Anno Pubblicazione"};
-            StringBuilder sb = new StringBuilder("Attenzione, i seguenti campi sono errati: ");
+            String[] campi = {"Titolo - Massimo 100 caratteri", "Autore/i - Nome Cognome, Nome Cognome ...", "ISBN - 13 cifre numeriche (Rispetta standard ISBN reale)", "Copie Disponibili - Numero intero tra 0 e 100", "Anno Pubblicazione - Numero intero tra 0 e anno corrente"};
+            StringBuilder sb = new StringBuilder("Attenzione, i seguenti campi sono errati:\n");
             for (int i = 0; i < maschera.length(); i++) {
-                if (maschera.charAt(i) == '0') sb.append(campi[i]).append(" ");
+                if (maschera.charAt(i) == '0') sb.append("\n").append(campi[i]);
             }
             showWarningAlert("Campi Errati", sb.toString());
         } catch (LibroGiaPresenteException ex){
