@@ -108,9 +108,12 @@ public class ISBN implements Serializable, Comparable<ISBN> {
     private static boolean verificaISBN10(String codiceISBN) {
         // Controlliamo che la stringa sia non nulla e composta esattamente da 10 cifre
         // numeriche OPPURE da 9 cifre numeriche e il carattere 'X'.
-        if (codiceISBN == null || !codiceISBN.matches("^\\d{9}[0-9X]$"))
+        if (codiceISBN == null)
             return false;
 
+        if (!codiceISBN.matches("^\\d{10}$") && !codiceISBN.matches("^\\d{9}X$"))
+            return false;
+        
         int sommaPonderata = 0;
         for (int i = 0; i < 10; i++) {
             int cifra;

@@ -21,29 +21,32 @@ public class ISBNTest {
 
     @BeforeEach
     public void setUp() {
-        i = new ISBN("038500438X");
+        i = new ISBN("883010471X");
     }
     
     @Test
     public void testCostruttoreISBN() {
-        assertNotNull(i);
+        ISBN isbn = new ISBN("883010471X");
+        
+        assertNotNull(isbn.getCodiceISBN());
+        assertEquals(isbn.getCodiceISBN(), "883010471X");
     }
     
     @Test
     public void testGetCodiceISBN() {
-        assertEquals(i.getCodiceISBN(), "038500438X");
+        assertEquals(i.getCodiceISBN(), "883010471X");
     }
 
     @Test
     public void testVerificaISBN() {
         // Test codice ISBN-10 valido:
-        assertTrue(ISBN.verificaISBN("038500438X"));
+        assertTrue(ISBN.verificaISBN("883010471X"));
         // Test codice ISBN-10 non valido:
-        assertFalse(ISBN.verificaISBN("0E8500438X"));
+        assertFalse(ISBN.verificaISBN("88E010471X"));
         // Test codice ISBN-13 valido:
-        assertTrue(ISBN.verificaISBN("9788807882298"));
+        assertTrue(ISBN.verificaISBN("9788867582143"));
         // Test codice ISBN-13 non valido:
-        assertFalse(ISBN.verificaISBN("97888O7882298"));
+        assertFalse(ISBN.verificaISBN("978886758214E"));
         // Test codice ISBN troppo corto:
         assertFalse(ISBN.verificaISBN("9788807"));
         // Test codice ISBN troppo lungo:
@@ -54,18 +57,18 @@ public class ISBNTest {
 
     @Test
     public void testEquals() {
-        ISBN i1 = new ISBN("038500438X");
-        ISBN i2 = new ISBN("9788807882298");
+        ISBN i1 = new ISBN("883010471X");
+        ISBN i2 = new ISBN("9788867582143");
         
         assertEquals(i, i1);
         assertNotEquals(i, i2);
     }
 
     @Test
-    public void testCompareTo() {
-        ISBN i1 = new ISBN("038500438X");
-        ISBN i2 = new ISBN("0385004400");
-        ISBN i3 = new ISBN("0385004371");
+    public void testCompareTo() {    
+        ISBN i1 = new ISBN("883010471X");
+        ISBN i2 = new ISBN("883010481X");
+        ISBN i3 = new ISBN("883010461X");
         
         assertTrue(i.compareTo(i1) == 0);
         assertTrue(i.compareTo(i2) < 0);

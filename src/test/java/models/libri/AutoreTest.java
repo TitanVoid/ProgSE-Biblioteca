@@ -27,7 +27,13 @@ public class AutoreTest {
     
     @Test
     public void testCostruttoreAutore() {
-        assertNotNull(a);
+        Autore autore = new Autore("Luigi", "Pirandello");
+        
+        assertNotNull(autore.getNome());
+        assertEquals(autore.getNome(), "Luigi");
+        
+        assertNotNull(autore.getCognome());
+        assertEquals(autore.getCognome(), "Pirandello");
     }
 
     @Test
