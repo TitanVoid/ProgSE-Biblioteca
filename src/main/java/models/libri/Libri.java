@@ -131,9 +131,5 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
     public Libro ottieni(ISBN chiave) {
         return chiaviISBN.get(chiave);
     }
-    
-    
-        
-            
-        
+
 }
