@@ -157,6 +157,6 @@ public class Prestito implements Comparable<Prestito>, Serializable {
 
     @Override
     public String toString() {
-        return "Prestito: " + codiceISBNLibro.getCodiceISBN() + "Scade: " + dataScadenza.toString();
+        return "ISBN: " + codiceISBNLibro.getCodiceISBN() + " -> " + dataScadenza.toString();
     }
 }

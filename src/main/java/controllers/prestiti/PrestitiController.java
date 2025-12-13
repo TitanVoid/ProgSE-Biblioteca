@@ -89,6 +89,7 @@ public class PrestitiController extends BaseController implements Initializable 
         });
 
         tablePrestiti.setItems(prestiti);
+        tablePrestiti.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
     }
 
     public Prestito getSelectedLoan(){
@@ -148,7 +149,7 @@ public class PrestitiController extends BaseController implements Initializable 
         /// ////////////////
         /// // Ricordare qua/////
         /// ////////////////////
-        List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.ATTIVI); //Capire come selezionare i filtri
+        List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.TUTTI); //Capire come selezionare i filtri
         prestiti.setAll(listPrestiti);
     }
 

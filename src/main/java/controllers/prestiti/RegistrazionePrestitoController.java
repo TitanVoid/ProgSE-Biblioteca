@@ -1,14 +1,9 @@
 package controllers.prestiti;
 import controllers.BaseController;
-import javafx.collections.FXCollections;
-import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.DatePicker;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
-import javafx.util.StringConverter;
 import models.FormatoCampiErratoException;
 import models.ISBN;
 import models.Matricola;
@@ -33,7 +28,7 @@ public class RegistrazionePrestitoController extends BaseController implements I
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
-        // Prevent user from typing non-dates
+        // Suggest default date of 2 weeks
         dataInizio.setDisable(true);
         dataInizio.setText(LocalDate.now().toString());
         dataScadenza.setText(LocalDate.now().plusWeeks(2).toString());

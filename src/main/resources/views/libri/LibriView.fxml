@@ -54,11 +54,11 @@
                                            AnchorPane.leftAnchor="0.0"
                                            AnchorPane.rightAnchor="0.0">
                                     <columns>
-                                        <TableColumn fx:id="titleClm" prefWidth="150.0" text="Titolo" />
-                                        <TableColumn fx:id="authorsClm" prefWidth="150.0" text="Autore/i" />
-                                        <TableColumn fx:id="publishYearClm" prefWidth="120.0" text="Anno pubblicazione" />
-                                        <TableColumn fx:id="idClm" prefWidth="150.0" text="Codice identificativo" />
-                                        <TableColumn fx:id="copiesClm" prefWidth="100.0" text="Numero copie" />
+                                        <TableColumn fx:id="idClm" text="Codice identificativo" />
+                                        <TableColumn fx:id="publishYearClm" text="Anno pubblicazione" />
+                                        <TableColumn fx:id="copiesClm" text="Numero copie" />
+                                        <TableColumn fx:id="titleClm" text="Titolo" />
+                                        <TableColumn fx:id="authorsClm" text="Autore/i" />
                                     </columns>
                                 </TableView>
                             </children>

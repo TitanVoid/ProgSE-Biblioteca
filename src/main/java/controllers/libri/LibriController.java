@@ -66,6 +66,12 @@ public class LibriController extends BaseController implements Initializable{
         idClm.setCellValueFactory(cell -> new SimpleStringProperty(cell.getValue().getCodiceISBNLibro().getCodiceISBN()));
         copiesClm.setCellValueFactory(new PropertyValueFactory<>("copieDisponibili"));
 
+        titleClm.prefWidthProperty().bind(tableLibri.widthProperty().multiply(0.30));
+        authorsClm.prefWidthProperty().bind(tableLibri.widthProperty().multiply(0.35));
+        publishYearClm.prefWidthProperty().bind(tableLibri.widthProperty().multiply(0.10));
+        idClm.prefWidthProperty().bind(tableLibri.widthProperty().multiply(0.15));
+        copiesClm.prefWidthProperty().bind(tableLibri.widthProperty().multiply(0.10));
+
         tableLibri.setItems(libri);
     }
 

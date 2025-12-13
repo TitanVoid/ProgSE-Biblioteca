@@ -46,11 +46,11 @@
                                            AnchorPane.leftAnchor="0.0"
                                            AnchorPane.rightAnchor="0.0">
                                     <columns>
-                                        <TableColumn fx:id="matricolaClm" prefWidth="120.0" text="Matricola" />
-                                        <TableColumn fx:id="isbnClm" prefWidth="150.0" text="ISBN" />
-                                        <TableColumn fx:id="dataInizioClm" prefWidth="120.0" text="Data Inizio" />
-                                        <TableColumn fx:id="dataScadenzaClm" prefWidth="120.0" text="Data Scadenza" />
-                                        <TableColumn fx:id="dataRestituzioneClm" prefWidth="140.0" text="Data Restituzione" />
+                                        <TableColumn fx:id="matricolaClm" text="Matricola" />
+                                        <TableColumn fx:id="isbnClm" text="ISBN" />
+                                        <TableColumn fx:id="dataInizioClm" text="Data Inizio" />
+                                        <TableColumn fx:id="dataScadenzaClm" text="Data Scadenza" />
+                                        <TableColumn fx:id="dataRestituzioneClm" text="Data Restituzione" />
                                     </columns>
                                 </TableView>
                             </children>

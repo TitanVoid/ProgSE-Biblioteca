@@ -16,7 +16,6 @@
       xmlns:fx="http://javafx.com/fxml/1"
       fx:controller="controllers.utenti.UtentiController">
     <children>
-        <!-- Header section - fixed height -->
         <HBox prefHeight="84.0">
             <children>
                 <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Utenti" textAlignment="CENTER">
@@ -36,7 +35,6 @@
             </children>
         </HBox>
 
-        <!-- Content section - grows to fill available space -->
         <AnchorPane VBox.vgrow="ALWAYS">
             <children>
                 <SplitPane dividerPositions="0.8"
@@ -45,7 +43,6 @@
                            AnchorPane.leftAnchor="0.0"
                            AnchorPane.rightAnchor="0.0">
                     <items>
-                        <!-- Table area -->
                         <AnchorPane minWidth="0.0">
                             <children>
                                 <TableView fx:id="tableUtenti"
@@ -54,17 +51,16 @@
                                            AnchorPane.leftAnchor="0.0"
                                            AnchorPane.rightAnchor="0.0">
                                     <columns>
-                                        <TableColumn fx:id="nomeClm" prefWidth="120.0" text="Nome" />
-                                        <TableColumn fx:id="cognomeClm" prefWidth="120.0" text="Cognome" />
-                                        <TableColumn fx:id="matricolaClm" prefWidth="120.0" text="Matricola" />
-                                        <TableColumn fx:id="emailClm" prefWidth="180.0" text="Email" />
-                                        <TableColumn fx:id="prestitiAttiviClm" prefWidth="130.0" text="Prestiti Attivi" />
+                                        <TableColumn fx:id="nomeClm" text="Nome" />
+                                        <TableColumn fx:id="cognomeClm" text="Cognome" />
+                                        <TableColumn fx:id="matricolaClm" text="Matricola" />
+                                        <TableColumn fx:id="emailClm" text="Email" />
+                                        <TableColumn fx:id="prestitiAttiviClm" text="Prestiti Attivi" />
                                     </columns>
                                 </TableView>
                             </children>
                         </AnchorPane>
 
-                        <!-- Button sidebar -->
                         <AnchorPane minWidth="138.0" prefWidth="138.0" maxWidth="138.0">
                             <children>
                                 <VBox alignment="TOP_CENTER" spacing="30.0"

@@ -70,6 +70,11 @@ public class UtentiController extends BaseController implements Initializable {
         });
 
         tableUtenti.setItems(utenti);
+        nomeClm.prefWidthProperty().bind(tableUtenti.widthProperty().multiply(0.10));
+        cognomeClm.prefWidthProperty().bind(tableUtenti.widthProperty().multiply(0.10));
+        matricolaClm.prefWidthProperty().bind(tableUtenti.widthProperty().multiply(0.10));
+        emailClm.prefWidthProperty().bind(tableUtenti.widthProperty().multiply(0.15));
+        prestitiAttiviClm.prefWidthProperty().bind(tableUtenti.widthProperty().multiply(0.55));
     }
 
     public void refreshUsers(){
