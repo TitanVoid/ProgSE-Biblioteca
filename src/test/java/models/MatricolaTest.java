@@ -5,9 +5,9 @@
  */
 package models;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
@@ -19,7 +19,7 @@ public class MatricolaTest {
     public MatricolaTest() {
     }
 
-    @BeforeEach
+    @Before
     public void setUp() {
         matricola = new Matricola("0612708796");
     }

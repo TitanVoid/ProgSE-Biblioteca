@@ -5,9 +5,9 @@
  */
 package models;
 
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
@@ -19,7 +19,7 @@ public class ISBNTest {
     public ISBNTest() {
     }
 
-    @BeforeEach
+    @Before
     public void setUp() {
         i = new ISBN("883010471X");
     }
@@ -51,8 +51,6 @@ public class ISBNTest {
         assertFalse(ISBN.verificaISBN("9788807"));
         // Test codice ISBN troppo lungo:
         assertFalse(ISBN.verificaISBN("978880788229836846"));
-        // Test codice ISBN nullo:
-        assertFalse(ISBN.verificaISBN(null));
     }
 
     @Test

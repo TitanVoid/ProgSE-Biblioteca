@@ -8,9 +8,9 @@ package models.libri;
 import java.util.ArrayList;
 import java.util.List;
 import models.ISBN;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
@@ -22,7 +22,7 @@ public class LibroTest {
     public LibroTest() {
     }
     
-    @BeforeEach
+    @Before
     public void setUp() {
         ISBN isbn = new ISBN("883010471X");
         l = new Libro("Il Signore degli Anelli", 2020, isbn, 5, "J.R.R. Tolkien");
