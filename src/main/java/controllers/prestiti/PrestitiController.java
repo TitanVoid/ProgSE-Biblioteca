@@ -11,10 +11,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import models.prestiti.Prestito;
 import models.servizi.Filtro;
@@ -63,6 +60,27 @@ public class PrestitiController extends BaseController implements Initializable 
         });
         dataScadenzaClm.setCellValueFactory(cell -> {
             return new SimpleStringProperty(cell.getValue().getDataScadenza().toString());
+        });
+        // Per evidenziare i prestiti in ritardo
+        dataScadenzaClm.setCellFactory(column -> {
+            return new TableCell<Prestito, String>() {
+                @Override
+                protected void updateItem(String item, boolean empty) {
+                    super.updateItem(item, empty);
+                    if (empty || item == null) {
+                        setText(null);
+                        setStyle("");
+                    } else {
+                        setText(item);
+                        Prestito prestito = getTableView().getItems().get(getIndex());
+                        if (prestito.getDataRestituzione() == null && prestito.getDataScadenza().isBefore(java.time.LocalDate.now())) {
+                            setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
+                        } else {
+                            setStyle("");
+                        }
+                    }
+                }
+            };
         });
         dataRestituzioneClm.setCellValueFactory(cell -> {
             if (cell.getValue().getDataRestituzione() == null) return new SimpleStringProperty("Attivo");
