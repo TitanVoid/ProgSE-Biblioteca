@@ -96,7 +96,7 @@ public class Prestito implements Comparable<Prestito>, Serializable {
      * @return true se il prestito è attivo, false altrimenti.
      */
     public boolean isAttivo() {
-        return dataRestituzione != null;
+        return dataRestituzione == null;
     }
 
     /**
@@ -156,7 +156,10 @@ public class Prestito implements Comparable<Prestito>, Serializable {
         if (!this.dataInizio.equals(p.dataInizio)) return false;
         if (!this.dataScadenza.equals(p.dataScadenza)) return false; 
         
-        if (this.dataRestituzione == p.dataRestituzione || this.dataRestituzione.equals(p.dataRestituzione)) return true;
+        if (this.dataRestituzione == p.dataRestituzione) return true;
+        if ((this.dataRestituzione == null && p.dataRestituzione != null) || (this.dataRestituzione != null && p.dataRestituzione == null)) return false;
+                
+        if (this.dataRestituzione.equals(p.dataRestituzione)) return true;
         
         return false;
     }
