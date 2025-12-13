@@ -83,19 +83,22 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
 
         switch (filtro) {
             case TUTTI:
-                l = prestiti;
+                l.addAll(prestiti);
+                break;
             case ATTIVI:
                 for (Prestito p : prestiti) {
                     if (p.getDataRestituzione() == null) {
                         l.add(p);
                     }
                 }
+                break;
             case CONCLUSI:
                 for (Prestito p : prestiti) {
                     if (p.getDataRestituzione() != null) {
                         l.add(p);
                     }
                 }
+                break;
             default:
                 System.out.println("Filtro sconosciuto.");
         }
