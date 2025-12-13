@@ -124,7 +124,7 @@ public class LibroTest {
         // Test con l'anno di pubblicazione non valido:
         assertThrows(FormatoCampiErratoException.class, () -> { Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "2054", "883010471X", "5"); });  
         // Test con il numero di copie disponibili non valido:
-        assertThrows(FormatoCampiErratoException.class, () -> { Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "1954", "883010471X", "-5"); });   
+        assertThrows(FormatoCampiErratoException.class, () -> { Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "1954", "883010471X", "500"); });   
     }
 
     @Test
