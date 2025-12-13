@@ -10,25 +10,27 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="12" xmlns="http://javafx.com/javafx/8.0.441"  fx:controller="controllers.prestiti.EstensionePrestitoController" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" spacing="12" xmlns="http://javafx.com/javafx/8.0.441" fx:controller="controllers.prestiti.EstensionePrestitoController" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets bottom="24" left="28" right="28" top="24" />
     </padding>
 
     <children>
-        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Modifica Dati Prestito" />
+        <Label style="-fx-font-size: 18px; -fx-font-weight: bold;" text="Registrazione Prestito" />
 
         <GridPane hgap="10" prefWidth="281.0" vgap="12">
             <children>
+                <Label text="Matricola Utente:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
+                <TextField fx:id="matricola" promptText="Matricola" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                <Label text="Matricola:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
-                <TextField fx:id="matricola" disable="true" promptText="Non Modificabile" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                <Label text="ISBN Libro:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <TextField fx:id="isbn" promptText="ISBN" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
-                <Label text="ISBN:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
-                <TextField fx:id="codiceISBN" disable="true" promptText="Non Modificabile" GridPane.columnIndex="1" GridPane.rowIndex="2" />
+                <Label text="Data Inizio:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
+                <TextField fx:id="dataInizio" promptText="Data Inizio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                <Label text="Data Restituzione" GridPane.rowIndex="3" />
-                <TextField fx:id="dataResituzione" promptText="Data Restituzione" GridPane.columnIndex="1" GridPane.rowIndex="3" />
+                <Label text="Data Scadenza:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <TextField fx:id="dataScadenza" promptText="Data Scadenza" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
             <columnConstraints>
                 <ColumnConstraints />
@@ -39,7 +41,6 @@
                 <RowConstraints />
                 <RowConstraints />
                 <RowConstraints />
-                <RowConstraints minHeight="10.0" prefHeight="30.0" />
             </rowConstraints>
         </GridPane>
 

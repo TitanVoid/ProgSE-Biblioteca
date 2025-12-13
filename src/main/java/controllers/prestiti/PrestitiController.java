@@ -72,6 +72,10 @@ public class PrestitiController extends BaseController implements Initializable 
         tablePrestiti.setItems(prestiti);
     }
 
+    public Prestito getSelectedLoan(){
+        return tablePrestiti.getSelectionModel().getSelectedItem();
+    }
+
     public void refreshLoans(){
         List<Prestito> listPrestiti = biblioteca.getPrestiti().getListaPrestiti();
         prestiti.setAll(listPrestiti);
@@ -90,6 +94,10 @@ public class PrestitiController extends BaseController implements Initializable 
             BaseController controller = loader.getController();
             controller.setParentController(this);
             controller.setBiblioteca(biblioteca);
+            if (controller instanceof EstensionePrestitoController){
+                EstensionePrestitoController cont = (EstensionePrestitoController) controller;
+                cont.loadPrestito(getSelectedLoan());
+            }
             Scene scene = new Scene(root);
             stage.setScene(scene);
             stage.setTitle(title);
