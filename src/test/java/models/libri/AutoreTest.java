@@ -6,9 +6,9 @@
 package models.libri;
 
 import models.Persona;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
@@ -20,7 +20,7 @@ public class AutoreTest {
     public AutoreTest() {
     }
     
-    @BeforeEach
+    @Before
     public void setUp() {
         a = new Autore("Luigi", "Pirandello");
     }

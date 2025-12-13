@@ -7,9 +7,9 @@ package models.utenti;
 
 import models.Matricola;
 import models.prestiti.Prestito;
-import org.junit.jupiter.api.Test;
-import static org.junit.jupiter.api.Assertions.*;
-import org.junit.jupiter.api.BeforeEach;
+import org.junit.Test;
+import static org.junit.Assert.*;
+import org.junit.Before;
 
 /**
  *
@@ -17,21 +17,21 @@ import org.junit.jupiter.api.BeforeEach;
  */
 public class UtenteTest {
     private Utente u;
-    
+
     public UtenteTest() {
     }
-    
-    @BeforeEach
+
+    @Before
     public void setUp() {
         Matricola m = new Matricola("0612708796");
         u = new Utente("Luisa", "Genovese", m, "l.genovese20@studenti.unisa.it");
     }
-    
+
     @Test
     public void testCostruttoreUtente() {
         Matricola m = new Matricola("0612708796");
         Utente utente = new Utente("Luisa", "Genovese", m, "l.genovese20@studenti.unisa.it");
-        
+
         assertNotNull(utente);
         assertEquals(utente.getNome(), "Luisa");
         assertEquals(utente.getCognome(), "Genovese");
@@ -45,7 +45,7 @@ public class UtenteTest {
     public void testGetMatricolaUtente() {
         Matricola m = new Matricola("0612708796");
         Utente utente = new Utente("Luisa", "Genovese", m, "l.genovese20@studenti.unisa.it");
-        
+
         assertNotNull(utente.getMatricolaUtente());
         assertEquals(utente.getMatricolaUtente(), m);
     }
@@ -54,7 +54,7 @@ public class UtenteTest {
     public void testGetEmail() {
         Matricola m = new Matricola("0612708796");
         Utente utente = new Utente("Luisa", "Genovese", m, "l.genovese20@studenti.unisa.it");
-        
+
         assertNotNull(utente.getEmail());
         assertEquals(utente.getEmail(), "l.genovese20@studenti.unisa.it");
     }
@@ -63,7 +63,7 @@ public class UtenteTest {
     public void testGetPrestitiAttivi() {
         Matricola m = new Matricola("0612708796");
         Utente utente = new Utente("Luisa", "Genovese", m, "l.genovese20@studenti.unisa.it");
-        
+
         assertNotNull(utente.getPrestitiAttivi());
     }
 
@@ -71,9 +71,9 @@ public class UtenteTest {
     public void testSetEmail() {
         Matricola m = new Matricola("0612708796");
         Utente utente = new Utente("Luisa", "Genovese", m, "l.genovese20@studenti.unisa.it");
-        
+
         utente.setEmail("l.genovese@studenti.unisa.it");
-        
+
         assertEquals(utente.getEmail(), "l.genovese@studenti.unisa.it");
     }
 
@@ -81,13 +81,13 @@ public class UtenteTest {
     public void testAggiungiPrestito() {
         Matricola m = new Matricola("0612708796");
         Utente utente = new Utente("Luisa", "Genovese", m, "l.genovese20@studenti.unisa.it");
-        
+
         // MODIFICARE
         Prestito p = new Prestito(m, null, null, null);
-        
+
         utente.aggiungiPrestito(p);
-        
-        assertTrue(utente.getPrestitiAttivi().contains(p));  
+
+        assertTrue(utente.getPrestitiAttivi().contains(p));
         assertEquals(utente.getPrestitiAttivi().size(), 1);
     }
 
@@ -95,14 +95,14 @@ public class UtenteTest {
     public void testRimuoviPrestito() {
         Matricola m = new Matricola("0612708796");
         Utente utente = new Utente("Luisa", "Genovese", m, "l.genovese20@studenti.unisa.it");
-        
+
         // MODIFICARE
         Prestito p = new Prestito(m, null, null, null);
-        
+
         utente.aggiungiPrestito(p);
         utente.rimuoviPrestito(p);
-        
-        assertFalse(utente.getPrestitiAttivi().contains(p));  
+
+        assertFalse(utente.getPrestitiAttivi().contains(p));
         assertEquals(utente.getPrestitiAttivi().size(), 0);
     }
 
@@ -123,14 +123,14 @@ public class UtenteTest {
     public void testEquals() {
         Matricola m1 = new Matricola("0612708796");
         Utente u1 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-        
+
         // Test utente uguale:
         Utente u2 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-        
+
         // Test utente diverso:
         Matricola m2 = new Matricola("0612708797");
         Utente u3 = new Utente("Luisa", "Genovese", m2, "l.genovese20@studenti.unisa.it");
-        
+
         assertTrue(u1.equals(u2));
         assertFalse(u1.equals(u3));
     }
@@ -140,30 +140,31 @@ public class UtenteTest {
         Matricola m1 = new Matricola("0612708796");
         Matricola m2 = new Matricola("0612708797");
         Matricola m3 = new Matricola("0612708795");
-        
+
         Utente u1 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-        
+
         // Test utente uguale:
         Utente u2 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-        
+
         // Test utente cognome maggiore:
         Utente u3 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-        
+
         // Test utente cognome minore:
         Utente u4 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-        
+
         // Test utente cognome uguale, nome maggiore:
         Utente u5 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-        
+
         // Test utente cognome uguale, nome minore:
         Utente u6 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-        
+
         // Test utente nome e cognome uguali, matricola maggiore:
         Utente u7 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-        
+
         // Test utente nome e cognome uguali, matricola minore:
         Utente u8 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-        
+
+        assertTrue(u1.compareTo(u2) == 0);
     }
-    
+
 }
