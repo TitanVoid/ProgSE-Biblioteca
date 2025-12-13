@@ -76,7 +76,23 @@ public class RegistrazionePrestitoController extends BaseController implements I
             return;
         }
 
-        biblioteca.getPrestiti().aggiungi(new Prestito(new Matricola(matricolaUtente), new ISBN(isbnLibro), LocalDate.now(), LocalDate.parse(dataScadenzaPrestito)));
+        Matricola mat =  new Matricola(matricolaUtente);
+        ISBN isb = new ISBN(isbnLibro);
+        Utente u = biblioteca.getUtenti().ottieni(mat);
+        Libro l = biblioteca.getLibri().ottieni(isb);
+        if (u.getPrestitiAttivi().size() >= 3) {
+            showWarningAlert("Prestito Non Consentito", "L'utente inserito ha già 3 prestiti attivi!");
+            return;
+        }
+        if (l.getCopieDisponibili() <= 0){
+            showWarningAlert("Prestito Non Consentito", "Il libro inserito non ha copie disponibili!");
+            return;
+        }
+
+        Prestito p = new Prestito(mat, isb, LocalDate.now(), LocalDate.parse(dataScadenzaPrestito));
+        biblioteca.getPrestiti().aggiungi(p);
+        u.getPrestitiAttivi().add(p);
+        l.setCopieDisponibili(l.getCopieDisponibili() - 1);
         PrestitiController prestitiController = (PrestitiController) parentController;
         prestitiController.refreshLoans();
         Stage stage = (Stage) matricola.getScene().getWindow();

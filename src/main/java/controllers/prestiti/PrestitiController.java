@@ -18,6 +18,7 @@ import models.servizi.Filtro;
 
 import java.io.IOException;
 import java.net.URL;
+import java.time.LocalDate;
 import java.util.*;
 
 public class PrestitiController extends BaseController implements Initializable {
@@ -73,7 +74,7 @@ public class PrestitiController extends BaseController implements Initializable 
                     } else {
                         setText(item);
                         Prestito prestito = getTableView().getItems().get(getIndex());
-                        if (prestito.getDataRestituzione() == null && prestito.getDataScadenza().isBefore(java.time.LocalDate.now())) {
+                        if (prestito.getDataRestituzione() == null && prestito.getDataScadenza().isBefore(LocalDate.now())) {
                             setStyle("-fx-text-fill: red; -fx-font-weight: bold;");
                         } else {
                             setStyle("");
