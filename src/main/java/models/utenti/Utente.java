@@ -15,7 +15,7 @@ import java.util.ArrayList;
  * @see Prestito
  */
 
-public class Utente extends Persona implements Comparable<Utente> {
+public class Utente extends Persona {
 
     private final Matricola matricolaUtente;
     private String email;
@@ -101,36 +101,37 @@ public class Utente extends Persona implements Comparable<Utente> {
      * @param[in] cognome Cognome dell'utente.
      * @param[in] matricolaUtente Matricola dell'utente.
      * @param[in] email Email dell'utente.
-     * @return true se il formato dei campi dell'utente è corretto, lancia eccezione altrimenti.
+     * @return true se il formato dei campi dell'utente è corretto, lancia eccezione
+     *         altrimenti.
      */
     public static boolean verificaUtente(String nome, String cognome, String matricolaUtente, String email) {
-        String msg= "";
-        if(!Persona.verificaNome(nome)){
-            msg = msg+ "0";
-        }else {
-            msg = msg+ "1";
+        String msg = "";
+        if (!Persona.verificaNome(nome)) {
+            msg = msg + "0";
+        } else {
+            msg = msg + "1";
         }
 
-        if(!Persona.verificaCognome(cognome)){
-            msg = msg+ "0";
-        }else  {
-            msg = msg+ "1";
+        if (!Persona.verificaCognome(cognome)) {
+            msg = msg + "0";
+        } else {
+            msg = msg + "1";
         }
 
-        if(!Matricola.verificaMatricola(matricolaUtente)){
-            msg = msg+ "0";
-        }else{
-            msg = msg+ "1";
+        if (!Matricola.verificaMatricola(matricolaUtente)) {
+            msg = msg + "0";
+        } else {
+            msg = msg + "1";
         }
 
-        if(!Utente.verificaEmail(email)){
-            msg = msg+ "0";
-        }else  {
-            msg = msg+ "1";
+        if (!Utente.verificaEmail(email)) {
+            msg = msg + "0";
+        } else {
+            msg = msg + "1";
         }
 
-        String check= "1111";
-        if(!msg.equals(check)){
+        String check = "1111";
+        if (!msg.equals(check)) {
             throw new FormatoCampiErratoException(msg);
         }
         return true;
@@ -175,13 +176,11 @@ public class Utente extends Persona implements Comparable<Utente> {
      *         lessicografico.
      */
     @Override
-    public int compareTo(Utente u) {
-        if (this.getCognome().equals(u.getCognome())) {
-            if (this.getNome().equals(u.getNome())) {
-                return this.matricolaUtente.compareTo(u.matricolaUtente);
-            }
-            return this.getNome().compareTo(u.getNome());
-        }
-        return this.getCognome().compareTo(u.getCognome());
+    public int compareTo(Persona p) {
+        if (super.compareTo(p) == 0) {
+            Utente u = (Utente) p;
+            return this.getMatricolaUtente().compareTo(u.getMatricolaUtente());
+        } else
+            return super.compareTo(p);
     }
 }

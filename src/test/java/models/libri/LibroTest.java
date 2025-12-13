@@ -18,10 +18,10 @@ import org.junit.Before;
  */
 public class LibroTest {
     private Libro l;
-    
+
     public LibroTest() {
     }
-    
+
     @Before
     public void setUp() {
         ISBN isbn = new ISBN("883010471X");
@@ -32,16 +32,15 @@ public class LibroTest {
     public void testCostruttoreLibro() {
         ISBN isbn = new ISBN("883010471X");
         Libro libro = new Libro("Il Signore degli Anelli", 2020, isbn, 5, "J.R.R. Tolkien");
-        
+
         assertNotNull(libro);
         assertEquals(libro.getTitolo(), "Il Signore degli Anelli");
-        // CHIEDERE A BRANCACCIO
-        // assertTrue(libro.getAutori().contains(new Autore("J.R.R.", "Tolkien")));
+        assertTrue(libro.getAutori().contains(new Autore("J.R.R.", "Tolkien")));
         assertEquals(libro.getAnnoPubblicazione(), 2020);
         assertEquals(libro.getCodiceISBNLibro(), isbn);
         assertEquals(libro.getCopieDisponibili(), 5);
     }
-    
+
     @Test
     public void testGetTitolo() {
         assertEquals(l.getTitolo(), "Il Signore degli Anelli");
@@ -69,51 +68,43 @@ public class LibroTest {
 
     @Test
     public void testSetTitolo() {
-        Libro libro = new Libro("Il Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
-        
-        libro.setTitolo("Lo Hobbit");
-        
-        assertEquals(libro.getTitolo(), "Lo Hobbit");
+        l.setTitolo("Lo Hobbit");
+
+        assertEquals(l.getTitolo(), "Lo Hobbit");
     }
 
     @Test
     public void testSetAnnoPubblicazione() {
-        Libro libro = new Libro("Il Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
-        
-        libro.setAnnoPubblicazione(2018);
-        
-        assertEquals(libro.getAnnoPubblicazione(), 2018);
+        l.setAnnoPubblicazione(2018);
+
+        assertEquals(l.getAnnoPubblicazione(), 2018);
     }
 
     @Test
     public void testSetCopieDisponibili() {
-        Libro libro = new Libro("Il Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
-        
-        libro.setCopieDisponibili(10);
-        
-        assertEquals(libro.getCopieDisponibili(), 10);
+        l.setCopieDisponibili(10);
+
+        assertEquals(l.getCopieDisponibili(), 10);
     }
 
     @Test
     public void testAggiungiAutore() {
-        Libro libro = new Libro("Il Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
         Autore autore = new Autore("Mario", "Rossi");
-        
-        libro.aggiungiAutore(autore);
-        
-        assertTrue(libro.getAutori().contains(autore));
-        assertEquals(libro.getAutori().size(), 2);
+
+        l.aggiungiAutore(autore);
+
+        assertTrue(l.getAutori().contains(autore));
+        assertEquals(l.getAutori().size(), 2);
     }
 
     @Test
     public void testRimuoviAutore() {
-        Libro libro = new Libro("Il Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
         Autore autore = new Autore("J.R.R.", "Tolkien");
-        
-        libro.rimuoviAutore(autore);
-        
-        assertFalse(libro.getAutori().contains(autore));
-        // assertEquals(libro.getAutori().size(), 0);
+
+        l.rimuoviAutore(autore);
+
+        assertFalse(l.getAutori().contains(autore));
+        assertEquals(l.getAutori().size(), 0);
     }
 
     @Test
@@ -124,32 +115,30 @@ public class LibroTest {
     @Test
     public void testEquals() {
         Libro l1 = new Libro("Il Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
-        Libro l2 = new Libro("Il Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
-        Libro l3 = new Libro("Il Signore degli Anelli", 2020, new ISBN("983010471X"), 5, "J.R.R. Tolkien");
-        
-        assertEquals(l1, l2);
-        assertNotEquals(l1, l3);
+        Libro l2 = new Libro("Il Signore degli Anelli", 2020, new ISBN("983010471X"), 5, "J.R.R. Tolkien");
+
+        assertEquals(l, l1);
+        assertNotEquals(l, l2);
     }
 
     @Test
     public void testCompareTo() {
-        Libro l1 = new Libro("Il Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
         // Test libro uguale:
-        Libro l2 = new Libro("Il Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
+        Libro l1 = new Libro("Il Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
         // Test libro con titolo maggiore:
-        Libro l3 = new Libro("Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
+        Libro l2 = new Libro("Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
         // Test libro con ISBN maggiore:
-        Libro l4 = new Libro("Il Signore degli Anelli", 2020, new ISBN("983010471X"), 5, "J.R.R. Tolkien");
+        Libro l3 = new Libro("Il Signore degli Anelli", 2020, new ISBN("983010471X"), 5, "J.R.R. Tolkien");
         // Test libro con titolo minore:
-        Libro l5 = new Libro("Al Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
+        Libro l4 = new Libro("Al Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
         // Test libro con ISBN minore:
-        Libro l6 = new Libro("Il Signore degli Anelli", 2020, new ISBN("783010471X"), 5, "J.R.R. Tolkien");
-        
-        assertTrue(l1.compareTo(l2) == 0);
-        assertTrue(l1.compareTo(l3) < 0);
-        assertTrue(l1.compareTo(l4) < 0);
-        assertTrue(l1.compareTo(l5) > 0);
-        assertTrue(l1.compareTo(l6) > 0);     
+        Libro l5 = new Libro("Il Signore degli Anelli", 2020, new ISBN("783010471X"), 5, "J.R.R. Tolkien");
+
+        assertTrue(l.compareTo(l1) == 0);
+        assertTrue(l.compareTo(l2) < 0);
+        assertTrue(l.compareTo(l3) < 0);
+        assertTrue(l.compareTo(l4) > 0);
+        assertTrue(l.compareTo(l5) > 0);
     }
-    
+
 }

@@ -6,10 +6,11 @@ import java.io.Serializable;
  * @class Persona
  * @brief Classe che incapsula le informazioni di una persona.
  *
- *  Rappresenta una persona generica con nome e cognome, fornendo metodi di accesso, modifica e verifica.
+ *        Rappresenta una persona generica con nome e cognome, fornendo metodi
+ *        di accesso, modifica e verifica.
  *
  */
-public abstract class Persona implements Serializable {
+public abstract class Persona implements Serializable, Comparable<Persona> {
 
     private String nome;
     private String cognome;
@@ -25,7 +26,7 @@ public abstract class Persona implements Serializable {
         this.nome = nome;
         this.cognome = cognome;
     }
-    
+
     /**
      * @brief Restituisce il nome.
      *
@@ -66,13 +67,14 @@ public abstract class Persona implements Serializable {
 
     /**
      * @brief Verifica la correttezza del formato del nome.
-
+     * 
      * @param[in] nome Nome da verificare.
      * @return true se il formato del nome è valido, false altrimenti.
      *
      */
-    public static boolean verificaNome(String nome){
-        if(nome == null || !nome.matches("^\\D{3,25}$")) return false;
+    public static boolean verificaNome(String nome) {
+        if (nome == null || !nome.matches("^\\D{3,25}$"))
+            return false;
         return true;
     }
 
@@ -84,13 +86,35 @@ public abstract class Persona implements Serializable {
      * @return true se il formato del cognome è valido, false altrimenti.
      *
      */
-    public static boolean verificaCognome(String cognome){
-        if(cognome == null || !cognome.matches("^\\D{3,25}$")) return false;
+    public static boolean verificaCognome(String cognome) {
+        if (cognome == null || !cognome.matches("^\\D{3,25}$"))
+            return false;
         return true;
     }
 
     @Override
-    public String toString(){
+    public boolean equals(Object o) {
+        if (o == null)
+            return false;
+        if (this == o)
+            return true;
+        if (o.getClass() != this.getClass())
+            return false;
+
+        Persona p = (Persona) o;
+        return this.nome.equals(p.nome) && this.cognome.equals(p.cognome);
+    }
+
+    @Override
+    public int compareTo(Persona p) {
+        if (this.cognome.equals(p.cognome)) {
+            return this.nome.compareTo(p.nome);
+        }
+        return this.cognome.compareTo(p.cognome);
+    }
+
+    @Override
+    public String toString() {
         return this.nome + " " + this.cognome;
     }
 }
