@@ -154,4 +154,9 @@ public class Prestito implements Comparable<Prestito>, Serializable {
     public int compareTo(Prestito p) {
         return this.dataScadenza.compareTo(p.dataScadenza);
     }
+
+    @Override
+    public String toString() {
+        return "Prestito: " + codiceISBNLibro.getCodiceISBN() + "Scade: " + dataScadenza.toString();
+    }
 }
