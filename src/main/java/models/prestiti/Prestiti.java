@@ -56,12 +56,8 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
      */
     @Override
     public void rimuovi(Prestito prestito) {
-        // Rimuoviamo il prestito attivo dalla lista dei prestiti.
-        prestiti.remove(prestito);
-        // Impostiamo la data di restituzione alla data attuale.
-        prestito.setDataRestituzione(LocalDate.now());
-        // Richiamiamo l'aggiunta sul prestito estinto (usando il metodo "aggiungi" in modo tale da inserirlo in ordine) 
-        aggiungi(prestito);
+        int index = Collections.binarySearch(prestiti, prestito);
+        prestiti.get(index).setDataRestituzione(LocalDate.now());
     }
 
     /**
@@ -71,9 +67,8 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
      */
     @Override
     public void modifica(Prestito originale, Prestito modificato) {
-        // Rimuoviamo il prestito originale, prima delle modifiche, dalla lista dei prestiti. 
-        prestiti.remove(originale);
-        // Richiamiamo l'aggiunta sul prestito coi campi modificati (usando il metodo "aggiungi" in modo tale da inserirlo in ordine).
+        int index = Collections.binarySearch(prestiti, originale);
+        prestiti.remove(index);
         aggiungi(modificato);
     }
 
