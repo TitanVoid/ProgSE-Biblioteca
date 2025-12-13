@@ -170,7 +170,7 @@ public class Utente extends Persona {
      *        - In primo luogo, in base al loro cognome;
      *        - A parità di cognome, in base al loro nome;
      *        - A parità dei campi precedenti, in base alla loro matricola.
-     * @param[in] u Utente da confrontare con l'utente corrente.
+     * @param[in] p Utente da confrontare con l'utente corrente.
      * @return Valore minore di zero, pari a zero oppure maggiore di zero se
      *         l'utente corrente precede, è uguale o segue l'utente u nell'ordine
      *         lessicografico.
