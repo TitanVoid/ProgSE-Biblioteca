@@ -142,6 +142,24 @@ public class Prestito implements Comparable<Prestito>, Serializable {
         }
 
     }
+    
+    @Override
+    public boolean equals(Object o) {
+        if (o == null) return false;
+        if (this == o) return true;
+        if (this.getClass() != o.getClass()) return false;
+        
+        Prestito p = (Prestito) o;
+        
+        if (!this.matricolaUtente.equals(p.matricolaUtente)) return false; 
+        if (!this.codiceISBNLibro.equals(p.codiceISBNLibro)) return false; 
+        if (!this.dataInizio.equals(p.dataInizio)) return false;
+        if (!this.dataScadenza.equals(p.dataScadenza)) return false; 
+        
+        if (this.dataRestituzione == p.dataRestituzione || this.dataRestituzione.equals(p.dataRestituzione)) return true;
+        
+        return false;
+    }
 
     /**
      * @brief Confronta due prestiti in base alla loro data di scadenza.
