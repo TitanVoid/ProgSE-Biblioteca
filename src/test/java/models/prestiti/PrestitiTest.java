@@ -21,7 +21,7 @@ import org.junit.Before;
  * @author luisagenovese
  */
 public class PrestitiTest {
-    public Prestiti prestiti;
+    private Prestiti prestiti;
     
     public PrestitiTest() {
     }
