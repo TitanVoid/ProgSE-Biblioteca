@@ -5,6 +5,7 @@
  */
 package models.utenti;
 
+import models.FormatoCampiErratoException;
 import models.Matricola;
 import models.prestiti.Prestito;
 import org.junit.Test;
@@ -70,7 +71,7 @@ public class UtenteTest {
     @Test
     public void testAggiungiPrestito() {
         Matricola m = new Matricola("0612708796");
-        // MODIFICARE
+        
         Prestito p = new Prestito(m, null, null, null);
 
         u.aggiungiPrestito(p);
@@ -82,7 +83,7 @@ public class UtenteTest {
     @Test
     public void testRimuoviPrestito() {
         Matricola m = new Matricola("0612708796");
-        // MODIFICARE
+       
         Prestito p = new Prestito(m, null, null, null);
 
         u.aggiungiPrestito(p);
@@ -102,7 +103,17 @@ public class UtenteTest {
 
     @Test
     public void testVerificaUtente() {
-        // CHIEDERE A BRANCACCIO
+        // Test con tutti i campi validi:
+        assertTrue(Utente.verificaUtente("Luisa", "Genovese", "0612708796", "l.genovese20@studenti.unisa.it"));
+    
+        // Test con il nome non valido:
+        assertThrows(FormatoCampiErratoException.class, () -> { Utente.verificaUtente("Lu", "Genovese", "0612708796", "l.genovese20@studenti.unisa.it"); });
+        // Test con il cognome non valido:
+        assertThrows(FormatoCampiErratoException.class, () -> { Utente.verificaUtente("Luisa", "Ge", "0612708796", "l.genovese20@studenti.unisa.it"); });
+        // Test con la matricola non valida:
+        assertThrows(FormatoCampiErratoException.class, () -> { Utente.verificaUtente("Luisa", "Genovese", "06127", "l.genovese20@studenti.unisa.it"); });
+        // Test con l'email non valida:
+        assertThrows(FormatoCampiErratoException.class, () -> { Utente.verificaUtente("Luisa", "Genovese", "0612708796", "lgenovese20@studenti.unisa.it"); });
     }
 
     @Test
