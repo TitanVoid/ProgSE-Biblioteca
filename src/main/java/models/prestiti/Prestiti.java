@@ -4,6 +4,7 @@ import models.servizi.Archiviabile;
 import models.servizi.Filtro;
 
 import java.io.Serializable;
+import java.time.LocalDate;
 import java.util.List;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -50,26 +51,29 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
     }
 
     /**
-     * @brief Rimuove un prestito dalla lista dei prestiti.
-     * @param[in] prestito Prestito da rimuovere.
+     * @brief Estingue un prestito.
+     * @param[in] prestito Prestito da estinguere.
      */
     @Override
     public void rimuovi(Prestito prestito) {
-        int index = Collections.binarySearch(prestiti, prestito);
-        if (index < 0) {
-            System.out.println("Prestito non presente nella lista.");
-        } else {
-            prestiti.remove(index);
-        }
+        // Rimuoviamo il prestito attivo dalla lista dei prestiti.
+        prestiti.remove(prestito);
+        // Impostiamo la data di restituzione alla data attuale.
+        prestito.setDataRestituzione(LocalDate.now());
+        // Richiamiamo l'aggiunta sul prestito estinto (usando il metodo "aggiungi" in modo tale da inserirlo in ordine) 
+        aggiungi(prestito);
     }
 
     /**
      * @brief Modifica un prestito esistente.
+     * @param[in] originale Prestito senza modifiche.
      * @param[in] modificato Nuovo prestito modificato.
      */
     @Override
     public void modifica(Prestito originale, Prestito modificato) {
-        rimuovi(originale);
+        // Rimuoviamo il prestito originale, prima delle modifiche, dalla lista dei prestiti. 
+        prestiti.remove(originale);
+        // Richiamiamo l'aggiunta sul prestito coi campi modificati (usando il metodo "aggiungi" in modo tale da inserirlo in ordine).
         aggiungi(modificato);
     }
 
