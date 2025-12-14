@@ -6,7 +6,7 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="12" xmlns="http://javafx.com/javafx/8.0.441" fx:controller="controllers.utenti.RimozioneUtenteController" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" spacing="12" xmlns="http://javafx.com/javafx/8.0.441" fx:controller="controllers.RimozioneController" xmlns:fx="http://javafx.com/fxml/1">
     <padding>
         <Insets bottom="24" left="28" right="28" top="24" />
     </padding>
