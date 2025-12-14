@@ -62,9 +62,9 @@ public class UtentiController extends BaseController implements Initializable {
         });
         emailClm.setCellValueFactory(new PropertyValueFactory<>("email"));
         prestitiAttiviClm.setCellValueFactory(cell -> {
-            StringBuilder prAt = new StringBuilder();
+            StringJoiner prAt = new StringJoiner(", ");
             for (Prestito a : cell.getValue().getPrestitiAttivi()){
-                prAt.append(a.toString()).append(", ");
+                prAt.add(a.toString());
             }
             return new SimpleStringProperty(prAt.toString());
         });
