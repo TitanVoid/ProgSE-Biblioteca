@@ -6,13 +6,13 @@ import java.io.Serializable;
  * @class Persona
  * @brief Classe che incapsula le informazioni di una persona.
  *
- *        La Classe rappresenta una generica persona con nome e cognome,
+ *        La classe rappresenta una generica persona con nome e cognome,
  *        fornendo metodi di accesso, modifica e verifica dei propri attributi.
  *        Inoltre, essa implementa l'interfaccia Comparable<Persona>,
  *        consentendo di confrontare tra di loro oggetti di tipo Persona sulla
  *        base del proprio cognome e, a parità di cognome, del nome.
  * 
- *        Si specializza in Utente ed Autore.
+ *        Si specializza nelle classi Utente ed Autore.
  * 
  * @see Utente
  * @see Autore
@@ -26,7 +26,8 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
      * @brief Costruttore.
      * 
      *        Costruisce un nuovo oggetto Persona a partire dalle stringhe fornite
-     *        come parametri in ingresso.
+     *        come parametri in ingresso, che ne rappresentano il nome ed il
+     *        cognome.
      * 
      * @pre Le stringhe passate come parametri devono corrispondere ad un nome e ad
      *      un cognome validi.
