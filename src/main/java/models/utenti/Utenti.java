@@ -1,6 +1,7 @@
 package models.utenti;
 
 import models.Matricola;
+import models.OggettoGiaPresenteException;
 import models.servizi.Archiviabile;
 import models.servizi.Mappabile;
 
@@ -13,11 +14,23 @@ import java.util.Map;
 
 /**
  * @class Utenti
- * @brief Gestisce una lista e una mappa di utenti.
+ * 
+ * @brief Classe che rappresenta l'archivio degli utenti della biblioteca.
+ * 
+ *        La classe definisce i seguenti metodi fondamentali per la gestione e
+ *        manipolazione dell'archivio degli utenti:
+ *        - Aggiunta di un nuovo utente;
+ *        - Rimozione di un utente;
+ *        - Modifica di un utente;
+ *        - Ricerca di uno o più utenti.
+ * 
+ *        Le prime tre funzionalità vengono ereditate implementando
+ *        l'interfaccia Archiviabile.
+ *        La classe eredita inoltre i metodi di utilità messi a disposizione
+ *        dall'interfaccia Mappabile.
+ * 
  * @see Utente
- * @implements Archiviabile<Utente></Utente>
  * @see Archiviabile
- * @implements Mappabile<String, Utente>
  * @see Mappabile
  */
 public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente>, Serializable {
@@ -27,6 +40,12 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
 
     /**
      * @brief Costruttore.
+     * 
+     *        Costruisce un nuovo oggetto Utenti, istanziando al suo interno due
+     *        collezioni di oggetti di tipo Utente.
+     *
+     * @post L'oggetto Utenti è creato.
+     * @post La lista degli utenti è vuota.
      */
     public Utenti() {
         this.utenti = new ArrayList<>();
@@ -34,19 +53,23 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
     }
 
     /**
-     * @brief Restituisce la lista degli utenti.
-     * @return Lista degli utenti.
+     * @brief Metodo Getter per la lista degli utenti.
+     * @return La lista degli utenti.
      */
     public List<Utente> getListaUtenti() {
         return utenti;
     }
 
     /**
-     * @brief Ricerca uno o più utenti in base al loro cognome e alla loro
-     *        matricola, verificando se almeno uno di questi due campi contenga una
-     *        determinata stringa.
-     * @param[in] input Criterio di ricerca.
-     * @return Lista di utenti che soddisfano il criterio di ricerca.
+     * @brief Ricerca di uno o più utenti.
+     * 
+     *        Questo metodo effettua la ricerca di uno o più utenti in base al loro
+     *        cognome e alla loro matricola, verificando se almeno uno di questi due
+     *        campi contiene la stringa passata come parametro.
+     * 
+     * @param[in] input Stringa che rappresenta il criterio di ricerca.
+     * 
+     * @return La lista di utenti che soddisfano il criterio di ricerca.
      */
     public List<Utente> ricercaUtenti(String input) {
         List<Utente> l = new ArrayList<>();
@@ -62,8 +85,14 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
     }
 
     /**
-     * @brief Aggiunge un utente alla lista.
+     * @brief Aggiunge un nuovo utente all'archivio.
+     * 
+     * @post L'archivio contiene l'utente passato come parametro.
+     * 
      * @param[in] utente Utente da aggiungere.
+     * 
+     * @throws OggettoGiaPresenteException nel caso in cui si provi ad aggiungere un
+     *                                     utente già presente nell'archivio.
      */
     @Override
     public void aggiungi(Utente utente) throws UtenteGiaPresenteException {
@@ -80,7 +109,11 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
     }
 
     /**
-     * @brief Rimuove un utente dalla lista.
+     * @brief Rimuove un utente dall'archivio.
+     * 
+     * @post L'utente passato come parametro viene rimosso con successo
+     *       dall'archivio.
+     * 
      * @param[in] utente Utente da rimuovere.
      */
     @Override
@@ -91,7 +124,10 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
     }
 
     /**
-     * @brief Modifica un utente esistente.
+     * @brief Modifica un utente presente nell'archivio.
+     * 
+     * @post L'utente viene aggiornato all'interno dell'archivio con successo.
+     * 
      * @param[in] originale Utente da modificare.
      * @param[in] modificato Utente modificato.
      */
@@ -106,10 +142,13 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
     }
 
     /**
-     * @brief Verifica se esiste l'utente che corrisponde a una determinata
-     *        matricola.
-     * @param[in] chiave Matricola del utente.
-     * @return true se esiste, false altrimenti.
+     * @brief Verifica se l'utente con la matricola specificata esiste
+     *        nell'archivio.
+     * 
+     * @param[in] chiave Matricola dell'utente da cercare.
+     * 
+     * @return true se l'utente che corrisponde a quella matricola esiste, false
+     *         altrimenti.
      */
     @Override
     public boolean esisteChiave(Matricola chiave) {
@@ -117,9 +156,12 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
     }
 
     /**
-     * @brief Ottiene un utente tramite la sua matricola.
-     * @param chiave Matricola dell'utente che si vuole ottenere.
-     * @return Utente associato alla matricola, null altrimenti.
+     * @brief Restituisce l'utente associato ad una matricola.
+     * 
+     * @param[in] chiave Matricola dell'utente da ottenere.
+     * 
+     * @return L'utente associato alla matricola, oppure null se non presente
+     *         nell'archivio.
      */
     @Override
     public Utente ottieni(Matricola chiave) {
