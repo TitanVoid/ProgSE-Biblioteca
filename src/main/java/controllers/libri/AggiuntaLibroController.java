@@ -44,7 +44,6 @@ public class AggiuntaLibroController extends BaseController {
             stage.close();
         } catch (FormatoCampiErratoException ex){
             String maschera = ex.getMessage();
-            System.out.println(maschera);
             String[] campi = {"Titolo - Massimo 100 caratteri", "Autore/i - Nome Cognome, Nome Cognome ...", "ISBN - 13 o 10 cifre numeriche (Rispetta standard ISBN reale)", "Copie Disponibili - Numero intero tra 0 e 100", "Anno Pubblicazione - Numero intero tra 0 e anno corrente"};
             StringBuilder sb = new StringBuilder("Attenzione, i seguenti campi sono errati:\n");
             for (int i = 0; i < maschera.length(); i++) {
