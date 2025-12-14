@@ -2,24 +2,35 @@ package models.servizi;
 
 /**
  * @interface Mappabile
- * @brief Interfaccia per la gestione di una collezione di elementi mappabili.
+ * 
+ * @brief Interfaccia generica per la gestione di un archivio di elementi
+ *        mappabili.
+ * 
+ *        L'interfaccia definisce una serie di operazioni per accedere agli
+ *        elementi di un archivio tramite una chiave univoca.
  *
- * @tparam K Tipo della chiave.
- * @tparam V Tipo del valore.
+ * @param <K> Tipo della chiave.
+ * @param <V> Tipo degli elementi contenuti nell'archivio.
  */
 public interface Mappabile<K, V> {
 
     /**
-     * @brief Verifica se una chiave esiste nell'archivio.
-     * @param[in] key La chiave da verificare.
-     * @return true se la chiave esiste, false altrimenti.
+     * @brief Verifica se l'elemento con la chiave specificata esiste nell'archivio.
+     * 
+     * @param[in] key Chiave dell'elemento da cercare.
+     * 
+     * @return true se l'elemento che corrisponde a quella chiave esiste, false
+     *         altrimenti.
      */
     public boolean esisteChiave(K key);
 
     /**
-     * @brief Restituisce l'elemento associato alla chiave.
-     * @param[in] key La chiave dell'elemento da recuperare.
-     * @return L'elemento associato alla chiave, null se non esiste.
+     * @brief Restituisce l'elemento associato ad una chiave.
+     * 
+     * @param[in] key Chiave dell'elemento da ottenere.
+     * 
+     * @return L'elemento associato alla chiave, oppure null se non presente
+     *         nell'archivio.
      */
     public V ottieni(K key);
 
