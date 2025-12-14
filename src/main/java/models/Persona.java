@@ -11,7 +11,11 @@ import java.io.Serializable;
  *        Inoltre, essa implementa l'interfaccia Comparable<Persona>,
  *        consentendo di confrontare tra di loro oggetti di tipo Persona sulla
  *        base del proprio cognome e, a parità di cognome, del nome.
- *
+ * 
+ *        Si specializza in Utente ed Autore.
+ * 
+ * @see Utente
+ * @see Autore
  */
 public abstract class Persona implements Serializable, Comparable<Persona> {
 
