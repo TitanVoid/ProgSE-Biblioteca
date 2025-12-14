@@ -10,9 +10,24 @@ import java.util.ArrayList;
 
 /**
  * @class Utente
+ * 
  * @brief Classe che rappresenta un utente della biblioteca.
+ * 
+ *        La classe contiene le informazioni associate ad un utente della
+ *        biblioteca, ovvero:
+ *        - Nome;
+ *        - Cognome;
+ *        - Matricola;
+ *        - Email;
+ *        - Lista dei prestiti attivi.
+ * 
+ *        Ogni Utente è identificato univocamente dalla propria Matricola.
+ * 
+ *        È una specializzazione di Persona, ed in quanto tale ne eredita i
+ *        metodi e gli attributi.
+ * 
  * @see Matricola
- * @see Prestito
+ * @see Persona
  */
 
 public class Utente extends Persona {
@@ -23,62 +38,87 @@ public class Utente extends Persona {
 
     /**
      * @brief Costruttore.
-     * @param[in] nome Nome dell'utente.
-     * @param[in] cognome Cognome dell'utente.
+     * 
+     *        Costruisce un nuovo oggetto Matricola a partire dai parametri forniti
+     *        in ingresso, che ne rappresentano rispettivamente il nome, il
+     *        cognome, la matricola e l'indirizzo email.
+     * 
+     * @pre I parametri devono avere un formato valido.
+     * 
+     * @post L'oggetto Matricola è creato.
+     *
+     * @param[in] nome Stringa di caratteri che compone il nome dell'utente.
+     * @param[in] cognome Stringa di caratteri che compone il cognome dell'utente.
      * @param[in] matricolaUtente Matricola identificativa dell'utente.
-     * @param[in] email Email dell'utente.
+     * @param[in] email Stringa di caratteri che compone l'indirizzo email
+     *            dell'utente.
      */
     public Utente(String nome, String cognome, Matricola matricolaUtente, String email) {
         super(nome, cognome);
+        assert (verificaUtente(nome, cognome, matricolaUtente.getMatricola(), email));
         this.matricolaUtente = matricolaUtente;
         this.email = email;
         this.prestitiAttivi = new ArrayList<>();
     }
 
     /**
-     * @brief Restituisce la matricola dell'utente.
-     * @return Matricola dell'utente.
+     * @brief Metodo Getter per la matricola di un utente.
+     * @return La matricola associata ad un utente.
      */
     public Matricola getMatricolaUtente() {
         return matricolaUtente;
     }
 
     /**
-     * @brief Restituisce l'email dell'utente.
-     * @return Email dell'utente.
+     * @brief Metodo Getter per la stringa di caratteri dell'indirizzo email di un
+     *        utente.
+     * @return La stringa di caratteri che compone l'indirizzo email dell'utente.
      */
     public String getEmail() {
         return email;
     }
 
     /**
-     * @brief Restituisce la lista dei prestiti attivi associati ad un utente.
-     * @return Lista dei prestiti attivi associati all'utente.
+     * @brief Metodo Getter per la lista di prestiti associati ad un utente.
+     * @return La lista dei prestiti attivi associati all'utente.
      */
     public List<Prestito> getPrestitiAttivi() {
         return prestitiAttivi;
     }
 
     /**
-     * @brief Imposta l'email dell'utente.
-     * @param[in] email Email da impostare.
+     * @brief Metodo Setter per la stringa di caratteri dell'indirizzo email di un
+     *        utente.
+     *
+     * @pre La stringa passata come parametro deve essere un indirizzo email valido.
+     * @post L'oggetto Utente sarà modificato, impostando come suo nuovo indirizzo
+     *       email la stringa email.
+     * 
+     * @param[in] email La stringa di caratteri da impostare come nuovo indirizzo
+     *            email dell'utente.
      */
     public void setEmail(String email) {
+        assert (verificaEmail(email));
         this.email = email;
     }
 
     /**
      * @brief Aggiunge un prestito alla lista dei prestiti attivi associati ad un
      *        utente.
+     * 
+     * @pre L'utente non deve avere più di 3 prestiti attivi contemporaneamente.
+     * 
      * @param[in] prestito Prestito da aggiungere.
      */
     public void aggiungiPrestito(Prestito prestito) {
+        assert (prestitiAttivi.size() < 3);
         prestitiAttivi.add(prestito);
     }
 
     /**
      * @brief Rimuove un prestito dalla lista dei prestiti attivi associati ad un
      *        utente.
+     * 
      * @param[in] prestito Prestito da rimuovere.
      */
     public void rimuoviPrestito(Prestito prestito) {
@@ -86,23 +126,38 @@ public class Utente extends Persona {
     }
 
     /**
-     * @brief Verifica il formato di un'email.
-     * @param[in] email Email da verificare.
-     * @return true se il formato dell'email è corretto, false altrimenti.
+     * @brief Verifica il formato di un indirizzo email.
+     * 
+     *        Verifica se la stringa passata come parametro corrisponde o meno ad un
+     *        indirizzo email valido, sulla base degli standard internazionali
+     *        definiti all'interno del documento RFC 5322 (con dominio
+     *        "studenti.unisa.it").
+     * 
+     * @param[in] email Stringa da verificare.
+     * 
+     * @return true se la stringa corrisponde ad un indirizzo email valido, false
+     *         altrimenti.
      */
     public static boolean verificaEmail(String email) {
         return email.matches("^[a-z]{1}\\.[a-z0-9]{1,}@studenti\\.unisa\\.it$");
     }
 
     /**
-     * @brief Verifica il formato dei campi di un utente.
-     * @param[in] utente Utente da verificare.
-     * @param[in] nome Nome dell'utente.
-     * @param[in] cognome Cognome dell'utente.
-     * @param[in] matricolaUtente Matricola dell'utente.
-     * @param[in] email Email dell'utente.
-     * @return true se il formato dei campi dell'utente è corretto, lancia eccezione
-     *         altrimenti.
+     * @brief Verifica il formato di un utente.
+     * 
+     *        Verifica il formato di tutti i campi dell'utente, passati come
+     *        parametri in ingresso, richiamando al suo interno gli appositi metodi
+     *        di verifica.
+     * 
+     * @param[in] nome Stringa corrispondente al nome dell'utente.
+     * @param[in] cognome Stringa corrispondente al cognome dell'utente.
+     * @param[in] matricolaUtente Stringa corrispondente alla matricola dell'utente.
+     * @param[in] email Stringa corrispondente all'indirizzo email dell'utente.
+     * 
+     * @return true se il formato di tutti i campi dell'utente è corretto.
+     * 
+     * @throws FormatoCampiErratoException se si verifica un errore nel formato di
+     *                                     uno o più campi.
      */
     public static boolean verificaUtente(String nome, String cognome, String matricolaUtente, String email) {
         String msg = "";
@@ -138,8 +193,10 @@ public class Utente extends Persona {
     }
 
     /**
-     * @brief Calcola l'hashcode di un utente.
-     * @return Valore hashcode.
+     * @brief Hashcode per l'oggetto Utente.
+     *        Aderisce al contratto del metodo hashCode() di Object.
+     * 
+     * @return L'hashcode associato all'oggetto Utente.
      */
     @Override
     public int hashCode() {
@@ -147,9 +204,14 @@ public class Utente extends Persona {
     }
 
     /**
-     * @brief Verifica l'uguaglianza tra l'oggetto corrente ed un altro oggetto.
-     * @param[in] o Oggetto da confrontare.
-     * @return true se i due oggetti sono uguali, false altrimenti.
+     * @brief Verifica dell'uguaglianza tra un oggetto e l'istanza corrente.
+     *        Aderisce al contratto del metodo equals() di Object.
+     * 
+     *        Due oggetti Utente si dicono uguali se le matricole ad essi associate
+     *        sono uguali.
+     * 
+     * @param[in] o Oggetto da confrontare con l'istanza corrente.
+     * @return true se i due oggetti Utente sono uguali, false altrimenti.
      */
     @Override
     public boolean equals(Object o) {
@@ -165,22 +227,27 @@ public class Utente extends Persona {
     }
 
     /**
-     * @brief Confronta due utenti.
-     *        Il confronto è effettuato in base ai seguenti campi:
-     *        - In primo luogo, in base al loro cognome;
-     *        - A parità di cognome, in base al loro nome;
+     * @brief Confronto dell'Utente corrente con un altro Utente.
+     *        Aderisce al contratto del metodo compareTo() di Comparable<T>, ed
+     *        estende il contratto definito dalla sua superclasse Persona.
+     * 
+     *        Gli utenti vengono confrontati:
+     *        - In base all'ordine lessicografico del loro cognome;
+     *        - A parità di cognome, in base all'ordine lessicografico del loro
+     *        cognome;
      *        - A parità dei campi precedenti, in base alla loro matricola.
-     * @param[in] p Utente da confrontare con l'utente corrente.
-     * @return Valore minore di zero, pari a zero oppure maggiore di zero se
-     *         l'utente corrente precede, è uguale o segue l'utente u nell'ordine
-     *         lessicografico.
+     * 
+     * @param[in] u Utente da confrontare con l'istanza corrente.
+     * @return Valore negativo, zero o positivo se l'Utente corrente è
+     *         rispettivamente minore, uguale o maggiore dell'Utente passato come
+     *         parametro.
      */
     @Override
-    public int compareTo(Persona p) {
-        if (super.compareTo(p) == 0) {
-            Utente u = (Utente) p;
-            return this.getMatricolaUtente().compareTo(u.getMatricolaUtente());
+    public int compareTo(Persona u) {
+        if (super.compareTo(u) == 0) {
+            Utente utente = (Utente) u;
+            return this.getMatricolaUtente().compareTo(utente.getMatricolaUtente());
         } else
-            return super.compareTo(p);
+            return super.compareTo(u);
     }
 }
