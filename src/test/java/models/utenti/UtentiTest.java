@@ -59,16 +59,15 @@ public class UtentiTest {
     public void testAggiungi() throws Exception {
         // Test utente nuovo:
         Matricola m = new Matricola("0612712345");
-        Utente u1 = new Utente("Mario", "Rossi", m, "m.rossi10@studenti.unisa.it");
+        Utente u = new Utente("Mario", "Rossi", m, "m.rossi10@studenti.unisa.it");
         
-        utenti.aggiungi(u1);
+        utenti.aggiungi(u);
         
-        assertTrue(utenti.getListaUtenti().contains(u1));
+        assertTrue(utenti.getListaUtenti().contains(u));
         assertTrue(utenti.esisteChiave(m));
         
         // Test utente duplicato:
-        Utente u2 = new Utente("Mario", "Rossi", m, "m.rossi10@studenti.unisa.it");
-        assertThrows(UtenteGiaPresenteException.class, () -> { utenti.aggiungi(u2); });       
+        assertThrows(UtenteGiaPresenteException.class, () -> { utenti.aggiungi(u); });       
     }
 
     @Test
