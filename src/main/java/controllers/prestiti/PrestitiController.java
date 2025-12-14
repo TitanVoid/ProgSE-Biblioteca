@@ -48,11 +48,15 @@ public class PrestitiController extends BaseController implements Initializable 
     public void initialize(URL location, ResourceBundle resources) {
 
         estendiButton.disableProperty().bind(Bindings.createBooleanBinding(() -> {
-            Prestito p = tablePrestiti.getSelectionModel().getSelectedItem(); return p == null || p.getDataRestituzione() == null;
-            }, tablePrestiti.getSelectionModel().selectedItemProperty()));
+                Prestito p = getSelectedLoan();
+                return p == null || p.getDataRestituzione() != null;
+            }, tablePrestiti.getSelectionModel().selectedItemProperty())
+        );
         restituzioneButton.disableProperty().bind(Bindings.createBooleanBinding(() -> {
-            Prestito p = tablePrestiti.getSelectionModel().getSelectedItem(); return p == null || p.getDataRestituzione() == null;
-        }, tablePrestiti.getSelectionModel().selectedItemProperty()));
+                Prestito p = tablePrestiti.getSelectionModel().getSelectedItem();
+                return p == null || p.getDataRestituzione() != null;
+            }, tablePrestiti.getSelectionModel().selectedItemProperty())
+        );
 
         // Initialization code
         matricolaClm.setCellValueFactory(cell -> {
