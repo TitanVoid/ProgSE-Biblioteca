@@ -2,6 +2,7 @@ package controllers.prestiti;
 import controllers.BaseController;
 import controllers.libri.LibriController;
 import controllers.utenti.UtentiController;
+import javafx.beans.binding.Bindings;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -46,8 +47,12 @@ public class PrestitiController extends BaseController implements Initializable 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
 
-        estendiButton.disableProperty().bind(tablePrestiti.getSelectionModel().selectedItemProperty().isNull());
-        restituzioneButton.disableProperty().bind(tablePrestiti.getSelectionModel().selectedItemProperty().isNull());
+        estendiButton.disableProperty().bind(Bindings.createBooleanBinding(() -> {
+            Prestito p = tablePrestiti.getSelectionModel().getSelectedItem(); return p == null || p.getDataRestituzione() == null;
+            }, tablePrestiti.getSelectionModel().selectedItemProperty()));
+        restituzioneButton.disableProperty().bind(Bindings.createBooleanBinding(() -> {
+            Prestito p = tablePrestiti.getSelectionModel().getSelectedItem(); return p == null || p.getDataRestituzione() == null;
+        }, tablePrestiti.getSelectionModel().selectedItemProperty()));
 
         // Initialization code
         matricolaClm.setCellValueFactory(cell -> {
