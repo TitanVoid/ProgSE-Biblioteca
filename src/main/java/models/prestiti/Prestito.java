@@ -9,8 +9,19 @@ import java.time.LocalDate;
 
 /**
  * @class Prestito
- * @brief Classe che rappresenta un prestito di un libro effettuato ad un
- *        utente.
+ * 
+ * @brief Classe che rappresenta un prestito di un libro effettuato da un utente
+ *        della biblioteca.
+ * 
+ *        La classe contiene le informazioni associate ad un prestito, ovvero:
+ *        - Matricola dell'utente che ha richiesto il prestito;
+ *        - Codice ISBN del libro prestato;
+ *        - Data di inizio;
+ *        - Data di scadenza;
+ *        - Data di restituzione.
+ * 
+ * @see Matricola
+ * @see ISBN
  */
 public class Prestito implements Comparable<Prestito>, Serializable {
     private final Matricola matricolaUtente;
@@ -21,9 +32,16 @@ public class Prestito implements Comparable<Prestito>, Serializable {
 
     /**
      * @brief Costruttore.
+     * 
+     *        Costruisce un nuovo oggetto Prestito a partire dai parametri forniti
+     *        in ingresso.
+     *
+     * @post L'oggetto Prestito è creato e la sua data di restituzione è impostata a
+     *       null (valore per i prestiti attivi).
+     *
      * @param[in] matricolaUtente Matricola dell'utente che ha effettuato il
      *            prestito.
-     * @param[in] codiceISBNLibro ISBN del libro prestato.
+     * @param[in] codiceISBNLibro Codice ISBN del libro prestato.
      * @param[in] dataInizio Data di inizio del prestito.
      * @param[in] dataScadenza Data di scadenza del prestito.
      */
@@ -36,7 +54,8 @@ public class Prestito implements Comparable<Prestito>, Serializable {
     }
 
     /**
-     * @brief Restituisce la matricola dell'utente che ha effettuato il prestito.
+     * @brief Metodo Getter per la matricola di un utente che ha effettuato un
+     *        prestito.
      * @return Matricola dell'utente che ha effettuato il prestito.
      */
     public Matricola getMatricolaUtente() {
@@ -44,15 +63,15 @@ public class Prestito implements Comparable<Prestito>, Serializable {
     }
 
     /**
-     * @brief Restituisce l'ISBN del libro prestato.
-     * @return ISBN del libro prestato.
+     * @brief Metodo Getter per il codice ISBN di un libro prestato.
+     * @return Codice ISBN del libro prestato.
      */
     public ISBN getCodiceISBNLibro() {
         return codiceISBNLibro;
     }
 
     /**
-     * @brief Restituisce la data di inizio del prestito.
+     * @brief Metodo Getter per la data di inizio di un prestito.
      * @return Data di inizio del prestito.
      */
     public LocalDate getDataInizio() {
@@ -60,7 +79,7 @@ public class Prestito implements Comparable<Prestito>, Serializable {
     }
 
     /**
-     * @brief Restituisce la data di scadenza del prestito.
+     * @brief Metodo Getter per la data di scadenza di un prestito.
      * @return Data di scadenza del prestito.
      */
     public LocalDate getDataScadenza() {
@@ -68,7 +87,7 @@ public class Prestito implements Comparable<Prestito>, Serializable {
     }
 
     /**
-     * @brief Restituisce la data di restituzione del prestito.
+     * @brief Metodo Getter per la data di restituzione di un prestito.
      * @return Data di restituzione del prestito.
      */
     public LocalDate getDataRestituzione() {
@@ -76,23 +95,40 @@ public class Prestito implements Comparable<Prestito>, Serializable {
     }
 
     /**
-     * @brief Imposta la data di scadenza del prestito.
-     * @param[in] dataScadenza Data di scadenza da impostare.
+     * 
+     * @brief Metodo Setter per la data di scadenza di un prestito.
+     *
+     * @pre La data passata come parametro deve essere una data di scadenza valida.
+     * @post L'oggetto Prestito sarà modificato, impostando come sua nuova data di
+     *       scadenza il parametro dataScadenza.
+     * 
+     * @param[in] dataScadenza La data da impostare come nuova data di scadenza del
+     *            prestito.
      */
     public void setDataScadenza(LocalDate dataScadenza) {
+        assert (verificaDataScadenza(dataScadenza.toString()));
         this.dataScadenza = dataScadenza;
     }
 
     /**
-     * @brief Imposta la data di restituzione del prestito.
-     * @param[in] dataRestituzione Data di restituzione da impostare.
+     * 
+     * @brief Metodo Setter per la data di restituzione di un prestito.
+     *
+     * @post L'oggetto Prestito sarà modificato, impostando come sua nuova data di
+     *       restituzione il parametro dataRestituzione.
+     * 
+     * @param[in] dataRestituzione La data da impostare come nuova data di
+     *            restituzione del prestito.
      */
     public void setDataRestituzione(LocalDate dataRestituzione) {
         this.dataRestituzione = dataRestituzione;
     }
 
     /**
-     * @brief Verifica se il prestito è attivo.
+     * @brief Restituisce lo stato di un prestito.
+     * 
+     *        Un prestito può essere attivo oppure concluso.
+     * 
      * @return true se il prestito è attivo, false altrimenti.
      */
     public boolean isAttivo() {
@@ -100,9 +136,16 @@ public class Prestito implements Comparable<Prestito>, Serializable {
     }
 
     /**
-     * @brief Converte una Stringa dataScadenza in un LocalDate.
-     * @param[in] dataScadenza Stringa data di scadenza.
-     * @return data convertita.
+     * @brief Converte una stringa che rappresenta una data di scadenza in un
+     *        oggetto di tipo LocalDate.
+     * 
+     *        Metodo interno che effettua la conversione di una stringa in un
+     *        oggetto.
+     *        Viene utilizzato nel metodo verificaDataScadenza().
+     * 
+     * @param[in] autori Stringa che rappresenta la data di scadenza da convertire.
+     * 
+     * @return Una data di scadenza.
      */
     private static LocalDate StringDataScadenzaToLocalDate(String dataScadenza) {
         LocalDate data = null;
@@ -111,17 +154,22 @@ public class Prestito implements Comparable<Prestito>, Serializable {
         int anno = Integer.parseInt(y[0]);
         int mese = Integer.parseInt(y[1]);
         int giorno = Integer.parseInt(y[2]);
-        // DOVREBBE LANCIARE UNA DATETIMEEXCEPTION SE MESE GIORNO E ANNO SONO FUORI DAL
-        // RANGE CONSENTITO
         data = LocalDate.of(anno, mese, giorno);
         return data;
     }
 
     /**
-     * @brief Verifica se la data di scadenza inserita è valida.
-     * @param[in] dataScadenza Data di scadenza da verificare.
-     * @return true se la data di scadenza inserita è logicamente valida, lancia
-     *         eccezione altrimenti.
+     * @brief Verifica il formato di una data di scadenza.
+     * 
+     *        Verifica se la stringa passata come parametro corrisponde o meno ad
+     *        una data di scadenza valida, sia formalmente che logicamente.
+     * 
+     * @param[in] dataScadenza Stringa da verificare.
+     * 
+     * @return true se la Stringa corrisponde ad una data di scadenza valida.
+     * 
+     * @throws FormatoCampiErratoException se si riscontra un errore nel formato del
+     *                                     campo.
      */
     public static boolean verificaDataScadenza(String dataScadenza) {
         LocalDate data = null;
@@ -142,40 +190,71 @@ public class Prestito implements Comparable<Prestito>, Serializable {
         }
 
     }
-    
+
+    /**
+     * @brief Verifica dell'uguaglianza tra un oggetto e l'istanza corrente.
+     *        Aderisce al contratto del metodo equals() di Object.
+     * 
+     *        Due oggetti Prestito si dicono uguali se tutti i loro campi sono
+     *        uguali.
+     * 
+     * @param[in] o Oggetto da confrontare con l'istanza corrente.
+     * @return true se i due oggetti Utente sono uguali, false altrimenti.
+     */
     @Override
     public boolean equals(Object o) {
-        if (o == null) return false;
-        if (this == o) return true;
-        if (this.getClass() != o.getClass()) return false;
-        
+        if (o == null)
+            return false;
+        if (this == o)
+            return true;
+        if (this.getClass() != o.getClass())
+            return false;
+
         Prestito p = (Prestito) o;
-        
-        if (!this.matricolaUtente.equals(p.matricolaUtente)) return false; 
-        if (!this.codiceISBNLibro.equals(p.codiceISBNLibro)) return false; 
-        if (!this.dataInizio.equals(p.dataInizio)) return false;
-        if (!this.dataScadenza.equals(p.dataScadenza)) return false; 
-        
-        if (this.dataRestituzione == p.dataRestituzione) return true;
-        if ((this.dataRestituzione == null && p.dataRestituzione != null) || (this.dataRestituzione != null && p.dataRestituzione == null)) return false;
-                
-        if (this.dataRestituzione.equals(p.dataRestituzione)) return true;
-        
+
+        if (!this.matricolaUtente.equals(p.matricolaUtente))
+            return false;
+        if (!this.codiceISBNLibro.equals(p.codiceISBNLibro))
+            return false;
+        if (!this.dataInizio.equals(p.dataInizio))
+            return false;
+        if (!this.dataScadenza.equals(p.dataScadenza))
+            return false;
+
+        if (this.dataRestituzione == p.dataRestituzione)
+            return true;
+        if ((this.dataRestituzione == null && p.dataRestituzione != null)
+                || (this.dataRestituzione != null && p.dataRestituzione == null))
+            return false;
+
+        if (this.dataRestituzione.equals(p.dataRestituzione))
+            return true;
+
         return false;
     }
 
     /**
-     * @brief Confronta due prestiti in base alla loro data di scadenza.
-     * @param[in] p Prestito da confrontare col prestito corrente.
-     * @return Valore minore di zero, pari a zero oppure maggiore di zero se la data
-     *         di scadenza del prestito corrente è rispettivamente precedente,
-     *         uguale o successiva alla data di scadenza del prestito p.
+     * @brief Confronto del Prestito corrente con un altro Prestito.
+     *        Aderisce al contratto del metodo compareTo() di Comparable<T>.
+     * 
+     *        I prestiti vengono confrontati in base alla loro data di scadenza.
+     * 
+     * @param[in] p Prestito da confrontare con l'istanza corrente.
+     * @return Valore negativo, zero o positivo se il Prestito corrente è
+     *         rispettivamente minore, uguale o maggiore del Prestito passato come
+     *         parametro.
      */
     @Override
     public int compareTo(Prestito p) {
         return this.dataScadenza.compareTo(p.dataScadenza);
     }
 
+    /**
+     * @brief Rappresentazione testuale dell'oggetto corrente.
+     *        Aderisce al contratto del metodo toString() di Object.
+     * 
+     * @return Una stringa che rappresenta l'oggetto.
+     */
     @Override
     public String toString() {
         return "ISBN: " + codiceISBNLibro.getCodiceISBN() + " -> " + dataScadenza.toString();
