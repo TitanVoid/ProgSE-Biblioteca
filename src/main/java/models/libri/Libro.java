@@ -81,6 +81,14 @@ public class Libro implements Comparable<Libro>, Serializable{
     }
 
     /**
+     * @brief Restituisce la stringa di autori
+     * @return Stringa degli autori
+     */
+    public String getStringaAutori(){
+        return ListAutoriToString(autori);
+    }
+
+    /**
      * @brief Imposta il titolo del libro.
      * @param[in] titolo Nuovo titolo.
      */
@@ -103,8 +111,6 @@ public class Libro implements Comparable<Libro>, Serializable{
     public void setCopieDisponibili(int copieDisponibili) {
         this.copieDisponibili = copieDisponibili;
     }
-
-
 
     /**
      * @brief Aggiunge un autore alla lista degli autori.
@@ -140,6 +146,20 @@ public class Libro implements Comparable<Libro>, Serializable{
             al.add(new Autore(nome, cognome));
         }
         return al;
+    }
+
+    /**
+     * @brief Converte una lista di oggetti Autore in una stringa di autori
+     * @param[in] autori List<Autore> autori</Autore>
+     * @return String
+     */
+    private String ListAutoriToString(List<Autore> autori){
+        StringBuffer autoriStringa = new StringBuffer();
+        for(Autore a : autori){
+            autoriStringa.append(a.toString());
+            autoriStringa.append(", ");
+        }
+        return autoriStringa.toString();
     }
 
     /**
