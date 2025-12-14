@@ -5,8 +5,6 @@
  */
 package models.libri;
 
-import java.util.ArrayList;
-import java.util.List;
 import models.FormatoCampiErratoException;
 import models.ISBN;
 import org.junit.Test;
@@ -114,17 +112,29 @@ public class LibroTest {
         assertTrue(Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "1954", "883010471X", "5"));
 
         // Test con il nome dell'autore non valido:
-        assertThrows(FormatoCampiErratoException.class, () -> { Libro.verificaLibro("J Tolkien", "Il Signore degli Anelli", "1954", "883010471X", "5"); });
+        assertThrows(FormatoCampiErratoException.class, () -> {
+            Libro.verificaLibro("J Tolkien", "Il Signore degli Anelli", "1954", "883010471X", "5");
+        });
         // Test con il cognome dell'autore non valido:
-        assertThrows(FormatoCampiErratoException.class, () -> { Libro.verificaLibro("J.R.R. To", "Il Signore degli Anelli", "1954", "883010471X", "5"); });
+        assertThrows(FormatoCampiErratoException.class, () -> {
+            Libro.verificaLibro("J.R.R. To", "Il Signore degli Anelli", "1954", "883010471X", "5");
+        });
         // Test con il titolo non valido:
-        assertThrows(FormatoCampiErratoException.class, () -> { Libro.verificaLibro("J.R.R. Tolkien", null, "1954", "883010471X", "5"); });
+        assertThrows(FormatoCampiErratoException.class, () -> {
+            Libro.verificaLibro("J.R.R. Tolkien", null, "1954", "883010471X", "5");
+        });
         // Test con il codice ISBN non valido:
-        assertThrows(FormatoCampiErratoException.class, () -> { Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "1954", "883010471", "5"); });  
+        assertThrows(FormatoCampiErratoException.class, () -> {
+            Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "1954", "883010471", "5");
+        });
         // Test con l'anno di pubblicazione non valido:
-        assertThrows(FormatoCampiErratoException.class, () -> { Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "2054", "883010471X", "5"); });  
+        assertThrows(FormatoCampiErratoException.class, () -> {
+            Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "2054", "883010471X", "5");
+        });
         // Test con il numero di copie disponibili non valido:
-        assertThrows(FormatoCampiErratoException.class, () -> { Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "1954", "883010471X", "500"); });   
+        assertThrows(FormatoCampiErratoException.class, () -> {
+            Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "1954", "883010471X", "500");
+        });
     }
 
     @Test
