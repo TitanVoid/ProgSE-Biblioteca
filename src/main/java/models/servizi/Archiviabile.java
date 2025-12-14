@@ -17,7 +17,7 @@ public interface Archiviabile<E> {
     /**
      * @brief Aggiunge un nuovo elemento all'archivio.
      * 
-     * @post L'archivio conterrà l'elemento passato come parametro.
+     * @post L'archivio contiene l'elemento passato come parametro.
      * 
      * @param[in] elemento Elemento da aggiungere.
      * 
@@ -33,7 +33,7 @@ public interface Archiviabile<E> {
      *        In base alla collezione da gestire, può trattarsi sia di una rimozione
      *        logica che di una fisica.
      * 
-     * @post L'elemento passato come parametro sarà rimosso con successo
+     * @post L'elemento passato come parametro viene rimosso con successo
      *       dall'archivio.
      * 
      * @param[in] elemento Elemento da rimuovere.
