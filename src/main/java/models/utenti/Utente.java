@@ -156,7 +156,7 @@ public class Utente extends Persona {
      * 
      * @return true se il formato di tutti i campi dell'utente è corretto.
      * 
-     * @throws FormatoCampiErratoException se si verifica un errore nel formato di
+     * @throws FormatoCampiErratoException se si riscontra un errore nel formato di
      *                                     uno o più campi.
      */
     public static boolean verificaUtente(String nome, String cognome, String matricolaUtente, String email) {
