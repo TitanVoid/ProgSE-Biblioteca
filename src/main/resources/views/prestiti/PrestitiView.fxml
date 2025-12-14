@@ -53,7 +53,7 @@
                             </HBox.margin>
                         </RadioButton>
 
-                        <RadioButton fx:id="BtnConclusi"
+                        <RadioButton fx:id="btnConclusi"
                                      text="CONCLUSI"
                                      onAction="#onFilterLoans"
                                      toggleGroup="$filtroGroup">

@@ -17,7 +17,7 @@
         <!-- Header section - fixed height -->
         <HBox prefHeight="84.0">
             <children>
-                <MenuButton mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Libri">
+                <MenuButton alignment="CENTER" contentDisplay="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Libri" textAlignment="JUSTIFY">
                     <items>
                         <MenuItem fx:id="utenti" mnemonicParsing="false" onAction="#onChangeViewMode" text="Utenti" userData="UTENTI" />
                         <MenuItem fx:id="prestiti" mnemonicParsing="false" onAction="#onChangeViewMode" text="Prestiti" userData="PRESTITI" />

@@ -148,7 +148,7 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
             return false;
 
         Persona p = (Persona) o;
-        return this.nome.equals(p.nome) && this.cognome.equals(p.cognome);
+        return this.cognome.equals(p.cognome);
     }
 
     /**

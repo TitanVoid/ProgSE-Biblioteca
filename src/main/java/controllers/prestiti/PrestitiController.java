@@ -43,6 +43,12 @@ public class PrestitiController extends BaseController implements Initializable 
     private Button estendiButton;
     @FXML
     private Button restituzioneButton;
+    @FXML
+    private RadioButton btnTutti;
+    @FXML
+    private RadioButton btnAttivi;
+    @FXML
+    private RadioButton btnConclusi;
 
     @Override
     public void initialize(URL location, ResourceBundle resources) {
@@ -155,11 +161,24 @@ public class PrestitiController extends BaseController implements Initializable 
 
     @FXML
     private void onFilterLoans(){
-        /// ////////////////
-        /// // Ricordare qua/////
-        /// ////////////////////
-        List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.TUTTI); //Capire come selezionare i filtri
-        prestiti.setAll(listPrestiti);
+
+        if(btnTutti.isSelected()) {
+
+            List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.TUTTI); //Capire come selezionare i filtri
+            prestiti.setAll(listPrestiti);
+
+        } else if (btnAttivi.isSelected()) {
+
+            List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.ATTIVI); //Capire come selezionare i filtri
+            prestiti.setAll(listPrestiti);
+
+        } else if (btnConclusi.isSelected()) {
+
+            List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.CONCLUSI); //Capire come selezionare i filtri
+            prestiti.setAll(listPrestiti);
+
+        }
+
     }
 
     @FXML
