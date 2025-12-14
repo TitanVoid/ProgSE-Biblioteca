@@ -5,21 +5,14 @@ import controllers.prestiti.PrestitiController;
 import controllers.utenti.UtentiController;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
-import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
-import javafx.stage.Stage;
-import models.Biblioteca;
-
 
 import java.io.IOException;
-import java.net.URL;
 import java.util.*;
 
-public class MenuController extends BaseController implements Initializable {
-    private Biblioteca biblioteca;
-    private final Map<String, Stage> windows = new HashMap<>();
+public class MenuController extends BaseController {
 
     @FXML
     private Button libriBtn;
@@ -30,20 +23,8 @@ public class MenuController extends BaseController implements Initializable {
     @FXML
     private Button prestitiBtn;
 
-    @Override
-    public void initialize(URL location, ResourceBundle resources) {
-        // Initialization code
-
-    }
-
     private void showNewWindow(String viewName, String title) {
-        if (windows.containsKey(viewName)) {
-            Stage stage = windows.get(viewName);
-            stage.toFront();
-            return;
-        }
         try{
-            Stage stage = new Stage();
             FXMLLoader loader = new FXMLLoader(Objects.requireNonNull(getClass().getResource(viewName)));
             Parent root = loader.load();
             BaseController controller = loader.getController();
@@ -64,12 +45,8 @@ public class MenuController extends BaseController implements Initializable {
                 cont.refreshUsers();
             }
 
-            Scene scene = new Scene(root);
-            stage.setScene(scene);
-            stage.setTitle(title);
-            windows.put(viewName, stage);
-            stage.setOnHidden(e -> windows.remove(viewName));
-            stage.showAndWait();
+            Scene scene = libriBtn.getScene();
+            scene.setRoot(root);
         } catch (IOException | NullPointerException ex) {
             showErrorAlert("Error", "Could Not Find FXML at " + viewName);
         }
@@ -77,7 +54,7 @@ public class MenuController extends BaseController implements Initializable {
 
     @FXML
     public void onLibri(){
-        showNewWindow("/views/libri/LibriView.fxml", "Libro");
+        showNewWindow("/views/libri/LibriView.fxml", "Libri");
     }
 
     @FXML
@@ -89,5 +66,4 @@ public class MenuController extends BaseController implements Initializable {
     public void onPrestiti(){
         showNewWindow("/views/prestiti/PrestitiView.fxml", "Prestiti");
     }
-
 }
