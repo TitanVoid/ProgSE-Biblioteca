@@ -29,8 +29,6 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
      *        come parametri in ingresso, che ne rappresentano il nome ed il
      *        cognome.
      * 
-     * @pre Le stringhe passate come parametri devono corrispondere ad un nome e ad
-     *      un cognome validi.
      * @post L'oggetto Persona è creato.
      *
      * @param[in] nome Stringa di caratteri che compone il nome.
@@ -38,7 +36,6 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
      *
      */
     public Persona(String nome, String cognome) {
-        assert (verificaNome(nome) && verificaCognome(cognome));
         this.nome = nome;
         this.cognome = cognome;
     }
@@ -62,7 +59,6 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
     /**
      * @brief Metodo Setter per la stringa di caratteri del nome.
      *
-     * @pre La stringa passata come parametro deve essere un nome valido.
      * @post L'oggetto Persona sarà modificato, impostando come suo nuovo nome la
      *       stringa nome.
      * 
@@ -71,14 +67,12 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
      *
      */
     public void setNome(String nome) {
-        assert (verificaNome(nome));
         this.nome = nome;
     }
 
     /**
      * @brief Metodo Setter per la stringa di caratteri del cognome.
      *
-     * @pre La stringa passata come parametro deve essere un cognome valido.
      * @post L'oggetto Persona sarà modificato, impostando come suo nuovo cognome la
      *       stringa cognome.
      * 
@@ -87,7 +81,6 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
      *
      */
     public void setCognome(String cognome) {
-        assert (verificaCognome(cognome));
         this.cognome = cognome;
     }
 

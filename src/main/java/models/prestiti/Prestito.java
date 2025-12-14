@@ -36,8 +36,9 @@ public class Prestito implements Comparable<Prestito>, Serializable {
      *        Costruisce un nuovo oggetto Prestito a partire dai parametri forniti
      *        in ingresso.
      *
-     * @post L'oggetto Prestito è creato e la sua data di restituzione è impostata a
-     *       null (valore per i prestiti attivi).
+     * @post L'oggetto Prestito è creato.
+     * @post La data di restituzione del prestito è impostata a null (valore per i
+     *       prestiti attivi).
      *
      * @param[in] matricolaUtente Matricola dell'utente che ha effettuato il
      *            prestito.
@@ -98,7 +99,6 @@ public class Prestito implements Comparable<Prestito>, Serializable {
      * 
      * @brief Metodo Setter per la data di scadenza di un prestito.
      *
-     * @pre La data passata come parametro deve essere una data di scadenza valida.
      * @post L'oggetto Prestito sarà modificato, impostando come sua nuova data di
      *       scadenza il parametro dataScadenza.
      * 
@@ -106,7 +106,6 @@ public class Prestito implements Comparable<Prestito>, Serializable {
      *            prestito.
      */
     public void setDataScadenza(LocalDate dataScadenza) {
-        assert (verificaDataScadenza(dataScadenza.toString()));
         this.dataScadenza = dataScadenza;
     }
 

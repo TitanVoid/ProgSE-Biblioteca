@@ -43,8 +43,6 @@ public class Libro implements Comparable<Libro>, Serializable {
      *        pubblicazione, il codice ISBN, il numero di copie disponibili e la
      *        lista degli autori.
      * 
-     * @pre I parametri devono avere un formato valido.
-     * 
      * @post L'oggetto Libro è creato.
      *
      * @param[in] titolo Stringa di caratteri che compone il titolo del libro.
@@ -55,8 +53,6 @@ public class Libro implements Comparable<Libro>, Serializable {
      * @param[in] autori Stringa che rappresenta la lista degli autori del libro.
      */
     public Libro(String titolo, int annoPubblicazione, ISBN codiceISBNLibro, int copieDisponibili, String autori) {
-        assert (verificaLibro(autori, titolo, annoPubblicazione + "", codiceISBNLibro.getCodiceISBN(),
-                copieDisponibili + ""));
         this.titolo = titolo;
         this.annoPubblicazione = annoPubblicazione;
         this.codiceISBNLibro = codiceISBNLibro;

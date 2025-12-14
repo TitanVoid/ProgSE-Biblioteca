@@ -26,8 +26,6 @@ public class Autore extends Persona {
      *        come parametri in ingresso, che ne rappresentano il nome ed il
      *        cognome.
      * 
-     * @pre Le stringhe passate come parametri devono corrispondere ad un nome e ad
-     *      un cognome validi.
      * @post L'oggetto Autore è creato.
      *
      * @param[in] nome Stringa di caratteri che compone il nome.

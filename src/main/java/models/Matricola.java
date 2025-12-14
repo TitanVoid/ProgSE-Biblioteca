@@ -26,8 +26,6 @@ public class Matricola implements Serializable, Comparable<Matricola> {
      *        come
      *        parametro in ingresso.
      * 
-     * @pre La stringa passata come parametro deve essere una matricola
-     *      valida.
      * @post L'oggetto Matricola è creato e la stringa ad esso associata è
      *       immutabile.
      * 
@@ -36,7 +34,6 @@ public class Matricola implements Serializable, Comparable<Matricola> {
      *
      */
     public Matricola(String matricola) {
-        assert (verificaMatricola(matricola));
         this.matricola = matricola;
     }
 

@@ -18,8 +18,7 @@ import models.utenti.Utenti;
  *        utenti.
  * 
  *        Una biblioteca contiene al suo interno un insieme di prestiti, libri
- *        ed
- *        utenti.
+ *        ed utenti.
  *
  *        La classe implementa l'interfaccia Serializable e fornisce metodi per
  *        il salvataggio e il caricamento del proprio stato, in modo tale da
@@ -41,6 +40,7 @@ public class Biblioteca implements Serializable {
      *        Costruisce un nuovo oggetto Biblioteca, istanziando i tre oggetti per
      *        la gestione degli archivi.
      * 
+     * @post L'oggetto Biblioteca è creato.
      * @post Gli oggetti Libri, Prestiti ed Utenti vengono costruiti correttamente,
      *       e al loro interno contengono liste vuote.
      */

@@ -23,14 +23,11 @@ public class ISBN implements Serializable, Comparable<ISBN> {
      *        Costruisce un nuovo oggetto ISBN a partire dalla stringa fornita come
      *        parametro in ingresso.
      * 
-     * @pre La stringa passata come parametro deve essere un codice ISBN
-     *      valido.
      * @post L'oggetto ISBN è creato e il codice ad esso associato è immutabile.
      * 
      * @param[in] codiceISBN Stringa di caratteri che compone il codice ISBN.
      */
     public ISBN(String codiceISBN) {
-        assert (verificaISBN(codiceISBN));
         this.codiceISBN = codiceISBN;
     }
 

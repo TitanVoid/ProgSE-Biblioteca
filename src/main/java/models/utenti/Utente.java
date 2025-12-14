@@ -43,7 +43,6 @@ public class Utente extends Persona {
      *        in ingresso, che ne rappresentano rispettivamente il nome, il
      *        cognome, la matricola e l'indirizzo email.
      * 
-     * @pre I parametri devono avere un formato valido.
      * 
      * @post L'oggetto Utente è creato.
      *
@@ -55,7 +54,6 @@ public class Utente extends Persona {
      */
     public Utente(String nome, String cognome, Matricola matricolaUtente, String email) {
         super(nome, cognome);
-        assert (verificaUtente(nome, cognome, matricolaUtente.getMatricola(), email));
         this.matricolaUtente = matricolaUtente;
         this.email = email;
         this.prestitiAttivi = new ArrayList<>();
@@ -90,7 +88,6 @@ public class Utente extends Persona {
      * @brief Metodo Setter per la stringa di caratteri dell'indirizzo email di un
      *        utente.
      *
-     * @pre La stringa passata come parametro deve essere un indirizzo email valido.
      * @post L'oggetto Utente sarà modificato, impostando come suo nuovo indirizzo
      *       email la stringa email.
      * 
@@ -98,7 +95,6 @@ public class Utente extends Persona {
      *            email dell'utente.
      */
     public void setEmail(String email) {
-        assert (verificaEmail(email));
         this.email = email;
     }
 
