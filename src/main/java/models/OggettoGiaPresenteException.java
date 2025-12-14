@@ -1,28 +1,31 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 /**
- *
- * @author erica
+ * @brief Eccezione che segnala all'utente l'inserimento di un oggetto
+ *        già presente nell'archivio della biblioteca.
+ *        Si specializza in UtenteGiaPresenteException e
+ *        LibroGiaPresenteException.
+ * 
+ * @see UtenteGiaPresenteException
+ * @see LibroGiaPresenteException
  */
 public class OggettoGiaPresenteException extends Exception {
 
     /**
-     * Creates a new instance of <code>LibroGiaPresenteException</code> without
-     * detail message.
+     * @brief Costruttore.
+     *        Costruisce un'istanza dell'eccezione, senza specificare alcun
+     *        messaggio di errore.
      */
     public OggettoGiaPresenteException() {
+
     }
 
     /**
-     * Constructs an instance of <code>LibroGiaPresenteException</code> with the
-     * specified detail message.
-     *
-     * @param msg the detail message.
+     * @brief Costruttore con messaggio di errore.
+     *        Costruisce un'istanza dell'eccezione con il messaggio di errore
+     *        passato come parametro.
+     * 
+     * @param msg messaggio descrittivo dell'errore.
      */
     public OggettoGiaPresenteException(String msg) {
         super(msg);
