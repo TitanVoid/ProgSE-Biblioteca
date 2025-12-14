@@ -2,11 +2,18 @@ package models;
 
 import java.io.Serializable;
 
+import models.utenti.Utente;
+
 /**
  * @class Matricola
  *
- * @brief Classe che definisce una matricola universitaria e la sua verifica.
+ * @brief Classe che rappresenta il codice identificativo associato ad un utente
+ *        della biblioteca.
+ * 
+ *        Ad ogni Utente è associata univocamente una matricola universitaria.
+ *        Una matricola è composta esattamente da 10 cifre numeriche.
  *
+ * @see Utente
  */
 public class Matricola implements Serializable, Comparable<Matricola> {
 
@@ -15,18 +22,28 @@ public class Matricola implements Serializable, Comparable<Matricola> {
     /**
      * @brief Costruttore.
      *
-     * @param[in] matricola Matricola universitaria.
+     *        Costruisce un nuovo oggetto Matricola a partire dalla stringa fornita
+     *        come
+     *        parametro in ingresso.
+     * 
+     * @pre La stringa passata come parametro deve essere una matricola
+     *      valida.
+     * @post L'oggetto Matricola è creato e la stringa ad esso associata è
+     *       immutabile.
+     * 
+     * 
+     * @param[in] matricola Stringa di caratteri che compone la matricola.
      *
      */
     public Matricola(String matricola) {
-
+        assert (verificaMatricola(matricola));
         this.matricola = matricola;
     }
 
     /**
-     * @brief Restituisce la matricola.
+     * @brief Metodo Getter per la stringa di caratteri della matricola.
      *
-     * @return matricola.
+     * @return La stringa di caratteri che compone la matricola.
      *
      */
     public String getMatricola() {
@@ -34,43 +51,70 @@ public class Matricola implements Serializable, Comparable<Matricola> {
     }
 
     /**
-     * @brief Verifica la correttezza del formato della matricola.
-     * @param[in] matricola Matricola universitaria.
-     * @return true se il formato della matricola è valido, false altrimenti.
+     * @brief Verifica del formato della matricola.
+     * 
+     *        Verifica se la stringa passata come parametro corrisponde o meno ad
+     *        una matricola valida.
+     *        Una matricola è valida se è composta esattamente da 10 cifre
+     *        numeriche.
+     * 
+     * @param[in] matricola Stringa di caratteri da verificare.
+     * @return true se la stringa corrisponde ad una matricola valida, false
+     *         altrimenti.
      */
-    public static boolean verificaMatricola(String matricola){
-        if(matricola == null || !matricola.matches("\\d{10}")) return false;
+    public static boolean verificaMatricola(String matricola) {
+        if (matricola == null || !matricola.matches("\\d{10}"))
+            return false;
         return true;
     }
 
     /**
-     * @brief Verifica l'uguaglianza tra questa matricola e un altro oggetto in base alla matricola.
+     * @brief Verifica dell'uguaglianza tra un oggetto e l'istanza corrente.
+     *        Aderisce al contratto del metodo equals() di Object.
+     * 
+     *        Due Matricole si dicono uguali se le stringhe ad esse associate sono
+     *        uguali.
      * @param o Oggetto da confrontare.
-     * @return true se sono uguali, false altrimenti.
+     * @return true se le due Matricole sono uguali, false altrimenti.
      */
     @Override
-    public boolean equals(Object o){
-        if(o == null) return false;
-        if(o == this) return true;
-        if(o.getClass() != this.getClass()) return false;
+    public boolean equals(Object o) {
+        if (o == null)
+            return false;
+        if (o == this)
+            return true;
+        if (o.getClass() != this.getClass())
+            return false;
 
         Matricola m = (Matricola) o;
         return this.matricola.equals(m.getMatricola());
     }
 
+    /**
+     * @brief Hashcode per l'oggetto Matricola.
+     *        Aderisce al contratto del metodo hashCode() di Object.
+     * 
+     * @return L'hashcode associato all'oggetto Matricola.
+     */
     @Override
-    public int hashCode(){
+    public int hashCode() {
         return matricola != null ? matricola.hashCode() : 0;
     }
 
     /**
-     * @brief Confronta questa matricola con un altra matricola in base alla matricola.
-     * @param matricola matricola da confrontare.
-     * @return 0 se sono uguali, valore negativo se questo libro precede l, positivo altrimenti.
+     * @brief Confronto della Matricola corrente con un altra Matricola.
+     *        Aderisce al contratto del metodo compareTo() di Comparable<T>.
+     * 
+     *        Le Matricole vengono confrontate in base all'ordine lessicografico
+     *        della stringa di caratteri ad esse associata.
+     * @param m Matricola da confrontare con l'istanza corrente.
+     * @return Valore negativo, zero o positivo se la Matricola corrente è
+     *         rispettivamente minore, uguale o maggiore della Matricola passata
+     *         come parametro.
      */
     @Override
-    public int compareTo(Matricola matricola) {
-        return this.matricola.compareTo(matricola.getMatricola());
+    public int compareTo(Matricola m) {
+        return this.matricola.compareTo(m.getMatricola());
     }
 
 }
