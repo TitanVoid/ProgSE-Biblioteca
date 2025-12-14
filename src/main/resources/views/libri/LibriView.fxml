@@ -20,7 +20,7 @@
     <children>
 
         <!-- Header section -->
-        <HBox prefHeight="84.0" alignment="CENTER_LEFT">
+        <HBox prefHeight="84.0" alignment="CENTER">
             <children>
 
                 <MenuButton alignment="CENTER"
@@ -33,7 +33,7 @@
                         <MenuItem fx:id="prestiti" onAction="#onChangeViewMode" text="Prestiti" userData="PRESTITI"/>
                     </items>
                     <HBox.margin>
-                        <Insets left="40.0" top="30.0" />
+                        <Insets left="40.0" top="13.0" />
                     </HBox.margin>
                 </MenuButton>
 
@@ -42,7 +42,7 @@
                            prefHeight="26.0"
                            prefWidth="340.0">
                     <HBox.margin>
-                        <Insets left="20.0" top="30.0" />
+                        <Insets left="20.0" top="13.0" />
                     </HBox.margin>
                 </TextField>
 
