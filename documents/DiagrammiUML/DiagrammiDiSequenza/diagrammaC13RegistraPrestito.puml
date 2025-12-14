@@ -61,7 +61,7 @@
 			gp->gp: Viene aggiunto il prestito
 			gp--> rpc: Conferma
 		deactivate gp
-		rpc->a: VIene chiusa la schermata di aggiunta prestito
+		rpc-->a: Viene chiusa la schermata di aggiunta prestito
 	deactivate rpc	
 
 
