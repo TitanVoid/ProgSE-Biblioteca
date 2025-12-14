@@ -14,8 +14,8 @@ import java.util.Collections;
  * 
  * @brief Classe che rappresenta l'archivio dei prestiti della biblioteca.
  * 
- *        La classe definisce i seguenti metodi per la gestione e manipolazione
- *        dell'archivio dei prestiti:
+ *        La classe definisce i seguenti metodi fondamentali per la gestione e
+ *        manipolazione dell'archivio dei prestiti:
  *        - Aggiunta di un nuovo prestito;
  *        - Registrazione di una restituzione;
  *        - Estensione di un prestito (ovvero modifica della data di scadenza
