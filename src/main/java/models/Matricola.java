@@ -51,7 +51,7 @@ public class Matricola implements Serializable, Comparable<Matricola> {
     }
 
     /**
-     * @brief Verifica del formato della matricola.
+     * @brief Verifica del formato di una matricola.
      * 
      *        Verifica se la stringa passata come parametro corrisponde o meno ad
      *        una matricola valida.
@@ -72,10 +72,10 @@ public class Matricola implements Serializable, Comparable<Matricola> {
      * @brief Verifica dell'uguaglianza tra un oggetto e l'istanza corrente.
      *        Aderisce al contratto del metodo equals() di Object.
      * 
-     *        Due Matricole si dicono uguali se le stringhe ad esse associate sono
-     *        uguali.
+     *        Due oggetti Matricola si dicono uguali se le stringhe ad essi
+     *        associate sono uguali.
      * @param o Oggetto da confrontare.
-     * @return true se le due Matricole sono uguali, false altrimenti.
+     * @return true se i due oggetti Matricola sono uguali, false altrimenti.
      */
     @Override
     public boolean equals(Object o) {
@@ -105,8 +105,9 @@ public class Matricola implements Serializable, Comparable<Matricola> {
      * @brief Confronto della Matricola corrente con un altra Matricola.
      *        Aderisce al contratto del metodo compareTo() di Comparable<T>.
      * 
-     *        Le Matricole vengono confrontate in base all'ordine lessicografico
+     *        Le matricole vengono confrontate in base all'ordine lessicografico
      *        della stringa di caratteri ad esse associata.
+     * 
      * @param m Matricola da confrontare con l'istanza corrente.
      * @return Valore negativo, zero o positivo se la Matricola corrente è
      *         rispettivamente minore, uguale o maggiore della Matricola passata

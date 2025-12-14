@@ -6,8 +6,11 @@ import java.io.Serializable;
  * @class Persona
  * @brief Classe che incapsula le informazioni di una persona.
  *
- *        Rappresenta una persona generica con nome e cognome, fornendo metodi
- *        di accesso, modifica e verifica.
+ *        La Classe rappresenta una generica persona con nome e cognome,
+ *        fornendo metodi di accesso, modifica e verifica dei propri attributi.
+ *        Inoltre, essa implementa l'interfaccia Comparable<Persona>,
+ *        consentendo di confrontare tra di loro oggetti di tipo Persona sulla
+ *        base del proprio cognome e, a parità di cognome, del nome.
  *
  */
 public abstract class Persona implements Serializable, Comparable<Persona> {
@@ -17,59 +20,82 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
 
     /**
      * @brief Costruttore.
+     * 
+     *        Costruisce un nuovo oggetto Persona a partire dalle stringhe fornite
+     *        come parametri in ingresso.
+     * 
+     * @pre Le stringhe passate come parametri devono corrispondere ad un nome e ad
+     *      un cognome validi.
+     * @post L'oggetto Persona è creato.
      *
-     * @param[in] nome Nome della persona.
-     * @param[in] cognome Cognome della persona.
+     * @param[in] nome Stringa di caratteri che compone il nome.
+     * @param[in] cognome Stringa di caratteri che compone il cognome.
      *
      */
     public Persona(String nome, String cognome) {
+        assert (verificaNome(nome) && verificaCognome(cognome));
         this.nome = nome;
         this.cognome = cognome;
     }
 
     /**
-     * @brief Restituisce il nome.
-     *
-     * @return nome.
+     * @brief Metodo Getter per la stringa di caratteri del nome.
+     * @return La stringa di caratteri che compone il nome.
      */
     public String getNome() {
         return nome;
     }
 
     /**
-     * @brief Restituisce il cognome della persona.
-     *
-     * @return cognome.
+     * @brief Metodo Getter per la stringa di caratteri del cognome.
+     * @return La stringa di caratteri che compone il cognome.
      */
     public String getCognome() {
         return cognome;
     }
 
     /**
-     * @brief Imposta il nome.
+     * @brief Metodo Setter per la stringa di caratteri del nome.
      *
-     * @param[in] nome Nuovo nome da assegnare.
+     * @pre La stringa passata come parametro deve essere un nome valido.
+     * @post L'oggetto Persona sarà modificato, impostando come suo nuovo nome la
+     *       stringa nome.
+     * 
+     * @param[in] nome La stringa di caratteri da impostare come nuovo nome della
+     *            Persona.
      *
      */
     public void setNome(String nome) {
+        assert (verificaNome(nome));
         this.nome = nome;
     }
 
     /**
-     * @brief Imposta il cognome.
+     * @brief Metodo Setter per la stringa di caratteri del cognome.
      *
-     * @param[in] cognome Nuovo cognome da assegnare.
+     * @pre La stringa passata come parametro deve essere un cognome valido.
+     * @post L'oggetto Persona sarà modificato, impostando come suo nuovo cognome la
+     *       stringa cognome.
+     * 
+     * @param[in] nome La stringa di caratteri da impostare come nuovo cognome della
+     *            Persona.
      *
      */
     public void setCognome(String cognome) {
+        assert (verificaCognome(cognome));
         this.cognome = cognome;
     }
 
     /**
-     * @brief Verifica la correttezza del formato del nome.
+     * @brief Verifica del formato di un nome.
      * 
-     * @param[in] nome Nome da verificare.
-     * @return true se il formato del nome è valido, false altrimenti.
+     *        Verifica se la stringa passata come parametro corrisponde ad un
+     *        nome valido.
+     *        Un nome è valido se è composto da 3-25 cifre non decimali.
+     * 
+     * @param[in] nome Stringa di caratteri da verificare.
+     * 
+     * @return true se la stringa corrisponde ad un nome valido, false altrimenti.
      *
      */
     public static boolean verificaNome(String nome) {
@@ -79,11 +105,16 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
     }
 
     /**
-     * @brief Verifica la correttezza del formato del cognome.
+     * @brief Verifica del formato di un cognome.
+     * 
+     *        Verifica se la stringa passata come parametro corrisponde ad un
+     *        cognome valido.
+     *        Un cognome è valido se è composto da 3-25 cifre non decimali.
      *
-     * @param[in] cognome Cognome da verificare.
+     * @param[in] cognome Stringa di caratteri da verificare.
      *
-     * @return true se il formato del cognome è valido, false altrimenti.
+     * @return true se la stringa corrisponde ad un cognome valido, false
+     *         altrimenti.
      *
      */
     public static boolean verificaCognome(String cognome) {
@@ -92,6 +123,16 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
         return true;
     }
 
+    /**
+     * @brief Verifica dell'uguaglianza tra un oggetto e l'istanza corrente.
+     *        Aderisce al contratto del metodo equals() di Object.
+     * 
+     *        Due oggetti Persona si dicono uguali se le stringhe corrispondenti a
+     *        nome e cognome ad essi associate sono uguali.
+     * 
+     * @param[in] o Oggetto da confrontare con l'istanza corrente.
+     * @return true se i due oggetti Persona sono uguali, false altrimenti.
+     */
     @Override
     public boolean equals(Object o) {
         if (o == null)
@@ -105,6 +146,19 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
         return this.nome.equals(p.nome) && this.cognome.equals(p.cognome);
     }
 
+    /**
+     * @brief Confronto della Persona corrente con un altra Persona.
+     *        Aderisce al contratto del metodo compareTo() di Comparable<T>.
+     * 
+     *        Le persone vengono confrontate in base all'ordine lessicografico della
+     *        stringa di caratteri che compone il loro cognome e, a parità di
+     *        cognome, il loro nome.
+     * 
+     * @param[in] p Persona da confrontare con l'istanza corrente.
+     * @return Valore negativo, zero o positivo se la Persona corrente è
+     *         rispettivamente minore, uguale o maggiore della Persona passata come
+     *         parametro.
+     */
     @Override
     public int compareTo(Persona p) {
         if (this.cognome.equals(p.cognome)) {
@@ -113,6 +167,12 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
         return this.cognome.compareTo(p.cognome);
     }
 
+    /**
+     * @brief Rappresentazione testuale dell'oggetto corrente.
+     *        Aderisce al contratto del metodo toString() di Object.
+     * 
+     * @return Una stringa che rappresenta l'oggetto.
+     */
     @Override
     public String toString() {
         return this.nome + " " + this.cognome;

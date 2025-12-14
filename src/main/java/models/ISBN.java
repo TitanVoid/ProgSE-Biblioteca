@@ -27,7 +27,7 @@ public class ISBN implements Serializable, Comparable<ISBN> {
      *      valido.
      * @post L'oggetto ISBN è creato e il codice ad esso associato è immutabile.
      * 
-     * @param[in] codiceISBN Stringa di caratteri che compongono il codice ISBN.
+     * @param[in] codiceISBN Stringa di caratteri che compone il codice ISBN.
      */
     public ISBN(String codiceISBN) {
         assert (verificaISBN(codiceISBN));
@@ -36,14 +36,14 @@ public class ISBN implements Serializable, Comparable<ISBN> {
 
     /**
      * @brief Metodo Getter per la stringa di caratteri del codice ISBN.
-     * @return La stringa di caratteri che compongono il codice ISBN.
+     * @return La stringa di caratteri che compone il codice ISBN.
      */
     public String getCodiceISBN() {
         return codiceISBN;
     }
 
     /**
-     * @brief Verifica del formato dell'ISBN.
+     * @brief Verifica del formato di un ISBN.
      *        Verifica se la stringa passata come parametro corrisponde o meno ad un
      *        codice ISBN valido, sulla base degli standard internazionali definiti
      *        all'interno del documento ISO 2108.
@@ -148,11 +148,11 @@ public class ISBN implements Serializable, Comparable<ISBN> {
      * @brief Verifica dell'uguaglianza tra un oggetto e l'istanza corrente.
      *        Aderisce al contratto del metodo equals() di Object.
      * 
-     *        Due ISBN si dicono uguali se le stringhe ad essi associate sono
-     *        uguali.
+     *        Due oggetti ISBN si dicono uguali se le stringhe ad essi associate
+     *        sono uguali.
      * 
      * @param[in] o Oggetto da confrontare con l'istanza corrente.
-     * @return true se i due ISBN sono uguali, false altrimenti.
+     * @return true se i due oggetti ISBN sono uguali, false altrimenti.
      */
     @Override
     public boolean equals(Object o) {
@@ -179,8 +179,8 @@ public class ISBN implements Serializable, Comparable<ISBN> {
     }
 
     /**
-     * @brief Confronto dell'ISBN corrente con un altro ISBN. Aderisce al contratto
-     *        del metodo compareTo() di Comparable<T>.
+     * @brief Confronto dell'ISBN corrente con un altro ISBN.
+     *        Aderisce al contratto del metodo compareTo() di Comparable<T>.
      * 
      *        Gli ISBN vengono confrontati in base all'ordine
      *        lessicografico della stringa di caratteri ad essi associata.
