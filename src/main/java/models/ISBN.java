@@ -8,7 +8,8 @@ import models.libri.Libro;
  * @class ISBN
  * 
  * @brief Classe che rappresenta il codice identificativo associato ad un libro.
- *        Ad ogni \ref Libro è associato univocamente un codice ISBN.
+ * 
+ *        Ad ogni Libro è associato univocamente un codice ISBN.
  *        Un codice ISBN può essere composto da 10 oppure 13 cifre, e il proprio
  *        formato deve essere conforme allo standard internazionale ISO 2108.
  * @see Libro
@@ -21,14 +22,20 @@ public class ISBN implements Serializable, Comparable<ISBN> {
      * @brief Costruttore.
      *        Costruisce un nuovo oggetto ISBN a partire dalla stringa fornita come
      *        parametro in ingresso.
+     * 
+     * @pre La stringa passata come parametro deve essere un codice ISBN
+     *      valido.
+     * @post L'oggetto ISBN è creato e il codice ad esso associato è immutabile.
+     * 
      * @param[in] codiceISBN Stringa di caratteri che compongono il codice ISBN.
      */
     public ISBN(String codiceISBN) {
+        assert (verificaISBN(codiceISBN));
         this.codiceISBN = codiceISBN;
     }
 
     /**
-     * @brief Metodo Getter della stringa di caratteri dell'ISBN.
+     * @brief Metodo Getter per la stringa di caratteri del codice ISBN.
      * @return La stringa di caratteri che compongono il codice ISBN.
      */
     public String getCodiceISBN() {
@@ -86,7 +93,7 @@ public class ISBN implements Serializable, Comparable<ISBN> {
             sommaPonderata += cifra;
 
         }
-        // Se la somma è divisibile per 10 allora l'ISBN13 è valido, altrimenti no.
+        // Se la somma è divisibile per 10 allora l'ISBN-13 è valido, altrimenti no.
         return sommaPonderata % 10 == 0;
     }
 
@@ -113,7 +120,7 @@ public class ISBN implements Serializable, Comparable<ISBN> {
 
         if (!codiceISBN.matches("^\\d{10}$") && !codiceISBN.matches("^\\d{9}X$"))
             return false;
-        
+
         int sommaPonderata = 0;
         for (int i = 0; i < 10; i++) {
             int cifra;
@@ -133,7 +140,7 @@ public class ISBN implements Serializable, Comparable<ISBN> {
             sommaPonderata += cifra * peso;
 
         }
-        // Se la somma è divisibile per 11 allora l'ISBN10 è valido, altrimenti no.
+        // Se la somma è divisibile per 11 allora l'ISBN-10 è valido, altrimenti no.
         return sommaPonderata % 11 == 0;
     }
 
