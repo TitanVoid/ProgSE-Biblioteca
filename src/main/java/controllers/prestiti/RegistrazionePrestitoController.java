@@ -12,6 +12,7 @@ import models.prestiti.Prestito;
 import models.utenti.Utente;
 
 import java.net.URL;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -57,7 +58,7 @@ public class RegistrazionePrestitoController extends BaseController implements I
         try {
             Prestito.verificaDataScadenza(dataScadenzaPrestito);
             mask += "1";
-        } catch (FormatoCampiErratoException ex){
+        } catch (FormatoCampiErratoException | DateTimeException ex){
             mask += "0";
         }
 
