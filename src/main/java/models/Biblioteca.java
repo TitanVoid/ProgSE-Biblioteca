@@ -8,7 +8,6 @@ import models.libri.Libri;
 import models.libri.Libro;
 import models.prestiti.Prestiti;
 import models.prestiti.Prestito;
-import models.servizi.Archiviabile;
 import models.utenti.Utente;
 import models.utenti.Utenti;
 
@@ -26,7 +25,6 @@ import models.utenti.Utenti;
  *        il salvataggio e il caricamento del proprio stato, in modo tale da
  *        garantire la persistenza su file.
  * 
- * @see Archiviabile
  * @see Utente
  * @see Libro
  * @see Prestito
