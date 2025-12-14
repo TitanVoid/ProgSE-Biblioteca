@@ -63,7 +63,7 @@ public class Utente extends Persona {
 
     /**
      * @brief Metodo Getter per la matricola di un utente.
-     * @return La matricola associata ad un utente.
+     * @return La matricola associata all'utente.
      */
     public Matricola getMatricolaUtente() {
         return matricolaUtente;
