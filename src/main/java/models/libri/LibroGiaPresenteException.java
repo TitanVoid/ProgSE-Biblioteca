@@ -8,23 +8,29 @@ package models.libri;
 import models.OggettoGiaPresenteException;
 
 /**
- *
- * @author erica
+ * @brief Eccezione che segnala all'utente l'inserimento di un libro già
+ *        presente nell'archivio della biblioteca.
+ *        È una specializzazione di OggettoGiaPresenteException.
+ * 
+ * @see OggettoGiaPresenteException
  */
 public class LibroGiaPresenteException extends OggettoGiaPresenteException {
 
     /**
-     * Creates a new instance of <code>LibroGiaPresenteException</code> without
-     * detail message.
+     * @brief Costruttore.
+     *        Costruisce un'istanza dell'eccezione, senza specificare alcun
+     *        messaggio di errore.
      */
     public LibroGiaPresenteException() {
+
     }
 
     /**
-     * Constructs an instance of <code>LibroGiaPresenteException</code> with the
-     * specified detail message.
-     *
-     * @param msg the detail message.
+     * @brief Costruttore con messaggio di errore.
+     *        Costruisce un'istanza dell'eccezione con il messaggio di errore
+     *        passato come parametro.
+     * 
+     * @param msg messaggio descrittivo dell'errore.
      */
     public LibroGiaPresenteException(String msg) {
         super(msg);
