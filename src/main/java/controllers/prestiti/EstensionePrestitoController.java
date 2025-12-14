@@ -10,6 +10,7 @@ import models.Matricola;
 import models.prestiti.Prestito;
 
 import java.net.URL;
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import java.util.ResourceBundle;
 
@@ -45,7 +46,7 @@ public class EstensionePrestitoController extends BaseController implements Init
         String data = dataScadenza.getText();
         try {
             Prestito.verificaDataScadenza(data);
-        } catch (FormatoCampiErratoException e) {
+        } catch (FormatoCampiErratoException | DateTimeException e) {
             showWarningAlert("Campi Errati", "La data scadenza deve essere nel formato AAAA-MM-GG");
             return;
         }
