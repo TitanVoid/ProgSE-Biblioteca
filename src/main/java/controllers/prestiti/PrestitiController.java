@@ -164,17 +164,17 @@ public class PrestitiController extends BaseController implements Initializable 
 
         if(btnTutti.isSelected()) {
 
-            List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.TUTTI); //Capire come selezionare i filtri
+            List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.TUTTI);
             prestiti.setAll(listPrestiti);
 
         } else if (btnAttivi.isSelected()) {
 
-            List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.ATTIVI); //Capire come selezionare i filtri
+            List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.ATTIVI);
             prestiti.setAll(listPrestiti);
 
         } else if (btnConclusi.isSelected()) {
 
-            List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.CONCLUSI); //Capire come selezionare i filtri
+            List<Prestito> listPrestiti = biblioteca.getPrestiti().filtra(Filtro.CONCLUSI);
             prestiti.setAll(listPrestiti);
 
         }

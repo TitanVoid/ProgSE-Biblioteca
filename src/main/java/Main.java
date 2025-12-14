@@ -1,3 +1,5 @@
+import controllers.BaseController;
+import controllers.MenuController;
 import controllers.libri.LibriController;
 import javafx.scene.control.Alert;
 import models.Biblioteca;
@@ -26,12 +28,11 @@ public class Main extends Application {
             biblioteca = new Biblioteca();
         }
 
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/libri/LibriView.fxml"));
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/views/MenuView.fxml"));
         Parent root = loader.load();
         // Pass instance of biblioteca to controllers
-        LibriController controller = loader.getController();
+        MenuController controller = loader.getController();
         controller.setBiblioteca(biblioteca);
-        controller.refreshBooks();
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
         primaryStage.setMaximized(true);
