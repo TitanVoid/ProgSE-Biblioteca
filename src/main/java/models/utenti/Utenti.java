@@ -1,7 +1,6 @@
 package models.utenti;
 
 import models.Matricola;
-import models.OggettoGiaPresenteException;
 import models.servizi.Archiviabile;
 import models.servizi.Mappabile;
 
@@ -91,8 +90,8 @@ public class Utenti implements Archiviabile<Utente>, Mappabile<Matricola, Utente
      * 
      * @param[in] utente Utente da aggiungere.
      * 
-     * @throws OggettoGiaPresenteException nel caso in cui si provi ad aggiungere un
-     *                                     utente già presente nell'archivio.
+     * @throws UtenteGiaPresenteException nel caso in cui si provi ad aggiungere un
+     *                                    utente già presente nell'archivio.
      */
     @Override
     public void aggiungi(Utente utente) throws UtenteGiaPresenteException {
