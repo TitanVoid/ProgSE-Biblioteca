@@ -11,12 +11,22 @@ import java.util.Collections;
 
 /**
  * @class Prestiti
- * @brief Classe che rappresenta un insieme di prestiti.
+ * 
+ * @brief Classe che rappresenta l'archivio dei prestiti della biblioteca.
+ * 
+ *        La classe definisce i seguenti metodi per la gestione e manipolazione
+ *        dell'archivio dei prestiti:
+ *        - Aggiunta di un nuovo prestito;
+ *        - Registrazione di una restituzione;
+ *        - Estensione di un prestito (ovvero modifica della data di scadenza
+ *        relativa ad un prestito);
+ *        - Filtraggio dell'archivio.
+ * 
+ *        Le prime tre funzionalità vengono ereditate implementando
+ *        l'interfaccia Archiviabile.
+ * 
  * @see Prestito
- * @implements Archiviabile<Prestito>
  * @see Archiviabile
- * 
- * 
  */
 public class Prestiti implements Archiviabile<Prestito>, Serializable {
 
@@ -24,22 +34,32 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
 
     /**
      * @brief Costruttore.
+     * 
+     *        Costruisce un nuovo oggetto Prestiti, istanziando al suo interno una
+     *        collezione di oggetti di tipo Prestito.
+     *
+     * @post L'oggetto Prestiti è creato.
+     * @post La lista dei prestiti è vuota.
      */
     public Prestiti() {
         prestiti = new ArrayList<>();
     }
 
     /**
-     * @brief Restituisce la lista dei prestiti.
-     * @return Lista dei prestiti.
+     * @brief Metodo Getter per la lista dei prestiti.
+     * @return La lista dei prestiti.
      */
     public List<Prestito> getListaPrestiti() {
         return prestiti;
     }
 
     /**
-     * @brief Aggiunge un prestito alla lista.
+     * @brief Aggiunge un nuovo prestito all'archivio.
+     * 
+     * @post L'archivio contiene il prestito passato come parametro.
+     * 
      * @param[in] prestito Prestito da aggiungere.
+     * 
      */
     @Override
     public void aggiungi(Prestito prestito) {
@@ -51,7 +71,16 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
     }
 
     /**
-     * @brief Estingue un prestito.
+     * @brief Estingue un prestito presente nell'archivio.
+     * 
+     *        Si tratta di un metodo che rimuove logicamente un prestito
+     *        dall'archivio.
+     *        Questo metodo cerca il prestito passato come parametro all'interno
+     *        della lista e lo segna come restituito, modificandone la data di
+     *        restituzione.
+     * 
+     * @post Il prestito viene estinto con successo.
+     * 
      * @param[in] prestito Prestito da estinguere.
      */
     @Override
@@ -61,9 +90,12 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
     }
 
     /**
-     * @brief Modifica un prestito esistente.
-     * @param[in] originale Prestito senza modifiche.
-     * @param[in] modificato Nuovo prestito modificato.
+     * @brief Modifica un prestito presente nell'archivio.
+     * 
+     * @post Il prestito viene aggiornato all'interno dell'archivio con successo.
+     * 
+     * @param[in] originale Prestito da modificare.
+     * @param[in] modificato Prestito modificato.
      */
     @Override
     public void modifica(Prestito originale, Prestito modificato) {
@@ -74,9 +106,13 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
 
     /**
      * @brief Filtra i prestiti secondo un determinato criterio di filtraggio.
+     * 
      * @param[in] filtro Filtro da applicare.
+     * 
      * @return Lista dei prestiti che soddisfano il criterio di filtraggio
      *         specificato.
+     * 
+     * @see Filtro
      */
     public List<Prestito> filtra(Filtro filtro) {
         List<Prestito> l = new ArrayList<>();
