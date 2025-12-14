@@ -39,13 +39,13 @@ public class Utente extends Persona {
     /**
      * @brief Costruttore.
      * 
-     *        Costruisce un nuovo oggetto Matricola a partire dai parametri forniti
+     *        Costruisce un nuovo oggetto Utente a partire dai parametri forniti
      *        in ingresso, che ne rappresentano rispettivamente il nome, il
      *        cognome, la matricola e l'indirizzo email.
      * 
      * @pre I parametri devono avere un formato valido.
      * 
-     * @post L'oggetto Matricola è creato.
+     * @post L'oggetto Utente è creato.
      *
      * @param[in] nome Stringa di caratteri che compone il nome dell'utente.
      * @param[in] cognome Stringa di caratteri che compone il cognome dell'utente.
