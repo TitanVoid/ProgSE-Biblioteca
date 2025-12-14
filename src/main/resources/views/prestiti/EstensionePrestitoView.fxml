@@ -29,7 +29,7 @@
                 <Label text="Data Inizio:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
                 <TextField fx:id="dataInizio" promptText="Data Inizio" GridPane.columnIndex="1" GridPane.rowIndex="2" />
 
-                <Label text="Data Scadenza:" GridPane.columnIndex="0" GridPane.rowIndex="3" />
+                <Label text="Data Scadenza: * " GridPane.columnIndex="0" GridPane.rowIndex="3" />
                 <TextField fx:id="dataScadenza" promptText="Data Scadenza" GridPane.columnIndex="1" GridPane.rowIndex="3" />
             </children>
             <columnConstraints>
@@ -49,6 +49,14 @@
                 <Button fx:id="confermaBtn" onAction="#onConfirm" text="Conferma" />
                 <Button fx:id="annullaBtn" onAction="#onCancel" text="Annulla" />
             </children>
+            <VBox.margin>
+                <Insets bottom="2.0" />
+            </VBox.margin>
         </HBox>
+        <Label alignment="BOTTOM_RIGHT" text="* AAAA-MM-GG">
+            <VBox.margin>
+                <Insets left="200.0" top="20.0" />
+            </VBox.margin>
+        </Label>
     </children>
 </VBox>

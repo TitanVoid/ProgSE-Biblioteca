@@ -10,7 +10,7 @@
 <?import javafx.scene.layout.RowConstraints?>
 <?import javafx.scene.layout.VBox?>
 
-<VBox alignment="CENTER" spacing="12" xmlns="http://javafx.com/javafx/8.0.441" fx:controller="controllers.libri.AggiuntaLibroController" xmlns:fx="http://javafx.com/fxml/1">
+<VBox alignment="CENTER" spacing="12" xmlns="http://javafx.com/javafx/8.0.441" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.libri.AggiuntaLibroController">
     <padding>
         <Insets bottom="24" left="28" right="28" top="24" />
     </padding>
@@ -23,7 +23,7 @@
                 <Label text="Titolo:" GridPane.columnIndex="0" GridPane.rowIndex="0" />
                 <TextField fx:id="titolo" promptText="Titolo" GridPane.columnIndex="1" GridPane.rowIndex="0" />
 
-                <Label text="Autore/i:" GridPane.columnIndex="0" GridPane.rowIndex="1" />
+                <Label text="Autore/i: *" GridPane.columnIndex="0" GridPane.rowIndex="1" />
                 <TextField fx:id="autori" promptText="Autore/i" GridPane.columnIndex="1" GridPane.rowIndex="1" />
 
                 <Label text="ISBN:" GridPane.columnIndex="0" GridPane.rowIndex="2" />
@@ -32,7 +32,7 @@
                 <Label text="Copie Disponibili:" GridPane.rowIndex="3" />
                 <TextField fx:id="copieDisponibili" promptText="Copie Disponibili" GridPane.columnIndex="1" GridPane.rowIndex="3" />
                 <TextField fx:id="annoPubblicazione" promptText="Anno Pubblicazione" GridPane.columnIndex="1" GridPane.rowIndex="4" />
-                <Label text="Anno Pubblicazione:" GridPane.rowIndex="4" />
+                <Label text="Anno Pubblicazione: " GridPane.rowIndex="4" />
             </children>
             <columnConstraints>
                 <ColumnConstraints />
@@ -53,5 +53,10 @@
                 <Button fx:id="annullaBtn" onAction="#onCancel" text="Annulla" />
             </children>
         </HBox>
+        <Label alignment="BASELINE_LEFT" contentDisplay="RIGHT" text="* Nome Cognome, Nome ..">
+            <VBox.margin>
+                <Insets left="180.0" top="10.0" />
+            </VBox.margin>
+        </Label>
     </children>
 </VBox>

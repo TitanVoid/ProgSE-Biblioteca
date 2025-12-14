@@ -30,35 +30,26 @@
                 <HBox alignment="CENTER_LEFT" spacing="10.0">
                     <children>
 
-                        <RadioButton fx:id="btnTutti"
-                                     text="TUTTI"
-                                     selected="true"
-                                     onAction="#onFilterLoans">
+                        <RadioButton fx:id="btnTutti" onAction="#onFilterLoans" selected="true" text="TUTTI">
 
                             <toggleGroup>
-                                <ToggleGroup fx:id ="filtroGroup" />
+                                <ToggleGroup fx:id="filtroGroup" />
                             </toggleGroup>
+                            <HBox.margin>
+                                <Insets left="20.0" top="5.0" />
+                            </HBox.margin>
+                        </RadioButton>
+
+                        <RadioButton fx:id="btnAttivi" onAction="#onFilterLoans" text="ATTIVI" toggleGroup="$filtroGroup">
+
                             <HBox.margin>
                                 <Insets left="10.0" top="5.0" />
                             </HBox.margin>
                         </RadioButton>
 
-                        <RadioButton fx:id="btnAttivi"
-                                     text="ATTIVI"
-                                     onAction="#onFilterLoans"
-                                     toggleGroup="$filtroGroup">
-
+                        <RadioButton fx:id="btnConclusi" onAction="#onFilterLoans" text="CONCLUSI" toggleGroup="$filtroGroup">
                             <HBox.margin>
-                                <Insets top="5.0" />
-                            </HBox.margin>
-                        </RadioButton>
-
-                        <RadioButton fx:id="btnConclusi"
-                                     text="CONCLUSI"
-                                     onAction="#onFilterLoans"
-                                     toggleGroup="$filtroGroup">
-                            <HBox.margin>
-                                <Insets top="5.0" />
+                                <Insets left="10.0" top="5.0" />
                             </HBox.margin>
                         </RadioButton>
                     </children>
