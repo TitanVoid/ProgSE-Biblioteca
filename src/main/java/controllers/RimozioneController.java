@@ -28,10 +28,6 @@ public class RimozioneController extends BaseController{
                 ((LibriController) rimuoviController).refreshBooks();
             }else if(rimuoviController instanceof PrestitiController) {
                 Prestito prestitoDaEliminare = ((PrestitiController) rimuoviController).getSelectedLoan();
-                if (prestitoDaEliminare.getDataRestituzione() != null){
-                    showErrorAlert("Prestito Non Attivo", "Questo Prestito è già stato restituito!");
-                    return; //Prestito gia restituito
-                }
                 biblioteca.getPrestiti().rimuovi(prestitoDaEliminare);
                 ((PrestitiController) rimuoviController).refreshLoans();
                 biblioteca.getUtenti().ottieni(prestitoDaEliminare.getMatricolaUtente()).rimuoviPrestito(prestitoDaEliminare);

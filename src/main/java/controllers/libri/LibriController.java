@@ -56,9 +56,9 @@ public class LibriController extends BaseController implements Initializable{
 
         titleClm.setCellValueFactory(new PropertyValueFactory<>("titolo"));
         authorsClm.setCellValueFactory(cell -> {
-            StringBuilder authors = new StringBuilder();
+            StringJoiner authors = new StringJoiner(", ");
             for (Autore a : cell.getValue().getAutori()){
-                authors.append(a.toString()).append(", ");
+                authors.add(a.toString());
             }
             return new SimpleStringProperty(authors.toString());
         });
