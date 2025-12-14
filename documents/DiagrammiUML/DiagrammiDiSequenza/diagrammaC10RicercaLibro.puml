@@ -11,7 +11,7 @@
 	'Ogni volta che viene inserito un carattere viene aggiornata la ricerca
 	loop Inserimento sottostringa 
 		a->cvl: Digita una sottostringa nella barra di ricerca
-		cvl->gl: ricerca(...)
+		cvl->gl: ricercaLibri(...)
 		activate gl
 			gl->gl: Ricerca libri
 			gl-->a:Restituisce libri che rispettano i criteri di ricerca

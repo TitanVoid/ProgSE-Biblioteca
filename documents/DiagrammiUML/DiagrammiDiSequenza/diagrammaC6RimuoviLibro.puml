@@ -2,7 +2,7 @@
 
 	actor Amministratore as a
 	participant LibriController as cvl
-	participant RimozioneLibroController as rcl
+	participant RimozioneController as rcl
 	participant Libro as l
 	participant Libri as gl
 
