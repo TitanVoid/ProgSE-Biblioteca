@@ -1,4 +1,21 @@
-Per utilizzabilità sono riportati dei esempi di Libri con il loro rispettivo codice ISBN:
+Ingegneria del Software - A.A. 2025/2026
+Realizzazione di una semplice applicazione per la gestione di una biblioteca universitaria.
+
+Strumenti/linguaggi utilizzati:
+- Java
+- LaTeX (per la produzione dei documenti)
+- Doxygen
+- Maven
+- JUnit
+
+
+
+
+
+
+
+
+Per utilizzabilità sono riportati degli esempi di Libri con il loro rispettivo codice ISBN:
 
 - Harry Potter and the Sorcerer's Stone, ISBN-13: 9780439708180
 - Harry Potter and the Chamber of Secrets, ISBN-13: 9780439064873
