@@ -52,6 +52,7 @@
     \endgroup
     \newpage
 
+    \hypersetup{linkcolor=blue}
     \fancyhead[L]{\nouppercase{\leftmark}}
     \section{Progettazione del Software}
     \subsection{Decomposizione in moduli}
@@ -60,13 +61,12 @@
             \begin{itemize}[label=$\bullet$]
                 \setlength\itemsep{0.1em}
                 \item \textbf{Biblioteca}: classe centrale dell'applicazione, che modella una biblioteca. Mantiene e gestisce le tre collezioni principali mediante gli attributi \texttt{libri}, \texttt{utenti} e \texttt{prestiti}. Fornisce i metodi per la serializzazione e deserializzazione (salvataggio e lettura) dei dati su file;
-                \item \textbf{Maschera}: classe che modella una maschera, utilizzata per la verifica dei campi di un oggetto. Possiede gli attributi \texttt{lunghezza} e \texttt{maschera}, e metodi per la gestione di questi ultimi (getter e setter); 
-                \item \textbf{Prestiti}: classe che modella un insieme di prestiti. Possiede l'attributo \texttt{prestiti} (una collezione di oggetti di tipo Prestito). Implementa l'interfaccia Archiviabile, ereditando i metodi fondamentali per la manipolazione della collezione. Fornisce un metodo per la visualizzazione dei prestiti (getter) e un metodo di filtraggio per visualizzare solo i prestiti che rispettano il criterio applicato; 
-                \item \textbf{Utenti}: classe che modella un insieme di utenti. Possiede gli attributi \texttt{chiaviMatricole} e \texttt{utenti} (due collezioni di oggetti di tipo Utente). Implementa le interfacce Archiviabile e Mappabile, ereditando i metodi fondamentali per la manipolazione delle collezioni. Fornisce un metodo per la visualizzazione degli utenti (getter) e un metodo per effettuare una ricerca all’interno della collezione;
-                \item \textbf{Libri}: classe che modella un insieme di libri. Possiede gli attributi \texttt{chiaviISBN} e \texttt{libri} (due collezioni di oggetti di tipo Libro). Implementa le interfacce Archiviabile e Mappabile, ereditando i metodi fondamentali per la manipolazione delle collezioni. Fornisce un metodo per la visualizzazione dei libri (getter) e un metodo per effettuare una ricerca all’interno della collezione;
-                \item \textbf{Archiviabile}: interfaccia parametrizzata implementata dalle classi Prestiti, Utenti e Libri. Definisce i tre metodi per le operazioni fondamentali di aggiunta, modifica e rimozione dell'elemento passato come parametro; 
-                \item \textbf{Mappabile}: interfaccia parametrizzata implementata dalle classi Utenti e Libri. Definisce i metodi per l'accesso e la ricerca di un valore attraverso una chiave;
-                \item \textbf{Filtro}: classe enumerativa che definisce tre stati di filtraggio: \texttt{TUTTI}, \texttt{ATTIVI} e \texttt{CONCLUSI}. Questa classe è utilizzata per l'applicazione di criteri di selezione sull'insieme dei prestiti; 
+                \item \textbf{Prestiti}: classe che modella un insieme di prestiti. Possiede l'attributo \texttt{prestiti} (una collezione di oggetti di tipo Prestito). Implementa l'interfaccia \hyperlink{Archiviabile}{Archiviabile}, ereditando i metodi fondamentali per la manipolazione della collezione. Fornisce un metodo per la visualizzazione dei prestiti (getter) e un metodo di filtraggio per visualizzare solo i prestiti che rispettano il criterio selezionato; 
+                \item \textbf{Utenti}: classe che modella un insieme di utenti. Possiede gli attributi \texttt{chiaviMatricole} e \texttt{utenti} (due collezioni di oggetti di tipo Utente). Implementa le interfacce \hyperlink{Archiviabile}{Archiviabile} e \hyperlink{Mappabile}{Mappabile}, ereditando i metodi fondamentali per la manipolazione della collezione. Fornisce un metodo per la visualizzazione degli utenti (getter) e un metodo per effettuare una ricerca all’interno della collezione;
+                \item \textbf{Libri}: classe che modella un insieme di libri. Possiede gli attributi \texttt{chiaviISBN} e \texttt{libri} (due collezioni di oggetti di tipo Libro). Implementa le interfacce \hyperlink{Archiviabile}{Archiviabile} e \hyperlink{Mappabile}{Mappabile}, ereditando i metodi fondamentali per la manipolazione della collezione. Fornisce un metodo per la visualizzazione dei libri (getter) e un metodo per effettuare una ricerca all’interno della collezione;
+                \hypertarget{Archiviabile}{\item} \textbf{Archiviabile}: interfaccia parametrizzata implementata dalle classi Prestiti, Utenti e Libri. Definisce i tre metodi per le operazioni fondamentali di aggiunta, modifica e rimozione dell'elemento passato come parametro; 
+                \hypertarget{Mappabile}{\item} \textbf{Mappabile}: interfaccia parametrizzata implementata dalle classi Utenti e Libri. Definisce i metodi per l'accesso e la ricerca di un valore attraverso una chiave;
+                \item \textbf{Filtro}: classe enumerativa che definisce tre criteri di filtraggio: \texttt{TUTTI}, \texttt{ATTIVI} e \texttt{CONCLUSI}. Questa classe è utilizzata per l'applicazione di criteri di selezione sull'insieme dei prestiti; 
                 \item \textbf{Prestito}: classe che modella un prestito. I suoi attributi sono: \texttt{matricolaUtente}, \texttt{codiceISBNLibro}, \texttt{dataInizio}, \texttt{dataScadenza} e \texttt{dataRestituzione}. Fornisce vari metodi per la modifica e visualizzazione di questi ultimi (getter e setter) e per la verifica della correttezza del formato dei dati; 
                 \item \textbf{Utente}: classe che specializza Persona. Modella un utente del sistema. I suoi attributi sono: \texttt{matricolaUtente}, \texttt{email} e \texttt{prestitiAttivi} (una collezione di oggetti di tipo Prestito). Fornisce vari metodi per la modifica e visualizzazione di questi ultimi (getter e setter), per la gestione della collezione di prestiti e per la verifica della correttezza del formato dei dati; 
                 \item \textbf{Libro}: classe che modella un libro. I suoi attributi sono: \texttt{titolo}, \texttt{autori} (una collezione di oggetti di tipo Autore), \texttt{annoPubblicazione}, \texttt{codiceISBNLibro} e \texttt{copieDisponibili}. Fornisce vari metodi per la modifica e visualizzazione di questi ultimi (getter e setter), per la gestione della collezione di autori e per la verifica della correttezza del formato dei dati;
@@ -75,14 +75,14 @@
                 \item \textbf{Autore}: classe che specializza Persona. Modella l'entità autore associata ad un libro.
                 \item \textbf{Persona}: classe astratta che funge da superclasse per Utente e Autore. Definisce gli attributi fondamentali di una persona, ovvero \texttt{nome} e \texttt{cognome}. Fornisce metodi per la loro gestione (getter e setter) e per la verifica della correttezza del loro formato.
             \end{itemize} 
-            All'interno del diagramma viene omessa l’implementazione dell’interfaccia Serializable al fine di aumentare la propria leggibilità. Suddetta interfaccia dovrà essere implementata dalle classi Biblioteca, Prestiti, Libri, Utenti, Prestito, Libro, Utente, Autore, Matricola e ISBN.\vspace{0.2cm}
-            \\Per lo stesso motivo, all'interno del diagramma vengono omesse le classi Controller, così come le relazioni tra queste ultime ed i modelli. 
+            All'interno del diagramma viene omessa l’implementazione dell’interfaccia Serializable al fine di aumentare la propria leggibilità. Suddetta interfaccia dovrà essere implementata dalle classi: Biblioteca, Prestiti, Libri, Utenti, Prestito, Libro, Utente, Autore, Matricola e ISBN.\vspace{0.2cm}
+            \\Per lo stesso motivo, all'interno del diagramma viene omessa anche l'implementazione dell'interfaccia Comparable, che sarà implementata dalle classi: Prestito, Libro, Matricola, ISBN e Persona (con le proprie specializzazioni). 
         \newpage
 
         \subsubsection{Diagramma delle classi}
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.92\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}
-                \includesvg[inkscapelatex=false]{classdiagram.svg}    
+            \begin{adjustbox}{width=.92\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}  
+                \includegraphics{classdiagram.png}
             \end{adjustbox}
             \captionof{figure}{Diagramma delle Classi} 
         \end{figure}
@@ -90,7 +90,7 @@
 
          \subsubsection{Diagramma dei package (essenziale)}
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.33\paperwidth, height=.5\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+            \begin{adjustbox}{width=.45\paperwidth, height=.4\paperheight, center, margin= 0cm .6cm 0cm .1cm}
                 \includesvg[inkscapelatex=false]{diagrammaDeiPackageNonDettagliato.svg}    
             \end{adjustbox}
             \captionof{figure}{Diagramma dei Package relativo ai modelli} 
@@ -99,7 +99,7 @@
         
         \subsubsection{Diagramma dei package (completo)}
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.7\paperwidth, height=.75\paperheight, center, margin= 0cm .3cm 0cm .1cm}
+            \begin{adjustbox}{width=.57\paperwidth, height=.75\paperheight, center, margin= 0cm .3cm 0cm .1cm}
                 \includesvg[inkscapelatex=false]{diagrammaDeiPackage.svg}    
             \end{adjustbox}
             \captionof{figure}{Diagramma dei Package completo (incluse le classi Controller e View)} 
@@ -278,6 +278,6 @@
         \subsubsection{Strategie per la riduzione dell'Accoppiamento}
             Utilizzando ampliamente meccanismi come l'\emph{incapsulamento} e l'\emph{astrazione} mediante l'introduzione di interfacce, è stato possibile ridurre al minimo possibile l'accoppiamento tra i moduli, nonché aumentare la robustezza generale del sistema.\vspace{.2cm}
             \\Uno degli aspetti su cui sarebbe possibile effettuare delle ottimizzazioni è l'uso dell'\emph{ereditarietà}: per questioni semantiche (e dettate dalla natura del linguaggio di programmazione utilizzato, ovvero \emph{Java}), la struttura del nostro sistema prevede due relazioni di specializzazione (\emph{Utente} $\rightarrow$ \emph{Persona} e \emph{Autore} $\rightarrow$ \emph{Persona}), che portano con sé un livello di accoppiamento estremamente elevato (\emph{accoppiamento per contenuti}).\vspace{.2cm}
-            \\Una possibile soluzione sarebbe quella di predilire l'\emph{associazione} all'\emph{ereditarietà}: anziché far dipendere l'implementazione di \emph{Utente} interamente da quella di \emph{Persona}, si potrebbe pensare di far mantenere a \emph{Utente} un riferimento ad una classe avente come attributi \emph{nome} e \emph{cognome}, riducendo di molto l'accoppiamento.
+            \\Una possibile soluzione potrebbe essere quella di predilire l'\emph{associazione} all'\emph{ereditarietà}: anziché far dipendere l'implementazione di \emph{Utente} interamente da quella di \emph{Persona}, si potrebbe pensare di far mantenere a \emph{Utente} un riferimento ad una classe avente come attributi \emph{nome} e \emph{cognome} (e che potrebbe prendere il nome di "Anagrafica"), riducendo di molto l'accoppiamento.
         
 \end{document}

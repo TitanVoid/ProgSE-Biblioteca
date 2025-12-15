@@ -1,0 +1,132 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.layout.Region?>
+
+<VBox xmlns="http://javafx.com/javafx/8.0.441" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controllers.libri.LibriController">
+
+    <children>
+
+        <!-- Header section -->
+        <HBox prefHeight="84.0" alignment="CENTER">
+            <children>
+
+                <MenuButton alignment="CENTER"
+                            mnemonicParsing="false"
+                            prefHeight="26.0"
+                            prefWidth="119.0"
+                            text="Libri">
+                    <items>
+                        <MenuItem fx:id="utenti" onAction="#onChangeViewMode" text="Utenti" userData="UTENTI"/>
+                        <MenuItem fx:id="prestiti" onAction="#onChangeViewMode" text="Prestiti" userData="PRESTITI"/>
+                    </items>
+                    <HBox.margin>
+                        <Insets left="40.0" top="13.0" />
+                    </HBox.margin>
+                </MenuButton>
+
+                <TextField fx:id="searchBar"
+                           onKeyReleased="#onSearchBook"
+                           prefHeight="26.0"
+                           prefWidth="340.0"
+                           promptText="Inserire  Titolo  /  Autore  /  ISBN  " >
+                    <HBox.margin>
+                        <Insets left="20.0" top="13.0" />
+                    </HBox.margin>
+                </TextField>
+
+                <!-- Spacer -->
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Logo top-right -->
+                <ImageView fitHeight="75.0"
+                           preserveRatio="true"
+                           smooth="false">
+                    <image>
+                        <Image url="@/image/logo_standard.png"/>
+                    </image>
+                    <HBox.margin>
+                        <Insets right="50.0" top="10.0" bottom="10.0"/>
+                    </HBox.margin>
+                </ImageView>
+
+            </children>
+        </HBox>
+
+        <!-- Content section -->
+        <AnchorPane VBox.vgrow="ALWAYS">
+            <children>
+                <SplitPane dividerPositions="0.8"
+                           AnchorPane.bottomAnchor="0.0"
+                           AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0"
+                           AnchorPane.topAnchor="0.0">
+
+                    <items>
+
+                        <!-- Table area -->
+                        <AnchorPane minWidth="0.0">
+                            <children>
+                                <TableView fx:id="tableLibri"
+                                           AnchorPane.bottomAnchor="0.0"
+                                           AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0"
+                                           AnchorPane.topAnchor="0.0">
+                                    <columns>
+                                        <TableColumn fx:id="titleClm" text="Titolo"/>
+                                        <TableColumn fx:id="authorsClm" text="Autore/i"/>
+                                        <TableColumn fx:id="idClm" text="Codice identificativo"/>
+                                        <TableColumn fx:id="publishYearClm" text="Anno pubblicazione"/>
+                                        <TableColumn fx:id="copiesClm" text="Numero copie"/>
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+
+                        <!-- Button sidebar -->
+                        <AnchorPane maxWidth="138.0" minWidth="138.0" prefWidth="138.0">
+                            <children>
+                                <VBox alignment="TOP_CENTER"
+                                      spacing="30.0"
+                                      AnchorPane.leftAnchor="10.0"
+                                      AnchorPane.rightAnchor="10.0"
+                                      AnchorPane.topAnchor="30.0">
+                                    <children>
+                                        <Button maxWidth="Infinity"
+                                                mnemonicParsing="false"
+                                                onAction="#onAddBook"
+                                                text="Aggiungi"/>
+                                        <Button fx:id="modificaButton"
+                                                maxWidth="Infinity"
+                                                mnemonicParsing="false"
+                                                onAction="#onModifyBook"
+                                                text="Modifica"/>
+                                        <Button fx:id="eliminaButton"
+                                                maxWidth="Infinity"
+                                                mnemonicParsing="false"
+                                                onAction="#onDeleteBook"
+                                                text="Elimina"/>
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+
+                    </items>
+                </SplitPane>
+            </children>
+        </AnchorPane>
+
+    </children>
+</VBox>

@@ -12,11 +12,15 @@
 	'Ogni volta che viene inserito un carattere viene aggiornata la ricerca
 	loop Inserimento sottostringa 
 		a->cvu: Digita una sottostringa nella barra di ricerca
-		cvu->gu: ricerca(...)
-		activate gu
-			gu->gu: Ricerca utenti
-			gu-->a:Restituisce utenti che rispettano i criteri di ricerca
-		deactivate gu
+		cvu->gu: ricercaUtenti(...)
+		activate cvu
+			activate gu
+				gu->gu: Ricerca utenti
+				gu-->cvu:Restituisce gli utenti che rispettano i criteri di ricerca
+			deactivate gu
+			cvu --> a: Mostra gli utenti che rispettano i criteri di ricerca
+		deactivate cvu
+
 		
 		'Condizione di uscita dal loop
 		break Seleziona un utente 

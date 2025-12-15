@@ -1,60 +1,63 @@
 @startuml
 left to right direction
 
-package Java{
-	class Main{}
+package java{
+	class Main
 	
-	package Controllers{
+	package controllers{
 		
-		class MainController
+		class BaseController
+		class MenuController
+		class RimozioneController
 		
-		package Libri{
+		package libri{
 			class AggiuntaLibroController
 			class LibriController
 			class ModificaLibroController
-			class RimozioneLibroController
 		}
 		
-		package Prestiti{
+		package prestiti{
 			class EstensionePrestitoController
 			class PrestitiController
 			class RegistazionePrestitoController
-			class RestituzionePrestitoController
 		}
 		
-		package Utenti{
+		package utenti{
 			class AggiuntaUtenteController
 			class UtentiController
 			class ModificaUtenteController
-			class RimozioneUtenteController
 		}
 	
 	}
 	
-	package Models{
+	package models{
 		
 		class Biblioteca
 		class Matricola
 		class ISBN
 		abstract Persona
+		exception FormatoCampiErratoException
+		exception OggettoGiaPresenteException
 		
-		package Libri{
+		package libri{
 			class Autore
 			class Libri
 			class Libro
+			exception LibroGiaPresenteException
 		}
 		
-		package Prestiti{
+		package prestiti{
 			class Prestiti
 			class Prestito
 		}
 		
-		package Utenti{
+		package utenti{
 			class Utente
 			class Utenti
+			exception UtenteGiaPresenteException
 		}
 		
-		package Servizi{
+		package servizi{
 			interface Archiviabile
 			enum Filtro
 			interface Mappabile
@@ -62,31 +65,33 @@ package Java{
 		}
 	}
 	
-	
-	package Views{
-	
-		class AvvisoConfermaRimozioneView
+	package resources{
+		package views{
 		
-		package Libri{
-			class LibriView
-			class AggiuntaLibroView
-			class ModificaLibroView
-		}
-		
-		package Prestiti{
-			class EstensionePrestitoView
-			class PrestitiView
-			class RegistrazionePrestitoView
-		}
-		
-		package Utenti{
-			class AggiuntaUtenteView
-			class ModificaUtenteView
-			class UtentiView
+			class AvvisoConfermaRimozioneView
+			class MenuView
+			
+			package libri{
+				class LibriView
+				class AggiuntaLibroView
+				class ModificaLibroView
+			}
+			
+			package prestiti{
+				class EstensionePrestitoView
+				class PrestitiView
+				class RegistrazionePrestitoView
+			}
+			
+			package utenti{
+				class AggiuntaUtenteView
+				class ModificaUtenteView
+				class UtentiView
+			}
 		}
 	}
 }
-Models -[hidden]> Controllers
+'Models -[hidden]> Controllers
 
 
 @enduml

@@ -1,40 +1,43 @@
 @startuml
 left to right direction
 
-package "Java"{
-	class Main{}
+package java{
+	class Main
 		
-	package "Models"{
+	package models{
 		
 		class Biblioteca
 		class Matricola
 		class ISBN
 		abstract Persona
+		exception OggettoGiaPresenteException
+		exception FormatoCampiErratoException
 		
 		
-		package "Prestiti"{
+		package prestiti{
 			class Prestiti
 			class Prestito
 		}
 			
-		package "Libri"{
+		package libri{
 			class Autore
 			class Libri
 			class Libro
+			exception LibroGiaPresenteException
 		}
 			
-		package "Utenti"{
+		package utenti{
 			class Utente
 			class Utenti
+			exception UtenteGiaPresenteException
 		}
 
-		package "Servizi"{
+		package servizi{
 			interface Archiviabile
 			enum Filtro
 			interface Mappabile
 			class Maschera
 		}
-		
 		
 	}
 	

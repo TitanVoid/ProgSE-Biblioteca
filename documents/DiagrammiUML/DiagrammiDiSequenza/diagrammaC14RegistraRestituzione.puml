@@ -2,7 +2,7 @@
 
 	actor Amministratore as a
 	participant PrestitiController as cvp
-	participant RestituzionePrestitoController as rrc
+	participant RimozioneController as rrc
 	participant Prestiti as gp
 
 	cvp->cvp: initialize(...)
@@ -25,7 +25,7 @@
 		a->rrc: Conferma l'operazione cliccando il pulsante "Si"
 		rrc->rrc: onConfirm(...)
 		activate rrc
-			rrc->gp: registraPrestito(...)
+			rrc->gp: rimuovi(...)
 			activate gp
 				gp->gp: Viene registrata la restituzione
 				gp-->rrc: Conferma

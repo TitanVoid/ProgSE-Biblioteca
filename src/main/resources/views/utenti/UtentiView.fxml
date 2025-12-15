@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.MenuButton?>
+<?import javafx.scene.control.MenuItem?>
+<?import javafx.scene.control.SplitPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.Region?>
+<?import javafx.scene.image.Image?>
+<VBox xmlns="http://javafx.com/javafx/8.0.441"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="controllers.utenti.UtentiController">
+    <children>
+        <HBox prefHeight="84.0">
+            <children>
+
+                <MenuButton alignment="CENTER" mnemonicParsing="false" prefHeight="26.0" prefWidth="119.0" text="Utenti" textAlignment="CENTER">
+                    <items>
+                        <MenuItem fx:id="prestiti" mnemonicParsing="false" onAction="#onChangeViewMode" text="Prestiti" userData="PRESTITI" />
+                        <MenuItem fx:id="libri" mnemonicParsing="false" onAction="#onChangeViewMode" text="Libri" userData="LIBRI" />
+                    </items>
+                    <HBox.margin>
+                        <Insets left="40.0" top="40.0" />
+                    </HBox.margin>
+                </MenuButton>
+
+                <TextField fx:id="searchBar" onKeyReleased="#onSearchUser" prefHeight="26.0" prefWidth="340.0" promptText="Inserire  Cognome  /  Matricola ">
+                    <HBox.margin>
+                        <Insets left="20.0" top="40.0" />
+                    </HBox.margin>
+                </TextField>
+
+                <!-- Spacer -->
+                <Region HBox.hgrow="ALWAYS"/>
+
+                <!-- Logo top-right -->
+                <ImageView fitHeight="75.0"
+                           preserveRatio="true"
+                           smooth="false">
+                    <image>
+                        <Image url="@/image/logo_standard.png"/>
+                    </image>
+                    <HBox.margin>
+                        <Insets right="50.0" top="10.0" bottom="10.0"/>
+                    </HBox.margin>
+                </ImageView>
+
+            </children>
+        </HBox>
+
+        <AnchorPane VBox.vgrow="ALWAYS">
+            <children>
+                <SplitPane dividerPositions="0.8"
+                           AnchorPane.topAnchor="0.0"
+                           AnchorPane.bottomAnchor="0.0"
+                           AnchorPane.leftAnchor="0.0"
+                           AnchorPane.rightAnchor="0.0">
+                    <items>
+                        <AnchorPane minWidth="0.0">
+                            <children>
+                                <TableView fx:id="tableUtenti"
+                                           AnchorPane.topAnchor="0.0"
+                                           AnchorPane.bottomAnchor="0.0"
+                                           AnchorPane.leftAnchor="0.0"
+                                           AnchorPane.rightAnchor="0.0">
+                                    <columns>
+                                        <TableColumn fx:id="nomeClm" text="Nome" />
+                                        <TableColumn fx:id="cognomeClm" text="Cognome" />
+                                        <TableColumn fx:id="matricolaClm" text="Matricola" />
+                                        <TableColumn fx:id="emailClm" text="Email" />
+                                        <TableColumn fx:id="prestitiAttiviClm" text="Prestiti Attivi" />
+                                    </columns>
+                                </TableView>
+                            </children>
+                        </AnchorPane>
+
+                        <AnchorPane minWidth="138.0" prefWidth="138.0" maxWidth="138.0">
+                            <children>
+                                <VBox alignment="TOP_CENTER" spacing="30.0"
+                                      AnchorPane.topAnchor="30.0"
+                                      AnchorPane.leftAnchor="10.0"
+                                      AnchorPane.rightAnchor="10.0">
+                                    <children>
+                                        <Button mnemonicParsing="false" onAction="#onAddUser" text="Aggiungi" maxWidth="Infinity" />
+                                        <Button fx:id="modificaButton" mnemonicParsing="false" onAction="#onModifyUser" text="Modifica" maxWidth="Infinity" />
+                                        <Button fx:id="eliminaButton" mnemonicParsing="false" onAction="#onDeleteUser" text="Rimuovi" maxWidth="Infinity" />
+                                    </children>
+                                </VBox>
+                            </children>
+                        </AnchorPane>
+                    </items>
+                </SplitPane>
+            </children>
+        </AnchorPane>
+    </children>
+</VBox>

@@ -35,7 +35,7 @@
 		end
 	end
 
-	auc -> gu: esisteChiave(...)
+	auc -> gu: aggiungi(...)
 		 
 			gu -> gu: Verifica se l'utente è presente già nella lista
 		
@@ -45,16 +45,11 @@
 		gu-->auc: L'utente esiste nella lista
 		auc-->a: Viene mostrato un messaggio di errore	
 	else L'utente non esiste nella lista
-		gu --> auc: L'utente non esiste nella lista
-		activate auc
-			auc->gu: aggiungi(...)
-			activate gu
-				gu->gu: Viene aggiunto l'utente
+			gu->gu: Viene aggiunto l'utente
+				activate gu
 				gu --> auc: Conferma
-				deactivate gu
+			deactivate gu
 				auc-->a: Viene chiusa la schermata di aggiunta utente
-		deactivate auc
-		
 	end
 
 @enduml
