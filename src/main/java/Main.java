@@ -1,6 +1,4 @@
-import controllers.BaseController;
 import controllers.MenuController;
-import controllers.libri.LibriController;
 import javafx.scene.control.Alert;
 import models.Biblioteca;
 import javafx.application.Application;
@@ -20,9 +18,9 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception {
-        try{
+        try {
             biblioteca = Biblioteca.leggiBibliotecaObj("biblioteca.obj");
-        } catch (IOException e){
+        } catch (IOException e) {
             Alert alert = new Alert(Alert.AlertType.WARNING, e.getMessage());
             alert.showAndWait();
             biblioteca = new Biblioteca();

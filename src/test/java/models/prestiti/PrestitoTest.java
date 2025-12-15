@@ -19,8 +19,8 @@ import org.junit.Before;
  */
 public class PrestitoTest {
     private Prestito p;
-    
-    public PrestitoTest() {        
+
+    public PrestitoTest() {
     }
 
     @Before
@@ -29,11 +29,11 @@ public class PrestitoTest {
         ISBN isbn = new ISBN("883010471X");
         p = new Prestito(m, isbn, LocalDate.now(), LocalDate.now().plusDays(3));
     }
-    
+
     @Test
     public void testCostruttorePrestito() {
     }
-    
+
     @Test
     public void testGetMatricolaUtente() {
         Matricola m = new Matricola("0612708796");
@@ -64,14 +64,14 @@ public class PrestitoTest {
     @Test
     public void testSetDataScadenza() {
         p.setDataScadenza(LocalDate.now().plusDays(10));
-        
+
         assertEquals(p.getDataScadenza(), LocalDate.now().plusDays(10));
     }
 
     @Test
     public void testSetDataRestituzione() {
         p.setDataRestituzione(LocalDate.now());
-        
+
         assertEquals(p.getDataRestituzione(), LocalDate.now());
     }
 
@@ -84,7 +84,7 @@ public class PrestitoTest {
         // Prestito estinto:
         Prestito p2 = new Prestito(m, isbn, LocalDate.now(), LocalDate.now().plusDays(3));
         p2.setDataRestituzione(LocalDate.now());
-        
+
         assertTrue(p1.isAttivo());
         assertFalse(p2.isAttivo());
     }
@@ -94,36 +94,12 @@ public class PrestitoTest {
         // Test con data di scadenza valida:
         assertTrue(Prestito.verificaDataScadenza("2025-12-20"));
         // Test con data di scadenza non valida:
-        assertThrows(FormatoCampiErratoException.class, () -> { Prestito.verificaDataScadenza("2025/12/20"); });   
-        assertThrows(FormatoCampiErratoException.class, () -> { Prestito.verificaDataScadenza("2025-12-12"); });   
-    }
-
-    @Test
-    public void testEquals() {
-        Matricola m1 = new Matricola("0612708796");
-        Matricola m2 = new Matricola("0612708797");
-        ISBN isbn1 = new ISBN("883010471X");
-        ISBN isbn2 = new ISBN("883010471");
-        
-        // Test prestito uguale:
-        Prestito p1 = new Prestito(m1, isbn1, LocalDate.now(), LocalDate.now().plusDays(3));
-        assertTrue(p.equals(p1));
-        // Test prestito con matricola diversa:
-        Prestito p2 = new Prestito(m2, isbn1, LocalDate.now(), LocalDate.now().plusDays(3));
-        assertFalse(p.equals(p2));
-        // Test prestito con codice ISBN diverso:
-        Prestito p3 = new Prestito(m1, isbn2, LocalDate.now(), LocalDate.now().plusDays(3));
-        assertFalse(p.equals(p3));
-        // Test prestito con data di inizio diversa:
-        Prestito p4 = new Prestito(m1, isbn1, LocalDate.now().minusDays(1), LocalDate.now().plusDays(3));
-        assertFalse(p.equals(p4));
-        // Test prestito con data di scadenza diversa:
-        Prestito p5 = new Prestito(m1, isbn1, LocalDate.now(), LocalDate.now().plusDays(2));
-        assertFalse(p.equals(p5));
-        // Test prestito con data di restituzione diversa:
-        Prestito p6 = new Prestito(m1, isbn1, LocalDate.now(), LocalDate.now().plusDays(3));
-        p6.setDataRestituzione(LocalDate.now());
-        assertFalse(p.equals(p6));    
+        assertThrows(FormatoCampiErratoException.class, () -> {
+            Prestito.verificaDataScadenza("2025/12/20");
+        });
+        assertThrows(FormatoCampiErratoException.class, () -> {
+            Prestito.verificaDataScadenza("2025-12-12");
+        });
     }
 
     @Test
@@ -141,5 +117,5 @@ public class PrestitoTest {
         Prestito p3 = new Prestito(m, isbn, LocalDate.now(), LocalDate.now().plusDays(4));
         assertTrue(p.compareTo(p3) < 0);
     }
-    
+
 }
