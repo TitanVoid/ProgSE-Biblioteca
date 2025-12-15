@@ -9,9 +9,8 @@ Strumenti/linguaggi utilizzati:
 - Maven
 - JUnit
 
-
-
-
+L'applicazione utilizza Java 8, per essere sicuri di usare la versione corretta prima di compilare e testare, eseguire: 
+- export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-1.8.jdk/Contents/Home
 
 
 
