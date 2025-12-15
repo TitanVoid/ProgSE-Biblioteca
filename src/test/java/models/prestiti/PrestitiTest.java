@@ -21,24 +21,35 @@ public class PrestitiTest {
     public void setUp() {
         prestiti = new Prestiti();
     }
-    
+  
+    // TEST COSTRUTTORE
     @Test
-    public void testCostruttorePrestiti() {
+    public void testCostruttorePrestitiInizializzazioneLista() {
         Prestiti prestiti2 = new Prestiti();
         
+        assertNotNull(prestiti2);
+        
         assertNotNull(prestiti2.getListaPrestiti());
+    }
+    
+    @Test
+    public void testCostruttorePrestitiListaVuota() {
+        Prestiti prestiti2 = new Prestiti();
+
         assertTrue(prestiti2.getListaPrestiti().isEmpty());
     }
     
+    // TEST METODO GETTER
     @Test
     public void testGetListaPrestiti() {
         assertNotNull(prestiti.getListaPrestiti());
         assertTrue(prestiti.getListaPrestiti() instanceof ArrayList);
     }
 
+    // TEST AGGIUNGI
     @Test
     public void testAggiungi() {
-        Prestito p = new Prestito(new Matricola("0612701523"), new ISBN("883010471X"), LocalDate.now(), LocalDate.now().plusDays(20));
+        Prestito p = new Prestito(new Matricola("0612708796"), new ISBN("883010471X"), LocalDate.now(), LocalDate.now().plusDays(5));
 
         prestiti.aggiungi(p);
         
@@ -46,6 +57,7 @@ public class PrestitiTest {
         assertEquals(1, prestiti.getListaPrestiti().size());
     }
 
+    // TEST RIMUOVI
     @Test
     public void testRimuovi() {
         Prestito p = new Prestito(new Matricola("0612708796"), new ISBN("883010471X"), LocalDate.now(), LocalDate.now().plusDays(5));
@@ -73,8 +85,9 @@ public class PrestitiTest {
         assertEquals(prestiti.getListaPrestiti().get(prestiti.getListaPrestiti().indexOf(p2)).getDataScadenza(), LocalDate.now().plusDays(20));
     }
 
+    // TEST FILTRA
     @Test
-    public void testFiltra() {
+    public void testFiltraTutti() {
         LocalDate now = LocalDate.now();
         Prestito p1 = new Prestito(new Matricola("0612708796"), new ISBN("883010471X"), now, now.plusDays(5));
         Prestito p2 = new Prestito(new Matricola("0612709452"), new ISBN("9788867582143"), now, now.plusDays(10));
@@ -86,20 +99,54 @@ public class PrestitiTest {
         prestiti.rimuovi(p1);
         prestiti.rimuovi(p3);
         
-        // Test con filtro TUTTI:
         List<Prestito> tutti = prestiti.filtra(Filtro.TUTTI);
         
         assertEquals(3, tutti.size());
-        
-        // Test con filtro ATTIVI:
+        assertTrue(tutti.contains(p1));
+        assertTrue(tutti.contains(p2));
+        assertTrue(tutti.contains(p3));
+    }
+    
+    @Test
+    public void testFiltraAttivi() {
+        LocalDate now = LocalDate.now();
+        Prestito p1 = new Prestito(new Matricola("0612708796"), new ISBN("883010471X"), now, now.plusDays(5));
+        Prestito p2 = new Prestito(new Matricola("0612709452"), new ISBN("9788867582143"), now, now.plusDays(10));
+        Prestito p3 = new Prestito(new Matricola("0612712846"), new ISBN("8883379071"), now, now.plusDays(15));
+
+        prestiti.aggiungi(p1);
+        prestiti.aggiungi(p2);
+        prestiti.aggiungi(p3);
+        prestiti.rimuovi(p1);
+        prestiti.rimuovi(p3);
+
         List<Prestito> attivi = prestiti.filtra(Filtro.ATTIVI);
         
         assertEquals(1, attivi.size());
-        
-        // Test con filtro CONCLUSI:
+        assertFalse(attivi.contains(p1));
+        assertTrue(attivi.contains(p2));
+        assertFalse(attivi.contains(p3));        
+    }
+    
+    @Test
+    public void testFiltraConclusi() {
+        LocalDate now = LocalDate.now();
+        Prestito p1 = new Prestito(new Matricola("0612708796"), new ISBN("883010471X"), now, now.plusDays(5));
+        Prestito p2 = new Prestito(new Matricola("0612709452"), new ISBN("9788867582143"), now, now.plusDays(10));
+        Prestito p3 = new Prestito(new Matricola("0612712846"), new ISBN("8883379071"), now, now.plusDays(15));
+
+        prestiti.aggiungi(p1);
+        prestiti.aggiungi(p2);
+        prestiti.aggiungi(p3);
+        prestiti.rimuovi(p1);
+        prestiti.rimuovi(p3);
+
         List<Prestito> conclusi = prestiti.filtra(Filtro.CONCLUSI);
         
         assertEquals(2, conclusi.size());
+        assertTrue(conclusi.contains(p1));
+        assertFalse(conclusi.contains(p2));
+        assertTrue(conclusi.contains(p3));        
     }
     
 }
