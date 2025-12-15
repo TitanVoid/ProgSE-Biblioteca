@@ -148,7 +148,6 @@ top to bottom direction
 +isAttivo(): boolean
 -StringDataScadenzaToLocalDate(dataScadenza: String): LocalDate {static}
 +verificaDataScadenza(dataScadenza: String): boolean {static}
-+equals(o: Object): boolean
 +compareTo(p: Prestito): int
 +toString(): String
 }
