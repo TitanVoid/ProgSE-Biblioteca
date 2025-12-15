@@ -46,10 +46,10 @@
     \fancyhead[R]{pagina \thepage\ di \pageref*{LastPage}}
     \pagestyle{fancy}
     \hypersetup{linkcolor=black}
-    \begingroup
-        \let\bfseries\normalfont
+    %\begingroup
+        %\let\bfseries\normalfont
         \tableofcontents
-    \endgroup
+    %\endgroup
     \newpage
 
     \hypersetup{linkcolor=blue}
@@ -66,7 +66,7 @@
                 \item \textbf{Libri}: classe che modella un insieme di libri. Possiede gli attributi \texttt{chiaviISBN} e \texttt{libri} (due collezioni di oggetti di tipo Libro). Implementa le interfacce \hyperlink{Archiviabile}{Archiviabile} e \hyperlink{Mappabile}{Mappabile}, ereditando i metodi fondamentali per la manipolazione della collezione. Fornisce un metodo per la visualizzazione dei libri (getter) e un metodo per effettuare una ricerca all’interno della collezione;
                 \hypertarget{Archiviabile}{\item} \textbf{Archiviabile}: interfaccia parametrizzata implementata dalle classi Prestiti, Utenti e Libri. Definisce i tre metodi per le operazioni fondamentali di aggiunta, modifica e rimozione dell'elemento passato come parametro; 
                 \hypertarget{Mappabile}{\item} \textbf{Mappabile}: interfaccia parametrizzata implementata dalle classi Utenti e Libri. Definisce i metodi per l'accesso e la ricerca di un valore attraverso una chiave;
-                \item \textbf{Filtro}: classe enumerativa che definisce tre criteri di filtraggio: \texttt{TUTTI}, \texttt{ATTIVI} e \texttt{CONCLUSI}. Questa classe è utilizzata per l'applicazione di criteri di selezione sull'insieme dei prestiti; 
+                \item \textbf{Filtro}: classe enumerativa che definisce tre criteri di filtraggio: \texttt{TUTTI}, \texttt{ATTIVI} e \texttt{CONCLUSI}. Questa classe è utilizzata per l'applicazione di criteri di visualizzazione selettiva sull'insieme dei prestiti; 
                 \item \textbf{Prestito}: classe che modella un prestito. I suoi attributi sono: \texttt{matricolaUtente}, \texttt{codiceISBNLibro}, \texttt{dataInizio}, \texttt{dataScadenza} e \texttt{dataRestituzione}. Fornisce vari metodi per la modifica e visualizzazione di questi ultimi (getter e setter) e per la verifica della correttezza del formato dei dati; 
                 \item \textbf{Utente}: classe che specializza Persona. Modella un utente del sistema. I suoi attributi sono: \texttt{matricolaUtente}, \texttt{email} e \texttt{prestitiAttivi} (una collezione di oggetti di tipo Prestito). Fornisce vari metodi per la modifica e visualizzazione di questi ultimi (getter e setter), per la gestione della collezione di prestiti e per la verifica della correttezza del formato dei dati; 
                 \item \textbf{Libro}: classe che modella un libro. I suoi attributi sono: \texttt{titolo}, \texttt{autori} (una collezione di oggetti di tipo Autore), \texttt{annoPubblicazione}, \texttt{codiceISBNLibro} e \texttt{copieDisponibili}. Fornisce vari metodi per la modifica e visualizzazione di questi ultimi (getter e setter), per la gestione della collezione di autori e per la verifica della correttezza del formato dei dati;
@@ -75,13 +75,35 @@
                 \item \textbf{Autore}: classe che specializza Persona. Modella l'entità autore associata ad un libro.
                 \item \textbf{Persona}: classe astratta che funge da superclasse per Utente e Autore. Definisce gli attributi fondamentali di una persona, ovvero \texttt{nome} e \texttt{cognome}. Fornisce metodi per la loro gestione (getter e setter) e per la verifica della correttezza del loro formato.
             \end{itemize} 
-            All'interno del diagramma viene omessa l’implementazione dell’interfaccia Serializable al fine di aumentare la propria leggibilità. Suddetta interfaccia dovrà essere implementata dalle classi: Biblioteca, Prestiti, Libri, Utenti, Prestito, Libro, Utente, Autore, Matricola e ISBN.\vspace{0.2cm}
-            \\Per lo stesso motivo, all'interno del diagramma viene omessa anche l'implementazione dell'interfaccia Comparable, che sarà implementata dalle classi: Prestito, Libro, Matricola, ISBN e Persona (con le proprie specializzazioni). 
+            Per la gestione e segnalazione dei possibili errori che si possono verificare durante l'esecuzione delle operazioni fondamentali del software, sono state realizzate anche le classi \textbf{FormatoCampiErratoException} e \textbf{OggettoGiaPresenteException} (che si specializza in \textbf{UtenteGiaPresenteException} e \textbf{LibroGiaPresenteException}).\vspace{.2cm}
+            \\All'interno del diagramma viene omessa l’implementazione dell’interfaccia Serializable al fine di aumentare la propria leggibilità. Suddetta interfaccia dovrà essere implementata dalle classi:\vspace{-0.2cm}
+            \begin{itemize}[label=$\bullet$]
+                \setlength\itemsep{-0.3em}
+                \item Biblioteca;
+                \item Prestiti;
+                \item Libri;
+                \item Utenti;
+                \item Prestito;
+                \item Libro;
+                \item Utente;
+                \item Autore;
+                \item Matricola;
+                \item ISBN.
+            \end{itemize}
+            Per lo stesso motivo, all'interno del diagramma viene omessa anche l'implementazione dell'interfaccia Comparable, che sarà implementata dalle classi:\vspace{-0.2cm}
+            \begin{itemize}[label=$\bullet$]
+                \setlength\itemsep{-0.3em}
+                \item Prestito;
+                \item Libro;
+                \item Matricola;
+                \item ISBN;
+                \item Persona (con le proprie specializzazioni).
+            \end{itemize}
         \newpage
 
         \subsubsection{Diagramma delle classi}
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.92\paperwidth, height=.75\paperheight, center, margin= 0cm .6cm 0cm .1cm}  
+            \begin{adjustbox}{width=.95\paperwidth, height=.7\paperheight, center, margin= 0cm .6cm 0cm .1cm}  
                 \includegraphics{classdiagram.png}
             \end{adjustbox}
             \captionof{figure}{Diagramma delle Classi} 
@@ -90,7 +112,7 @@
 
          \subsubsection{Diagramma dei package (essenziale)}
         \begin{figure}[h!]
-            \begin{adjustbox}{width=.45\paperwidth, height=.4\paperheight, center, margin= 0cm .6cm 0cm .1cm}
+            \begin{adjustbox}{width=.43\paperwidth, height=.4\paperheight, center, margin= 0cm .6cm 0cm .1cm}
                 \includesvg[inkscapelatex=false]{diagrammaDeiPackageNonDettagliato.svg}    
             \end{adjustbox}
             \captionof{figure}{Diagramma dei Package relativo ai modelli} 
@@ -109,7 +131,7 @@
     \subsection{Diagrammi di sequenza}
         Di seguito vengono presentati dei diagrammi di sequenza che descrivono i flussi esecutivi dei casi d’uso più rilevanti, utili per la comprensione delle funzionalità principali del sistema.
         \\Questi diagrammi descrivono l’interazione tra l’attore \emph{Amministratore} e gli oggetti del sistema coinvolti, ai fini di soddisfare i requisiti specificati. 
-        \subsubsection{\textbf{C4: Inserimento di un libro}}
+        \subsubsection{C4: Inserimento di un libro}
         Il seguente diagramma descrive l'esecuzione del caso d'uso C4.\vspace{.2cm}
         \\Per migliorare la leggibilità del diagramma, è stato omesso il flusso alternativo di annullamento dell’operazione tramite la pressione del pulsante “Annulla”.
         \\Per il flusso alternativo di inserimento errato o incompleto, è stata utilizzata la sintassi \texttt{loop-break}.
@@ -122,7 +144,7 @@
         \end{figure}
         \newpage
 
-        \subsubsection{\textbf{C5: Modifica di un libro}}
+        \subsubsection{C5: Modifica di un libro}
         Il seguente diagramma descrive l'esecuzione del caso d'uso C5.\vspace{.2cm}
         \\Per migliorare la leggibilità del diagramma, è stato omesso il flusso alternativo di annullamento dell’operazione tramite la pressione del pulsante “Annulla”.
         \\Per il flusso alternativo relativo ad una modifica errata o incompleta è stata utilizzata la sintassi \texttt{loop-break}.
@@ -134,7 +156,7 @@
         \end{figure}
         \newpage
 
-        \subsubsection{\textbf{C6: Rimozione di un libro}}
+        \subsubsection{C6: Rimozione di un libro}
         Il seguente diagramma descrive l'esecuzione del caso d'uso C6.\vspace{.2cm}
         \\Per il flusso alternativo di annullamento dell’operazione tramite la pressione del pulsante “No” è stata utilizzata la sintassi \texttt{alt}.
         \begin{figure}[h!]
@@ -145,7 +167,7 @@
         \end{figure}
         \newpage
 
-        \subsubsection{\textbf{C7: Inserimento di un utente}}
+        \subsubsection{C7: Inserimento di un utente}
         Il seguente diagramma descrive l'esecuzione del caso d'uso C7.\vspace{.2cm}
         \\Per migliorare la leggibilità del diagramma, è stato omesso il flusso alternativo di annullamento dell’operazione tramite la pressione del pulsante “Annulla”.
         \\Per il flusso alternativo di inserimento errato o incompleto, è stata utilizzata la sintassi \texttt{loop-break}.
@@ -158,7 +180,7 @@
         \end{figure}
         \newpage
 
-        \subsubsection{\textbf{C8: Modifica di un utente}}
+        \subsubsection{C8: Modifica di un utente}
         Il seguente diagramma descrive l'esecuzione del caso d'uso C8.\vspace{.2cm}
         \\Per migliorare la leggibilità del diagramma, è stato omesso il flusso alternativo di annullamento dell’operazione tramite la pressione del pulsante “Annulla”.
         \\Per il flusso alternativo relativo ad una modifica errata o incompleta è stata utilizzata la sintassi \texttt{loop-break}.
@@ -170,7 +192,7 @@
         \end{figure}
         \newpage
 
-        \subsubsection{\textbf{C9: Rimozione di un utente}}
+        \subsubsection{C9: Rimozione di un utente}
         Il seguente diagramma descrive l'esecuzione del caso d'uso C9.\vspace{.2cm}
         \\Per il flusso alternativo di annullamento dell’operazione tramite la pressione del pulsante “No” è stata utilizzata la sintassi \texttt{alt}.
         \begin{figure}[h!]
@@ -181,7 +203,7 @@
         \end{figure}
         \newpage
 
-        \subsubsection{\textbf{C10: Ricerca di un libro}}
+        \subsubsection{C10: Ricerca di un libro}
         Il seguente diagramma descrive l'esecuzione del caso d'uso C10.\vspace{.2cm}
         \\All'interno del diagramma è stato scelto di utilizzare la sintassi \texttt{loop-break} per simulare la ricerca mediante l'inserimento di una sottostringa nella barra di ricerca.
         \\Ogni volta che viene aggiunto un carattere alla stringa, verrà effettuata una ricerca in tempo reale e verranno visualizzati tutti i libri i cui campi presenteranno almeno una corrispondenza con la sottostringa inserita.
@@ -194,7 +216,7 @@
         \end{figure}
         \newpage
 
-        \subsubsection{\textbf{C12: Ricerca di un utente}}
+        \subsubsection{C12: Ricerca di un utente}
         Il seguente diagramma descrive l'esecuzione del caso d'uso C12.\vspace{.2cm}
         \\All'interno del diagramma è stato scelto di utilizzare la sintassi \texttt{loop-break} per simulare la ricerca mediante l'inserimento di una sottostringa nella barra di ricerca.
         \\Ogni volta che viene aggiunto un carattere alla stringa, verrà effettuata una ricerca in tempo reale e verranno visualizzati tutti gli utenti i cui campi presenteranno almeno una corrispondenza con la sottostringa inserita.
@@ -207,7 +229,7 @@
         \end{figure}
         \newpage
 
-        \subsubsection{\textbf{C13: Registrazione di un prestito}}
+        \subsubsection{C13: Registrazione di un prestito}
         Il seguente diagramma descrive l'esecuzione del caso d'uso C13.\vspace{.2cm}
         \\Per migliorare la leggibilità del diagramma, è stato omesso il flusso alternativo di annullamento dell’operazione tramite la pressione del pulsante “Annulla”.
         \\Per il flusso alternativo di inserimento errato o incompleto è stata utilizzata la sintassi \texttt{loop-break}.
@@ -220,7 +242,7 @@
         \end{figure}
         \newpage
 
-        \subsubsection{\textbf{C14: Registrazione di una restituzione}}
+        \subsubsection{C14: Registrazione di una restituzione}
         Il seguente diagramma descrive l'esecuzione del caso d'uso C14.\vspace{.2cm}
         \\Per il flusso alternativo di annullamento dell’operazione tramite la pressione del pulsante “No” è stata utilizzata la sintassi \texttt{alt}.
         \begin{figure}[h!]
@@ -231,7 +253,7 @@
         \end{figure}
         \newpage
 
-        \subsubsection{\textbf{C15: Estensione di un prestito}}
+        \subsubsection{C15: Estensione di un prestito}
         Il seguente diagramma descrive l'esecuzione del caso d'uso C15.\vspace{.2cm}
         \\Per migliorare la leggibilità del diagramma, è stato omesso il flusso alternativo di annullamento dell’operazione tramite la pressione del pulsante “Annulla”.
         \\Per il flusso alternativo relativo ad una modifica errata o incompleta è stata utilizzata la sintassi \texttt{loop-break}. 
