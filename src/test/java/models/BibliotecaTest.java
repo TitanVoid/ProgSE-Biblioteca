@@ -20,7 +20,7 @@ import org.junit.Before;
  */
 public class BibliotecaTest {
     private Biblioteca b;
-    private static final String file = "test.obj";
+    private static final String testFile = "test.obj";
 
     private Matricola m;
     private Utente u;
@@ -32,8 +32,8 @@ public class BibliotecaTest {
     public void setUp() {
         b = new Biblioteca();
 
-        m = new Matricola("0612708796");
-        u = new Utente("Luisa", "Genovese", m, "l.genovese20@studenti.unisa.it");
+        m = new Matricola("1234567890");
+        u = new Utente("Mario", "Rossi", m, "m.rossi@studenti.unisa.it");
 
         i = new ISBN("883010471X");
         l = new Libro("Il Signore degli Anelli", 1954, i, 5, "J.R.R. Tolkien");
@@ -43,26 +43,30 @@ public class BibliotecaTest {
 
     @After
     public void tearDown() {
-        File f = new File(file);
+        File f = new File(testFile);
         if (f.exists()) {
             f.delete();
         }
     }
 
     @Test
-    public void testCostruttoreBiblioteca() {
+    public void testCostruttoreInizializzazioneArchivi() {
         Biblioteca biblio = new Biblioteca();
 
         assertNotNull(biblio.getPrestiti());
-        assertTrue(biblio.getPrestiti().getListaPrestiti().isEmpty());
-
         assertNotNull(biblio.getLibri());
-        assertTrue(biblio.getLibri().getListaLibri().isEmpty());
-
-        assertNotNull(biblio.getUtenti());
-        assertTrue(biblio.getUtenti().getListaUtenti().isEmpty());
+        assertNotNull(biblio.getUtenti());        
     }
 
+    @Test
+    public void testCostruttoreArchiviVuoti() {
+        Biblioteca biblio = new Biblioteca();
+        
+        assertTrue(biblio.getPrestiti().getListaPrestiti().isEmpty());
+        assertTrue(biblio.getLibri().getListaLibri().isEmpty());
+        assertTrue(biblio.getUtenti().getListaUtenti().isEmpty());
+    }
+    
     @Test
     public void testGetPrestiti() {
         assertNotNull(b.getPrestiti());
@@ -88,12 +92,12 @@ public class BibliotecaTest {
         b.getUtenti().aggiungi(u);
 
         try {
-            b.salvaBibliotecaObj(file);
+            b.salvaBibliotecaObj(testFile);
         } catch (IOException ex) {
             fail(ex.toString());
         }
 
-        File f = new File(file);
+        File f = new File(testFile);
         assertTrue(f.exists());
         assertTrue(f.length() > 0);
     }
@@ -104,8 +108,8 @@ public class BibliotecaTest {
         b.getLibri().aggiungi(l);
         b.getUtenti().aggiungi(u);
 
-        b.salvaBibliotecaObj(file);
-        Biblioteca letta = Biblioteca.leggiBibliotecaObj(file);
+        b.salvaBibliotecaObj(testFile);
+        Biblioteca letta = Biblioteca.leggiBibliotecaObj(testFile);
 
         assertNotNull(letta);
 
