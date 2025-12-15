@@ -59,8 +59,10 @@ public class EstensionePrestitoController extends BaseController implements Init
         Prestito modificato = new Prestito(new Matricola(matricola.getText()), new ISBN(isbn.getText()), LocalDate.parse(dataInizio.getText()), LocalDate.parse(dataScadenza.getText()));
         biblioteca.getPrestiti().modifica(prestitiController.getSelectedLoan(), modificato);
         Utente u = biblioteca.getUtenti().ottieni(prestitiController.getSelectedLoan().getMatricolaUtente());
-        u.rimuoviPrestito(prestitiController.getSelectedLoan());
-        u.aggiungiPrestito(modificato);
+        if (u != null){
+            u.rimuoviPrestito(prestitiController.getSelectedLoan());
+            u.aggiungiPrestito(modificato);
+        }
         prestitiController.refreshLoans();
         Stage stage = (Stage) matricola.getScene().getWindow();
         stage.close();

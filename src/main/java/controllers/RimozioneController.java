@@ -30,9 +30,14 @@ public class RimozioneController extends BaseController{
                 Prestito prestitoDaEliminare = ((PrestitiController) rimuoviController).getSelectedLoan();
                 biblioteca.getPrestiti().rimuovi(prestitoDaEliminare);
                 ((PrestitiController) rimuoviController).refreshLoans();
-                biblioteca.getUtenti().ottieni(prestitoDaEliminare.getMatricolaUtente()).rimuoviPrestito(prestitoDaEliminare);
+                Utente u = biblioteca.getUtenti().ottieni(prestitoDaEliminare.getMatricolaUtente());
+                if (u != null){
+                    u.rimuoviPrestito(prestitoDaEliminare);
+                }
                 Libro l = biblioteca.getLibri().ottieni(prestitoDaEliminare.getCodiceISBNLibro());
-                l.setCopieDisponibili(l.getCopieDisponibili() + 1);
+                if (l != null){
+                    l.setCopieDisponibili(l.getCopieDisponibili() + 1);
+                }
             }
         }catch (Exception e){
             System.out.println(e.getMessage());
