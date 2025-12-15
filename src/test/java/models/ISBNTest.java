@@ -16,52 +16,93 @@ public class ISBNTest {
         i = new ISBN("883010471X");
     }
     
+    // TEST COSTRUTTORE
     @Test
     public void testCostruttoreISBN() {
         ISBN isbn = new ISBN("883010471X");
+        
+        assertNotNull(isbn);
         
         assertNotNull(isbn.getCodiceISBN());
         assertEquals("883010471X", isbn.getCodiceISBN());
     }
     
+    // TEST METODO GETTER
     @Test
     public void testGetCodiceISBN() {
         assertEquals("883010471X", i.getCodiceISBN());
     }
 
+    // TEST VERIFICA ISBN-10
     @Test
-    public void testVerificaISBN() {
-        // Test codice ISBN-10 valido:
+    public void testVerificaISBN10Valido() {
+        assertTrue(ISBN.verificaISBN("8863114927"));
+    }
+    
+    @Test
+    public void testVerificaISBN10ValidoConX() {
         assertTrue(ISBN.verificaISBN("883010471X"));
-        // Test codice ISBN-10 non valido:
-        assertFalse(ISBN.verificaISBN("88E010471X"));
-        // Test codice ISBN-13 valido:
+    }
+    
+    @Test
+    public void testVerificaISBN10NonValido() {
+        // Test con codice non numerico:
+        assertFalse(ISBN.verificaISBN("886E11A9L7"));
+        // Test con ultimo carattere diverso da X o da una cifra:
+        assertFalse(ISBN.verificaISBN("883010471Y"));
+    }
+    
+    // TEST VERIFICA ISBN-13
+    @Test
+    public void testVerificaISBN13Valido() {
         assertTrue(ISBN.verificaISBN("9788867582143"));
-        // Test codice ISBN-13 non valido:
-        assertFalse(ISBN.verificaISBN("978886758214E"));
-        // Test codice ISBN troppo corto:
+    }
+    
+    @Test
+    public void testVerificaISBN13NonValido() {
+        assertFalse(ISBN.verificaISBN("9T8886758L14E"));
+    }
+
+    // TEST VERIFICA ISBN 
+    @Test
+    public void testVerificaISBNTroppoCorto() {
         assertFalse(ISBN.verificaISBN("9788807"));
-        // Test codice ISBN troppo lungo:
+    }
+    
+    @Test
+    public void testVerificaISBNTroppoLungo() {
         assertFalse(ISBN.verificaISBN("978880788229836846"));
     }
-
+    
+    // TEST EQUALS
     @Test
-    public void testEquals() {
-        ISBN i1 = new ISBN("883010471X");
-        ISBN i2 = new ISBN("9788867582143");
-        
-        assertEquals(i, i1);
-        assertNotEquals(i, i2);
+    public void testEqualsISBNUguali() {
+        assertEquals(i, new ISBN("883010471X"));
+    }
+    
+    @Test
+    public void testEqualsISBNDiversi() {
+        assertNotEquals(i, new ISBN("9788867582143"));
+    }
+    
+    @Test
+    public void testEqualsISBNConNull() {
+        assertNotEquals(i, null);
     }
 
+    // TEST COMPARETO
     @Test
-    public void testCompareTo() {    
-        ISBN i1 = new ISBN("883010471X");
-        ISBN i2 = new ISBN("883010481X");
-        ISBN i3 = new ISBN("883010461X");
-
-        assertEquals(0, i.compareTo(i1));
-        assertTrue(i.compareTo(i2) < 0);
-        assertTrue(i.compareTo(i3) > 0);
+    public void testCompareToUguale() {    
+        assertEquals(0, i.compareTo(new ISBN("883010471X")));
+    }
+    
+    @Test
+    public void testCompareToMinore() {
+        assertTrue(i.compareTo(new ISBN("8863114927")) < 0);
+    }
+    
+    @Test
+    public void testCompareToMaggiore() {
+        assertTrue(i.compareTo(new ISBN("8807900327")) > 0);
     }
 }
