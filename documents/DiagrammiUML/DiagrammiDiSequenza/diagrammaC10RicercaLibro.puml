@@ -12,10 +12,13 @@
 	loop Inserimento sottostringa 
 		a->cvl: Digita una sottostringa nella barra di ricerca
 		cvl->gl: ricercaLibri(...)
-		activate gl
-			gl->gl: Ricerca libri
-			gl-->a:Restituisce libri che rispettano i criteri di ricerca
-		deactivate gl
+		activate cvl
+			activate gl
+				gl->gl: Ricerca libri
+				gl-->cvl:Restituisce libri che rispettano i criteri di ricerca
+			deactivate gl
+			cvl-->a: Mostra i libri che rispettano i criterii di ricerca
+		deactivate cvl
 		
 		'Condizione di uscita dal loop
 		break Seleziona un libro 
