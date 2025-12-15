@@ -25,7 +25,7 @@ public class LibriTest {
     
     // TEST COSTRUTTORE
     @Test
-    public void testCostruttoreLibriInizializzazione() {
+    public void testCostruttoreLibriInizializzazioneLista() {
         Libri libri2 = new Libri();
         
         assertNotNull(libri2);
@@ -46,7 +46,7 @@ public class LibriTest {
         assertTrue(libri.getListaLibri() instanceof ArrayList);
     }
 
-    // TEST RICERCA
+    // TEST RICERCA LIBRI
     @Test
     public void testRicercaLibri() {
         List<Libro> risultati;
