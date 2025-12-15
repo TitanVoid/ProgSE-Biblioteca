@@ -16,6 +16,7 @@
 \renewcommand{\contentsname}{Indice}
 \renewcommand{\sectionmark}[1]{\markboth{#1}{#1}}
 
+
 \begin{document}
     \begin{titlepage}
         \fancyhf{}
@@ -66,35 +67,13 @@
                 \\Un altro stakeholder interno è il \textbf{Responsabile/Direttore} stesso della biblioteca che, pur non utilizzando l'applicazione, definisce le regole di business che ne determinano il funzionamento.
             \subsubsection*{Stakeholder Esterni}
                 L'\textbf{Utente} (ovvero lo \textbf{Studente universitario}), sebbene non usi direttamente l'interfaccia grafica, è il beneficiario finale del sistema.
-            
 
     \newpage
+    \hypersetup{linkcolor=blue}
     \fancyhf{}
     \fancyhead[R]{pagina \thepage\ di \pageref*{LastPage}}
     \fancyhead[L]{\nouppercase{\leftmark}}
     \section{Ingegneria dei Requisiti - SRS}
-    \subsection{Tabella di categorizzazione dei requisiti}
-        \begin{adjustbox}{width=.8\paperwidth, height=.77\paperheight, center, margin=0cm 0cm 0cm .5cm}
-            \includegraphics{images/categorizzazione_requisiti1.png}
-        \end{adjustbox}
-        
-        \newpage
-        \begin{figure}[h!]
-            \begin{adjustbox}{width=.8\paperwidth, height=.78\paperheight, center, margin=0cm 0cm 0cm 1.4cm}
-                \includegraphics{images/categorizzazione_requisiti2.png}
-            \end{adjustbox}
-        \end{figure}
-
-        \newpage
-        \begin{figure}[h!]
-            \begin{adjustbox}{width=.8\paperwidth, height=.21\paperheight, margin=0cm 0cm 0cm .5cm}
-                \includegraphics{images/categorizzazione_requisiti3.png}
-            \end{adjustbox}
-            \caption{Tabella di categorizzazione dei requisiti}
-        \end{figure}
-
-    \newpage
-    \hypersetup{linkcolor=blue}
     \subsection{Requisiti Funzionali}
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{Funzionalità individuali - IF}]
             \begin{itemize}[itemsep=6pt]
@@ -141,11 +120,6 @@
                 \\Al termine dell’inserimento, sarà possibile confermare oppure annullare l’operazione mediante i rispettivi pulsanti.
                 \\Nel caso in cui non siano stati inseriti tutti i campi necessari, oppure nel caso di inserimento di campi errati (vedere \hyperlink{DF-3}{DF-3} per le informazioni relative al formato dei dati), non sarà possibile confermare l’inserimento.
                 \\Se la matricola fornita in input dovesse corrispondere ad un utente già presente nella lista, l'operazione di inserimento sarà bloccata e l’amministratore verrà notificato dell’esistenza di un duplicato. 
-                \begin{itemize} 
-                    \hypertarget{IF-6.1}{\item[\textbf{IF-6.1}]}\textbf{Inserimento del numero di telefono di un utente}
-                    \\L’applicazione consente all’amministratore di specificare come ulteriore informazione il numero telefonico di un utente, all’atto del suo inserimento nella lista degli utenti (vedere \hyperlink{IF-6}{IF-6}).\vspace{.2cm}
-                    \\Il suo formato dovrà essere conforme a quanto definito in \hyperlink{DF-3.1}{DF-3.1}, altrimenti non sarà possibile confermare l’inserimento. 
-                \end{itemize}
                 
                 \hypertarget{IF-7}{\item[\textbf{IF-7}]}\textbf{Modifica di un utente}
                 \\L’applicazione consente all’amministratore di modificare le informazioni associate ad un utente.\vspace{.2cm}
@@ -203,7 +177,7 @@
                 \end{itemize}
                 Tutti i prestiti conclusi saranno comunque archiviati all’interno di un file, coerentemente a quanto definito in \hyperlink{DF-1}{DF-1}. 
 
-                \hypertarget{IF-14}{\item[\textbf{IF-14}]}\textbf{Ricerca rapida mediante filtro}
+                \hypertarget{IF-14}{\item[\textbf{IF-14}]}\textbf{Filtraggio dei prestiti}
                 \\L’applicazione supporta, nel caso della lista dei libri, una funzionalità di ricerca avanzata mediante criteri di filtro multipli e combinati.\vspace{.2cm}
                 \\Tali criteri di filtro potranno essere applicati autonomamente, come alternativa alla ricerca testuale tradizionale (definita in \hyperlink{IF-5}{IF-5}).\\Dovrà essere supportare la possibilità di filtrare la lista dei libri sui seguenti campi: 
                 \begin{itemize}[label=$\bullet$]
@@ -310,13 +284,6 @@
                     \item I campi “Nome” e “Cognome” dovranno essere stringhe di caratteri alfabetici (con una lunghezza massima di venticinque caratteri);
                     \item Il campo “Matricola” dovrà essere una stringa di dieci cifre numeriche;
                     \item Il campo “E-mail” dovrà aderire allo standard RFC 5322, e come campo “dominio” dovrà avere “studenti.unisa.it”. 
-                    
-                    \hypertarget{DF-3.1}{\item[\textbf{DF-3.1}]}\textbf{Numero di telefono dell'utente}
-                    \\Il sistema offre la possibilità di estendere l’insieme dei campi memorizzati per ogni utente (definiti in \hyperlink{DF-3}{DF-3}) includendo un’ulteriore informazione: 
-                    \begin{itemize}[label=$\bullet$]
-                        \item Numero di telefono.
-                    \end{itemize}
-                    Quest'ultimo dovrà essere conforme allo standard ITU E.164, in particolar modo al formato italiano (che prevede “39” come codice paese, ed una lunghezza pari a dieci cifre). 
                 \end{itemize}
 
                 \hypertarget{DF-4}{\item[\textbf{DF-4}]}\textbf{Informazioni sui prestiti}
@@ -419,14 +386,31 @@
                     \item Coerenza del layout: Il layout dovrà essere chiaro, privo di eccessivo affollamento e ricco di elementi autoesplicativi, al fine di rendere la navigazione prevedibile e facilmente apprendibili. 
                 \end{enumerate}
                 Inoltre, i pulsanti di navigazione principali e i pulsanti di azione manterranno un posizionamento semanticamente coerente rispetto alla loro funzionalità, attraverso tutte le schermate operative.  
-                
-                \item[\textbf{FC-3}]\textbf{Cifratura dati sensibili}
-                \\Il sistema garantisce la riservatezza dei dati sensibili degli utenti (specificati in \hyperlink{DF-3}{DF-3}), offuscandoli mediante un algoritmo crittografico prima della loro memorizzazione su file (come definito in \hyperlink{DF-1}{DF-1}).\vspace{.2cm}
-                \\Nello specifico, l’algoritmo di cifratura utilizzato sarà il Cifrario di Cesare (algoritmo di sostituzione monoalfabetica).
-                \\Si garantisce la totale reversibilità del processo di cifratura.  
+                 
             \end{itemize}
         \end{tcolorbox}
 
+    \newpage
+    \subsection{Tabella di categorizzazione dei requisiti}
+        \begin{adjustbox}{width=.8\paperwidth, height=.8\paperheight, center, margin=0cm 0cm 0cm .5cm}
+            \includegraphics{images/requisiti1.png}
+        \end{adjustbox}
+        
+        \newpage
+        \begin{figure}[h!]
+            \begin{adjustbox}{width=.8\paperwidth, height=.8\paperheight, center, margin=0cm 0cm 0cm 1cm}
+                \includegraphics{images/requisiti2.png}
+            \end{adjustbox}
+        \end{figure}
+
+        \newpage
+        \begin{figure}[h!]
+            \begin{adjustbox}{width=.8\paperwidth, height=.25\paperheight, margin=0cm 0cm 0cm .5cm}
+                \includegraphics{images/requisiti3.png}
+            \end{adjustbox}
+            \caption{Tabella di categorizzazione dei requisiti}
+        \end{figure}
+    
     \newpage
     \subsection{Diagramma UML dei Casi d'Uso}
         \begin{adjustbox}{width=.86\paperwidth, height=.8\paperheight, center, margin= 0cm 0cm 0cm .1cm}
@@ -448,17 +432,17 @@
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
                 \item L’amministratore preme il pulsante apposito per aprire il menù a tendina; 
-                \item L’amministratore preme, all’interno del menù, il pulsante “Libri”; 
+                \item L’amministratore preme il pulsante “Libri”; 
                 \item Viene visualizzato l’elenco dei libri; 
-                \item L’amministratore può interagire con la lista.
             \end{enumerate}
 
             \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
             \begin{enumerate}
-                \item[3a.] Viene visualizzata una tabella vuota;\vspace{-0.2cm}
+                \item[1a.] L'amministratore visualizza la schermata principale dell'applicazione;\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[3a.1] L'esecuzione riprende dal passo 4.
+                    \item[1a.1] L'esecuzione riprende dal passo 2.
                 \end{enumerate}
+                \item[3a.] Viene visualizzata una tabella vuota.
             \end{enumerate}                
         \end{tcolorbox}
 
@@ -473,17 +457,17 @@
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
                 \item L’amministratore preme il pulsante apposito per aprire il menù a tendina; 
-                \item L’amministratore preme, all’interno del menù, il pulsante “Utenti”; 
+                \item L’amministratore preme il pulsante “Utenti”; 
                 \item Viene visualizzato l’elenco degli utenti; 
-                \item L’amministratore può interagire con la lista.
             \end{enumerate}
 
             \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
             \begin{enumerate}
-                \item[3a.] Viene visualizzata una tabella vuota;\vspace{-0.2cm}
+                \item[1a.] L'amministratore visualizza la schermata principale dell'applicazione;\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[3a.1] L'esecuzione riprende dal passo 4.
+                    \item[1a.1] L'esecuzione riprende dal passo 2.
                 \end{enumerate}
+                \item[3a.] Viene visualizzata una tabella vuota.
             \end{enumerate}       
         \end{tcolorbox}
 
@@ -498,17 +482,17 @@
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
                 \item L’amministratore preme il pulsante apposito per aprire il menù a tendina; 
-                \item L’amministratore preme, all’interno del menù, il pulsante “Prestiti”; 
+                \item L’amministratore preme il pulsante “Prestiti”; 
                 \item Viene visualizzato l’elenco dei prestiti; 
-                \item L’amministratore può interagire con la lista.
             \end{enumerate}
 
             \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
             \begin{enumerate}
-                \item[3a.] Viene visualizzata una tabella vuota;\vspace{-0.2cm}
+                \item[1a.] L'amministratore visualizza la schermata principale dell'applicazione;\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[3a.1] L'esecuzione riprende dal passo 4.
+                    \item[1a.1] L'esecuzione riprende dal passo 2.
                 \end{enumerate}
+                \item[3a.] Viene visualizzata una tabella vuota.
             \end{enumerate}       
         \end{tcolorbox}
 
@@ -523,36 +507,36 @@
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
                 \item L’amministratore preme il pulsante “Aggiungi”;
-                \item Viene mostrata una nuova finestra con i campi richiesti per l'inserimento (Titolo, Autori, Anno di pubblicazione, ISBN e Numero di copie disponibili);
+                \item Viene mostrata una nuova finestra con i campi richiesti per l'inserimento (specificati in \hyperlink{DF-2}{DF-2});
                 \item L’amministratore inserisce tutte le informazioni necessarie per l’inserimento del libro;
                 \item L’amministratore preme il pulsante “Conferma”;
                 \item Il sistema convalida i dati (formato corretto e campi obbligatori compilati);
                 \item Il sistema verifica l’univocità dell’ISBN;
                 \item Il sistema inserisce il nuovo libro all’interno dell’archivio;
-                \item La finestra di inserimento dei campi viene chiusa.
+                \item La finestra di inserimento dei campi viene chiusa;
                 \item L’amministratore visualizza la lista dei libri aggiornata. 
             \end{enumerate}
 
             \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
-                \item[4a.] L’amministratore preme il pulsante “Annulla”; 
+                \item[4a.] L’amministratore preme il pulsante “Annulla”;\vspace{-0.2cm}
                 \begin{enumerate}
                     \item[4a.1] L’esecuzione riprende dal passo 1.
                 \end{enumerate}
-                \item[5a.] Il sistema riscontra degli errori nel formato dei campi inseriti; 
+                \item[5a.] Il sistema riscontra degli errori nel formato dei campi inseriti;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[5a.1] Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere;
                     \item[5a.2] L’esecuzione riprende dal passo 3.
                 \end{enumerate}
-                \item[5b.] Il sistema si accorge che non sono stati inseriti tutti i campi obbligatori; 
+                \item[5b.] Il sistema si accorge che non sono stati inseriti tutti i campi obbligatori;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[5b.1] Viene visualizzato un messaggio di errore e vengono evidenziati i campi da inserire;
                     \item[5b.2] L’esecuzione riprende dal passo 3.
                 \end{enumerate}
-                \item[6a.] L’ISBN inserito corrisponde ad un libro già presente nell’archivio; 
+                \item[6a.] L’ISBN inserito corrisponde ad un libro già presente nell’archivio;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[6a.1] Viene visualizzato un messaggio di errore;
@@ -578,24 +562,24 @@
                 \item L’amministratore preme il pulsante “Conferma”.
                 \item Il sistema convalida i dati (formato corretto e campi obbligatori compilati);
                 \item Il sistema aggiorna i dati del libro nell’archivio;
-                \item La finestra di modifica dei campi viene chiusa.
+                \item La finestra di modifica dei campi viene chiusa;
                 \item L’amministratore visualizza la lista dei libri aggiornata. 
             \end{enumerate}
 
             \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
-                \item[5a.] L’amministratore preme il pulsante “Annulla”; 
+                \item[5a.] L’amministratore preme il pulsante “Annulla”;\vspace{-0.2cm}
                 \begin{enumerate}
                     \item[5a.1] L’esecuzione riprende dal passo 1.
                 \end{enumerate}
-                \item[6a.] Il sistema riscontra degli errori nel formato dei campi inseriti; 
+                \item[6a.] Il sistema riscontra degli errori nel formato dei campi inseriti;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[6a.1] Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere;
                     \item[6a.2] L’esecuzione riprende dal passo 4.
                 \end{enumerate}
-                \item[6b.] Il sistema si accorge che non sono stati inseriti tutti i campi obbligatori; 
+                \item[6b.] Il sistema si accorge che non sono stati inseriti tutti i campi obbligatori;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[6b.1] Viene visualizzato un messaggio di errore e vengono evidenziati i campi da inserire;
@@ -643,36 +627,36 @@
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
                 \item L’amministratore preme il pulsante “Aggiungi”;
-                \item Viene mostrata una nuova finestra con i campi richiesti per l'inserimento (Nome, Cognome, Matricola ed E-mail istituzionale); 
+                \item Viene mostrata una nuova finestra con i campi richiesti per l'inserimento (specificati in \hyperlink{DF-3}{DF-3}); 
                 \item L’amministratore inserisce tutte le informazioni necessarie per l’inserimento dell'utente;
                 \item L’amministratore preme il pulsante “Conferma”;
                 \item Il sistema convalida i dati (formato corretto e campi obbligatori compilati);
                 \item Il sistema verifica l’univocità della matricola;
                 \item Il sistema inserisce il nuovo utente all’interno dell’archivio;
-                \item La finestra di inserimento dei campi viene chiusa.
+                \item La finestra di inserimento dei campi viene chiusa;
                 \item L’amministratore visualizza la lista degli utenti aggiornata. 
             \end{enumerate}
 
             \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
-                \item[4a.] L’amministratore preme il pulsante “Annulla”; 
+                \item[4a.] L’amministratore preme il pulsante “Annulla”;\vspace{-0.2cm}
                 \begin{enumerate}
                     \item[4a.1] L’esecuzione riprende dal passo 1.
                 \end{enumerate}
-                \item[5a.] Il sistema riscontra degli errori nel formato dei campi inseriti; 
+                \item[5a.] Il sistema riscontra degli errori nel formato dei campi inseriti;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[5a.1] Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere;
                     \item[5a.2] L’esecuzione riprende dal passo 3.
                 \end{enumerate}
-                \item[5b.] Il sistema si accorge che non sono stati inseriti tutti i campi obbligatori; 
+                \item[5b.] Il sistema si accorge che non sono stati inseriti tutti i campi obbligatori;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[5b.1] Viene visualizzato un messaggio di errore e vengono evidenziati i campi da inserire;
                     \item[5b.2] L’esecuzione riprende dal passo 3.
                 \end{enumerate}
-                \item[6a.] La matricola inserita corrisponde ad un utente già presente nell’archivio; 
+                \item[6a.] La matricola inserita corrisponde ad un utente già presente nell’archivio;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[6a.1] Viene visualizzato un messaggio di errore;
@@ -698,24 +682,24 @@
                 \item L’amministratore preme il pulsante “Conferma”.
                 \item Il sistema convalida i dati (formato corretto e campi obbligatori compilati);
                 \item Il sistema aggiorna i dati dell'utente nell’archivio;
-                \item La finestra di modifica dei campi viene chiusa. 
+                \item La finestra di modifica dei campi viene chiusa;
                 \item L’amministratore visualizza la lista degli utenti aggiornata. 
             \end{enumerate}
 
             \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
-                \item[5a.] L’amministratore preme il pulsante “Annulla”; 
+                \item[5a.] L’amministratore preme il pulsante “Annulla”;\vspace{-0.2cm}
                 \begin{enumerate}
                     \item[5a.1] L’esecuzione riprende dal passo 1.
                 \end{enumerate}
-                \item[6a.] Il sistema riscontra degli errori nel formato dei campi inseriti; 
+                \item[6a.] Il sistema riscontra degli errori nel formato dei campi inseriti;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[6a.1] Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere;
                     \item[6a.2] L’esecuzione riprende dal passo 4.
                 \end{enumerate}
-                \item[6b.] Il sistema si accorge che non sono stati inseriti tutti i campi obbligatori; 
+                \item[6b.] Il sistema si accorge che non sono stati inseriti tutti i campi obbligatori;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[6b.1] Viene visualizzato un messaggio di errore e vengono evidenziati i campi da inserire;
@@ -765,70 +749,22 @@
                 \item L’amministratore seleziona la barra di ricerca;
                 \item L’amministratore inserisce una sottostringa del titolo, del nome/cognome di uno degli autori o dell’ISBN del libro da ricercare all'interno della barra di ricerca;
                 \item Il sistema effettua in tempo reale la ricerca;
-                \item Vengono visualizzati soltanto i libri che hanno almeno una corrispondenza con la sottostringa inserita;
+                \item Vengono visualizzati soltanto i libri che hanno almeno una corrispondenza con la sottostringa inserita.
             \end{enumerate}
 
             \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
-                \item[2a.] L’amministratore cancella la sottostringa dalla barra di ricerca; 
+                \item[2a.] L’amministratore cancella la sottostringa dalla barra di ricerca;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[2a.1] Viene ripristinata la visualizzazione della lista completa dei libri.
                 \end{enumerate}
-                \item[3a.] Il sistema non trova alcuna corrispondenza per la sottostringa inserita; 
+                \item[3a.] Il sistema non trova alcuna corrispondenza per la sottostringa inserita;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[3a.1] Viene visualizzata una tabella vuota con un messaggio informativo;
                     \item[3a.2] L’esecuzione riprende dal passo 2.
-                \end{enumerate}
-            \end{enumerate}       
-        \end{tcolorbox}
-
-        \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C11 - Ricerca libro con filtro}]
-            \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
-                
-            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei libri;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
-                
-            \textbf{Postcondizioni:} Vengono mostrati soltanto i libri che soddisfano il criterio o i criteri di ricerca applicati;\\I libri vengono visualizzati in ordine alfabetico, per titolo.\vspace{.2cm}
-
-            \textbf{Flusso di eventi normale:}\vspace{-0.2cm}
-            \begin{enumerate}
-                \setlength\itemsep{-0.3em}
-                \item L’amministratore preme il pulsante "Filtri”;
-                \item Viene visualizzata la schermata di selezione dei filtri di ricerca avanzata;
-                \item L’amministratore seleziona uno o più criteri di ricerca da applicare, riempiendo (laddove presenti) i campi necessari;
-                \item L’amministratore preme il pulsante “Applica filtri”;
-                \item Il sistema convalida, se necessario, i dati di input per i filtri (formato corretto);
-                \item Il sistema effettua in tempo reale la ricerca;
-                \item Vengono visualizzati soltanto i libri che soddisfano i criteri applicati;
-            \end{enumerate}
-
-            \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
-            \begin{enumerate}
-                \setlength\itemsep{-0.3em}
-                \item[3a.] L’amministratore preme il pulsante “Rimuovi filtri”; 
-                \begin{enumerate}
-                    \setlength\itemsep{-0.3em}
-                    \item[3a.1] Viene ripristinata la visualizzazione della lista completa dei libri.
-                \end{enumerate}
-                \item[5a.] Il sistema riscontra degli errori nel formato dei campi inseriti;
-                \begin{enumerate}
-                    \setlength\itemsep{-0.3em}
-                    \item[5a.1] Viene visualizzato un messaggio di errore e vengono evidenziati i campi da correggere;
-                    \item[5a.2] L’esecuzione riprende dal passo 3.
-                \end{enumerate}
-                \item[5b.] Il sistema si accorge che non sono stati inseriti tutti i campi obbligatori; 
-                \begin{enumerate}
-                    \setlength\itemsep{-0.3em}
-                    \item[5b.1] Viene visualizzato un messaggio di errore e vengono evidenziati i campi da inserire;
-                    \item[5b.2] L’esecuzione riprende dal passo 3.
-                \end{enumerate}
-                \item[6a.] Il sistema non trova alcuna corrispondenza per i criteri di ricerca applicati; 
-                \begin{enumerate}
-                    \setlength\itemsep{-0.3em}
-                    \item[6a.1] Viene visualizzata una tabella vuota con un messaggio informativo;
-                    \item[6a.2] L’esecuzione riprende dal passo 3.
                 \end{enumerate}
             \end{enumerate}       
         \end{tcolorbox}
@@ -846,18 +782,18 @@
                 \item L’amministratore seleziona la barra di ricerca;
                 \item L’amministratore inserisce una sottostringa del cognome o della matricola dell'utente da ricercare all'interno della barra di ricerca;
                 \item Il sistema effettua in tempo reale la ricerca;
-                \item Vengono visualizzati soltanto gli utenti che hanno almeno una corrispondenza con la sottostringa inserita; 
+                \item Vengono visualizzati soltanto gli utenti che hanno almeno una corrispondenza con la sottostringa inserita.
             \end{enumerate}
 
             \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
-                \item[2a.] L’amministratore cancella la sottostringa dalla barra di ricerca; 
+                \item[2a.] L’amministratore cancella la sottostringa dalla barra di ricerca;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
-                    \item[2a.1] Viene ripristinata la visualizzazione della lista completa degli utenti;
+                    \item[2a.1] Viene ripristinata la visualizzazione della lista completa degli utenti.
                 \end{enumerate}
-                \item[3a.] Il sistema non trova alcuna corrispondenza per la sottostringa inserita; 
+                \item[3a.] Il sistema non trova alcuna corrispondenza per la sottostringa inserita;\vspace{-0.2cm}
                 \begin{enumerate}
                     \setlength\itemsep{-0.3em}
                     \item[3a.1] Viene visualizzata una tabella vuota con un messaggio informativo;
@@ -869,7 +805,7 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C13 - Registra prestito}]
             \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
                 
-            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei prestiti;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema;\\L’utente che ha richiesto il prestito è presente all’interno del sistema e non ha più di tre prestiti attivi;\\Il libro da prestare è presente all’interno del sistema ed è disponibile. \vspace{.2cm}
+            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei prestiti;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
                 
             \textbf{Postcondizioni:} Il prestito viene aggiunto con successo alla lista dei prestiti;\\Il numero di copie disponibili del libro prestato viene aggiornato dal sistema;\\La lista dei libri presi in prestito dall’utente viene aggiornata dal sistema.\vspace{.2cm}
 
@@ -877,9 +813,10 @@
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
                 \item L’amministratore preme il pulsante “Inserisci”;
-                \item Viene mostrata una nuova finestra con i campi richiesti per l'inserimento (Matricola dello studente che richiede il prestito, ISBN del libro da prestare e Data prevista di restituzione);
+                \item Viene mostrata una nuova finestra con i campi richiesti per l'inserimento (specificati in \hyperlink{DF-4}{DF-4});
                 \item L’amministratore inserisce tutte le informazioni necessarie per la registrazione del prestito;
                 \item L’amministratore preme il pulsante “Conferma”;
+                \item Il sistema verifica l'esistenza dell'utente e del libro associati ai dati inseriti;
                 \item Il sistema convalida i dati (formato corretto, campi obbligatori compilati e data logicamente corretta);
                 \item Il sistema inserisce il nuovo prestito all’interno dell’archivio;
                 \item Il sistema decrementa il numero di copie disponibili del libro prestato e lo aggiunge alla lista dei libri presi in prestito dall’utente;
@@ -893,20 +830,30 @@
                 \begin{enumerate}
                     \item[4a.1] L'esecuzione riprende dal passo 1.
                 \end{enumerate}
-                \item[5a.] Il sistema riscontra degli errori nel formato dei campi inseriti;\vspace{-0.2cm}
+                \item[5a.] Il sistema si accorge dell'inesistenza dell'utente e/o del libro all'interno dell'archivio;\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[5a.1] Viene visualizzato un messaggio di errore e vengono evidenziati i 		          campi da correggere;
+                    \item[5a.1] Viene visualizzato un messaggio di errore;
                     \item[5a.2] L’esecuzione riprende dal passo 3.
                 \end{enumerate}
-                \item[5b.] Il sistema si accorge che non sono stati inseriti tutti i campi obbligatori;\vspace{-0.2cm}
+                \item[5b.] Il sistema si accorge che l'utente ha raggiunto il limite massimo di prestiti;\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[5b.1] Viene visualizzato un messaggio di errore e vengono evidenziati i campi da inserire;
-                    \item[5b.2] L'esecuzione riprende dal passo 3.
+                    \item[5b.1] Viene visualizzato un messaggio di errore;
+                    \item[5b.2] L’esecuzione riprende dal passo 3.
                 \end{enumerate}
-                \item[5c.] Il sistema si accorge che è stata inserita una data antecedente alla data odierna;\vspace{-0.2cm}
+                \item[5c.] Il sistema si accorge che il libro non ha copie disponibili;\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[5c.1] Viene visualizzato un messaggio di errore e viene evidenziato il campo da modificare;
-                    \item[5c.2] L'esecuzione riprende dal passo 3.
+                    \item[5c.1] Viene visualizzato un messaggio di errore;
+                    \item[5c.2] L’esecuzione riprende dal passo 3.
+                \end{enumerate}
+                \item[6a.] Il sistema riscontra degli errori nel formato dei campi inseriti;\vspace{-0.2cm}
+                \begin{enumerate}
+                    \item[6a.1] Viene visualizzato un messaggio di errore e vengono evidenziati i 		          campi da correggere;
+                    \item[6a.2] L’esecuzione riprende dal passo 3.
+                \end{enumerate}
+                \item[6b.] Il sistema si accorge che non sono stati inseriti tutti i campi obbligatori;\vspace{-0.2cm}
+                \begin{enumerate}
+                    \item[6b.1] Viene visualizzato un messaggio di errore e vengono evidenziati i campi da inserire;
+                    \item[6b.2] L'esecuzione riprende dal passo 3.
                 \end{enumerate}
             \end{enumerate}       
         \end{tcolorbox}
@@ -926,7 +873,6 @@
                 \item Viene mostrata una nuova finestra con un messaggio di avviso;
                 \item L’amministratore conferma l’operazione premendo il pulsante “Sì”;
                 \item Il sistema registra l’avvenuta restituzione;
-                \item Il sistema rimuove il prestito dalla schermata di visualizzazione dei prestiti;
                 \item Il sistema incrementa il numero di copie disponibili del libro prestato e lo rimuove dalla lista dei libri presi in prestito dall’utente;
                 \item La finestra di conferma viene chiusa;
                 \item L’amministratore visualizza la lista dei prestiti aggiornata. 
@@ -953,8 +899,8 @@
                 \setlength\itemsep{-0.3em}
                 \item L’amministratore seleziona un prestito presente nella lista dei prestiti;
                 \item L’amministratore preme il pulsante “Estendi”;
-                \item Viene mostrata una nuova finestra con la data prevista di restituzione corrente del prestito selezionato;
-                \item L’amministratore modifica il campo;
+                \item Viene mostrata una nuova finestra con i campi correnti del prestito selezionato;
+                \item L’amministratore modifica la data prevista di restituzione del prestito;
                 \item L’amministratore preme il pulsante “Conferma”;
                 \item Il sistema convalida il dato (formato corretto, campo obbligatorio compilato e data logicamente corretta);
                 \item Il sistema aggiorna i dati del prestito nell’archivio;
@@ -982,6 +928,36 @@
                 \begin{enumerate}
                     \item[6c.1] Viene visualizzato un messaggio di errore e viene evidenziato il campo da modificare;
                     \item[6c.2] L'esecuzione riprende dal passo 4.
+                \end{enumerate}
+            \end{enumerate}       
+        \end{tcolorbox}
+
+        \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{C16 - Filtra lista prestiti}]
+            \textbf{Attori presenti:} Amministratore.\vspace{.2cm}     
+                
+            \textbf{Precondizioni:} L’amministratore si trova sulla schermata di visualizzazione e gestione dei prestiti;\\L'archivio è stato caricato correttamente dal file all'avvio del sistema.\vspace{.2cm}
+                
+            \textbf{Postcondizioni:} Vengono mostrati soltanto i prestiti che soddisfano il criterio di filtraggio selezionato;\\I prestiti vengono visualizzati in ordine cronologico, per data prevista di restituzione.\vspace{.2cm}
+
+            \textbf{Flusso di eventi normale:}\vspace{-0.2cm}
+            \begin{enumerate}
+                \setlength\itemsep{-0.3em}
+                \item L’amministratore seleziona la voce "ATTIVI" dall'elenco dei filtri;
+                \item Vengono visualizzati soltanto i prestiti che soddisfano il criterio applicato.
+            \end{enumerate}
+
+            \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
+            \begin{enumerate}
+                \setlength\itemsep{-0.3em}
+                \item[1a.] L’amministratore seleziona la voce "CONCLUSI" dall'elenco dei filtri;
+                    \begin{enumerate}
+                    \setlength\itemsep{-0.3em}
+                    \item[1a.1] L'esecuzione riprende dal passo 2.
+                \end{enumerate}
+                \item[1b.] L’amministratore seleziona la voce "TUTTI" dall'elenco dei filtri; 
+                \begin{enumerate}
+                    \setlength\itemsep{-0.3em}
+                    \item[1b.1] Viene ripristinata la visualizzazione della lista completa dei prestiti.
                 \end{enumerate}
             \end{enumerate}       
         \end{tcolorbox}
