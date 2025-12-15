@@ -1,6 +1,8 @@
 package models.utenti;
 
+import java.time.LocalDate;
 import models.FormatoCampiErratoException;
+import models.ISBN;
 import models.Matricola;
 import models.prestiti.Prestito;
 import org.junit.Test;
@@ -20,12 +22,14 @@ public class UtenteTest {
         u = new Utente("Luisa", "Genovese", m, "l.genovese20@studenti.unisa.it");
     }
 
+    // TEST COSTRUTTORE
     @Test
     public void testCostruttoreUtente() {
         Matricola m = new Matricola("0612708796");
         Utente utente = new Utente("Luisa", "Genovese", m, "l.genovese20@studenti.unisa.it");
 
         assertNotNull(utente);
+        
         assertEquals("Luisa", utente.getNome());
         assertEquals("Genovese", utente.getCognome());
         assertEquals(m, utente.getMatricolaUtente());
@@ -34,6 +38,7 @@ public class UtenteTest {
         assertTrue(utente.getPrestitiAttivi().isEmpty());
     }
 
+    // TEST METODI GETTER
     @Test
     public void testGetMatricolaUtente() {
         Matricola m = new Matricola("0612708796");
@@ -53,6 +58,7 @@ public class UtenteTest {
         assertNotNull(u.getPrestitiAttivi());
     }
 
+    // TEST METODO SETTER
     @Test
     public void testSetEmail() {
         u.setEmail("l.genovese@studenti.unisa.it");
@@ -60,11 +66,12 @@ public class UtenteTest {
         assertEquals("l.genovese@studenti.unisa.it", u.getEmail());
     }
 
+    // TEST AGGIUNGIPRESTITO
     @Test
     public void testAggiungiPrestito() {
         Matricola m = new Matricola("0612708796");
         
-        Prestito p = new Prestito(m, null, null, null);
+        Prestito p = new Prestito(m, new ISBN("883010471X"), LocalDate.now(), LocalDate.now().plusDays(3));
 
         u.aggiungiPrestito(p);
 
@@ -72,11 +79,12 @@ public class UtenteTest {
         assertEquals(1, u.getPrestitiAttivi().size());
     }
 
+    // TEST RIMUOVIPRESTITO
     @Test
     public void testRimuoviPrestito() {
         Matricola m = new Matricola("0612708796");
        
-        Prestito p = new Prestito(m, null, null, null);
+        Prestito p = new Prestito(m, new ISBN("883010471X"), LocalDate.now(), LocalDate.now().plusDays(3));
 
         u.aggiungiPrestito(p);
         u.rimuoviPrestito(p);
@@ -85,76 +93,87 @@ public class UtenteTest {
         assertEquals(0, u.getPrestitiAttivi().size());
     }
 
+    // TEST VERIFICA EMAIL
     @Test
-    public void testVerificaEmail() {
-        // Test email valida:
+    public void testVerificaEmailValida() {
         assertTrue(Utente.verificaEmail("l.genovese20@studenti.unisa.it"));
-        // Test email non valida:
+    }
+    
+    @Test
+    public void testVerificaEmailNonValida() {
         assertFalse(Utente.verificaEmail("luisagenovese@studenti.unisa.it"));
     }
-
-    @Test
-    public void testVerificaUtente() {
-        // Test con tutti i campi validi:
-        assertTrue(Utente.verificaUtente("Luisa", "Genovese", "0612708796", "l.genovese20@studenti.unisa.it"));
     
-        // Test con il nome non valido:
-        assertThrows(FormatoCampiErratoException.class, () -> { Utente.verificaUtente("Lu", "Genovese", "0612708796", "l.genovese20@studenti.unisa.it"); });
-        // Test con il cognome non valido:
-        assertThrows(FormatoCampiErratoException.class, () -> { Utente.verificaUtente("Luisa", "Ge", "0612708796", "l.genovese20@studenti.unisa.it"); });
-        // Test con la matricola non valida:
+    @Test
+    public void testVerificaEmailDominioNonValido() {
+        assertFalse(Utente.verificaEmail("l.genovese20@gmail.com"));
+    }
+
+    // TEST VERIFICA UTENTE
+    @Test
+    public void testVerificaUtenteValido() {
+        assertTrue(Utente.verificaUtente("Luisa", "Genovese", "0612708796", "l.genovese20@studenti.unisa.it"));
+    }
+    
+    @Test
+    public void testVerificaUtenteNomeNonValido() {
+        assertThrows(FormatoCampiErratoException.class, () -> { Utente.verificaUtente("L", "Genovese", "0612708796", "l.genovese20@studenti.unisa.it"); });
+    }
+    
+    @Test
+    public void testVerificaUtenteCognomeNonValido() {    
+        assertThrows(FormatoCampiErratoException.class, () -> { Utente.verificaUtente("Luisa", "G", "0612708796", "l.genovese20@studenti.unisa.it"); });
+    }
+    
+    @Test
+    public void testVerificaUtenteMatricolaNonValida() {
         assertThrows(FormatoCampiErratoException.class, () -> { Utente.verificaUtente("Luisa", "Genovese", "06127", "l.genovese20@studenti.unisa.it"); });
-        // Test con l'email non valida:
+    }
+    
+    @Test
+    public void testVerificaUtenteEmailNonValida() {
         assertThrows(FormatoCampiErratoException.class, () -> { Utente.verificaUtente("Luisa", "Genovese", "0612708796", "lgenovese20@studenti.unisa.it"); });
     }
 
+    // TEST EQUALS
     @Test
-    public void testEquals() {
-        Matricola m1 = new Matricola("0612708796");
-        Matricola m2 = new Matricola("0612708797");
-
-        // Test utente uguale:
-        Utente u1 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-        assertEquals(u, u1);
-        
-        // Test utente diverso:
-        Utente u2 = new Utente("Luisa", "Genovese", m2, "l.genovese20@studenti.unisa.it");
-        assertNotEquals(u, u2);
+    public void testEqualsUtentiUguali() {
+        assertEquals(u, new Utente("Luisa", "Genovese", new Matricola("0612708796"), "l.genovese20@studenti.unisa.it"));
+    }
+    
+    @Test
+    public void testEqualsUtentiDiversi() {
+        assertNotEquals(u, new Utente("Luisa", "Genovese", new Matricola("0612708797"), "l.genovese20@studenti.unisa.it"));
+    }
+    
+    @Test
+    public void testEqualsUtenteConNull() {
+        assertNotEquals(u, null);
     }
 
+    // TEST COMPARETO
     @Test
-    public void testCompareTo() {
-        Matricola m1 = new Matricola("0612708796");
-        Matricola m2 = new Matricola("0612708797");
-        Matricola m3 = new Matricola("0612708795");
-
-        // Test utente uguale:
-        Utente u1 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-
-        // Test utente cognome maggiore:
-        Utente u2 = new Utente("Luisa", "Russo", m1, "l.genovese20@studenti.unisa.it");
-
-        // Test utente cognome minore:
-        Utente u3 = new Utente("Luisa", "Apicella", m1, "l.genovese20@studenti.unisa.it");
-
-        // Test utente cognome uguale, nome maggiore:
-        Utente u4 = new Utente("Maria", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-
-        // Test utente cognome uguale, nome minore:
-        Utente u5 = new Utente("Anna", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-
-        // Test utente nome e cognome uguali, matricola maggiore:
-        Utente u6 = new Utente("Luisa", "Genovese", m2, "l.genovese20@studenti.unisa.it");
-
-        // Test utente nome e cognome uguali, matricola minore:
-        Utente u7 = new Utente("Luisa", "Genovese", m3, "l.genovese20@studenti.unisa.it");
-
-        assertEquals(0, u.compareTo(u1));
-        assertTrue(u.compareTo(u2) < 0);
-        assertTrue(u.compareTo(u3) > 0);
-        assertTrue(u.compareTo(u4) < 0);
-        assertTrue(u.compareTo(u5) > 0);
-        assertTrue(u.compareTo(u6) < 0);
-        assertTrue(u.compareTo(u7) > 0);
+    public void testCompareToUguale() {
+        assertEquals(0, u.compareTo(new Utente("Luisa", "Genovese", new Matricola("0612708796"), "l.genovese20@studenti.unisa.it")));
+    }
+    
+    @Test
+    public void testCompareToMinore() {
+        // Utente con cognome maggiore:
+        assertTrue(u.compareTo(new Utente("Luisa", "Russo", new Matricola("0612708796"), "l.genovese20@studenti.unisa.it")) < 0);
+        // Utente con cognome uguale, nome maggiore:
+        assertTrue(u.compareTo(new Utente("Maria", "Genovese", new Matricola("0612708796"), "l.genovese20@studenti.unisa.it")) < 0);
+        // Utente con cognome e nome uguali, matricola maggiore:
+        assertTrue(u.compareTo(new Utente("Luisa", "Genovese", new Matricola("0612708797"), "l.genovese20@studenti.unisa.it")) < 0);
+    }
+    
+    @Test
+    public void testCompareToMaggiore() {
+        // Utente con cognome minore:
+        assertTrue(u.compareTo(new Utente("Luisa", "Apicella", new Matricola("0612708796"), "l.genovese20@studenti.unisa.it")) > 0);
+        // Utente con cognome uguale, nome minore:
+        assertTrue(u.compareTo(new Utente("Anna", "Genovese", new Matricola("0612708796"), "l.genovese20@studenti.unisa.it")) > 0);
+        // Utente con cognome e nome uguali, matricola minore:
+        assertTrue(u.compareTo(new Utente("Luisa", "Genovese", new Matricola("0612708795"), "l.genovese20@studenti.unisa.it")) > 0);
     }
 }
