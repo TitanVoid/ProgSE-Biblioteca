@@ -76,8 +76,8 @@ public abstract class Persona implements Serializable, Comparable<Persona> {
      * @post L'oggetto Persona sarà modificato, impostando come suo nuovo cognome la
      *       stringa cognome.
      * 
-     * @param[in] nome La stringa di caratteri da impostare come nuovo cognome della
-     *            Persona.
+     * @param[in] cognome La stringa di caratteri da impostare come nuovo cognome
+     *            della Persona.
      *
      */
     public void setCognome(String cognome) {

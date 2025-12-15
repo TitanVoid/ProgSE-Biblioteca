@@ -20,7 +20,7 @@ public class FormatoCampiErratoException extends RuntimeException {
      *        Costruisce un'istanza dell'eccezione con il messaggio di errore
      *        passato come parametro.
      * 
-     * @param msg messaggio descrittivo dell'errore.
+     * @param message messaggio descrittivo dell'errore.
      */
     public FormatoCampiErratoException(String message) {
         super(message);

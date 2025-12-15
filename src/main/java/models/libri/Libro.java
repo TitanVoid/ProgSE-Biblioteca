@@ -216,7 +216,7 @@ public class Libro implements Comparable<Libro>, Serializable {
      * @param[in] titolo Stringa corrispondente al titolo del libro.
      * @param[in] annoPubblicazione Stringa corrispondente all'anno di pubblicazione
      *            del libro.
-     * @param[in] isbn Stringa corrispondente al codice ISBN del libro.
+     * @param[in] codiceISBNLibro Stringa corrispondente al codice ISBN del libro.
      * @param[in] copieDisponibili Stringa corrispondente al numero di copie
      *            disponibili del libro.
      * 
