@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models.libri;
 
 import models.Persona;
@@ -17,9 +12,6 @@ import org.junit.Before;
 public class AutoreTest {
     private Autore a;
     
-    public AutoreTest() {
-    }
-    
     @Before
     public void setUp() {
         a = new Autore("Luigi", "Pirandello");
@@ -30,32 +22,32 @@ public class AutoreTest {
         Autore autore = new Autore("Luigi", "Pirandello");
         
         assertNotNull(autore.getNome());
-        assertEquals(autore.getNome(), "Luigi");
+        assertEquals("Luigi", autore.getNome());
         
         assertNotNull(autore.getCognome());
-        assertEquals(autore.getCognome(), "Pirandello");
+        assertEquals("Pirandello", autore.getCognome());
     }
 
     @Test
     public void testGetNome() {
-        assertEquals(a.getNome(), "Luigi");
+        assertEquals("Luigi", a.getNome());
     }
     
     @Test
     public void testGetCognome() {
-        assertEquals(a.getCognome(), "Pirandello");
+        assertEquals("Pirandello", a.getCognome());
     }
     
     @Test
     public void testSetNome() {
         a.setNome("Eugenio");
-        assertEquals(a.getNome(), "Eugenio");
+        assertEquals("Eugenio", a.getNome());
     }
     
     @Test
     public void testSetCognome() {
         a.setCognome("Montale");
-        assertEquals(a.getCognome(), "Montale");
+        assertEquals("Montale", a.getCognome());
     }
     
     @Test

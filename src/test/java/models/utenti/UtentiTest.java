@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models.utenti;
 
 import java.util.ArrayList;
@@ -19,16 +14,12 @@ import org.junit.Before;
 public class UtentiTest {
     private Utenti utenti;
 
-    public UtentiTest() {
-    }
-
     @Before
     public void setUp() throws Exception {
         utenti = new Utenti();
 
         utenti.aggiungi(new Utente("Luisa", "Genovese", new Matricola("0612708796"), "l.genovese20@studenti.unisa.it"));
-        utenti.aggiungi(
-                new Utente("Erica", "Brancaccio", new Matricola("0612709465"), "e.brancaccio@studenti.unisa.it"));
+        utenti.aggiungi(new Utente("Erica", "Brancaccio", new Matricola("0612709465"), "e.brancaccio@studenti.unisa.it"));
         utenti.aggiungi(new Utente("Francesco", "Altieri", new Matricola("0612712649"), "f.altieri@studenti.unisa.it"));
         utenti.aggiungi(new Utente("Paolo", "Alfe", new Matricola("0612708112"), "p.alfe@studenti.unisa.it"));
     }
@@ -48,12 +39,10 @@ public class UtentiTest {
 
     @Test
     public void testRicercaUtenti() {
-        List<Utente> risultati = new ArrayList<>();
-
-        risultati = utenti.ricercaUtenti("GENOVESE");
+        List<Utente> risultati = utenti.ricercaUtenti("GENOVESE");
 
         assertTrue(risultati.contains(utenti.ottieni(new Matricola("0612708796"))));
-        assertEquals(risultati.size(), 1);
+        assertEquals(1, risultati.size());
     }
 
     @Test
@@ -93,7 +82,7 @@ public class UtentiTest {
 
         utenti.modifica(utenti.ottieni(m), u);
 
-        assertEquals(utenti.ottieni(m).getEmail(), "l.genovese@studenti.unisa.it");
+        assertEquals("l.genovese@studenti.unisa.it", utenti.ottieni(m).getEmail());
     }
 
     @Test
@@ -120,12 +109,11 @@ public class UtentiTest {
 
         Matricola m5 = new Matricola("0612712345");
 
-        assertEquals(utenti.ottieni(m1), u1);
-        assertEquals(utenti.ottieni(m2), u2);
-        assertEquals(utenti.ottieni(m3), u3);
-        assertEquals(utenti.ottieni(m4), u4);
+        assertEquals(u1, utenti.ottieni(m1));
+        assertEquals(u2, utenti.ottieni(m2));
+        assertEquals(u3, utenti.ottieni(m3));
+        assertEquals(u4, utenti.ottieni(m4));
 
-        assertEquals(utenti.ottieni(m5), null);
+        assertNull(utenti.ottieni(m5));
     }
-
 }

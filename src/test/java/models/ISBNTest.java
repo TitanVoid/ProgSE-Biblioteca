@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 import org.junit.Test;
@@ -15,9 +10,6 @@ import org.junit.Before;
  */
 public class ISBNTest {
     private ISBN i;
-    
-    public ISBNTest() {
-    }
 
     @Before
     public void setUp() {
@@ -29,12 +21,12 @@ public class ISBNTest {
         ISBN isbn = new ISBN("883010471X");
         
         assertNotNull(isbn.getCodiceISBN());
-        assertEquals(isbn.getCodiceISBN(), "883010471X");
+        assertEquals("883010471X", isbn.getCodiceISBN());
     }
     
     @Test
     public void testGetCodiceISBN() {
-        assertEquals(i.getCodiceISBN(), "883010471X");
+        assertEquals("883010471X", i.getCodiceISBN());
     }
 
     @Test
@@ -67,10 +59,9 @@ public class ISBNTest {
         ISBN i1 = new ISBN("883010471X");
         ISBN i2 = new ISBN("883010481X");
         ISBN i3 = new ISBN("883010461X");
-        
-        assertTrue(i.compareTo(i1) == 0);
+
+        assertEquals(0, i.compareTo(i1));
         assertTrue(i.compareTo(i2) < 0);
         assertTrue(i.compareTo(i3) > 0);
     }
-    
 }

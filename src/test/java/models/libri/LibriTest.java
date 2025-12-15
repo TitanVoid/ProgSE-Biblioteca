@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models.libri;
 
 import java.util.ArrayList;
@@ -18,9 +13,6 @@ import org.junit.Before;
  */
 public class LibriTest {
     private Libri libri;
-    
-    public LibriTest() {
-    }
 
     @Before
     public void setUp() throws Exception {
@@ -46,13 +38,12 @@ public class LibriTest {
 
     @Test
     public void testRicercaLibri() {
-        List<Libro> risultati = new ArrayList<>();
-        
+        List<Libro> risultati;
         risultati = libri.ricercaLibri("ORWELL");
         
         assertTrue(risultati.contains(libri.ottieni(new ISBN("8883379071"))));
         assertTrue(risultati.contains(libri.ottieni(new ISBN("888337908X"))));
-        assertEquals(risultati.size(), 2);
+        assertEquals(2, risultati.size());
     }
 
     @Test
@@ -67,7 +58,7 @@ public class LibriTest {
         assertTrue(libri.esisteChiave(i));
         
         // Test libro duplicato:
-        assertThrows(LibroGiaPresenteException.class, () -> { libri.aggiungi(l); }); 
+        assertThrows(LibroGiaPresenteException.class, () -> { libri.aggiungi(l); });
     }
 
     @Test
@@ -79,7 +70,7 @@ public class LibriTest {
         
         libri.modifica(libri.ottieni(i), l);
         
-        assertEquals(libri.ottieni(i).getCopieDisponibili(), 20);
+        assertEquals(20, libri.ottieni(i).getCopieDisponibili());
     }
 
     @Test
@@ -117,8 +108,7 @@ public class LibriTest {
         assertEquals(libri.ottieni(i1), l1);
         assertEquals(libri.ottieni(i2), l2);
         assertEquals(libri.ottieni(i3), l3);
-        
-        assertEquals(libri.ottieni(i4), null);
+        assertNull(libri.ottieni(i4));
     }
     
 }

@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 import org.junit.Test;
@@ -15,9 +10,6 @@ import org.junit.Before;
  */
 public class MatricolaTest {
     private Matricola matricola;
-    
-    public MatricolaTest() {
-    }
 
     @Before
     public void setUp() {
@@ -29,17 +21,19 @@ public class MatricolaTest {
         Matricola m = new Matricola("0612708796");
         
         assertNotNull(m.getMatricola());
-        assertEquals(m.getMatricola(), "0612708796");
+        assertEquals("0612708796", m.getMatricola());
     }
     
     @Test
     public void testGetMatricola() {
-        assertEquals(matricola.getMatricola(), "0612708796");
+        assertEquals("0612708796", matricola.getMatricola());
     }
 
     @Test
     public void testVerificaMatricola() {
+        // Test matricola valida:
         assertTrue(Matricola.verificaMatricola("0612708796"));
+        // Test matricola non valida:
         assertFalse(Matricola.verificaMatricola(null));
         assertFalse(Matricola.verificaMatricola("061270879"));
         assertFalse(Matricola.verificaMatricola("061L708796"));
@@ -59,10 +53,9 @@ public class MatricolaTest {
         Matricola m1 = new Matricola("0612708796");
         Matricola m2 = new Matricola("0612708797");
         Matricola m3 = new Matricola("0612708795");
-        
-        assertTrue(matricola.compareTo(m1) == 0);
+
+        assertEquals(0, matricola.compareTo(m1));
         assertTrue(matricola.compareTo(m2) < 0);
         assertTrue(matricola.compareTo(m3) > 0);
     }
-    
 }

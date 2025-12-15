@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models.utenti;
 
 import models.FormatoCampiErratoException;
@@ -19,9 +14,6 @@ import org.junit.Before;
 public class UtenteTest {
     private Utente u;
 
-    public UtenteTest() {
-    }
-
     @Before
     public void setUp() {
         Matricola m = new Matricola("0612708796");
@@ -34,10 +26,10 @@ public class UtenteTest {
         Utente utente = new Utente("Luisa", "Genovese", m, "l.genovese20@studenti.unisa.it");
 
         assertNotNull(utente);
-        assertEquals(utente.getNome(), "Luisa");
-        assertEquals(utente.getCognome(), "Genovese");
-        assertEquals(utente.getMatricolaUtente(), m);
-        assertEquals(utente.getEmail(), "l.genovese20@studenti.unisa.it");
+        assertEquals("Luisa", utente.getNome());
+        assertEquals("Genovese", utente.getCognome());
+        assertEquals(m, utente.getMatricolaUtente());
+        assertEquals("l.genovese20@studenti.unisa.it", utente.getEmail());
         assertNotNull(utente.getPrestitiAttivi());
         assertTrue(utente.getPrestitiAttivi().isEmpty());
     }
@@ -47,13 +39,13 @@ public class UtenteTest {
         Matricola m = new Matricola("0612708796");
 
         assertNotNull(u.getMatricolaUtente());
-        assertEquals(u.getMatricolaUtente(), m);
+        assertEquals(m, u.getMatricolaUtente());
     }
 
     @Test
     public void testGetEmail() {
         assertNotNull(u.getEmail());
-        assertEquals(u.getEmail(), "l.genovese20@studenti.unisa.it");
+        assertEquals("l.genovese20@studenti.unisa.it", u.getEmail());
     }
 
     @Test
@@ -65,7 +57,7 @@ public class UtenteTest {
     public void testSetEmail() {
         u.setEmail("l.genovese@studenti.unisa.it");
 
-        assertEquals(u.getEmail(), "l.genovese@studenti.unisa.it");
+        assertEquals("l.genovese@studenti.unisa.it", u.getEmail());
     }
 
     @Test
@@ -77,7 +69,7 @@ public class UtenteTest {
         u.aggiungiPrestito(p);
 
         assertTrue(u.getPrestitiAttivi().contains(p));
-        assertEquals(u.getPrestitiAttivi().size(), 1);
+        assertEquals(1, u.getPrestitiAttivi().size());
     }
 
     @Test
@@ -90,7 +82,7 @@ public class UtenteTest {
         u.rimuoviPrestito(p);
 
         assertFalse(u.getPrestitiAttivi().contains(p));
-        assertEquals(u.getPrestitiAttivi().size(), 0);
+        assertEquals(0, u.getPrestitiAttivi().size());
     }
 
     @Test
@@ -123,11 +115,11 @@ public class UtenteTest {
 
         // Test utente uguale:
         Utente u1 = new Utente("Luisa", "Genovese", m1, "l.genovese20@studenti.unisa.it");
-        assertTrue(u.equals(u1));
+        assertEquals(u, u1);
         
         // Test utente diverso:
         Utente u2 = new Utente("Luisa", "Genovese", m2, "l.genovese20@studenti.unisa.it");
-        assertFalse(u.equals(u2));
+        assertNotEquals(u, u2);
     }
 
     @Test
@@ -157,7 +149,7 @@ public class UtenteTest {
         // Test utente nome e cognome uguali, matricola minore:
         Utente u7 = new Utente("Luisa", "Genovese", m3, "l.genovese20@studenti.unisa.it");
 
-        assertTrue(u.compareTo(u1) == 0);
+        assertEquals(0, u.compareTo(u1));
         assertTrue(u.compareTo(u2) < 0);
         assertTrue(u.compareTo(u3) > 0);
         assertTrue(u.compareTo(u4) < 0);
@@ -165,5 +157,4 @@ public class UtenteTest {
         assertTrue(u.compareTo(u6) < 0);
         assertTrue(u.compareTo(u7) > 0);
     }
-
 }

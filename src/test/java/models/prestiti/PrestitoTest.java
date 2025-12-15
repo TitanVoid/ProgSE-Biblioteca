@@ -1,10 +1,6 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models.prestiti;
 
+import java.time.DateTimeException;
 import java.time.LocalDate;
 import models.FormatoCampiErratoException;
 import models.ISBN;
@@ -20,9 +16,6 @@ import org.junit.Before;
 public class PrestitoTest {
     private Prestito p;
 
-    public PrestitoTest() {
-    }
-
     @Before
     public void setUp() {
         Matricola m = new Matricola("0612708796");
@@ -32,47 +25,53 @@ public class PrestitoTest {
 
     @Test
     public void testCostruttorePrestito() {
+        Prestito p = new Prestito(new Matricola("0612708796"), new ISBN("883010471X"), LocalDate.now(), LocalDate.now().plusDays(3));
+        assertNotNull(p);
+        assertEquals(new Matricola("0612708796"), p.getMatricolaUtente());
+        assertEquals(new ISBN("883010471X"), p.getCodiceISBNLibro());
+        assertEquals(LocalDate.now(), p.getDataInizio());
+        assertEquals(LocalDate.now().plusDays(3), p.getDataScadenza());
     }
 
     @Test
     public void testGetMatricolaUtente() {
         Matricola m = new Matricola("0612708796");
-        assertEquals(p.getMatricolaUtente(), m);
+        assertEquals(m, p.getMatricolaUtente());
     }
 
     @Test
     public void testGetCodiceISBNLibro() {
         ISBN isbn = new ISBN("883010471X");
-        assertEquals(p.getCodiceISBNLibro(), isbn);
+        assertEquals(isbn, p.getCodiceISBNLibro());
     }
 
     @Test
     public void testGetDataInizio() {
-        assertEquals(p.getDataInizio(), LocalDate.now());
+        assertEquals(LocalDate.now(), p.getDataInizio());
     }
 
     @Test
     public void testGetDataScadenza() {
-        assertEquals(p.getDataScadenza(), LocalDate.now().plusDays(3));
+        assertEquals(LocalDate.now().plusDays(3), p.getDataScadenza());
     }
 
     @Test
     public void testGetDataRestituzione() {
-        assertEquals(p.getDataRestituzione(), null);
+        assertNull(p.getDataRestituzione());
     }
 
     @Test
     public void testSetDataScadenza() {
         p.setDataScadenza(LocalDate.now().plusDays(10));
 
-        assertEquals(p.getDataScadenza(), LocalDate.now().plusDays(10));
+        assertEquals(LocalDate.now().plusDays(10), p.getDataScadenza());
     }
 
     @Test
     public void testSetDataRestituzione() {
         p.setDataRestituzione(LocalDate.now());
 
-        assertEquals(p.getDataRestituzione(), LocalDate.now());
+        assertEquals(LocalDate.now(), p.getDataRestituzione());
     }
 
     @Test
@@ -100,6 +99,10 @@ public class PrestitoTest {
         assertThrows(FormatoCampiErratoException.class, () -> {
             Prestito.verificaDataScadenza("2025-12-12");
         });
+        // Test con formato corretto ma data non valida:
+        assertThrows(DateTimeException.class, () -> {
+            Prestito.verificaDataScadenza("2025-13-50");
+        });
     }
 
     @Test
@@ -109,7 +112,7 @@ public class PrestitoTest {
 
         // Test prestito con data di scadenza uguale:
         Prestito p1 = new Prestito(m, isbn, LocalDate.now(), LocalDate.now().plusDays(3));
-        assertTrue(p.compareTo(p1) == 0);
+        assertEquals(0, p.compareTo(p1));
         // Test prestito con data di scadenza precedente:
         Prestito p2 = new Prestito(m, isbn, LocalDate.now(), LocalDate.now().plusDays(2));
         assertTrue(p.compareTo(p2) > 0);
@@ -117,5 +120,4 @@ public class PrestitoTest {
         Prestito p3 = new Prestito(m, isbn, LocalDate.now(), LocalDate.now().plusDays(4));
         assertTrue(p.compareTo(p3) < 0);
     }
-
 }

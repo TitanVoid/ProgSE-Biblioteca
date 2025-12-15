@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models;
 
 import java.io.File;
@@ -32,9 +27,6 @@ public class BibliotecaTest {
     private Libro l;
     private ISBN i;
     private Prestito p;
-
-    public BibliotecaTest() {
-    }
 
     @Before
     public void setUp() {
@@ -121,9 +113,9 @@ public class BibliotecaTest {
         assertNotNull(letta.getLibri());
         assertNotNull(letta.getUtenti());
 
-        assertTrue(letta.getPrestiti().getListaPrestiti().size() == b.getPrestiti().getListaPrestiti().size());
-        assertTrue(letta.getLibri().getListaLibri().equals(b.getLibri().getListaLibri()));
-        assertTrue(letta.getUtenti().getListaUtenti().equals(b.getUtenti().getListaUtenti()));
+        assertEquals(letta.getPrestiti().getListaPrestiti().size(), b.getPrestiti().getListaPrestiti().size());
+        assertEquals(letta.getLibri().getListaLibri(), b.getLibri().getListaLibri());
+        assertEquals(letta.getUtenti().getListaUtenti(), b.getUtenti().getListaUtenti());
     }
 
     @Test
@@ -140,5 +132,4 @@ public class BibliotecaTest {
         assertTrue(letta.getLibri().getListaLibri().isEmpty());
         assertTrue(letta.getUtenti().getListaUtenti().isEmpty());
     }
-
 }

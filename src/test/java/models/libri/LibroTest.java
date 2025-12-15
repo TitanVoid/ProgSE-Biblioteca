@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package models.libri;
 
 import models.FormatoCampiErratoException;
@@ -18,9 +13,6 @@ import org.junit.Before;
 public class LibroTest {
     private Libro l;
 
-    public LibroTest() {
-    }
-
     @Before
     public void setUp() {
         ISBN isbn = new ISBN("883010471X");
@@ -33,31 +25,31 @@ public class LibroTest {
         Libro libro = new Libro("Il Signore degli Anelli", 2020, isbn, 5, "J.R.R. Tolkien");
 
         assertNotNull(libro);
-        assertEquals(libro.getTitolo(), "Il Signore degli Anelli");
+        assertEquals("Il Signore degli Anelli", libro.getTitolo());
         assertTrue(libro.getAutori().contains(new Autore("J.R.R.", "Tolkien")));
-        assertEquals(libro.getAnnoPubblicazione(), 2020);
+        assertEquals(2020, libro.getAnnoPubblicazione());
         assertEquals(libro.getCodiceISBNLibro(), isbn);
-        assertEquals(libro.getCopieDisponibili(), 5);
+        assertEquals(5, libro.getCopieDisponibili());
     }
 
     @Test
     public void testGetTitolo() {
-        assertEquals(l.getTitolo(), "Il Signore degli Anelli");
+        assertEquals("Il Signore degli Anelli", l.getTitolo());
     }
 
     @Test
     public void testGetAnnoPubblicazione() {
-        assertEquals(l.getAnnoPubblicazione(), 2020);
+        assertEquals(2020, l.getAnnoPubblicazione());
     }
 
     @Test
     public void testGetCodiceISBNLibro() {
-        assertEquals(l.getCodiceISBNLibro(), new ISBN("883010471X"));
+        assertEquals(new ISBN("883010471X"), l.getCodiceISBNLibro());
     }
 
     @Test
     public void testGetCopieDisponibili() {
-        assertEquals(l.getCopieDisponibili(), 5);
+        assertEquals(5, l.getCopieDisponibili());
     }
 
     @Test
@@ -69,21 +61,21 @@ public class LibroTest {
     public void testSetTitolo() {
         l.setTitolo("Lo Hobbit");
 
-        assertEquals(l.getTitolo(), "Lo Hobbit");
+        assertEquals("Lo Hobbit", l.getTitolo());
     }
 
     @Test
     public void testSetAnnoPubblicazione() {
         l.setAnnoPubblicazione(2018);
 
-        assertEquals(l.getAnnoPubblicazione(), 2018);
+        assertEquals(2018, l.getAnnoPubblicazione());
     }
 
     @Test
     public void testSetCopieDisponibili() {
         l.setCopieDisponibili(10);
 
-        assertEquals(l.getCopieDisponibili(), 10);
+        assertEquals(10, l.getCopieDisponibili());
     }
 
     @Test
@@ -93,7 +85,7 @@ public class LibroTest {
         l.aggiungiAutore(autore);
 
         assertTrue(l.getAutori().contains(autore));
-        assertEquals(l.getAutori().size(), 2);
+        assertEquals(2, l.getAutori().size());
     }
 
     @Test
@@ -103,7 +95,7 @@ public class LibroTest {
         l.rimuoviAutore(autore);
 
         assertFalse(l.getAutori().contains(autore));
-        assertEquals(l.getAutori().size(), 0);
+        assertEquals(0, l.getAutori().size());
     }
 
     @Test
@@ -159,11 +151,10 @@ public class LibroTest {
         // Test libro con ISBN minore:
         Libro l5 = new Libro("Il Signore degli Anelli", 2020, new ISBN("783010471X"), 5, "J.R.R. Tolkien");
 
-        assertTrue(l.compareTo(l1) == 0);
+        assertEquals(0, l.compareTo(l1));
         assertTrue(l.compareTo(l2) < 0);
         assertTrue(l.compareTo(l3) < 0);
         assertTrue(l.compareTo(l4) > 0);
         assertTrue(l.compareTo(l5) > 0);
     }
-
 }
