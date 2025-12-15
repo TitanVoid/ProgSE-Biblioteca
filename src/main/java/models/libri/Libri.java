@@ -76,13 +76,13 @@ public class Libri implements Mappabile<ISBN, Libro>, Archiviabile<Libro>, Seria
         for (Libro l : libri) {
             String titoloLowerCase = l.getTitolo().toLowerCase();
             String codiceISBNLibroLowerCase = l.getCodiceISBNLibro().getCodiceISBN().toLowerCase();
-            if (titoloLowerCase.contains(inputLowerCase) || codiceISBNLibroLowerCase.matches(inputLowerCase)) {
+            if (titoloLowerCase.contains(inputLowerCase) || codiceISBNLibroLowerCase.contains(inputLowerCase)) {
                 lis.add(l);
             } else {
                 for (Autore a : l.getAutori()) {
                     String nomeLowerCase = a.getNome().toLowerCase();
                     String cognomeLowerCase = a.getCognome().toLowerCase();
-                    if (nomeLowerCase.matches(inputLowerCase) || cognomeLowerCase.matches(inputLowerCase)) {
+                    if (nomeLowerCase.contains(inputLowerCase) || cognomeLowerCase.contains(inputLowerCase)) {
                         lis.add(l);
                     }
                 }
