@@ -9,53 +9,85 @@ import org.junit.Before;
  * @author luisagenovese
  */
 public class MatricolaTest {
-    private Matricola matricola;
+    private Matricola m;
 
     @Before
     public void setUp() {
-        matricola = new Matricola("0612708796");
+        m = new Matricola("0612708796");
     }
     
+    // TEST COSTRUTTORE
     @Test
     public void testCostruttoreMatricola() {
-        Matricola m = new Matricola("0612708796");
+        Matricola matricola = new Matricola("0612708796");
         
-        assertNotNull(m.getMatricola());
+        assertNotNull(matricola);
+        
+        assertNotNull(matricola.getMatricola());
+        assertEquals("0612708796", matricola.getMatricola());
+    }
+    
+    // TEST METODO GETTER
+    @Test
+    public void testGetMatricola() {
         assertEquals("0612708796", m.getMatricola());
+    }
+
+    // TEST VERIFICA MATRICOLA
+    @Test
+    public void testVerificaMatricolaValida() {
+        assertTrue(Matricola.verificaMatricola("0612708796"));
     }
     
     @Test
-    public void testGetMatricola() {
-        assertEquals("0612708796", matricola.getMatricola());
+    public void testVerificaMatricolaTroppoCorta() {
+        assertFalse(Matricola.verificaMatricola("06127"));
     }
-
+    
     @Test
-    public void testVerificaMatricola() {
-        // Test matricola valida:
-        assertTrue(Matricola.verificaMatricola("0612708796"));
-        // Test matricola non valida:
+    public void testVerificaMatricolaTroppoLunga() {
+        assertFalse(Matricola.verificaMatricola("0612708796487562"));
+    }
+    
+    @Test
+    public void testVerificaMatricolaNonNumerica() {
+        assertFalse(Matricola.verificaMatricola("06127ABCDE"));
+    }
+    
+    @Test
+    public void testVerificaMatricolaNull() {
         assertFalse(Matricola.verificaMatricola(null));
-        assertFalse(Matricola.verificaMatricola("061270879"));
-        assertFalse(Matricola.verificaMatricola("061L708796"));
     }
 
+    // TEST EQUALS
     @Test
-    public void testEquals() {
-        Matricola m1 = new Matricola("0612708796");
-        Matricola m2 = new Matricola("0612708797");
-        
-        assertEquals(matricola, m1);
-        assertNotEquals(matricola, m2);
+    public void testEqualsMatricoleUguali() {
+        assertEquals(m, new Matricola("0612708796"));
     }
-
+    
     @Test
-    public void testCompareTo() {
-        Matricola m1 = new Matricola("0612708796");
-        Matricola m2 = new Matricola("0612708797");
-        Matricola m3 = new Matricola("0612708795");
-
-        assertEquals(0, matricola.compareTo(m1));
-        assertTrue(matricola.compareTo(m2) < 0);
-        assertTrue(matricola.compareTo(m3) > 0);
+    public void testEqualsMatricoleDiverse() {
+        assertNotEquals(m, new Matricola("0612709671"));
+    }    
+    
+    @Test
+    public void testEqualsMatricolaConNull() {
+        assertNotEquals(m, null);
+    }
+    
+    // TEST COMPARETO
+    @Test
+    public void testCompareToUguale() {
+        assertEquals(0, m.compareTo(new Matricola("0612708796")));
+    }
+    
+    @Test
+    public void testCompareToMinore() {
+        assertTrue(m.compareTo(new Matricola("0612708797")) < 0);
+    }
+    
+    @Test
+    public void testCompareToMaggiore() {
+        assertTrue(m.compareTo(new Matricola("0612708795")) > 0);
     }
 }
