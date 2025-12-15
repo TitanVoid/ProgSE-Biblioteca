@@ -51,8 +51,12 @@ public class EstensionePrestitoController extends BaseController implements Init
             showWarningAlert("Campi Errati", "La data scadenza deve essere nel formato AAAA-MM-GG");
             return;
         }
-        Prestito modificato = new Prestito(new Matricola(matricola.getText()), new ISBN(isbn.getText()), LocalDate.parse(dataInizio.getText()), LocalDate.parse(dataScadenza.getText()));
         PrestitiController prestitiController = (PrestitiController) parentController;
+        if (LocalDate.parse(data).isBefore(prestitiController.getSelectedLoan().getDataScadenza())){
+            showWarningAlert("Campi Errati", "Non è possibile inserire una data di scadenza precedente a quella impostata attualmente!");
+            return;
+        }
+        Prestito modificato = new Prestito(new Matricola(matricola.getText()), new ISBN(isbn.getText()), LocalDate.parse(dataInizio.getText()), LocalDate.parse(dataScadenza.getText()));
         biblioteca.getPrestiti().modifica(prestitiController.getSelectedLoan(), modificato);
         Utente u = biblioteca.getUtenti().ottieni(prestitiController.getSelectedLoan().getMatricolaUtente());
         u.rimuoviPrestito(prestitiController.getSelectedLoan());
