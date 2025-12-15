@@ -4,12 +4,14 @@ Realizzazione di una semplice applicazione per la gestione di una biblioteca uni
 
 Strumenti/linguaggi utilizzati:
 - Java
-- LaTeX (per la produzione dei documenti)
+- LaTeX (per la documentazione)
 - Doxygen
 - Maven
 - JUnit
 
-L'applicazione utilizza Java 8, per essere sicuri di usare la versione corretta prima di compilare e testare, eseguire: 
+AVVISO:
+L'applicazione utilizza Java 8.
+Per essere sicuri di usare la versione corretta prima di compilare e testare, eseguire: 
 - export JAVA_HOME=/Library/Java/JavaVirtualMachines/jdk-1.8.jdk/Contents/Home
 
 
