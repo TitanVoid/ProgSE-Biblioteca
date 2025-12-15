@@ -85,8 +85,11 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
      */
     @Override
     public void rimuovi(Prestito prestito) {
-        int index = Collections.binarySearch(prestiti, prestito);
-        prestiti.get(index).setDataRestituzione(LocalDate.now());
+        int index = prestiti.indexOf(prestito);
+        Prestito temp = prestiti.get(index);
+        prestiti.remove(index);
+        temp.setDataRestituzione(LocalDate.now());
+        aggiungi(temp);
     }
 
     /**
@@ -99,8 +102,7 @@ public class Prestiti implements Archiviabile<Prestito>, Serializable {
      */
     @Override
     public void modifica(Prestito originale, Prestito modificato) {
-        int index = Collections.binarySearch(prestiti, originale);
-        prestiti.remove(index);
+        prestiti.remove(originale);
         aggiungi(modificato);
     }
 

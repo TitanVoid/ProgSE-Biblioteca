@@ -191,48 +191,6 @@ public class Prestito implements Comparable<Prestito>, Serializable {
     }
 
     /**
-     * @brief Verifica dell'uguaglianza tra un oggetto e l'istanza corrente.
-     *        Aderisce al contratto del metodo equals() di Object.
-     * 
-     *        Due oggetti Prestito si dicono uguali se tutti i loro campi sono
-     *        uguali.
-     * 
-     * @param[in] o Oggetto da confrontare con l'istanza corrente.
-     * @return true se i due oggetti Utente sono uguali, false altrimenti.
-     */
-    @Override
-    public boolean equals(Object o) {
-        if (o == null)
-            return false;
-        if (this == o)
-            return true;
-        if (this.getClass() != o.getClass())
-            return false;
-
-        Prestito p = (Prestito) o;
-
-        if (!this.matricolaUtente.equals(p.matricolaUtente))
-            return false;
-        if (!this.codiceISBNLibro.equals(p.codiceISBNLibro))
-            return false;
-        if (!this.dataInizio.equals(p.dataInizio))
-            return false;
-        if (!this.dataScadenza.equals(p.dataScadenza))
-            return false;
-
-        if (this.dataRestituzione == p.dataRestituzione)
-            return true;
-        if ((this.dataRestituzione == null && p.dataRestituzione != null)
-                || (this.dataRestituzione != null && p.dataRestituzione == null))
-            return false;
-
-        if (this.dataRestituzione.equals(p.dataRestituzione))
-            return true;
-
-        return false;
-    }
-
-    /**
      * @brief Confronto del Prestito corrente con un altro Prestito.
      *        Aderisce al contratto del metodo compareTo() di Comparable<T>.
      * 
@@ -245,6 +203,11 @@ public class Prestito implements Comparable<Prestito>, Serializable {
      */
     @Override
     public int compareTo(Prestito p) {
+        if (this.dataScadenza.equals(p.dataScadenza)){
+            if (this.dataRestituzione == null && p.dataRestituzione != null) return -1;
+            else if (this.dataRestituzione != null && p.dataRestituzione == null) return 1;
+            return 0;
+        }
         return this.dataScadenza.compareTo(p.dataScadenza);
     }
 
