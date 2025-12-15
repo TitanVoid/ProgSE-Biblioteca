@@ -66,7 +66,7 @@
                 L'\textbf{Amministratore} della biblioteca ha l'interesse più alto nel progetto, poiché è colui che dovrà utilizzare l'applicazione per la gestione completa della biblioteca.\vspace{.2cm}
                 \\Un altro stakeholder interno è il \textbf{Responsabile/Direttore} stesso della biblioteca che, pur non utilizzando l'applicazione, definisce le regole di business che ne determinano il funzionamento.
             \subsubsection*{Stakeholder Esterni}
-                L'\textbf{Utente} (ovvero lo \textbf{Studente universitario}), sebbene non usi direttamente l'interfaccia grafica, è il beneficiario finale del sistema.
+                L'\textbf{Utente} (ovvero lo \textbf{Studente universitario}) che , sebbene non utilizzi direttamente l'interfaccia grafica, è il beneficiario finale del sistema.
 
     \newpage
     \hypersetup{linkcolor=blue}
@@ -79,7 +79,7 @@
             \begin{itemize}[itemsep=6pt]
                 \hypertarget{IF-1}{\item[\textbf{IF-1}]}\textbf{Inserimento di un libro}
                 \\L’applicazione consente all’amministratore di inserire un libro all’interno della lista dei libri.\vspace{.2cm}
-                \\Premendo l’apposito pulsante, comparirà una finestra aggiuntiva in cui si dovranno inserire tutti i campi necessari, coerentemente a quanto definito in \hyperlink{DF-2}{DF-2}. 
+                \\Premendo l’apposito pulsante, comparirà una finestra aggiuntiva (vedere \hyperlink{UI-6}{UI-6}) in cui si dovranno inserire tutti i campi necessari, coerentemente a quanto definito in \hyperlink{DF-2}{DF-2}. 
                 \\Al termine dell’inserimento, sarà possibile confermare oppure annullare l’operazione mediante la pressione dei rispettivi pulsanti. 
                 \\Nel caso in cui non siano stati inseriti tutti i campi necessari, oppure nel caso di inserimento di campi errati (vedere \hyperlink{DF-2}{DF-2} per le informazioni relative al formato dei dati), non sarà possibile confermare l’inserimento. 
                 \\Se il codice identificativo univoco fornito in input dovesse corrispondere ad un libro già presente nella lista, l'operazione di inserimento verrà bloccata e l’amministratore verrà notificato dell’esistenza di un duplicato. 
@@ -93,7 +93,7 @@
                 \hypertarget{IF-3}{\item[\textbf{IF-3}]}\textbf{Cancellazione di un libro}
                 \\L’applicazione consente all’amministratore di rimuovere un libro dalla lista dei libri.\vspace{.2cm}
                 \\L'operazione viene avviata selezionando un libro presente nella lista dei libri e premendo l’apposito pulsante di cancellazione.
-                \\Il sistema mostrerà un messaggio di conferma all’amministratore, offrendogli la possibilità di portare a termine o annullare l’operazione tramite la pressione dei rispettivi pulsanti.
+                \\Il sistema mostrerà un messaggio di conferma all’amministratore (vedere \hyperlink{UI-8}{UI-8}), offrendogli la possibilità di portare a termine o annullare l’operazione tramite la pressione dei rispettivi pulsanti.
                 \\La rimozione di un libro dalla lista dei libri non deve comportare la cancellazione dello storico dei prestiti precedentemente associati a quel volume, né annullare gli eventuali prestiti attivi al momento della rimozione.
                 \\L'operazione, una volta confermata, è irreversibile. 
 
@@ -116,7 +116,7 @@
 
                 \hypertarget{IF-6}{\item[\textbf{IF-6}]}\textbf{Inserimento di un utente}
                 \\L’applicazione consente all’amministratore di inserire un utente all’interno della lista dei libri.\vspace{.2cm}
-                \\Premendo l’apposito pulsante, comparirà una finestra aggiuntiva in cui si dovranno inserire tutti i campi necessari, coerentemente a quanto definito in \hyperlink{DF-3}{DF-3}.
+                \\Premendo l’apposito pulsante, comparirà una finestra aggiuntiva (vedere \hyperlink{UI-6}{UI-6}) in cui si dovranno inserire tutti i campi necessari, coerentemente a quanto definito in \hyperlink{DF-3}{DF-3}.
                 \\Al termine dell’inserimento, sarà possibile confermare oppure annullare l’operazione mediante la pressione dei rispettivi pulsanti.
                 \\Nel caso in cui non siano stati inseriti tutti i campi necessari, oppure nel caso di inserimento di campi errati (vedere \hyperlink{DF-3}{DF-3} per le informazioni relative al formato dei dati), non sarà possibile confermare l’inserimento.
                 \\Se la matricola fornita in input dovesse corrispondere ad un utente già presente nella lista, l'operazione di inserimento verrà bloccata e l’amministratore verrà notificato dell’esistenza di un duplicato. 
@@ -130,7 +130,7 @@
                 \hypertarget{IF-8}{\item[\textbf{IF-8}]}\textbf{Cancellazione di un utente}
                 \\L’applicazione consente all’amministratore di rimuovere un utente dalla lista degli utenti.\vspace{.2cm}
                 \\L'operazione viene avviata selezionando un utente presente nella lista degli utenti e premendo l’apposito pulsante di cancellazione.
-                \\Il sistema mostrerà un messaggio di conferma all’amministratore, offrendogli la possibilità di portare a termine o annullare l’operazione tramite la pressione dei rispettivi pulsanti.
+                \\Il sistema mostrerà un messaggio di conferma all’amministratore (vedere \hyperlink{UI-8}{UI-8}), offrendogli la possibilità di portare a termine o annullare l’operazione tramite la pressione dei rispettivi pulsanti.
                 \\La rimozione di un utente dalla lista degli utenti non deve comportare la cancellazione dello storico dei prestiti precedentemente associati a quell'utente né annullare gli eventuali prestiti attivi al momento della rimozione.
                 \\L'operazione, una volta confermata, è irreversibile. 
 
@@ -151,19 +151,21 @@
 
                 \hypertarget{IF-11}{\item[\textbf{IF-11}]}\textbf{Registrazione di un prestito}
                 \\L’applicazione consente all’amministratore di registrare un nuovo prestito.\vspace{.2cm}
-                \\Premendo l’apposito pulsante, comparirà una finestra aggiuntiva in cui si dovranno inserire tutti i campi necessari, coerentemente a quanto definito in \hyperlink{DF-4}{DF-4}.
+                \\Premendo l’apposito pulsante, comparirà una finestra aggiuntiva (vedere \hyperlink{UI-6}{UI-6}) in cui si dovranno inserire tutti i campi necessari, coerentemente a quanto definito in \hyperlink{DF-4}{DF-4}.
+                \\All'atto di una registrazione, il sistema imposterà automaticamente la data prevista di restituzione a quattordici giorni dalla data corrente, ma l'amministratore sarà libero di impostarla a suo piacimento.\vspace{.2cm}
                 \\Al termine dell’inserimento, sarà possibile confermare oppure annullare l’operazione mediante la pressione dei rispettivi pulsanti.
                 \\All’atto di una richiesta di prestito, il sistema dovrà svolgere automaticamente le seguenti operazioni:
                 \begin{itemize}[label=$\bullet$]
                     \item Aggiornamento del numero di copie disponibili del libro prestato; 
                     \item Aggiornamento della lista dei prestiti associati all’utente; 
-                    \item Aggiunta del prestito dalla schermata di visualizzazione dei prestiti attivi.
+                    \item Aggiunta del prestito alla schermata di visualizzazione dei prestiti attivi.
                 \end{itemize}
-                Nel caso in cui non siano stati inseriti tutti i campi necessari, oppure nel caso di inserimento di campi errati (vedere \hyperlink{DF-4}{DF-4} per le informazioni relative al formato dei dati), non sarà possibile confermare la registrazione.
-                \\Se il codice identificativo del libro e/o la matricola dell’utente forniti in input non dovessero essere presenti nelle rispettive liste, l'operazione di registrazione sarà bloccata. 
+                Nel caso in cui non siano stati inseriti tutti i campi necessari, oppure nel caso di inserimento di campi errati (vedere \hyperlink{DF-4}{DF-4} per le informazioni relative al formato dei dati), non sarà possibile confermare la registrazione.\vspace{.2cm}
+                \\Se il codice identificativo del libro e/o la matricola dell’utente forniti in input non dovessero essere presenti nelle rispettive liste, l'operazione di registrazione sarà bloccata e verrà visualizzato un messaggio di errore (vedere \hyperlink{UI-9}{UI-9}).
+                \\Allo stesso modo, se l'utente dovesse aver raggiunto il limite massimo di prestiti consentiti, oppure se il libro non dovesse avere copie disponibili all'atto della richiesta, verrà visualizzato un avviso.
 
-                \hypertarget{IF-12}{\item[\textbf{IF-12}]}\textbf{Visualizzazione dei prestiti attivi per data prevista di restituzione}
-                \\La visualizzazione dei prestiti attivi contenuti nella lista dei prestiti avviene sempre in ordine cronologico crescente, rispetto alla data di restituzione.
+                \hypertarget{IF-12}{\item[\textbf{IF-12}]}\textbf{Visualizzazione dei prestiti per data prevista di restituzione}
+                \\La visualizzazione dei prestiti contenuti nella lista dei prestiti avviene sempre in ordine cronologico crescente o decrescente, rispetto alla data di restituzione.
                 \\A parità di data di restituzione, verranno visualizzati prima i prestiti attivi e successivamente quelli conclusi.\vspace{.2cm}
                 \\L’ordinamento della lista dovrà essere mantenuto dopo ogni operazione di registrazione, di estensione di un prestito o di restituzione di un libro. 
 
@@ -179,8 +181,8 @@
                 Tutti i prestiti conclusi potranno comunque essere visualizzati dall'amministratore nella schermata di visualizzazione dei prestiti. 
 
                 \hypertarget{IF-14}{\item[\textbf{IF-14}]}\textbf{Filtraggio dei prestiti}
-                \\L’applicazione supporta, nel caso della lista dei prestiti, una funzionalità di filtraggio che permette all'amministratore di limitare la visualizzazione ai prestiti aventi un determinato stato.\vspace{.2cm}
-                \\L'elenco filtrato dei prestiti dovrà essere presentato rispettando l'ordinamento definito in \hyperlink{IF-12}{IF-12}. 
+                \\L'applicazione permette all'amministratore di filtrare l'elenco dei prestiti visualizzato, limitando i risultati ai soli prestiti che si trovano in un determinato stato.\vspace{.2cm}
+                \\A seguito dell'operazione di filtraggio, l'elenco dei prestiti dovrà essere presentato rispettando l'ordinamento definito in \hyperlink{IF-12}{IF-12}. 
 
                 \hypertarget{IF-15}{\item[\textbf{IF-15}]}\textbf{Estensione prestito}
                 \\L’applicazione consente di estendere la data di restituzione prevista per un prestito attivo.\vspace{.2cm}
@@ -195,26 +197,27 @@
                 \\Tramite l’applicazione, l’amministratore potrà successivamente procedere con la registrazione del prestito solo se vengono rispettate le seguenti condizioni:
                 \begin{itemize}[label=$\bullet$]
                     \item L’utente deve essere presente nell’elenco di utenti della biblioteca;
+                    \item Il libro deve essere presente nell’elenco di libri della biblioteca;
                     \item L’utente non deve avere più di tre prestiti attivi contemporaneamente;
                     \item Il libro richiesto deve avere un numero di copie disponibili maggiore di zero. 
                 \end{itemize}
                 All’atto della richiesta di prestito da parte dell’utente, il sistema dovrà dapprima verificare la sua presenza all’interno dell’elenco di utenti della biblioteca.
-                \\Qualora l’utente non dovesse essere presente in tale elenco, quest’ultimo fornirà i propri dati personali all’amministratore, che potrà inserirlo mediante l’operazione definita in \hyperlink{IF-6}{IF-6}.
+                \\Qualora l’utente non dovesse essere presente in tale elenco, quest’ultimo fornirà i propri dati personali all’amministratore, che potrà decidere di inserirlo mediante l’operazione definita in \hyperlink{IF-6}{IF-6}.
                 \\Una volta ottenute (o in alternativa, verificate) le informazioni personali dell’utente, esso mostrerà all’amministratore il libro che intende prendere in prestito.
                 \\A questo punto il sistema dovrà: 
                 \begin{itemize}[label=$\bullet$]
                     \item Verificare che il libro sia presente nel catalogo;
-                    \item Verificare che sia disponibile;
+                    \item Verificare che sia disponibile per il prestito;
                     \item Verificare che l’utente non superi il limite massimo di prestiti consentito.
                 \end{itemize}
-                Se tutte le condizioni sono soddisfatte, l'amministratore, tramite l'applicazione, registra l'avvenuto prestito all'Utente (come definito in \hyperlink{IF-11}{IF-11}).
-                \\Se uno dei libri richiesti in prestito non è disponibile, l'Amministratore notificherà l'indisponibilità all'utente.
+                Se tutte le condizioni sono soddisfatte, l'amministratore, tramite l'applicazione, registra l'avvenuto prestito all'utente (come definito in \hyperlink{IF-11}{IF-11}).
+                \\Se uno dei libri richiesti in prestito non è disponibile, l'amministratore notificherà l'indisponibilità all'utente.
                 \\Se l'utente ha già tre prestiti attivi, l’amministratore notificherà all'utente la necessità di restituire i libri in suo possesso prima di poterne prendere altri in prestito. 
                 
                 \hypertarget{BF-2}{\item[\textbf{BF-2}]}\textbf{Restituzione di un libro}
                 \\La biblioteca offre all’utente la possibilità di restituire un libro preso precedentemente in prestito.\vspace{.2cm}
                 \\Tramite l’applicazione, l’amministratore potrà successivamente procedere con la registrazione dell'avvenuta restituzione.
-                \\All’atto della richiesta di restituzione, l’utente dovrà identificarsi all’amministratore e presentare il libro o i libri che intende restituire.
+                \\All’atto della richiesta di restituzione, l’utente dovrà identificarsi all’amministratore e presentare il libro che intende restituire.
                 \\Una volta ottenuti i dati necessari, l’amministratore verificherà l’esistenza di un prestito attivo che corrisponde alle informazioni fornite dall’utente, accedendo alla schermata di visualizzazione dei prestiti attivi (vedere \hyperlink{UI-4}{UI-4}).
                 \\Una volta identificato il prestito corrispondente, l’amministratore lo selezionerà e procederà con la registrazione dell’avvenuta restituzione (definita in \hyperlink{IF-13}{IF-13}). 
             \end{itemize}
@@ -223,9 +226,9 @@
         \begin{tcolorbox}[breakable, colback=white,colframe=black!80!white,title=\textbf{Esigenze di Dati e Informazioni - DF}]
             \begin{itemize}[itemsep=6pt]
                 \hypertarget{DF-1}{\item[\textbf{DF-1}]}\textbf{Archiviazione su file}
-                \\L’intero archivio della biblioteca dovrà essere memorizzato, in maniera automatica, all’interno di un file.\vspace{.2cm}
-                \\L’archiviazione dovrà avvenire ogni qualvolta il software viene chiuso.
-                \\Al riavvio dell’applicazione, il sistema dovrà ripristinare automaticamente lo stato dell'archivio, leggendolo dal file.      
+                \\L’intero archivio della biblioteca dovrà essere memorizzato, in maniera del tutto automatica, all’interno di un file.\vspace{.2cm}
+                \\L’archiviazione dovrà avvenire ogni qualvolta l'applicazione viene chiusa.
+                \\Al suo riavvio, il sistema dovrà ripristinare automaticamente lo stato dell'archivio, leggendolo dal file.      
                 
                 \hypertarget{DF-2}{\item[\textbf{DF-2}]}\textbf{Informazioni di un libro}
                 \\Il sistema deve memorizzare, nel formato appropriato, tutte le informazioni relative ai libri presenti nella lista dei libri della biblioteca.\vspace{.2cm}
@@ -240,9 +243,9 @@
                 Nello specifico: 
                 \begin{itemize}[label=$\bullet$]
                     \item Il campo “Titolo” dovrà essere una stringa, con una lunghezza massima di cento caratteri;
-                    \item I campi “Nome” e “Cognome” di ogni autore dovranno essere stringhe di caratteri alfabetici (con una lunghezza minima di tre caratteri ed una massima di venticinque caratteri);
-                    \item Il campo “Anno di pubblicazione” dovrà essere un numero a quattro cifre, compreso tra zero e l’anno corrente;
-                    \item Il campo “Codice identificativo” dovrà essere il codice ISBN del libro, e dunque conforme allo standard ISO 2108;
+                    \item I campi “Nome” e “Cognome” di ogni autore dovranno essere stringhe di caratteri non numerici (con una lunghezza compresa tra i tre ed i venticinque caratteri);
+                    \item Il campo “Anno di pubblicazione” dovrà essere un numero compreso tra zero e l’anno corrente;
+                    \item Il campo “Codice identificativo” dovrà essere il codice ISBN del libro, e dunque aderire allo standard ISO 2108: 2017;
                     \item Il campo “Numero di copie disponibili” dovrà essere un numero compreso tra zero e cento (definita come disponibilità massima per un singolo volume). 
                 \end{itemize}
                 
@@ -258,7 +261,7 @@
                 \end{itemize}
                 Nello specifico: 
                 \begin{itemize}[label=$\bullet$]
-                    \item I campi “Nome” e “Cognome” dovranno essere stringhe di caratteri alfabetici (con una lunghezza minima di tre caratteri ed una massima di venticinque caratteri);
+                    \item I campi “Nome” e “Cognome” dovranno essere stringhe di caratteri non numerici (con una lunghezza compresa tra i tre ed i venticinque caratteri);
                     \item Il campo “Matricola” dovrà essere una stringa di dieci cifre numeriche;
                     \item Il campo “E-mail” dovrà aderire allo standard RFC 5322, e come campo “dominio” dovrà avere “studenti.unisa.it”. 
                 \end{itemize}
@@ -324,7 +327,8 @@
                 \\Saranno previste le seguenti funzionalità di interazione: 
                 \begin{enumerate}
                     \item Menù a tendina: sarà presente un menù che consentirà di passare da una schermata di visualizzazione all'altra;
-                    \item Messa in evidenza dei ritardi: nel caso dei prestiti che presentano un ritardo, la data prevista per la restituzione verrà evidenziata in rosso, in modo tale da segnalare visivamente il ritardo all’amministratore.
+                    \item Filtri: saranno presenti delle checkbox per la selezione del filtro di visualizzazione da applicare alla lista dei prestiti (vedere \hyperlink{IF-14}{IF-14}); 
+                    \item Messa in evidenza dei ritardi: nel caso dei prestiti che presentano un ritardo, la data prevista per la restituzione verrà evidenziata in rosso, in modo tale da segnalare visivamente il ritardo all’amministratore;
                     \item Pulsanti operativi per l’esecuzione delle operazioni principali:
                     \begin{itemize}[label=$\bullet$]
                         \item Pulsante “Inserisci” per la registrazione di un nuovo prestito (vedere \hyperlink{IF-11}{IF-11});
@@ -334,16 +338,16 @@
                 \end{enumerate}
 
                 \hypertarget{UI-5}{\item[\textbf{UI-5}]}\textbf{Visualizzazione schermata principale}
-                \\L'applicazione includerà una schermata principale dotata di tre pulsanti, chiamati "LIBRI", "UTENTI" e "PRESTITI", che permetteranno di accedere ad una delle tre schermate di visualizzazione (descritte in dettaglio in \hyperlink{UI-2}{UI-2}, \hyperlink{UI-3}{UI-3} e \hyperlink{UI-4}{UI-4}).\vspace{.2cm}
+                \\L'applicazione includerà una schermata principale dotata di tre pulsanti, chiamati "LIBRI", "UTENTI" e "PRESTITI", che permetteranno di accedere ad una delle rispettive schermate di visualizzazione (descritte nel dettaglio in \hyperlink{UI-2}{UI-2}, \hyperlink{UI-3}{UI-3} e \hyperlink{UI-4}{UI-4}).\vspace{.2cm}
                 \\Tale schermata verrà mostrata all'amministratore unicamente all'apertura dell'applicazione, e non sarà possibile visualizzarla in seguito.
 
                 \hypertarget{UI-6}{\item[\textbf{UI-6}]}\textbf{Visualizzazione popup di inserimento}
                 \\All'atto di una qualsiasi operazione di inserimento (vedere \hyperlink{IF-1}{IF-1}, \hyperlink{IF-6}{IF-6} e \hyperlink{IF-11}{IF-11}), all'amministratore verrà mostrata una schermata apposita.\vspace{.2cm}
-                \\Tale schermata conterrà i campi da inserire, che varieranno in base alla tipologia di inserimento (vedere \hyperlink{DF-2}{DF-2}, \hyperlink{DF-3}{DF-3} e \hyperlink{DF-4}{DF-4} per l'elenco dettagliato dei campi che verranno mostrati).
+                \\Tale schermata conterrà i campi da inserire, che varieranno in base alla tipologia dell'inserimento (vedere \hyperlink{DF-2}{DF-2}, \hyperlink{DF-3}{DF-3} e \hyperlink{DF-4}{DF-4} per l'elenco dettagliato dei campi che verranno mostrati).
                 \\Da questa schermata sarà possibile portare a termine l'operazione, premendo il pulsante "Conferma", oppure annullarla, premendo il pulsante "Annulla".
 
                 \hypertarget{UI-7}{\item[\textbf{UI-7}]}\textbf{Visualizzazione popup di modifica}
-                \\All'atto di una qualsiasi operazione di modifica (vedere \hyperlink{IF-2}{IF-2} e \hyperlink{IF-7}{IF-7}) oppure estensione (vedere \hyperlink{IF-15}{IF-15}), all'amministratore verrà mostrata una schermata apposita.\vspace{.2cm}
+                \\All'atto di una qualsiasi operazione di modifica (vedere \hyperlink{IF-2}{IF-2} e \hyperlink{IF-7}{IF-7}) oppure di estensione (vedere \hyperlink{IF-15}{IF-15}), all'amministratore verrà mostrata una schermata apposita.\vspace{.2cm}
                 \\Tale schermata conterrà i campi correnti dell'oggetto, che varieranno in base alla tipologia di modifica (vedere \hyperlink{DF-2}{DF-2}, \hyperlink{DF-3}{DF-3} e \hyperlink{DF-4}{DF-4} per l'elenco dettagliato dei campi che verranno mostrati).
                 \\All'amministratore verranno segnalati visivamente i campi modificabili.
                 \\Da questa schermata sarà possibile portare a termine l'operazione, premendo il pulsante "Conferma", oppure annullarla, premendo il pulsante "Annulla".
@@ -355,8 +359,8 @@
 
                 \hypertarget{UI-9}{\item[\textbf{UI-9}]}\textbf{Visualizzazione messaggi di errore}
                 \\Nel caso in cui si verifichino degli errori durante l'esecuzione di una qualsiasi operazione, questi ultimi verranno segnalati graficamente all'amministratore.\vspace{.2cm}
-                \\In questi casi, l'applicazione mostrerà una schermata aggiuntiva contenente un messaggio, che specificherà la tipologia di errore che si è verificato.
-                \\Inoltre, tale schermata si occuperà anche di offrire all'amministratore un'indicazione su come risolvere il problema per portare a termine con successo l'operazione.
+                \\L'applicazione mostrerà una schermata aggiuntiva contenente un messaggio, che specificherà la tipologia di errore che si è verificato.
+                \\Inoltre, tale schermata si occuperà anche di offrire all'amministratore un'indicazione su come risolvere il problema, in modo tale da permettergli di portare a termine con successo l'operazione.
             \end{itemize}
         \end{tcolorbox}
 
@@ -422,15 +426,16 @@
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
                 \item L’amministratore preme il pulsante apposito per aprire il menù a tendina; 
-                \item L’amministratore preme il pulsante “Libri”; 
-                \item Viene visualizzato l’elenco dei libri; 
+                \item L’amministratore preme, all'interno del menù, il pulsante “Libri”; 
+                \item Viene visualizzato l’elenco dei libri.
             \end{enumerate}
 
             \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
             \begin{enumerate}
                 \item[1a.] L'amministratore visualizza la schermata principale dell'applicazione;\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[1a.1] L'esecuzione riprende dal passo 2.
+                    \item[1a.1] L'amministratore preme il pulsante "LIBRI";
+                    \item[1a.2] L'esecuzione riprende dal passo 3.
                 \end{enumerate}
                 \item[3a.] Viene visualizzata una tabella vuota.
             \end{enumerate}                
@@ -447,16 +452,16 @@
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
                 \item L’amministratore preme il pulsante apposito per aprire il menù a tendina; 
-                \item L’amministratore preme il pulsante “Utenti”; 
-                \item Viene visualizzato l’elenco degli utenti; 
+                \item L’amministratore preme, all'interno del menù, il pulsante “Utenti”; 
+                \item Viene visualizzato l’elenco degli utenti.
             \end{enumerate}
 
             \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
             \begin{enumerate}
                 \item[1a.] L'amministratore visualizza la schermata principale dell'applicazione;\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[1a.1] L'esecuzione riprende dal passo 2.
-                \end{enumerate}
+                    \item[1a.1] L'amministratore preme il pulsante "UTENTI";
+                    \item[1a.2] L'esecuzione riprende dal passo 3.                \end{enumerate}
                 \item[3a.] Viene visualizzata una tabella vuota.
             \end{enumerate}       
         \end{tcolorbox}
@@ -472,15 +477,16 @@
             \begin{enumerate}
                 \setlength\itemsep{-0.3em}
                 \item L’amministratore preme il pulsante apposito per aprire il menù a tendina; 
-                \item L’amministratore preme il pulsante “Prestiti”; 
-                \item Viene visualizzato l’elenco dei prestiti; 
+                \item L’amministratore preme, all'interno del menù, il pulsante “Prestiti”; 
+                \item Viene visualizzato l’elenco dei prestiti. 
             \end{enumerate}
 
             \textbf{Flussi di eventi alternativi:}\vspace{-0.2cm}
             \begin{enumerate}
                 \item[1a.] L'amministratore visualizza la schermata principale dell'applicazione;\vspace{-0.2cm}
                 \begin{enumerate}
-                    \item[1a.1] L'esecuzione riprende dal passo 2.
+                    \item[1a.1] L'amministratore preme il pulsante "PRESTITI";
+                    \item[1a.2] L'esecuzione riprende dal passo 3.
                 \end{enumerate}
                 \item[3a.] Viene visualizzata una tabella vuota.
             \end{enumerate}       
