@@ -194,7 +194,10 @@ public class Prestito implements Comparable<Prestito>, Serializable {
      * @brief Confronto del Prestito corrente con un altro Prestito.
      *        Aderisce al contratto del metodo compareTo() di Comparable<T>.
      * 
-     *        I prestiti vengono confrontati in base alla loro data di scadenza.
+     *        I prestiti vengono confrontati in base alla loro data di scadenza e, a
+     *        parità di data di scadenza, in base al loro stato.
+     *        A parità di data di scadenza, un prestito attivo precede un prestito
+     *        concluso.
      * 
      * @param[in] p Prestito da confrontare con l'istanza corrente.
      * @return Valore negativo, zero o positivo se il Prestito corrente è
@@ -203,9 +206,11 @@ public class Prestito implements Comparable<Prestito>, Serializable {
      */
     @Override
     public int compareTo(Prestito p) {
-        if (this.dataScadenza.equals(p.dataScadenza)){
-            if (this.dataRestituzione == null && p.dataRestituzione != null) return -1;
-            else if (this.dataRestituzione != null && p.dataRestituzione == null) return 1;
+        if (this.dataScadenza.equals(p.dataScadenza)) {
+            if (this.dataRestituzione == null && p.dataRestituzione != null)
+                return -1;
+            else if (this.dataRestituzione != null && p.dataRestituzione == null)
+                return 1;
             return 0;
         }
         return this.dataScadenza.compareTo(p.dataScadenza);
