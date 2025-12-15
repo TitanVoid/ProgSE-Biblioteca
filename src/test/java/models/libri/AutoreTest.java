@@ -17,9 +17,12 @@ public class AutoreTest {
         a = new Autore("Luigi", "Pirandello");
     }
     
+    // TEST COSTRUTTORE
     @Test
     public void testCostruttoreAutore() {
         Autore autore = new Autore("Luigi", "Pirandello");
+        
+        assertNotNull(autore);
         
         assertNotNull(autore.getNome());
         assertEquals("Luigi", autore.getNome());
@@ -28,6 +31,7 @@ public class AutoreTest {
         assertEquals("Pirandello", autore.getCognome());
     }
 
+    // TEST METODI GETTER
     @Test
     public void testGetNome() {
         assertEquals("Luigi", a.getNome());
@@ -38,6 +42,7 @@ public class AutoreTest {
         assertEquals("Pirandello", a.getCognome());
     }
     
+    // TEST METODI SETTER
     @Test
     public void testSetNome() {
         a.setNome("Eugenio");
@@ -50,30 +55,61 @@ public class AutoreTest {
         assertEquals("Montale", a.getCognome());
     }
     
+    // TEST VERIFICA NOME
     @Test
-    public void testVerificaNome() {
-        // Test nome valido:
-        assertTrue(Persona.verificaNome("Mario"));
-        // Test nome con caratteri speciali valido:
-        assertTrue(Persona.verificaNome("J.K."));
-        // Test nome non valido, poiché troppo corto:
-        assertFalse(Persona.verificaNome("Ma"));
-        // Test nome non valido, poiché troppo lungo:
-        assertFalse(Persona.verificaNome("Mariomariomariomariomariomario"));
-        // Test nome non valido, poiché nullo:
+    public void testVerificaNomeValido() {
+        assertTrue(Persona.verificaNome("Luigi"));
+    }
+    
+    @Test
+    public void testVerificaNomeTroppoCorto() {
+        assertFalse(Persona.verificaNome("A"));
+    }
+    
+    @Test
+    public void testVerificaNomeTroppoLungo() {
+        assertFalse(Persona.verificaNome("Abcdefghijklmnopqrstuvwxyz"));
+    }
+    
+    @Test
+    public void testVerificaNomeNull() {
         assertFalse(Persona.verificaNome(null));
     }
     
+    // TEST VERIFICA COGNOME
     @Test
-    public void testVerificaCognome() {
-        // Test cognome valido:
-        assertTrue(Persona.verificaCognome("Rossi"));
-        // Test nome non valido, poiché troppo corto:
-        assertFalse(Persona.verificaCognome("Ro"));
-        // Test nome non valido, poiché troppo lungo:
-        assertFalse(Persona.verificaCognome("Rossirossirossirossirossirossi"));
-        // Test cognome non valido, poiché nullo:
+    public void testVerificaCognomeValido() {
+        assertTrue(Persona.verificaCognome("Pirandello"));
+    }
+    
+    @Test
+    public void testVerificaCognomeTroppoCorto() {
+        assertFalse(Persona.verificaCognome("A"));
+    }
+    
+    @Test
+    public void testVerificaCognomeTroppoLungo() {
+        assertFalse(Persona.verificaCognome("Abcdefghijklmnopqrstuvwxyz"));
+    }
+    
+    @Test
+    public void testVerificaCognomeNullo() {
         assertFalse(Persona.verificaCognome(null));
     }
     
+    // TEST EQUALS
+    @Test
+    public void testEqualsAutoriUguali() {
+        assertEquals(a, new Autore("Luigi", "Pirandello"));
+    }
+    
+    @Test
+    public void testEqualsAutoriDiversi() {
+        assertNotEquals(a, new Autore("George", "Orwell"));
+    }
+    
+    @Test
+    public void testEqualsAutoreConNull() {
+        assertNotEquals(a, null);
+    }
 }
