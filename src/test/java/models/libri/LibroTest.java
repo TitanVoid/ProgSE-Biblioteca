@@ -16,22 +16,26 @@ public class LibroTest {
     @Before
     public void setUp() {
         ISBN isbn = new ISBN("883010471X");
-        l = new Libro("Il Signore degli Anelli", 2020, isbn, 5, "J.R.R. Tolkien");
+        l = new Libro("Il Signore degli Anelli", 1954, isbn, 5, "J.R.R. Tolkien");
     }
 
+    // TEST COSTRUTTORE
     @Test
     public void testCostruttoreLibro() {
         ISBN isbn = new ISBN("883010471X");
-        Libro libro = new Libro("Il Signore degli Anelli", 2020, isbn, 5, "J.R.R. Tolkien");
+        Libro libro = new Libro("Il Signore degli Anelli", 1954, isbn, 5, "J.R.R. Tolkien");
 
         assertNotNull(libro);
+        
         assertEquals("Il Signore degli Anelli", libro.getTitolo());
+        assertNotNull(libro.getAutori());
         assertTrue(libro.getAutori().contains(new Autore("J.R.R.", "Tolkien")));
-        assertEquals(2020, libro.getAnnoPubblicazione());
+        assertEquals(1954, libro.getAnnoPubblicazione());
         assertEquals(libro.getCodiceISBNLibro(), isbn);
         assertEquals(5, libro.getCopieDisponibili());
     }
 
+    // TEST METODI GETTER
     @Test
     public void testGetTitolo() {
         assertEquals("Il Signore degli Anelli", l.getTitolo());
@@ -39,7 +43,7 @@ public class LibroTest {
 
     @Test
     public void testGetAnnoPubblicazione() {
-        assertEquals(2020, l.getAnnoPubblicazione());
+        assertEquals(1954, l.getAnnoPubblicazione());
     }
 
     @Test
@@ -57,6 +61,7 @@ public class LibroTest {
         assertNotNull(l.getAutori());
     }
 
+    // TEST METODI SETTER
     @Test
     public void testSetTitolo() {
         l.setTitolo("Lo Hobbit");
@@ -66,9 +71,9 @@ public class LibroTest {
 
     @Test
     public void testSetAnnoPubblicazione() {
-        l.setAnnoPubblicazione(2018);
+        l.setAnnoPubblicazione(1950);
 
-        assertEquals(2018, l.getAnnoPubblicazione());
+        assertEquals(1950, l.getAnnoPubblicazione());
     }
 
     @Test
@@ -78,9 +83,10 @@ public class LibroTest {
         assertEquals(10, l.getCopieDisponibili());
     }
 
+    // TEST AGGIUNGIAUTORE
     @Test
     public void testAggiungiAutore() {
-        Autore autore = new Autore("Mario", "Rossi");
+        Autore autore = new Autore("Luigi", "Pirandello");
 
         l.aggiungiAutore(autore);
 
@@ -88,6 +94,7 @@ public class LibroTest {
         assertEquals(2, l.getAutori().size());
     }
 
+    // TEST RIMUOVIAUTORE
     @Test
     public void testRimuoviAutore() {
         Autore autore = new Autore("J.R.R.", "Tolkien");
@@ -98,63 +105,83 @@ public class LibroTest {
         assertEquals(0, l.getAutori().size());
     }
 
+    // TEST VERIFICA LIBRO
     @Test
-    public void testVerificaLibro() {
-        // Test con tutti i campi validi:
+    public void testVerificaLibroValido() {
         assertTrue(Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "1954", "883010471X", "5"));
-
-        // Test con il nome dell'autore non valido:
-        assertThrows(FormatoCampiErratoException.class, () -> {
-            Libro.verificaLibro("J Tolkien", "Il Signore degli Anelli", "1954", "883010471X", "5");
-        });
-        // Test con il cognome dell'autore non valido:
-        assertThrows(FormatoCampiErratoException.class, () -> {
-            Libro.verificaLibro("J.R.R. To", "Il Signore degli Anelli", "1954", "883010471X", "5");
-        });
-        // Test con il titolo non valido:
+    }
+    
+    @Test
+    public void testVerificaLibroTitoloNonValido() {
         assertThrows(FormatoCampiErratoException.class, () -> {
             Libro.verificaLibro("J.R.R. Tolkien", null, "1954", "883010471X", "5");
         });
-        // Test con il codice ISBN non valido:
+    }
+    
+    @Test
+    public void testVerificaLibroNomeAutoreNonValido() {
+        assertThrows(FormatoCampiErratoException.class, () -> {
+            Libro.verificaLibro("J Tolkien", "Il Signore degli Anelli", "1954", "883010471X", "5");
+        });        
+    }
+    
+    @Test
+    public void testVerificaLibroCognomeAutoreNonValido() {
+        assertThrows(FormatoCampiErratoException.class, () -> {
+            Libro.verificaLibro("J.R.R. To", "Il Signore degli Anelli", "1954", "883010471X", "5");
+        });
+    }
+    
+    @Test
+    public void testVerificaLibroISBNNonValido() {
         assertThrows(FormatoCampiErratoException.class, () -> {
             Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "1954", "883010471", "5");
         });
-        // Test con l'anno di pubblicazione non valido:
+    }
+    
+    @Test
+    public void testVerificaLibroAnnoPubblicazioneNonValido() {
         assertThrows(FormatoCampiErratoException.class, () -> {
             Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "2054", "883010471X", "5");
         });
-        // Test con il numero di copie disponibili non valido:
+    }
+    
+    @Test
+    public void testVerificaLibroNumeroCopieNonValido() {
         assertThrows(FormatoCampiErratoException.class, () -> {
-            Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "1954", "883010471X", "500");
+            Libro.verificaLibro("J.R.R. Tolkien", "Il Signore degli Anelli", "1954", "883010471X", "-5");
         });
     }
 
+    // TEST EQUALS
     @Test
-    public void testEquals() {
-        Libro l1 = new Libro("Il Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
-        Libro l2 = new Libro("Il Signore degli Anelli", 2020, new ISBN("983010471X"), 5, "J.R.R. Tolkien");
-
-        assertEquals(l, l1);
-        assertNotEquals(l, l2);
+    public void testEqualsLibriUguali() {
+        assertEquals(l, new Libro("Il Signore degli Anelli", 1954, new ISBN("883010471X"), 5, "J.R.R. Tolkien"));
+    }
+    
+    @Test
+    public void testEqualsLibriDiversi() {
+        assertNotEquals(l, new Libro("La Fattoria degli Animali", 1945, new ISBN("888337908X"), 8, "George Orwell"));
+    }
+    
+    @Test
+    public void testEqualsLibroConNull() {
+        assertNotEquals(l, null);
     }
 
+    // TEST COMPARETO
     @Test
-    public void testCompareTo() {
-        // Test libro uguale:
-        Libro l1 = new Libro("Il Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
-        // Test libro con titolo maggiore:
-        Libro l2 = new Libro("Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
-        // Test libro con ISBN maggiore:
-        Libro l3 = new Libro("Il Signore degli Anelli", 2020, new ISBN("983010471X"), 5, "J.R.R. Tolkien");
-        // Test libro con titolo minore:
-        Libro l4 = new Libro("Al Signore degli Anelli", 2020, new ISBN("883010471X"), 5, "J.R.R. Tolkien");
-        // Test libro con ISBN minore:
-        Libro l5 = new Libro("Il Signore degli Anelli", 2020, new ISBN("783010471X"), 5, "J.R.R. Tolkien");
-
-        assertEquals(0, l.compareTo(l1));
-        assertTrue(l.compareTo(l2) < 0);
-        assertTrue(l.compareTo(l3) < 0);
-        assertTrue(l.compareTo(l4) > 0);
-        assertTrue(l.compareTo(l5) > 0);
+    public void testCompareToUguale() {
+        assertEquals(0, l.compareTo(new Libro("Il Signore degli Anelli", 1954, new ISBN("883010471X"), 5, "J.R.R. Tolkien")));
+    }
+    
+    @Test
+    public void testCompareToMinore() {
+        assertTrue(l.compareTo(new Libro("La Fattoria degli Animali", 1945, new ISBN("888337908X"), 8, "George Orwell")) < 0);
+    }
+    
+    @Test
+    public void testCompareToMaggiore() {
+        assertTrue(l.compareTo(new Libro("Carrie", 1974, new ISBN("8830110515"), 10, "Stephen King")) > 0);
     }
 }
